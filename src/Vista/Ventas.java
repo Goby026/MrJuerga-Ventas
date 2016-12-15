@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,8 +36,8 @@ public class Ventas extends javax.swing.JFrame {
 
     public void cargarDatos(String usuario) throws Exception {
         panelVuelto.getRootPane().setBackground(Color.DARK_GRAY);
+        panelPagoElectronico.setUndecorated(true);
         new VentasControl().llenarListaCategorias(listaCategorias);
-        new VentasControl().cargarTipoDocumento(cmbDocumento);
         txtCaja.setText(new VentasControl().getCajaDeUsuario(usuario));
         new Cronometro().iniciarCronometro(txtHora);
         txtUsuario.setText(usuario);
@@ -70,25 +72,24 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         panelPagoElectronico = new javax.swing.JDialog();
-        btnCero1 = new javax.swing.JButton();
-        btnSiete1 = new javax.swing.JButton();
-        btnCuatro1 = new javax.swing.JButton();
-        btnUno1 = new javax.swing.JButton();
-        btnPunto1 = new javax.swing.JButton();
-        btnOcho1 = new javax.swing.JButton();
-        btnCinco1 = new javax.swing.JButton();
-        btnDos1 = new javax.swing.JButton();
-        btnBorrar1 = new javax.swing.JButton();
-        btnNueve1 = new javax.swing.JButton();
-        btnSeis1 = new javax.swing.JButton();
-        btnTres1 = new javax.swing.JButton();
+        btnCeroTarjeta = new javax.swing.JButton();
+        btnSieteTarjeta = new javax.swing.JButton();
+        btnCuatroTarjeta = new javax.swing.JButton();
+        btnUnoTarjeta = new javax.swing.JButton();
+        btnOchoTarjeta = new javax.swing.JButton();
+        btnCincoTarjeta = new javax.swing.JButton();
+        btnDosTarjeta = new javax.swing.JButton();
+        btnBorrarTarjeta = new javax.swing.JButton();
+        btnNueveTarjeta = new javax.swing.JButton();
+        btnSeisTarjeta = new javax.swing.JButton();
+        btnTresTarjeta = new javax.swing.JButton();
         txtVuelto1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        btnRealizarVenta1 = new javax.swing.JButton();
-        txtMontoRecibido1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        btnCobrarConTarjeta = new javax.swing.JButton();
+        txtNumReferencia = new javax.swing.JTextField();
+        btnCancelarTarjeta = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaCategorias = new javax.swing.JList();
@@ -106,7 +107,6 @@ public class Ventas extends javax.swing.JFrame {
         btn0 = new javax.swing.JButton();
         btnDel = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        cmbDocumento = new javax.swing.JComboBox();
         txtCantidad = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
@@ -118,8 +118,6 @@ public class Ventas extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         lblPago = new javax.swing.JLabel();
         btnPendientes = new javax.swing.JButton();
-        lblComprobante = new javax.swing.JLabel();
-        lblUltimoComprobante1 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -128,6 +126,7 @@ public class Ventas extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
         txtCaja = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -143,7 +142,9 @@ public class Ventas extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         btnMasterCard = new javax.swing.JToggleButton();
-        btnVisa1 = new javax.swing.JToggleButton();
+        btnVisa = new javax.swing.JToggleButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
 
         panelVuelto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         panelVuelto.setTitle("MONTOS");
@@ -308,170 +309,176 @@ public class Ventas extends javax.swing.JFrame {
 
         panelPagoElectronico.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCero1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnCero1.setText("0");
-        btnCero1.addActionListener(new java.awt.event.ActionListener() {
+        btnCeroTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnCeroTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-0.png"))); // NOI18N
+        btnCeroTarjeta.setBorderPainted(false);
+        btnCeroTarjeta.setContentAreaFilled(false);
+        btnCeroTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCero1ActionPerformed(evt);
+                btnCeroTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnCero1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnCeroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 400, 70, 70));
 
-        btnSiete1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnSiete1.setText("7");
-        btnSiete1.addActionListener(new java.awt.event.ActionListener() {
+        btnSieteTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnSieteTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-7.png"))); // NOI18N
+        btnSieteTarjeta.setBorderPainted(false);
+        btnSieteTarjeta.setContentAreaFilled(false);
+        btnSieteTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSiete1ActionPerformed(evt);
+                btnSieteTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnSiete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnSieteTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 70, 70));
 
-        btnCuatro1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnCuatro1.setText("4");
-        btnCuatro1.addActionListener(new java.awt.event.ActionListener() {
+        btnCuatroTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnCuatroTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-4.png"))); // NOI18N
+        btnCuatroTarjeta.setBorderPainted(false);
+        btnCuatroTarjeta.setContentAreaFilled(false);
+        btnCuatroTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCuatro1ActionPerformed(evt);
+                btnCuatroTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnCuatro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnCuatroTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 70, 70));
 
-        btnUno1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnUno1.setText("1");
-        btnUno1.addActionListener(new java.awt.event.ActionListener() {
+        btnUnoTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnUnoTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-1.png"))); // NOI18N
+        btnUnoTarjeta.setBorderPainted(false);
+        btnUnoTarjeta.setContentAreaFilled(false);
+        btnUnoTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUno1ActionPerformed(evt);
+                btnUnoTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnUno1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnUnoTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, 70, 70));
 
-        btnPunto1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnPunto1.setText(".");
-        btnPunto1.addActionListener(new java.awt.event.ActionListener() {
+        btnOchoTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnOchoTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-8.png"))); // NOI18N
+        btnOchoTarjeta.setBorderPainted(false);
+        btnOchoTarjeta.setContentAreaFilled(false);
+        btnOchoTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPunto1ActionPerformed(evt);
+                btnOchoTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnPunto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnOchoTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 70, 70));
 
-        btnOcho1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnOcho1.setText("8");
-        btnOcho1.addActionListener(new java.awt.event.ActionListener() {
+        btnCincoTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnCincoTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-5.png"))); // NOI18N
+        btnCincoTarjeta.setBorderPainted(false);
+        btnCincoTarjeta.setContentAreaFilled(false);
+        btnCincoTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOcho1ActionPerformed(evt);
+                btnCincoTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnOcho1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnCincoTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 70, 70));
 
-        btnCinco1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnCinco1.setText("5");
-        btnCinco1.addActionListener(new java.awt.event.ActionListener() {
+        btnDosTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnDosTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-2.png"))); // NOI18N
+        btnDosTarjeta.setBorderPainted(false);
+        btnDosTarjeta.setContentAreaFilled(false);
+        btnDosTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCinco1ActionPerformed(evt);
+                btnDosTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnCinco1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnDosTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 70, 70));
 
-        btnDos1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnDos1.setText("2");
-        btnDos1.addActionListener(new java.awt.event.ActionListener() {
+        btnBorrarTarjeta.setBackground(new java.awt.Color(255, 51, 51));
+        btnBorrarTarjeta.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        btnBorrarTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar-boton-circular-de-una-cruz.png"))); // NOI18N
+        btnBorrarTarjeta.setBorderPainted(false);
+        btnBorrarTarjeta.setContentAreaFilled(false);
+        btnBorrarTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDos1ActionPerformed(evt);
+                btnBorrarTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnDos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnBorrarTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 400, 90, 70));
 
-        btnBorrar1.setBackground(new java.awt.Color(255, 51, 51));
-        btnBorrar1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        btnBorrar1.setText("<");
-        btnBorrar1.addActionListener(new java.awt.event.ActionListener() {
+        btnNueveTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnNueveTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-9.png"))); // NOI18N
+        btnNueveTarjeta.setBorderPainted(false);
+        btnNueveTarjeta.setContentAreaFilled(false);
+        btnNueveTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBorrar1ActionPerformed(evt);
+                btnNueveTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnBorrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnNueveTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 70, 70));
 
-        btnNueve1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnNueve1.setText("9");
-        btnNueve1.addActionListener(new java.awt.event.ActionListener() {
+        btnSeisTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnSeisTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-6.png"))); // NOI18N
+        btnSeisTarjeta.setBorderPainted(false);
+        btnSeisTarjeta.setContentAreaFilled(false);
+        btnSeisTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNueve1ActionPerformed(evt);
+                btnSeisTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnNueve1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnSeisTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 70, 70));
 
-        btnSeis1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnSeis1.setText("6");
-        btnSeis1.addActionListener(new java.awt.event.ActionListener() {
+        btnTresTarjeta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnTresTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iphone-3.png"))); // NOI18N
+        btnTresTarjeta.setBorderPainted(false);
+        btnTresTarjeta.setContentAreaFilled(false);
+        btnTresTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSeis1ActionPerformed(evt);
+                btnTresTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnSeis1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 70, 60));
-
-        btnTres1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnTres1.setText("3");
-        btnTres1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTres1ActionPerformed(evt);
-            }
-        });
-        panelPagoElectronico.getContentPane().add(btnTres1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 70, 60));
+        panelPagoElectronico.getContentPane().add(btnTresTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 70, 70));
 
         txtVuelto1.setEditable(false);
+        txtVuelto1.setBackground(new java.awt.Color(255, 255, 255));
         txtVuelto1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         txtVuelto1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelPagoElectronico.getContentPane().add(txtVuelto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 230, 60));
+        txtVuelto1.setBorder(null);
+        panelPagoElectronico.getContentPane().add(txtVuelto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, 230, 40));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("VUELTO");
-        panelPagoElectronico.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 250, -1));
+        panelPagoElectronico.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 70, -1));
 
-        btnRealizarVenta1.setBackground(new java.awt.Color(0, 153, 0));
-        btnRealizarVenta1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnRealizarVenta1.setForeground(new java.awt.Color(255, 255, 255));
-        btnRealizarVenta1.setText("COBRAR");
-        btnRealizarVenta1.addActionListener(new java.awt.event.ActionListener() {
+        btnCobrarConTarjeta.setBackground(new java.awt.Color(0, 153, 0));
+        btnCobrarConTarjeta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnCobrarConTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        btnCobrarConTarjeta.setText("COBRAR");
+        btnCobrarConTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarVenta1ActionPerformed(evt);
+                btnCobrarConTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnRealizarVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 230, 60));
+        panelPagoElectronico.getContentPane().add(btnCobrarConTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, 230, 40));
 
-        txtMontoRecibido1.setEditable(false);
-        txtMontoRecibido1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        txtMontoRecibido1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelPagoElectronico.getContentPane().add(txtMontoRecibido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 230, 80));
+        txtNumReferencia.setEditable(false);
+        txtNumReferencia.setBackground(new java.awt.Color(255, 255, 255));
+        txtNumReferencia.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        txtNumReferencia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNumReferencia.setBorder(null);
+        panelPagoElectronico.getContentPane().add(txtNumReferencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 230, 50));
 
-        jButton2.setBackground(new java.awt.Color(204, 0, 0));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("CANCELAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarTarjeta.setBorder(null);
+        btnCancelarTarjeta.setBorderPainted(false);
+        btnCancelarTarjeta.setContentAreaFilled(false);
+        btnCancelarTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCancelarTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 230, 50));
+        panelPagoElectronico.getContentPane().add(btnCancelarTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 630, 80, 70));
+        panelPagoElectronico.getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 550, 230, 10));
+        panelPagoElectronico.getContentPane().add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 230, 10));
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("MONTO RECIBIDO");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, -1));
-
-        panelPagoElectronico.getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 340, 50));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borderIphone.png"))); // NOI18N
+        panelPagoElectronico.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 720));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("PUNTO DE VENTA - BARRA");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        jLabel5.setText("DOCUMENTO");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         listaCategorias.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         listaCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -627,17 +634,14 @@ public class Ventas extends javax.swing.JFrame {
         jLabel8.setText("LISTA DE PEDIDOS");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, -1, -1));
 
-        cmbDocumento.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        getContentPane().add(cmbDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 160, -1));
-
         txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 55)); // NOI18N
         txtCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCantidad.setBorder(null);
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 110, 360, 70));
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 110, 410, 70));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setText("CANTIDAD");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 80, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 80, -1, -1));
 
         btnAgregar.setBackground(new java.awt.Color(255, 102, 0));
         btnAgregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -692,7 +696,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnQuitarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 960, 70, -1));
+        getContentPane().add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 950, 70, -1));
 
         btnCobrar.setBackground(new java.awt.Color(0, 153, 51));
         btnCobrar.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
@@ -721,11 +725,6 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 950, 250, 50));
-        getContentPane().add(lblComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 160, 20));
-
-        lblUltimoComprobante1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        lblUltimoComprobante1.setText("N° COMPROBANTE");
-        getContentPane().add(lblUltimoComprobante1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jPanel8.setBackground(new java.awt.Color(51, 153, 255));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -771,6 +770,14 @@ public class Ventas extends javax.swing.JFrame {
         txtCaja.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "CAJA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel8.add(txtCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 250, -1));
 
+        jButton3.setText("PRUEBITAS");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel8.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
+
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 70));
 
         jPanel6.setBackground(new java.awt.Color(51, 153, 255));
@@ -808,7 +815,7 @@ public class Ventas extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jLabel15.setText("PAGO");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 760, -1, -1));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 180, 360, 10));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 180, 410, 10));
 
         cboxMasVendidos.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         cboxMasVendidos.setForeground(new java.awt.Color(0, 102, 255));
@@ -823,30 +830,48 @@ public class Ventas extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("RUC");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, 30, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 120, 30, -1));
 
         jLabel4.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
         jLabel4.setText("RAZON SOCIAL");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 120, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 120, -1));
 
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 330, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 330, -1));
 
         jTextField2.setEditable(false);
         jTextField2.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 330, -1));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, 330, -1));
 
         btnMasterCard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/masterCard.png"))); // NOI18N
         btnMasterCard.setBorderPainted(false);
-        btnMasterCard.setContentAreaFilled(false);
+        btnMasterCard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMasterCardActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnMasterCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 80, 130, 80));
 
-        btnVisa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visa.png"))); // NOI18N
-        btnVisa1.setBorderPainted(false);
-        btnVisa1.setContentAreaFilled(false);
-        getContentPane().add(btnVisa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 80, 130, 80));
+        btnVisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visa.png"))); // NOI18N
+        btnVisa.setBorderPainted(false);
+        btnVisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 80, 130, 80));
+
+        jCheckBox1.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
+        jCheckBox1.setForeground(new java.awt.Color(0, 51, 204));
+        jCheckBox1.setText("NOTA DE PEDIDO");
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+
+        jCheckBox2.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
+        jCheckBox2.setForeground(new java.awt.Color(0, 51, 204));
+        jCheckBox2.setText("FACTURA");
+        getContentPane().add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1139,7 +1164,7 @@ public class Ventas extends javax.swing.JFrame {
             String direccion = "JR AYACUCHO 750";
             //tipo de pago lo pasamos en duro hasta normalizar el TIPODEPAGO
             Double total = Double.parseDouble(lblPago.getText());
-            int idTipoComprobante = new VentasControl().getIdComprobanteConNombre(cmbDocumento.getSelectedItem().toString());
+            int idTipoComprobante = 1;
 
             //creamos el comprobante
             Comprobante c = new Comprobante();
@@ -1182,7 +1207,7 @@ public class Ventas extends javax.swing.JFrame {
             System.out.println("flag: " + flag);
             if (flag > 0) {
                 JOptionPane.showMessageDialog(null, "VENTA REALIZADA EXITOSAMENTE");
-                
+
                 parametros.put("id_venta", idventa);
                 parametros.put("total", total);
                 mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\BoletaVenta.jrxml", parametros, getPageSize());
@@ -1203,61 +1228,88 @@ public class Ventas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
-    private void btnCero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCero1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCero1ActionPerformed
+    private void btnCeroTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCeroTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 0;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnCeroTarjetaActionPerformed
 
-    private void btnSiete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiete1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSiete1ActionPerformed
+    private void btnSieteTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSieteTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 7;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnSieteTarjetaActionPerformed
 
-    private void btnCuatro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuatro1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCuatro1ActionPerformed
+    private void btnCuatroTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuatroTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 4;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnCuatroTarjetaActionPerformed
 
-    private void btnUno1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUno1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUno1ActionPerformed
+    private void btnUnoTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnoTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 1;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnUnoTarjetaActionPerformed
 
-    private void btnPunto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPunto1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPunto1ActionPerformed
+    private void btnOchoTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOchoTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 8;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnOchoTarjetaActionPerformed
 
-    private void btnOcho1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOcho1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnOcho1ActionPerformed
+    private void btnCincoTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCincoTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 5;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnCincoTarjetaActionPerformed
 
-    private void btnCinco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCinco1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCinco1ActionPerformed
+    private void btnDosTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDosTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 2;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnDosTarjetaActionPerformed
 
-    private void btnDos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDos1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnDos1ActionPerformed
+    private void btnBorrarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarTarjetaActionPerformed
+        txtNumReferencia.setText("");
+    }//GEN-LAST:event_btnBorrarTarjetaActionPerformed
 
-    private void btnBorrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBorrar1ActionPerformed
+    private void btnNueveTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNueveTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 9;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnNueveTarjetaActionPerformed
 
-    private void btnNueve1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNueve1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNueve1ActionPerformed
+    private void btnSeisTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeisTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 6;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnSeisTarjetaActionPerformed
 
-    private void btnSeis1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeis1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSeis1ActionPerformed
+    private void btnTresTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTresTarjetaActionPerformed
+        String captura = txtNumReferencia.getText() + 3;
+        txtNumReferencia.setText(captura);
+    }//GEN-LAST:event_btnTresTarjetaActionPerformed
 
-    private void btnTres1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTres1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTres1ActionPerformed
+    private void btnCobrarConTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarConTarjetaActionPerformed
+        JOptionPane.showMessageDialog(getRootPane(), "VENTA REGISTRADA");
+    }//GEN-LAST:event_btnCobrarConTarjetaActionPerformed
 
-    private void btnRealizarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVenta1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRealizarVenta1ActionPerformed
+    private void btnVisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaActionPerformed
+        if (btnVisa.isSelected()) {
+            btnMasterCard.setEnabled(false);
+        } else {
+            btnMasterCard.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnVisaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnMasterCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasterCardActionPerformed
+        if (btnMasterCard.isSelected()) {
+            btnVisa.setEnabled(false);
+        } else {
+            btnVisa.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnMasterCardActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        panelPagoElectronico.setVisible(true);
+        panelPagoElectronico.setBounds(200, 200, 500, 1020);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnCancelarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTarjetaActionPerformed
+        panelPagoElectronico.dispose();
+    }//GEN-LAST:event_btnCancelarTarjetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1311,41 +1363,42 @@ public class Ventas extends javax.swing.JFrame {
     public javax.swing.JButton btn9;
     public javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnBorrar1;
+    private javax.swing.JButton btnBorrarTarjeta;
+    private javax.swing.JButton btnCancelarTarjeta;
     private javax.swing.JButton btnCero;
-    private javax.swing.JButton btnCero1;
+    private javax.swing.JButton btnCeroTarjeta;
     private javax.swing.JButton btnCinco;
-    private javax.swing.JButton btnCinco1;
+    private javax.swing.JButton btnCincoTarjeta;
     private javax.swing.JButton btnCobrar;
+    private javax.swing.JButton btnCobrarConTarjeta;
     private javax.swing.JButton btnCuatro;
-    private javax.swing.JButton btnCuatro1;
+    private javax.swing.JButton btnCuatroTarjeta;
     public javax.swing.JButton btnDel;
     private javax.swing.JButton btnDos;
-    private javax.swing.JButton btnDos1;
+    private javax.swing.JButton btnDosTarjeta;
     private javax.swing.JToggleButton btnMasterCard;
     private javax.swing.JButton btnNueve;
-    private javax.swing.JButton btnNueve1;
+    private javax.swing.JButton btnNueveTarjeta;
     private javax.swing.JButton btnOcho;
-    private javax.swing.JButton btnOcho1;
+    private javax.swing.JButton btnOchoTarjeta;
     private javax.swing.JButton btnPendientes;
     private javax.swing.JButton btnPunto;
-    private javax.swing.JButton btnPunto1;
     private javax.swing.JButton btnQuitar;
     private javax.swing.JButton btnRealizarVenta;
-    private javax.swing.JButton btnRealizarVenta1;
     private javax.swing.JButton btnSeis;
-    private javax.swing.JButton btnSeis1;
+    private javax.swing.JButton btnSeisTarjeta;
     private javax.swing.JButton btnSiete;
-    private javax.swing.JButton btnSiete1;
+    private javax.swing.JButton btnSieteTarjeta;
     private javax.swing.JButton btnTres;
-    private javax.swing.JButton btnTres1;
+    private javax.swing.JButton btnTresTarjeta;
     private javax.swing.JButton btnUno;
-    private javax.swing.JButton btnUno1;
-    private javax.swing.JToggleButton btnVisa1;
+    private javax.swing.JButton btnUnoTarjeta;
+    private javax.swing.JToggleButton btnVisa;
     private javax.swing.JCheckBox cboxMasVendidos;
-    private javax.swing.JComboBox cmbDocumento;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1363,11 +1416,9 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1375,11 +1426,11 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JLabel lblComprobante;
     private javax.swing.JLabel lblPago;
-    private javax.swing.JLabel lblUltimoComprobante1;
     private javax.swing.JList listaCategorias;
     private javax.swing.JDialog panelPagoElectronico;
     private javax.swing.JDialog panelVuelto;
@@ -1390,7 +1441,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JTextField txtFecha;
     private javax.swing.JTextField txtHora;
     private javax.swing.JTextField txtMontoRecibido;
-    private javax.swing.JTextField txtMontoRecibido1;
+    private javax.swing.JTextField txtNumReferencia;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtVuelto;
     private javax.swing.JTextField txtVuelto1;
