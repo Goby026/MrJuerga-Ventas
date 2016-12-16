@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="225" pageHeight="842" columnWidth="185" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7818f3ec-31eb-43b7-b4ec-fec4b0976ef0">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select * from venta]]>
+	</queryString>
+	<field name="idventa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="112" width="34" height="11" uuid="300dc511-9d3a-41fb-9886-a7e24888ee0b"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="13" width="185" height="26" uuid="1c0fc8e3-d79b-412c-bbd6-d77d78748c2e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="20"/>
+				</textElement>
+				<text><![CDATA[MR JUERGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="185" height="13" uuid="d83bd4f0-de79-4663-a030-cfbeadd3ee67"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[DISCOTECA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="61" width="185" height="11" uuid="818a9ecd-8b70-4b45-af21-54cd581223df"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<text><![CDATA[R.U.C. N° 20486243245]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="112" width="28" height="11" uuid="15120681-bc0c-4bab-8576-ae9a45ca70ac"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[HORA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="72" width="185" height="11" uuid="d8a0ae94-a591-4277-8ed8-e9b6fb8cbcc0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<text><![CDATA[N° DE SERIE FFCF277633]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="83" width="185" height="18" uuid="cc6e1c4c-68b9-494d-9e0b-e6f3ebb86c28"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OPERACION CON TARJETA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="92" y="101" width="46" height="11" uuid="9375d64d-4231-4980-89c6-0f0f75fe1948"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<text><![CDATA[N° BOLETA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="185" height="11" uuid="f6da5c9e-dfff-4a78-a743-bbcc09f06858"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<text><![CDATA[HUANCAYO - HUANCAYO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="39" width="185" height="11" uuid="865918b6-cd5e-41ec-adaf-7f7edf7b3d8d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="8"/>
+				</textElement>
+				<text><![CDATA[JR. AYACUCHO 773]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="18" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
