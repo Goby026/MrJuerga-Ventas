@@ -20,12 +20,8 @@ import Modelo.Venta;
 import Modelo.VentaDAO;
 import Modelo.VentaProducto;
 import Modelo.VentaProductoDAO;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -34,32 +30,6 @@ public class VentasControl {
 
     DefaultTableModel modelo;
 
-//    public void LlenarTablaProductos(JTable tabla, int small, int large, int xl) throws Exception {
-//        modelo = new DefaultTableModel();
-//        tabla.setModel(modelo);
-//        ProductoDAO ved = new ProductoDAO();
-//
-//        modelo.addColumn("ID");
-//        modelo.addColumn("NOMBRE");
-//        modelo.addColumn("PRECIO");
-//        modelo.addColumn("PRESENTACION");
-//
-//        Object[] columna = new Object[5];
-//
-//        int numeroRegistros = ved.listar().size();
-//
-//        for (int i = 0; i < numeroRegistros; i++) {
-//            columna[0] = ved.listar().get(i).getIdProducto();
-//            columna[1] = ved.listar().get(i).getNombre();
-//            columna[2] = ved.listar().get(i).getIdCategoria();
-//            modelo.addRow(columna);
-//        }
-//
-//        tabla.getColumnModel().getColumn(0).setPreferredWidth(small);
-//        tabla.getColumnModel().getColumn(1).setPreferredWidth(xl);
-//        tabla.getColumnModel().getColumn(2).setPreferredWidth(xl);
-//        tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
-//    }
     public void LlenarTablaProductosConId(int idCategoria, JTable tabla, int small, int large, int xl) throws Exception {
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
@@ -89,12 +59,7 @@ public class VentasControl {
         tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
 
     }
-
-//    public void addProductoSeleccionado(Object[] o, JTable tabla, String[] columnas){
-//        modelo = new DefaultTableModel(null, columnas);
-//        modelo.addRow(o);
-//        tabla.setModel(modelo);
-//    }
+    
     public void llenarTablaProductos(String nomCate, JTable tabla) throws Exception {
         CategoriaDAO dcate = new CategoriaDAO();
         for (Categoria c : dcate.Listar()) {
@@ -122,24 +87,11 @@ public class VentasControl {
         lista.setModel(list);
     }
 
-//    public void cargarListaPresentaciones(JList lista) throws Exception {
-//        try {
-//            PresentacionDAO pdao = new PresentacionDAO();
-//            DefaultListModel list = new DefaultListModel();
-//            for (Presentacion p : pdao.Listar()) {
-//                list.addElement(p.getDescripcion());
-//            }
-//            lista.setModel(list);
-//        } catch (Exception e) {
-//            throw e;
-//        }
-//
-//    }
     public double calcularMonto(JTable tabla) {
         double subtotal = 0.0;
         int numFilas = tabla.getRowCount();
         for (int i = 0; i < numFilas; i++) {
-            subtotal += (Double.parseDouble(tabla.getValueAt(i, 2).toString())) * (Integer.parseInt(tabla.getValueAt(i, 3).toString()));
+            subtotal += (Double.parseDouble(tabla.getValueAt(i, 3).toString())) * (Integer.parseInt(tabla.getValueAt(i, 4).toString()));
         }
         return subtotal;
     }
@@ -184,6 +136,7 @@ public class VentasControl {
         return -1;
     }
 
+    //metodo para obtener el nombre de presentacion con id
     public String getPresentacionConId(int idPresentacion) throws Exception {
         try {
             PresentacionDAO pdao = new PresentacionDAO();
@@ -195,7 +148,22 @@ public class VentasControl {
         } catch (Exception e) {
             throw e;
         }
-        return "";
+        return null;
+    }
+
+    //metodo para obtener el id de presentacion con el nombre
+    public int getIdPresentacion(String nomPresentacion) throws Exception {
+        try {
+            PresentacionDAO pdao = new PresentacionDAO();
+            for (Presentacion p : pdao.Listar()) {
+                if (p.getDescripcion().equals(nomPresentacion)) {
+                    return p.getIdPresentacion();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return -1;
     }
 
     public String getPrecio(int idProd, int presentacion) throws Exception {
@@ -242,15 +210,6 @@ public class VentasControl {
         return -1;
     }
 
-    /*OBTENER ULTIMO ID DE COMPROBANTE */
-//    public Comprobante getIdDeUltimoComprobanteRegistrado() throws Exception {
-//        ComprobanteDAO cdao = new ComprobanteDAO();
-//        Comprobante c = new Comprobante();
-//        int ultimaFila = cdao.Listar().size();
-//        c.setIdcomprobante(ultimaFila);
-//        return c;
-//    }
-
     /*OBTENER ULTIMO REGISTRO DE VENTA */
     public int getIdDeUltimaVentaRegistrada() throws Exception {
         VentaDAO vdao = new VentaDAO();
@@ -259,6 +218,7 @@ public class VentasControl {
         return v.getIdVenta();
     }
 
+    //metodo para registrar la venta
     public boolean registrarVenta(Object[] datos) throws Exception {
         Venta v = new Venta();
         v.setFecha((String) datos[0]);
@@ -279,6 +239,7 @@ public class VentasControl {
         return false;
     }
 
+    //metodo para registrar detalles de venta
     public int registrarDetalleDeVenta(JTable tabla, int numVenta) throws Exception {
         try {
             int flag = 0;
@@ -287,9 +248,9 @@ public class VentasControl {
                 VentaProducto vp = new VentaProducto();
                 vp.setIdProducto(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
                 vp.setIdVenta(numVenta);
-                vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 2).toString()));
-                vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 3).toString()));
-                vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
+                vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
+                vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
+                vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
                 VentaProductoDAO vpdao = new VentaProductoDAO();
                 if (vpdao.registrar(vp)) {
                     flag++;
@@ -300,7 +261,7 @@ public class VentasControl {
             throw e;
         }
     }
-    
+
     /*METODO PARA OBTENER EL NOMBRE DE CAJA CON SU ID*/
     public String getCajaConId(int idCaja) throws Exception {
         try {
@@ -315,8 +276,7 @@ public class VentasControl {
             throw e;
         }
     }
-    
-    
+
     //METODO PARA OBTENER EL NOMBRE DE CAJA DEL USUARIO LOGEADO
     public String getCajaDeUsuario(String usuario) throws Exception {
         try {
@@ -332,14 +292,87 @@ public class VentasControl {
             throw e;
         }
     }
-    
+
     //METODO PARA SUMAR LA CANTIDAD DE UN PRODUCTO QUE SE AÑADE A LA TABLA DE AÑADIDOS, SI ESTE PRODUCTO YA ESTUVIESE EN LA TABLA
-    public void sumarCantidad(String prod, JTable tabla, int cantidad){
+    public void sumarCantidad(String prod, JTable tabla, int cantidad) {
         for (int i = 0; i < tabla.getRowCount(); i++) {
             if (tabla.getValueAt(i, 1).toString().equals(prod)) {
-                int cant = Integer.parseInt(tabla.getValueAt(i, 3).toString())+cantidad;
+                int cant = Integer.parseInt(tabla.getValueAt(i, 3).toString()) + cantidad;
                 tabla.setValueAt(cant, i, 3);
             }
         }
+    }
+
+    //metodo para restar stock en una venta
+    public boolean restarStock(JTable tabla) throws Exception {
+        int numFilas = tabla.getRowCount();
+        try {
+            for (int i = 0; i < numFilas; i++) {
+                int id = Integer.parseInt(tabla.getValueAt(i, 0).toString());
+                System.out.println("id: " + id);
+                int cantidad = Integer.parseInt(tabla.getValueAt(i, 4).toString());
+                System.out.println("cantidad: " + cantidad);
+                ProductoPresentacionDAO pdao = new ProductoPresentacionDAO();
+                int stock = getStockProductoPresentacion(id, getIdPresentacion(tabla.getValueAt(i, 2).toString())) - cantidad;
+                System.out.println(stock);
+                ProductoPresentacion pp = new ProductoPresentacion();
+                pp.setIdProducto(id);//mando el mismo id de producto
+                pp.setIdPresentacion(getIdPresentacion(tabla.getValueAt(i, 2).toString())); //mando el nombre de presentacion al metodo para obtener el id
+                pp.setIdalmacen(1);
+                pp.setStock(stock);
+                pp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
+                pp.setIdcategoria(getIdCategoria(id, getIdPresentacion(tabla.getValueAt(i, 2).toString())));
+                pp.setIdProductoPresentacion(getIdProductoPresentacion(id, getIdPresentacion(tabla.getValueAt(i, 2).toString())));
+                pdao.modificar(pp);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
+    }
+
+    //metodo para obtener el id de productopresentacion
+    public int getIdProductoPresentacion(int idProducto, int idPresentacion) throws Exception {
+        try {
+            ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+            for (ProductoPresentacion pp : ppdao.listar()) {
+                if (pp.getIdProducto() == idProducto && pp.getIdPresentacion() == idPresentacion) {
+                    return pp.getIdProductoPresentacion();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return 0;
+    }
+
+    //metodo para obtener el idcategoria de productopresentacion
+    public int getIdCategoria(int idProducto, int idPresentacion) throws Exception {
+        try {
+            ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+            for (ProductoPresentacion pp : ppdao.listar()) {
+                if (pp.getIdProducto() == idProducto && pp.getIdPresentacion() == idPresentacion) {
+                    return pp.getIdcategoria();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return 0;
+    }
+    
+    //metodo para obtener el stock de producto con idProducto e idPresentacion
+    public int getStockProductoPresentacion(int idProducto, int idPresentacion) throws Exception {
+        try {
+            ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+            for (ProductoPresentacion pp : ppdao.listar()) {
+                if (pp.getIdProducto() == idProducto && pp.getIdPresentacion() == idPresentacion) {
+                    return pp.getStock();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return 0;
     }
 }

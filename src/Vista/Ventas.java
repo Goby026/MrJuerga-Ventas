@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -146,6 +148,7 @@ public class Ventas extends javax.swing.JFrame {
         btnVisa = new javax.swing.JToggleButton();
         cmbNotaDePedido = new javax.swing.JCheckBox();
         cmbFactura = new javax.swing.JCheckBox();
+        jButton2 = new javax.swing.JButton();
 
         panelVuelto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         panelVuelto.setTitle("MONTOS");
@@ -867,6 +870,14 @@ public class Ventas extends javax.swing.JFrame {
         });
         getContentPane().add(cmbFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
 
+        jButton2.setText("prueba");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 950, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -960,16 +971,22 @@ public class Ventas extends javax.swing.JFrame {
             int fila = tblProductos.getSelectedRow();
             int cod = new VentasControl().getIdProductoConNombre(tblProductos.getValueAt(fila, 0).toString());
             String prod = tblProductos.getValueAt(fila, 0).toString();
+            String presentacion = tblProductos.getValueAt(fila, 1).toString();
             double prec = Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
             int cant = Integer.parseInt(txtCantidad.getText());
             double subtotal = prec * cant;
-            Object datos[] = {cod, prod, prec, cant, subtotal};
-            table1.addRow(datos);
-            tblPedidos.setModel(table1);
-            lblPago.setText("" + new VentasControl().calcularMonto(tblPedidos));
-            tblProductos.clearSelection();
-            listaCategorias.clearSelection();
-            bloquearBotones();
+            if (Integer.parseInt(tblProductos.getValueAt(fila, 2).toString())<cant) {
+                JOptionPane.showMessageDialog(getRootPane(), "NO SE CUENTA CON LAS UNIDADES SOLICITADAS");
+            } else {
+                Object datos[] = {cod, prod, presentacion, prec, cant, subtotal};
+                table1.addRow(datos);
+                tblPedidos.setModel(table1);
+                lblPago.setText("" + new VentasControl().calcularMonto(tblPedidos));
+                tblProductos.clearSelection();
+                listaCategorias.clearSelection();
+                bloquearBotones();
+            }
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -1207,16 +1224,17 @@ public class Ventas extends javax.swing.JFrame {
             if (flag > 0) {
                 JOptionPane.showMessageDialog(null, "VENTA REALIZADA EXITOSAMENTE");
 
-                parametros.put("id_venta", idventa);
-                parametros.put("total", total);
-                mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\BoletaVenta.jrxml", parametros, getPageSize());
-                mrv.setNombreArchivo("BoletaVenta");
-                try {
-                    mrv.exportarAPdfConCopia();
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-                mrv.dispose();
+//                parametros.put("id_venta", idventa);
+//                parametros.put("total", total);
+//                mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\BoletaVenta.jrxml", parametros, getPageSize());
+//                mrv.setNombreArchivo("BoletaVenta");
+//                try {
+//                    mrv.exportarAPdfConCopia();
+//                } catch (Exception ex) {
+//                    System.out.println(ex.getMessage());
+//                }
+//                mrv.dispose();
+                new VentasControl().restarStock(tblPedidos);
                 panelVuelto.dispose();
                 cargarDatos(usuario);
             } else {
@@ -1316,6 +1334,14 @@ public class Ventas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbFacturaActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            System.out.println(new VentasControl().getIdProductoPresentacion(13, 1));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1403,6 +1429,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JCheckBox cmbFactura;
     private javax.swing.JCheckBox cmbNotaDePedido;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1452,7 +1479,7 @@ public class Ventas extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTitulosTablaPedidos() {
-        String[] titulos = {"CODIGO", "PRODUCTO", "PRECIO", "CANTIDAD", "SUBTOTAL"};
+        String[] titulos = {"CODIGO", "PRODUCTO", "PRESENTACION", "PRECIO", "CANTIDAD", "SUBTOTAL"};
         table1 = new DefaultTableModel(null, titulos);
         tblPedidos.setModel(table1);
     }
