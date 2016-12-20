@@ -4,6 +4,8 @@ import Modelo.Caja;
 import Modelo.CajaDAO;
 import Modelo.Categoria;
 import Modelo.CategoriaDAO;
+import Modelo.Comprobante;
+import Modelo.ComprobanteDAO;
 import Modelo.Presentacion;
 import Modelo.PresentacionDAO;
 import Modelo.Producto;
@@ -217,6 +219,14 @@ public class VentasControl {
         Venta v = vdao.listar().get(ultimaFila);
         return v.getIdVenta();
     }
+    
+     /*OBTENER ULTIMO REGISTRO DE COMPROBANTE */
+    public int getIdDeUltimoComprobanteRegistrado() throws Exception {
+        ComprobanteDAO cdao = new ComprobanteDAO();
+        int ultimaFila = cdao.Listar().size() - 1;
+        Comprobante c = cdao.Listar().get(ultimaFila);
+        return c.getIdcomprobante();
+    }
 
     //metodo para registrar la venta
     public boolean registrarVenta(Object[] datos) throws Exception {
@@ -227,7 +237,8 @@ public class VentasControl {
         v.setIdCliente((Integer) datos[3]);
         v.setIdComprobante((Integer) datos[4]);
         v.setEstado((Integer) datos[5]);
-        v.setIdcaja((Integer) datos[6]);
+        v.setTipopago((String) datos[6]);
+        v.setIdcaja((Integer) datos[7]);
         try {
             VentaDAO vdao = new VentaDAO();
             if (vdao.registrar(v)) {
@@ -288,6 +299,21 @@ public class VentasControl {
                 }
             }
             return "NULL de getCajaDeUsuario";
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    /*METODO PARA OBTENER EL ID DE CAJA CON SU NOMBRE*/
+    public int getIdCaja(String caja) throws Exception {
+        try {
+            CajaDAO cdao = new CajaDAO();
+            for (Caja c : cdao.Listar()) {
+                if (c.getNomCaja().equals(caja)) {
+                    return c.getIdCaja();
+                }
+            }
+            return -1;
         } catch (Exception e) {
             throw e;
         }

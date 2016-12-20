@@ -18,8 +18,7 @@ public class Pruebas {
      */
     public static void main(String[] args) {
         try {
-            ProductoPresentacionDAO pdao = new ProductoPresentacionDAO();
-            System.out.println(new VentasControl().getStockProductoPresentacion(10, 1));
+            System.out.println(new VentasControl().getIdCaja("CAJA VIP"));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

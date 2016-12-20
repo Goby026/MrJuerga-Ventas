@@ -975,18 +975,21 @@ public class Ventas extends javax.swing.JFrame {
             double prec = Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
             int cant = Integer.parseInt(txtCantidad.getText());
             double subtotal = prec * cant;
-            if (Integer.parseInt(tblProductos.getValueAt(fila, 2).toString())<cant) {
-                JOptionPane.showMessageDialog(getRootPane(), "NO SE CUENTA CON LAS UNIDADES SOLICITADAS");
+            if (cant == 0) {
+                JOptionPane.showMessageDialog(getRootPane(), "EL VALOR 0 NO DISPONE DE OPERACIONES");
             } else {
-                Object datos[] = {cod, prod, presentacion, prec, cant, subtotal};
-                table1.addRow(datos);
-                tblPedidos.setModel(table1);
-                lblPago.setText("" + new VentasControl().calcularMonto(tblPedidos));
-                tblProductos.clearSelection();
-                listaCategorias.clearSelection();
-                bloquearBotones();
+                if (Integer.parseInt(tblProductos.getValueAt(fila, 2).toString()) < cant) {
+                    JOptionPane.showMessageDialog(getRootPane(), "NO SE CUENTA CON LAS UNIDADES SOLICITADAS");
+                } else {
+                    Object datos[] = {cod, prod, presentacion, prec, cant, subtotal};
+                    table1.addRow(datos);
+                    tblPedidos.setModel(table1);
+                    lblPago.setText("" + new VentasControl().calcularMonto(tblPedidos));
+                    tblProductos.clearSelection();
+                    listaCategorias.clearSelection();
+                    bloquearBotones();
+                }
             }
-
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -1191,27 +1194,36 @@ public class Ventas extends javax.swing.JFrame {
             c.setSubTotal(subtotal);
             c.setRuc("12345678912");
             c.setDireccion(direccion);
-            c.setTipo_pago("CONTADO");
+            c.setTipo_pago("EFECTIVO");
             c.setTotal(total);
             c.setIdtipocomprobante(idTipoComprobante);
 
             //creamos el comprobante con acceso a datos
             ComprobanteDAO cdao = new ComprobanteDAO();
-            //ejecutamos el metodo registrar
+            //registramos el comprobante
             if (cdao.Registrar(c)) {
                 System.out.println("Comprobante Registrado");
             } else {
                 System.out.println("Error");
             }
             //SEGUNDO CAPTURAMOS DATOS PARA REGISTRAR VENTA
-            Object[] datos = new Object[7];
-            datos[0] = fecha;
-            datos[1] = txtHora.getText();
-            datos[2] = new VentasControl().getIdUsuarioConNombre(usuario);
-            datos[3] = 1;
-            datos[4] = 1;//capturar el ultimo comprobante registrado
+            Object[] datos = new Object[8];            
+            datos[0] = fecha;//fecha
+            System.out.println("registro fecha");
+            datos[1] = txtHora.getText();//hora
+            System.out.println("registro hora");
+            datos[2] = new VentasControl().getIdUsuarioConNombre(usuario);//usuario
+            System.out.println("registro usuario");
+            datos[3] = 1;//cliente
+            System.out.println("registro cliente");
+            datos[4] = new VentasControl().getIdDeUltimoComprobanteRegistrado();//ultimo comprobante registrado
+            System.out.println("registro ultimo comprobante");
             datos[5] = 1;//ESTADO->> 0:PENDIENTE     1:PAGADO
-            datos[6] = 1;//capturar la caja que realiza la operacion
+            System.out.println("registro estado");
+            datos[6] = "EFECTIVO";//tipo de transaccion en efectivo
+            System.out.println("registro tipo de transaccion");
+            datos[7] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
+            System.out.println("registro caja que realizo la transaccion");
             VentasControl vc = new VentasControl();
             vc.registrarVenta(datos);
             System.out.println("venta registrada");
@@ -1300,7 +1312,95 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTresTarjetaActionPerformed
 
     private void btnCobrarConTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarConTarjetaActionPerformed
-        JOptionPane.showMessageDialog(getRootPane(), "VENTA REGISTRADA");
+        try {
+            //PRIMERO CAPTURAMOS DATOS PARA REGISTRAR COMPROBANTE
+            String fecha = new ManejadorFechas().getFechaActualMySQL();
+            String usuario = txtUsuario.getText();
+            //cliente lo pasamos en duro
+            //cantidad de que????
+            Double subtotal = Double.parseDouble(lblPago.getText());
+            //ruc lo pasamos en duro
+            String direccion = "JR AYACUCHO 772";
+            String tipoPago = null;
+            Double total = Double.parseDouble(lblPago.getText());
+            int idTipoComprobante = 1;
+            
+            if (btnVisa.isSelected()) {
+                tipoPago = "VISA";
+            } else {
+                tipoPago = "MASTER CARD";
+            }
+
+            //creamos el comprobante
+            Comprobante c = new Comprobante();
+            c.setFecha(fecha);
+            c.setUsuario(usuario);
+            c.setCliente("mrjuerga");
+            c.setCantidad(0);
+            c.setSubTotal(subtotal);
+            c.setRuc("12345678912");
+            c.setDireccion(direccion);
+            c.setTipo_pago(tipoPago);
+            c.setTotal(total);
+            c.setIdtipocomprobante(idTipoComprobante);
+
+            //creamos el comprobante con acceso a datos
+            ComprobanteDAO cdao = new ComprobanteDAO();
+            //registramos el comprobante
+            if (cdao.Registrar(c)) {
+                System.out.println("Comprobante Registrado");
+            } else {
+                System.out.println("Error");
+            }
+            //SEGUNDO CAPTURAMOS DATOS PARA REGISTRAR VENTA
+            Object[] datos = new Object[8];
+            datos[0] = fecha;//fecha
+            System.out.println("registro fecha");
+            datos[1] = txtHora.getText();//hora
+            System.out.println("registro hora");
+            datos[2] = new VentasControl().getIdUsuarioConNombre(usuario);//usuario
+            System.out.println("registro usuario");
+            datos[3] = 1;//cliente
+            System.out.println("registro cliente");
+            datos[4] = new VentasControl().getIdDeUltimoComprobanteRegistrado();//ultimo comprobante registrado
+            System.out.println("registro ultimo comprobante");
+            datos[5] = 1;//ESTADO->> 0:PENDIENTE     1:PAGADO
+            System.out.println("registro estado");
+            datos[6] = tipoPago;//tipo de transaccion en efectivo
+            System.out.println("registro tipo de transaccion");
+            datos[7] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
+            System.out.println("registro caja que realizo la transaccion");
+            VentasControl vc = new VentasControl();
+            vc.registrarVenta(datos);
+            System.out.println("venta registrada");
+            //TERCERO REGISTRO LOS DETALLES DE LA VENTA            
+            //obtengo la ultima venta registrada
+            int idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
+            System.out.println("ultima venta: " + idventa);
+            int flag = vc.registrarDetalleDeVenta(tblPedidos, idventa);
+            System.out.println("flag: " + flag);
+            if (flag > 0) {
+                JOptionPane.showMessageDialog(null, "VENTA REALIZADA EXITOSAMENTE");
+
+//                parametros.put("id_venta", idventa);
+//                parametros.put("total", total);
+//                mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\BoletaVenta.jrxml", parametros, getPageSize());
+//                mrv.setNombreArchivo("BoletaVenta");
+//                try {
+//                    mrv.exportarAPdfConCopia();
+//                } catch (Exception ex) {
+//                    System.out.println(ex.getMessage());
+//                }
+//                mrv.dispose();
+                new VentasControl().restarStock(tblPedidos);
+                panelVuelto.dispose();
+                cargarDatos(usuario);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR EN REGISTRO DE LAS VENTAS");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnCobrarConTarjetaActionPerformed
 
     private void btnVisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaActionPerformed

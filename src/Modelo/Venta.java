@@ -6,6 +6,7 @@ public class Venta {
     int idVenta;
     String fecha;
     String hora;
+    String tipopago;
     int idUsuario;
     int idCliente;
     int idComprobante;
@@ -14,7 +15,7 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(int idVenta, String fecha, String hora, int idUsuario, int idCliente, int idComprobante, int estado, int idcaja) {
+    public Venta(int idVenta, String fecha, String hora, int idUsuario, int idCliente, int idComprobante, int estado,String tipopago ,int idcaja) {
         this.idVenta = idVenta;
         this.fecha = fecha;
         this.hora = hora;
@@ -22,6 +23,7 @@ public class Venta {
         this.idCliente = idCliente;
         this.idComprobante = idComprobante;
         this.estado = estado;
+        this.tipopago = tipopago;
         this.idcaja = idcaja;
     }
     
@@ -81,6 +83,14 @@ public class Venta {
         this.estado = estado;
     }
 
+    public String getTipopago() {
+        return tipopago;
+    }
+
+    public void setTipopago(String tipopago) {
+        this.tipopago = tipopago;
+    }
+    
     public int getIdcaja() {
         return idcaja;
     }
