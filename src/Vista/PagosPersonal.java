@@ -40,6 +40,12 @@ public class PagosPersonal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jLabel3 = new javax.swing.JLabel();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jLabel5 = new javax.swing.JLabel();
+        jCalendar2 = new com.toedter.calendar.JCalendar();
+        jButton13 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPersonal = new javax.swing.JTable();
@@ -48,7 +54,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         txtPago = new javax.swing.JTextField();
         btnRealizarPago = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
-        cmbConcepto = new javax.swing.JComboBox<>();
+        cmbConcepto = new javax.swing.JComboBox<String>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -62,6 +68,20 @@ public class PagosPersonal extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jButton12 = new javax.swing.JButton();
+
+        jDialog1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setText("INICIO");
+        jDialog1.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        jDialog1.getContentPane().add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 430, 320));
+
+        jLabel5.setText("FIN");
+        jDialog1.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, -1));
+        jDialog1.getContentPane().add(jCalendar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 430, 320));
+
+        jButton13.setText("CREAR REPORTE");
+        jDialog1.getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 380, 270, 70));
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -112,7 +132,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 btnRealizarPagoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 550, 560, 90));
+        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 630, 560, 90));
 
         btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnBuscar.setText("BUSCAR");
@@ -234,6 +254,9 @@ public class PagosPersonal extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 380, 50));
+
+        jButton12.setText("REPORTE DE PAGOS");
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 730, 560, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -386,6 +409,8 @@ public class PagosPersonal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -394,9 +419,14 @@ public class PagosPersonal extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private com.toedter.calendar.JCalendar jCalendar1;
+    private com.toedter.calendar.JCalendar jCalendar2;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPersonal;

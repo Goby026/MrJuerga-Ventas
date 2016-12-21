@@ -65,6 +65,7 @@ public class CerrarCaja extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblCaja = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -72,8 +73,8 @@ public class CerrarCaja extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel11.setText("ENTRADAS");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+        jLabel11.setText("TARJETAS");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
 
         txtMontoVentas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtMontoVentas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -81,7 +82,7 @@ public class CerrarCaja extends javax.swing.JFrame {
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel30.setText("SALDO INICIAL");
-        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, -1, -1));
+        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         txtMontoApertura.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtMontoApertura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -114,7 +115,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 btnCerrarCajaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCerrarCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 330, -1));
+        getContentPane().add(btnCerrarCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, 220, -1));
 
         lblFecha.setText("____________");
         getContentPane().add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, -1, -1));
@@ -149,14 +150,28 @@ public class CerrarCaja extends javax.swing.JFrame {
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 420, 120, 20));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("REPORTE DE CAJA");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 330, -1));
+        jButton1.setText("RESUMEN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 190, -1));
 
         jLabel1.setText("CAJA:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
 
         lblCaja.setText("____________");
         getContentPane().add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("LISTA DE VENTAS");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 190, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -199,6 +214,14 @@ public class CerrarCaja extends javax.swing.JFrame {
 //            lblDescuadre.setText(""+descuadre);
 //        }
     }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
     
        /**
      * @param args the command line arguments
@@ -239,6 +262,7 @@ public class CerrarCaja extends javax.swing.JFrame {
     private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCerrarCaja;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;

@@ -75,6 +75,7 @@ public class Ventas extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         panelPagoElectronico = new javax.swing.JDialog();
         btnCeroTarjeta = new javax.swing.JButton();
         btnSieteTarjeta = new javax.swing.JButton();
@@ -148,47 +149,54 @@ public class Ventas extends javax.swing.JFrame {
         btnVisa = new javax.swing.JToggleButton();
         cmbNotaDePedido = new javax.swing.JCheckBox();
         cmbFactura = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
 
         panelVuelto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         panelVuelto.setTitle("MONTOS");
         panelVuelto.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCero.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnCero.setText("0");
+        btnCero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero.png"))); // NOI18N
+        btnCero.setBorderPainted(false);
+        btnCero.setContentAreaFilled(false);
         btnCero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCeroActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnCero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 70, 60));
+        panelVuelto.getContentPane().add(btnCero, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 490, 70, 70));
 
         btnSiete.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnSiete.setText("7");
+        btnSiete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero (7).png"))); // NOI18N
+        btnSiete.setBorderPainted(false);
+        btnSiete.setContentAreaFilled(false);
         btnSiete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSieteActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnSiete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 70, 60));
+        panelVuelto.getContentPane().add(btnSiete, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 70, 70));
 
         btnCuatro.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnCuatro.setText("4");
+        btnCuatro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero (4).png"))); // NOI18N
+        btnCuatro.setBorderPainted(false);
+        btnCuatro.setContentAreaFilled(false);
         btnCuatro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCuatroActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnCuatro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 70, 60));
+        panelVuelto.getContentPane().add(btnCuatro, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 70, 70));
 
         btnUno.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnUno.setText("1");
+        btnUno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero (1).png"))); // NOI18N
+        btnUno.setBorderPainted(false);
+        btnUno.setContentAreaFilled(false);
         btnUno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUnoActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 70, 60));
+        panelVuelto.getContentPane().add(btnUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 420, 70, 70));
 
         btnPunto.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnPunto.setText(".");
@@ -197,34 +205,40 @@ public class Ventas extends javax.swing.JFrame {
                 btnPuntoActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnPunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 70, 60));
+        panelVuelto.getContentPane().add(btnPunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 70, 60));
 
         btnOcho.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnOcho.setText("8");
+        btnOcho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero (8).png"))); // NOI18N
+        btnOcho.setBorderPainted(false);
+        btnOcho.setContentAreaFilled(false);
         btnOcho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOchoActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnOcho, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 70, 60));
+        panelVuelto.getContentPane().add(btnOcho, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 70, 70));
 
         btnCinco.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnCinco.setText("5");
+        btnCinco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero (5).png"))); // NOI18N
+        btnCinco.setBorderPainted(false);
+        btnCinco.setContentAreaFilled(false);
         btnCinco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCincoActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnCinco, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 70, 60));
+        panelVuelto.getContentPane().add(btnCinco, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 70, 70));
 
         btnDos.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnDos.setText("2");
+        btnDos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero (2).png"))); // NOI18N
+        btnDos.setBorderPainted(false);
+        btnDos.setContentAreaFilled(false);
         btnDos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDosActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 70, 60));
+        panelVuelto.getContentPane().add(btnDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 70, 70));
 
         btnBorrar.setBackground(new java.awt.Color(255, 51, 51));
         btnBorrar.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
@@ -234,44 +248,50 @@ public class Ventas extends javax.swing.JFrame {
                 btnBorrarActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 70, 60));
+        panelVuelto.getContentPane().add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 70, 60));
 
         btnNueve.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnNueve.setText("9");
+        btnNueve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero (9).png"))); // NOI18N
+        btnNueve.setBorderPainted(false);
+        btnNueve.setContentAreaFilled(false);
         btnNueve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNueveActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnNueve, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 70, 60));
+        panelVuelto.getContentPane().add(btnNueve, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 70, 70));
 
         btnSeis.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnSeis.setText("6");
+        btnSeis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero (6).png"))); // NOI18N
+        btnSeis.setBorderPainted(false);
+        btnSeis.setContentAreaFilled(false);
         btnSeis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeisActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnSeis, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 70, 60));
+        panelVuelto.getContentPane().add(btnSeis, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 70, 70));
 
         btnTres.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        btnTres.setText("3");
+        btnTres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/numero (3).png"))); // NOI18N
+        btnTres.setBorderPainted(false);
+        btnTres.setContentAreaFilled(false);
         btnTres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTresActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 70, 60));
+        panelVuelto.getContentPane().add(btnTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 70, 70));
 
         txtVuelto.setEditable(false);
         txtVuelto.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         txtVuelto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelVuelto.getContentPane().add(txtVuelto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 230, 60));
+        panelVuelto.getContentPane().add(txtVuelto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 640, 230, 60));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("VUELTO");
-        panelVuelto.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 250, -1));
+        panelVuelto.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 590, 250, -1));
 
         btnRealizarVenta.setBackground(new java.awt.Color(0, 153, 0));
         btnRealizarVenta.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -282,23 +302,24 @@ public class Ventas extends javax.swing.JFrame {
                 btnRealizarVentaActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(btnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 230, 60));
+        panelVuelto.getContentPane().add(btnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 710, 230, 60));
 
         txtMontoRecibido.setEditable(false);
         txtMontoRecibido.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         txtMontoRecibido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        panelVuelto.getContentPane().add(txtMontoRecibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 230, 80));
+        panelVuelto.getContentPane().add(txtMontoRecibido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 230, 80));
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("CANCELAR");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelVuelto.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 230, 50));
+        panelVuelto.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 840, 105, 38));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -307,9 +328,12 @@ public class Ventas extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("MONTO RECIBIDO");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 200, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 400, -1));
 
-        panelVuelto.getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 230, 50));
+        panelVuelto.getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 400, 50));
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/borderGalaxy.png"))); // NOI18N
+        panelVuelto.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 910));
 
         panelPagoElectronico.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -685,10 +709,10 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel10.setText("PRODUCTOS");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 100, -1));
 
         btnQuitar.setBackground(new java.awt.Color(255, 0, 0));
-        btnQuitar.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnQuitar.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         btnQuitar.setForeground(new java.awt.Color(255, 255, 255));
         btnQuitar.setText("X");
         btnQuitar.addActionListener(new java.awt.event.ActionListener() {
@@ -696,7 +720,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnQuitarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 950, 70, -1));
+        getContentPane().add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 950, 130, 50));
 
         btnCobrar.setBackground(new java.awt.Color(0, 153, 51));
         btnCobrar.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
@@ -724,7 +748,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnPendientesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 950, 250, 50));
+        getContentPane().add(btnPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 950, 660, 50));
 
         jPanel8.setBackground(new java.awt.Color(51, 153, 255));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -801,7 +825,7 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel14.setText("CATEGORIAS");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 110, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 850, 290, 10));
 
         jLabel15.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
@@ -858,7 +882,7 @@ public class Ventas extends javax.swing.JFrame {
         cmbNotaDePedido.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         cmbNotaDePedido.setForeground(new java.awt.Color(0, 51, 204));
         cmbNotaDePedido.setText("NOTA DE PEDIDO");
-        getContentPane().add(cmbNotaDePedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        getContentPane().add(cmbNotaDePedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 30));
 
         cmbFactura.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         cmbFactura.setForeground(new java.awt.Color(0, 51, 204));
@@ -868,15 +892,7 @@ public class Ventas extends javax.swing.JFrame {
                 cmbFacturaActionPerformed(evt);
             }
         });
-        getContentPane().add(cmbFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, -1, -1));
-
-        jButton2.setText("prueba");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 950, -1, -1));
+        getContentPane().add(cmbFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1434,14 +1450,6 @@ public class Ventas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbFacturaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            System.out.println(new VentasControl().getIdProductoPresentacion(13, 1));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1529,7 +1537,6 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JCheckBox cmbFactura;
     private javax.swing.JCheckBox cmbNotaDePedido;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1538,6 +1545,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
