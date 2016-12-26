@@ -13,6 +13,7 @@ import Modelo.CajaDAO;
 import Modelo.FlujoCaja;
 import Modelo.FlujoCajaDAO;
 import java.awt.Color;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -209,17 +210,21 @@ public class AbrirCaja extends javax.swing.JFrame {
             try {
                 int flag = 0;
                 FlujoCajaDAO fdao = new FlujoCajaDAO();
+                
+                //validamos la apertura de caja con la fecha del sistema (24 horas)
                 for (FlujoCaja fc : fdao.Listar()) {
                     if (fc.getFecha().equals(new ManejadorFechas().getFechaActualMySQL())) {
                         flag++;
                     }
                 }
+                                
                 System.out.println(flag);
                 if (flag > 0) {
                     JOptionPane.showMessageDialog(getRootPane(), "YA SE APERTURO ESTA CAJA EL DIA DE HOY.");
                 } else {
                     FlujoCaja fc = new FlujoCaja();
                     fc.setFecha(new ManejadorFechas().getFechaActualMySQL());
+                    fc.setHora(new ManejadorFechas().getHoraActual());
                     fc.setIngresos(0);
                     fc.setEgresos(0);
                     fc.setSaldo(Double.parseDouble(txtSaldoInicial.getText()));

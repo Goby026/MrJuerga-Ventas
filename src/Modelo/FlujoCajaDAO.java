@@ -1,8 +1,10 @@
 package Modelo;
 
 import Interfaces.FlujoCajaCRUD;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +17,16 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
     @Override
     public boolean Registrar(FlujoCaja fc) throws Exception {
         try {
-            String sql = "INSERT INTO flujocaja(fecha_flujo,ingresos,egresos,saldo,idusuario,idcaja)VALUE (?,?,?,?,?,?)";
+            String sql = "INSERT INTO flujocaja(fecha_flujo,hora_flujo,ingresos,egresos,saldo,idusuario,idcaja)VALUE (?,?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, fc.getFecha());
-            pst.setDouble(2, fc.getIngresos());
-            pst.setDouble(3, fc.getEgresos());
-            pst.setDouble(4, fc.getSaldo());
-            pst.setInt(5, fc.getIdUsuario());
-            pst.setInt(6, fc.getIdCaja());
+            pst.setString(2, fc.getHora());
+            pst.setDouble(3, fc.getIngresos());
+            pst.setDouble(4, fc.getEgresos());
+            pst.setDouble(5, fc.getSaldo());
+            pst.setInt(6, fc.getIdUsuario());
+            pst.setInt(7, fc.getIdCaja());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -40,16 +43,17 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
     @Override
     public boolean Modificar(FlujoCaja fc) throws Exception {
         try {
-            String sql = ("UPDATE caja flujocaja SET fecha_flujo = ?, ingresos = ?, egresos = ?, saldo = ?, idusuario = ?, idcaja = ? WHERE idflujocaja = ?");
+            String sql = ("UPDATE caja flujocaja SET fecha_flujo = ?,hora_flujo=? ,ingresos = ?, egresos = ?, saldo = ?, idusuario = ?, idcaja = ? WHERE idflujocaja = ?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, fc.getFecha());
-            pst.setDouble(2, fc.getIngresos());
-            pst.setDouble(3, fc.getEgresos());
-            pst.setDouble(4, fc.getSaldo());
-            pst.setInt(5, fc.getIdUsuario());
-            pst.setInt(6, fc.getIdCaja());
-            pst.setInt(7, fc.getIdFlujoCaja());
+            pst.setString(2, fc.getHora());
+            pst.setDouble(3, fc.getIngresos());
+            pst.setDouble(4, fc.getEgresos());
+            pst.setDouble(5, fc.getSaldo());
+            pst.setInt(6, fc.getIdUsuario());
+            pst.setInt(7, fc.getIdCaja());
+            pst.setInt(8, fc.getIdFlujoCaja());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -92,8 +96,9 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 FlujoCaja fc = new FlujoCaja();
-                fc.setIdFlujoCaja(res.getInt("idflujocaja"));
+                fc.setIdFlujoCaja(res.getInt("idflujocaja"));                
                 fc.setFecha(res.getString("fecha_flujo"));
+                fc.setHora(res.getString("hora_flujo"));
                 fc.setIngresos(res.getDouble("ingresos"));
                 fc.setEgresos(res.getDouble("egresos"));
                 fc.setSaldo(res.getDouble("saldo"));

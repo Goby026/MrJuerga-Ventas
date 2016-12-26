@@ -1,23 +1,27 @@
-
 package Modelo;
+
+import java.sql.Time;
+import java.util.Date;
 
 /**
  *
  * @author Marce
  */
 public class FlujoCaja {
+
     int idFlujoCaja, idUsuario, idCaja;
-    String fecha;
+    String fecha, hora;
     double ingresos, egresos, saldo;
 
     public FlujoCaja() {
     }
 
-    public FlujoCaja(int idFlujoCaja, int idUsuario, int idCaja, String fecha, double ingresos, double egresos, double saldo) {
+    public FlujoCaja(int idFlujoCaja, int idUsuario, int idCaja, String fecha, String hora, double ingresos, double egresos, double saldo) {
         this.idFlujoCaja = idFlujoCaja;
         this.idUsuario = idUsuario;
         this.idCaja = idCaja;
         this.fecha = fecha;
+        this.hora = hora;
         this.ingresos = ingresos;
         this.egresos = egresos;
         this.saldo = saldo;
@@ -55,6 +59,14 @@ public class FlujoCaja {
         this.fecha = fecha;
     }
 
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
     public double getIngresos() {
         return ingresos;
     }
@@ -78,7 +90,5 @@ public class FlujoCaja {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
-    
-    
-    
+
 }

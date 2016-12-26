@@ -8,6 +8,10 @@ import Modelo.Usuario;
 import Modelo.UsuarioCaja;
 import Modelo.UsuarioCajaDAO;
 import Modelo.UsuarioDAO;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -93,5 +97,31 @@ public class AbrirCajaControl {
         return flag;
     }
 
-    /*METODO PARA OBTENER EL ESTADO DE CAJA*/
+    //METODO PARA VALIDAR LA APERTURA DE CAJA
+    public boolean verificarApertura(int idCaja) throws Exception {
+        try {
+            //rango de horas de trabajo ( 12 )
+            //hora inicial + 12
+            Date horaFinal = new Date();
+            horaFinal.getTime();
+            new ManejadorFechas().sumarRestarHorasFecha(horaFinal, 12);
+            
+            Date fechaHoy = new Date();
+            fechaHoy.getTime();
+
+            
+            String fechaActual = new ManejadorFechas().getFechaActual();
+            java.sql.Date mañana = new ManejadorFechas().sumarFechasDias((java.sql.Date) fechaHoy, 1);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yy");
+            String fechaMañana = sdf.format(mañana);
+            //verificar el estado de la caja
+            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+            for (FlujoCaja fc : fcdao.Listar()) {
+                
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return false;
+    }
 }

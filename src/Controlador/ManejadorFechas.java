@@ -1,12 +1,13 @@
 package Controlador;
 
-
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class ManejadorFechas {
 
@@ -17,7 +18,7 @@ public class ManejadorFechas {
         SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
         return formateador.format(ahora);
     }
-    
+
     public String getFechaActualMySQL() {
         Date ahora = new Date();
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
@@ -26,7 +27,7 @@ public class ManejadorFechas {
 
     //Metodo usado para obtener la hora actual del sistema
     //@return Retorna un <b>STRING</b> con la hora actual formato "hh:mm:ss"
-    public  String getHoraActual() {
+    public String getHoraActual() {
         Date ahora = new Date();
         SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
         return formateador.format(ahora);
@@ -36,7 +37,7 @@ public class ManejadorFechas {
     //@param fch La fecha para sumarle los dias
     //@param dias Numero de dias a agregar
     //@return La fecha agregando los dias
-    public  java.sql.Date sumarFechasDias(java.sql.Date fch, int dias) {
+    public java.sql.Date sumarFechasDias(java.sql.Date fch, int dias) {
         Calendar cal = new GregorianCalendar();
         cal.setTimeInMillis(fch.getTime());
         cal.add(Calendar.DATE, dias);
@@ -47,7 +48,7 @@ public class ManejadorFechas {
     //@param fch La fecha
     //@param dias Dias a restar
     //@return La fecha restando los dias
-    public  synchronized java.sql.Date restarFechasDias(java.sql.Date fch, int dias) {
+    public synchronized java.sql.Date restarFechasDias(java.sql.Date fch, int dias) {
         Calendar cal = new GregorianCalendar();
         cal.setTimeInMillis(fch.getTime());
         cal.add(Calendar.DATE, -dias);
@@ -58,7 +59,7 @@ public class ManejadorFechas {
     //@param fechaInicial La fecha de inicio
     //@param fechaFinal  La fecha de fin
     //@return Retorna el numero de dias entre dos fechas
-    public  synchronized int diferenciasDeFechas(Date fechaInicial, Date fechaFinal) {
+    public synchronized int diferenciasDeFechas(Date fechaInicial, Date fechaFinal) {
 
         DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
         String fechaInicioString = df.format(fechaInicial);
@@ -83,7 +84,7 @@ public class ManejadorFechas {
     //Devuele un java.util.Date desde un String en formato dd-MM-yyyy
     //@param La fecha a convertir a formato date
     //@return Retorna la fecha en formato Date
-    public  synchronized java.util.Date deStringToDate(String fecha) {
+    public synchronized java.util.Date deStringToDate(String fecha) {
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd-MM-yyyy");
         Date fechaEnviar = null;
         try {
@@ -93,5 +94,13 @@ public class ManejadorFechas {
             ex.printStackTrace();
             return null;
         }
+    }
+
+    public Date sumarRestarHorasFecha(Date fecha, int horas) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha); // Configuramos la fecha que se recibe
+        calendar.add(Calendar.HOUR, horas);  // numero de horas a añadir, o restar en caso de horas<0
+        calendar.getTime(); // Devuelve el objeto Date con las nuevas horas añadidas
+        return calendar.getTime();
     }
 }
