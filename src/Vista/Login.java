@@ -6,17 +6,14 @@
 package Vista;
 
 import Controlador.LoginControl;
-import Modelo.Usuario;
-import Modelo.UsuarioDAO;
-import java.util.List;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import sun.security.util.Password;
 
 /**
  *
- * @author Gaby
+ * @author Marce
  */
 public class Login extends javax.swing.JFrame {
 
@@ -24,10 +21,17 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
-        setUndecorated(true);
+        //setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
-        txtUsuario.requestFocus();
+        camposTransparentes();
+    }
+    
+    public void camposTransparentes(){        
+        Color c = new Color(0,0,1,0.01f);
+        txtUsuario.setBackground(c);
+        txtPass.setBackground(c);
+        btnIngresar.setBackground(c);
     }
 
     /**
@@ -39,130 +43,120 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jLabel21 = new javax.swing.JLabel();
-        sombra1 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        sombra2 = new javax.swing.JLabel();
+        customPanel2 = new Controlador.CustomPanel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         btnIngresar = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrarlogin.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(957, 30, 130, 100));
+        customPanel2.setOpaque(false);
+        customPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel21.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel21.setFont(new java.awt.Font("Bauhaus 93", 0, 48)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("MISTER JUERGA");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        sombra1.setBackground(new java.awt.Color(0, 0, 0));
-        sombra1.setFont(new java.awt.Font("Bauhaus 93", 0, 48)); // NOI18N
-        sombra1.setText("MISTER JUERGA");
-        getContentPane().add(sombra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 10, -1, -1));
-
-        jLabel19.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel19.setFont(new java.awt.Font("Bauhaus 93", 0, 48)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel19.setText("DISCOTECK");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, -1));
-
-        sombra2.setBackground(new java.awt.Color(0, 0, 0));
-        sombra2.setFont(new java.awt.Font("Bauhaus 93", 0, 48)); // NOI18N
-        sombra2.setText("DISCOTECK");
-        getContentPane().add(sombra2, new org.netbeans.lib.awtextra.AbsoluteConstraints(652, 10, -1, -1));
-
+        jLabel1.setFont(new java.awt.Font("Bauhaus 93", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("USUARIO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("CONTRASEÑA");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, -1, -1));
+        customPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 40));
 
-        txtUsuario.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.setBorder(null);
+        txtUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 310, 50));
+        customPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 280, 40));
 
-        btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Bauhaus 93", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("CONTRASEÑA");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
+
+        customPanel2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 190, 40));
+
+        btnIngresar.setBackground(new java.awt.Color(255, 255, 255));
+        btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("INGRESAR");
-        btnIngresar.setBorder(null);
-        btnIngresar.setBorderPainted(false);
+        btnIngresar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         btnIngresar.setContentAreaFilled(false);
+        btnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 470, 110, 30));
+        customPanel2.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 250, 60));
 
-        txtPass.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel13.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel13.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 51, 0));
+        jLabel13.setText("DISCOTECK");
+        customPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, -1, -1));
+
+        jLabel16.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel16.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("MISTER JUERGA");
+        customPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 420, -1, -1));
+
+        txtPass.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        txtPass.setForeground(new java.awt.Color(255, 255, 255));
         txtPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPass.setBorder(null);
+        txtPass.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPassActionPerformed(evt);
             }
         });
-        getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 310, 50));
+        customPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 270, 40));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login1.png"))); // NOI18N
-        jLabel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, 680));
+        getContentPane().add(customPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        try {
-            String usuario = txtUsuario.getText().toUpperCase();
-            String pass = String.valueOf(txtPass.getPassword()).toUpperCase();
-            Usuario u = new Usuario();
-            u.setUsuario(usuario);
-            u.setPass(pass);
-            if (new LoginControl().validar(u)) {
-                Menu m =new Menu(usuario);
-                m.setVisible(true);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "ERROR DE DATOS");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }//GEN-LAST:event_btnIngresarActionPerformed
-
-   
-    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
-        btnIngresar.doClick();
-    }//GEN-LAST:event_txtPassActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         txtPass.requestFocus();
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        String usuario = txtUsuario.getText().toUpperCase();
+        String pass = String.valueOf(txtPass.getPassword()).toUpperCase();
+        try {
+            if (new LoginControl().validar(usuario, pass)) {
+                Menu m = new Menu(usuario);
+                m.setVisible(true);
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(getRootPane(), "ERROR DE DATOS, VERIFICA TU USUARIO O CONTRASEÑA");
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+        btnIngresar.doClick();
+    }//GEN-LAST:event_txtPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,8 +185,6 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -204,14 +196,13 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIngresar;
-    private javax.swing.JButton jButton1;
+    private Controlador.CustomPanel customPanel2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel sombra1;
-    private javax.swing.JLabel sombra2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
