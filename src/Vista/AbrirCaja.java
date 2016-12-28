@@ -211,9 +211,8 @@ public class AbrirCaja extends javax.swing.JFrame {
                 int flag = 0;
                 FlujoCajaDAO fdao = new FlujoCajaDAO();
                 
-                //validamos la apertura de caja con la fecha del sistema (24 horas)
                 for (FlujoCaja fc : fdao.Listar()) {
-                    if (fc.getFecha().equals(new ManejadorFechas().getFechaActualMySQL())) {
+                    if (fc.getHoraFinal().equals(null)) {
                         flag++;
                     }
                 }
@@ -222,14 +221,17 @@ public class AbrirCaja extends javax.swing.JFrame {
                 if (flag > 0) {
                     JOptionPane.showMessageDialog(getRootPane(), "YA SE APERTURO ESTA CAJA EL DIA DE HOY.");
                 } else {
+                    //registrar la hora inicial y la final al igual que la fecha inicial y fecha final
                     FlujoCaja fc = new FlujoCaja();
-                    fc.setFecha(new ManejadorFechas().getFechaActualMySQL());
-                    fc.setHora(new ManejadorFechas().getHoraActual());
+                    fc.setFechaInicio(new ManejadorFechas().getFechaActualMySQL());
+                    fc.setHoraInicio(new ManejadorFechas().getHoraActual());
                     fc.setIngresos(0);
                     fc.setEgresos(0);
                     fc.setSaldo(Double.parseDouble(txtSaldoInicial.getText()));
                     fc.setIdUsuario(new AbrirCajaControl().getIdUsuario(txtUsuario.getText()));
                     fc.setIdCaja(new AbrirCajaControl().getIdCaja(lblCaja.getText()));
+                    fc.setEstado("1");
+                    //estados de caja :  1=aperturado,   0=cerrado
 
                     if (fdao.Registrar(fc)) {
                         JOptionPane.showMessageDialog(getRootPane(), "SE APERTURO LA CAJA CON S/." + txtSaldoInicial.getText());

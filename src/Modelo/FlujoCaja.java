@@ -10,21 +10,25 @@ import java.util.Date;
 public class FlujoCaja {
 
     int idFlujoCaja, idUsuario, idCaja;
-    String fecha, hora;
+    String fechaInicio, horaInicio, fechaFinal, horaFinal;
+    String estado;
     double ingresos, egresos, saldo;
 
     public FlujoCaja() {
     }
 
-    public FlujoCaja(int idFlujoCaja, int idUsuario, int idCaja, String fecha, String hora, double ingresos, double egresos, double saldo) {
+    public FlujoCaja(int idFlujoCaja, int idUsuario, int idCaja, String fechaInicio, String horaInicio,String fechaFinal, String horaFinal ,double ingresos, double egresos, double saldo, String estado) {
         this.idFlujoCaja = idFlujoCaja;
         this.idUsuario = idUsuario;
         this.idCaja = idCaja;
-        this.fecha = fecha;
-        this.hora = hora;
+        this.fechaInicio = fechaInicio;
+        this.horaInicio = horaInicio;
+        this.fechaFinal =fechaFinal;
+        this.horaFinal=horaFinal;
         this.ingresos = ingresos;
         this.egresos = egresos;
         this.saldo = saldo;
+        this.estado = estado;
     }
 
     public int getIdFlujoCaja() {
@@ -51,20 +55,36 @@ public class FlujoCaja {
         this.idCaja = idCaja;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public String getHora() {
-        return hora;
+    public String getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public String getFechaFinal() {
+        return fechaFinal;
+    }
+
+    public void setFechaFinal(String fechaFinal) {
+        this.fechaFinal = fechaFinal;
+    }
+
+    public String getHoraFinal() {
+        return horaFinal;
+    }
+
+    public void setHoraFinal(String horaFinal) {
+        this.horaFinal = horaFinal;
     }
 
     public double getIngresos() {
@@ -89,6 +109,14 @@ public class FlujoCaja {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 }

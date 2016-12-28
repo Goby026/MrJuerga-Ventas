@@ -90,7 +90,7 @@ public class AbrirCajaControl {
         String fecha = new ManejadorFechas().getFechaActualMySQL();
         FlujoCajaDAO fdao = new FlujoCajaDAO();
         for (FlujoCaja fc : fdao.Listar()) {
-            if (fc.getFecha().equals(fecha) && fc.getIdCaja() == idCaja) {
+            if (fc.getFechaInicio().equals(fecha) && fc.getIdCaja() == idCaja) {
                 flag++;
             }
         }
@@ -98,30 +98,23 @@ public class AbrirCajaControl {
     }
 
     //METODO PARA VALIDAR LA APERTURA DE CAJA
-    public boolean verificarApertura(int idCaja) throws Exception {
-        try {
-            //rango de horas de trabajo ( 12 )
-            //hora inicial + 12
-            Date horaFinal = new Date();
-            horaFinal.getTime();
-            new ManejadorFechas().sumarRestarHorasFecha(horaFinal, 12);
-            
-            Date fechaHoy = new Date();
-            fechaHoy.getTime();
-
-            
-            String fechaActual = new ManejadorFechas().getFechaActual();
-            java.sql.Date mañana = new ManejadorFechas().sumarFechasDias((java.sql.Date) fechaHoy, 1);
-            SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yy");
-            String fechaMañana = sdf.format(mañana);
-            //verificar el estado de la caja
-            FlujoCajaDAO fcdao = new FlujoCajaDAO();
-            for (FlujoCaja fc : fcdao.Listar()) {
-                
-            }
-        } catch (Exception ex) {
-            throw ex;
-        }
-        return false;
-    }
+//    public boolean verificarApertura(int idCaja) throws Exception {
+//        try {
+//            //verificar el estado de la caja
+//            String hoy = new ManejadorFechas().getFechaActualMySQL();
+//            Date fecha =  new Date();
+//            fecha.getTime();
+//            String mañana = new ManejadorFechas().sumarFechasDias(fecha, 1);
+//            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+//            for (FlujoCaja fc : fcdao.Listar()) {
+//                if (fc.getEstado().equals("1") && (fc.getFecha().equals(hoy) || fc.getFecha().equals(mañana))) {
+//                    
+//                } else {
+//                }
+//            }
+//        } catch (Exception ex) {
+//            throw ex;
+//        }
+//        return false;
+//    }
 }

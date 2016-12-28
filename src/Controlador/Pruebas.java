@@ -8,8 +8,15 @@ package Controlador;
 import Modelo.FlujoCaja;
 import Modelo.FlujoCajaDAO;
 import Modelo.ProductoPresentacionDAO;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  *
@@ -21,31 +28,27 @@ public class Pruebas {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-//            Date horaFinal = new Date();
-//            horaFinal.getTime();
-//            System.out.println(horaFinal);
-//            FlujoCajaDAO fcdao = new FlujoCajaDAO();
-//            for (FlujoCaja fc : fcdao.Listar()) {
-//                
+//        try {
+//            //System.out.print("Ingrese la fecha de ingreso: ");
+//            String hingreso = "19:00";//la hora de inicio se define cuando se apertura la caja
+//            LocalTime ingreso = LocalTime.parse(hingreso);
+//            //System.out.print("Ingrese la fecha de salida: ");
+//            String hsalida = "06:00";//la hora de salida se debe configurar para el cierre automatico
+//            LocalTime salida = LocalTime.parse(hsalida);
+//
+//            int minutes = (int) ChronoUnit.MINUTES.between(salida, ingreso);
+//            System.out.println(minutes);
+//            if (minutes > (60 * 12)) {
+//                //si se pasa la hora de trabajo ingresa aca
+//                System.out.println("¡Estás explotando a tus empleados!");
+//            }else{
+//                //si estamos en el horario correcto ingresa aca
+//                System.out.println("Horario correcto");
 //            }
-//            System.out.println(new ManejadorFechas().getHoraActual());
-            Date fechaHoy = new Date();
-            fechaHoy.getTime();
-
-            
-            String fechaActual = new ManejadorFechas().getFechaActual();
-            java.sql.Date mañana = new ManejadorFechas().sumarFechasDias((java.sql.Date) fechaHoy, 1);
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
-            String fechaMañana = sdf.format(mañana);
-            if (fechaActual.equals("26-12-2016") && fechaMañana.equals("27-12-2016")) {
-                System.out.println("SI");
-            } else {
-                System.out.println("NO");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+//        } catch (DateTimeParseException e) {
+//            System.out.println("Fecha de ingreso o salida inválida");
+//        }
+        
     }
-    
+
 }
