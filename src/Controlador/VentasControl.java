@@ -237,7 +237,7 @@ public class VentasControl {
         v.setIdCliente((Integer) datos[3]);
         v.setIdComprobante((Integer) datos[4]);
         v.setEstado((Integer) datos[5]);
-        v.setTipopago((String) datos[6]);
+        v.setTipopago((Integer) datos[6]);
         v.setIdcaja((Integer) datos[7]);
         try {
             VentaDAO vdao = new VentaDAO();

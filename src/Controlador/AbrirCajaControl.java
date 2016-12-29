@@ -98,23 +98,19 @@ public class AbrirCajaControl {
     }
 
     //METODO PARA VALIDAR LA APERTURA DE CAJA
-//    public boolean verificarApertura(int idCaja) throws Exception {
-//        try {
-//            //verificar el estado de la caja
-//            String hoy = new ManejadorFechas().getFechaActualMySQL();
-//            Date fecha =  new Date();
-//            fecha.getTime();
-//            String mañana = new ManejadorFechas().sumarFechasDias(fecha, 1);
-//            FlujoCajaDAO fcdao = new FlujoCajaDAO();
-//            for (FlujoCaja fc : fcdao.Listar()) {
-//                if (fc.getEstado().equals("1") && (fc.getFecha().equals(hoy) || fc.getFecha().equals(mañana))) {
-//                    
-//                } else {
-//                }
-//            }
-//        } catch (Exception ex) {
-//            throw ex;
-//        }
-//        return false;
-//    }
+    public boolean verificarApertura(int idUsuario,int idCaja) throws Exception {
+        try {
+            //verificar el estado de la caja
+            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+            int idFlujoCaja = fcdao.getIdFlujo(idUsuario, idCaja);
+            for (FlujoCaja fc : fcdao.Listar()) {
+                if ("1".equals(fc.getEstado()) && fc.getIdFlujoCaja()==idFlujoCaja) {
+                    return true;
+                }
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return false;
+    }
 }

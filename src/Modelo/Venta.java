@@ -6,7 +6,7 @@ public class Venta {
     int idVenta;
     String fecha;
     String hora;
-    String tipopago;
+    int tipopago;
     int idUsuario;
     int idCliente;
     int idComprobante;
@@ -15,7 +15,7 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(int idVenta, String fecha, String hora, int idUsuario, int idCliente, int idComprobante, int estado,String tipopago ,int idcaja) {
+    public Venta(int idVenta, String fecha, String hora, int idUsuario, int idCliente, int idComprobante, int estado,int tipopago ,int idcaja) {
         this.idVenta = idVenta;
         this.fecha = fecha;
         this.hora = hora;
@@ -83,11 +83,11 @@ public class Venta {
         this.estado = estado;
     }
 
-    public String getTipopago() {
+    public int getTipopago() {
         return tipopago;
     }
 
-    public void setTipopago(String tipopago) {
+    public void setTipopago(int tipopago) {
         this.tipopago = tipopago;
     }
     

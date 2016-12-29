@@ -32,8 +32,6 @@ public class AbrirCaja extends javax.swing.JFrame {
 
     public AbrirCaja() {
     }
-    
-    
 
     public void datosIniciales(String usuario) throws Exception {
         Color c = new Color(153, 153, 153);
@@ -83,6 +81,17 @@ public class AbrirCaja extends javax.swing.JFrame {
         lblMonto = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -91,16 +100,17 @@ public class AbrirCaja extends javax.swing.JFrame {
         getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, -1, -1));
 
         txtSaldoInicial.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtSaldoInicial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtSaldoInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSaldoInicialActionPerformed(evt);
             }
         });
-        getContentPane().add(txtSaldoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 130, -1));
+        getContentPane().add(txtSaldoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 230, -1));
 
-        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel27.setText("SALDO INICIAL");
-        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, -1));
+        getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
 
         lblFecha.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblFecha.setText("_______________");
@@ -111,7 +121,7 @@ public class AbrirCaja extends javax.swing.JFrame {
         getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
 
         btnAperturar.setBackground(new java.awt.Color(51, 153, 0));
-        btnAperturar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnAperturar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btnAperturar.setForeground(new java.awt.Color(255, 255, 255));
         btnAperturar.setText("APERTURAR");
         btnAperturar.addActionListener(new java.awt.event.ActionListener() {
@@ -119,10 +129,10 @@ public class AbrirCaja extends javax.swing.JFrame {
                 btnAperturarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAperturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 160, -1));
+        getContentPane().add(btnAperturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 690, 230, -1));
 
         btnCancelar.setBackground(new java.awt.Color(255, 0, 0));
-        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +140,7 @@ public class AbrirCaja extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 160, -1));
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 740, 230, -1));
 
         lblCaja.setText("________________");
         getContentPane().add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
@@ -191,7 +201,106 @@ public class AbrirCaja extends javax.swing.JFrame {
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel9.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 70));
 
-        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 640, 40));
+        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 800, 640, 40));
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton2.setText("7");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 70, 60));
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton3.setText("8");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 70, 60));
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton1.setText("9");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 70, 60));
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton4.setText("4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 70, 60));
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton5.setText("5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 70, 60));
+
+        jButton6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton6.setText("6");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 450, 70, 60));
+
+        jButton7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton7.setText("1");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 520, 70, 60));
+
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton8.setText("2");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 520, 70, 60));
+
+        jButton9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton9.setText("3");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 520, 70, 60));
+
+        jButton10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton10.setText("0");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 150, 60));
+
+        jButton11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton11.setText("<");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 590, 70, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -210,14 +319,13 @@ public class AbrirCaja extends javax.swing.JFrame {
             try {
                 int flag = 0;
                 FlujoCajaDAO fdao = new FlujoCajaDAO();
-                
-                for (FlujoCaja fc : fdao.Listar()) {
-                    if (fc.getHoraFinal().equals(null)) {
-                        flag++;
-                    }
+
+                if (new AbrirCajaControl().verificarApertura(new AbrirCajaControl().getIdUsuario(txtUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()))) {
+                    flag++;
                 }
-                                
+                
                 System.out.println(flag);
+
                 if (flag > 0) {
                     JOptionPane.showMessageDialog(getRootPane(), "YA SE APERTURO ESTA CAJA EL DIA DE HOY.");
                 } else {
@@ -225,7 +333,7 @@ public class AbrirCaja extends javax.swing.JFrame {
                     FlujoCaja fc = new FlujoCaja();
                     fc.setFechaInicio(new ManejadorFechas().getFechaActualMySQL());
                     fc.setHoraInicio(new ManejadorFechas().getHoraActual());
-                    fc.setIngresos(0);
+                    fc.setIngresos(Double.parseDouble(txtSaldoInicial.getText()));
                     fc.setEgresos(0);
                     fc.setSaldo(Double.parseDouble(txtSaldoInicial.getText()));
                     fc.setIdUsuario(new AbrirCajaControl().getIdUsuario(txtUsuario.getText()));
@@ -243,7 +351,7 @@ public class AbrirCaja extends javax.swing.JFrame {
                     }
                 }
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                ex.printStackTrace();
             }
         } else {
             JOptionPane.showMessageDialog(getRootPane(), "INGRESE UN MONTO INICIAL PARA APERTURAR LA CAJA");
@@ -288,15 +396,80 @@ public class AbrirCaja extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void txtSaldoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoInicialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSaldoInicialActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String numero = txtSaldoInicial.getText() + 7;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String numero = txtSaldoInicial.getText() + 8;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String numero = txtSaldoInicial.getText() + 9;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String numero = txtSaldoInicial.getText() + 4;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String numero = txtSaldoInicial.getText() + 5;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        String numero = txtSaldoInicial.getText() + 6;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        String numero = txtSaldoInicial.getText() + 1;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        String numero = txtSaldoInicial.getText() + 2;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        String numero = txtSaldoInicial.getText() + 3;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        String numero = txtSaldoInicial.getText() + 0;
+        txtSaldoInicial.setText(numero);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        txtSaldoInicial.setText("");
+    }//GEN-LAST:event_jButton11ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAperturar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel27;

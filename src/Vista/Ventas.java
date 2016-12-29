@@ -1343,6 +1343,21 @@ public class Ventas extends javax.swing.JFrame {
             //tipo de pago lo pasamos en duro hasta normalizar el TIPODEPAGO
             Double total = Double.parseDouble(lblPago.getText());
             int idTipoComprobante = 1;
+            
+            int tipoPago=0;
+            if(btnEfectivo.isSelected()){
+                //efectivo = 1
+                tipoPago = 1;
+            }else if(btnMasterCard.isSelected()){
+                //masterCard = 2
+                tipoPago = 2;
+            }else if(btnVisa.isSelected()){
+                //visa = 3
+                tipoPago = 3;
+            }else if(btnOperacionCombinada.isSelected()){
+                //combinada = 4
+                tipoPago = 4;
+            }
 
             //creamos el comprobante
             Comprobante c = new Comprobante();
@@ -1353,7 +1368,7 @@ public class Ventas extends javax.swing.JFrame {
             c.setSubTotal(subtotal);
             c.setRuc("12345678912");
             c.setDireccion(direccion);
-            c.setTipo_pago("EFECTIVO");
+            c.setTipo_pago(String.valueOf(tipoPago));
             c.setTotal(total);
             c.setIdtipocomprobante(idTipoComprobante);
 
@@ -1379,14 +1394,14 @@ public class Ventas extends javax.swing.JFrame {
             System.out.println("registro ultimo comprobante");
             datos[5] = 1;//ESTADO->> 0:PENDIENTE     1:PAGADO
             System.out.println("registro estado");
-            datos[6] = "EFECTIVO";//tipo de transaccion en efectivo
+            datos[6] = tipoPago;//tipo de transaccion
             System.out.println("registro tipo de transaccion");
             datos[7] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
             System.out.println("registro caja que realizo la transaccion");
             VentasControl vc = new VentasControl();
             vc.registrarVenta(datos);
             System.out.println("venta registrada");
-            //TERCERO REGISTRO LOS DETALLES DE LA VENTA            
+            //TERCERO REGISTRO LOS DETALLES DE LA VENTA
             //obtengo la ultima venta registrada
             int idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
             System.out.println("ultima venta: " + idventa);

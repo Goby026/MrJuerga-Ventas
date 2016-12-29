@@ -17,7 +17,7 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
     @Override
     public boolean Registrar(FlujoCaja fc) throws Exception {
         try {
-            String sql = "INSERT INTO flujocaja(fecha_inicio,hora_inicio,fecha_final, hora_final,ingresos,egresos,saldo,idusuario,idcaja, estado)VALUE (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO flujocaja(fecha_inicio,hora_inicio,fecha_final, hora_final,ingresos,egresos,saldo,idusuario,idcaja, estado)VALUE (?,?,?,?,?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, fc.getFechaInicio());
@@ -123,6 +123,26 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
             this.cerrar();
         }
         return lista;
+    }
+    
+    /* METODO PARA OBTENER EL ID DE FLUJO DE CAJA PARA LA VALIDACION  */
+    public int getIdFlujo(int idUsuario, int idCaja) throws Exception{
+        try {
+            this.conectar();            
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT MAX(idflujocaja) FROM flujocaja where idusuario= "+idUsuario+" and idcaja="+idCaja+"");
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                return res.getInt("MAX(idflujocaja)");
+            }
+            pst.close();
+            res.close();
+        } catch (Exception e) {
+            throw e;
+        }finally {
+            this.cerrar();
+        }
+       
+       return -1;
     }
 
 }

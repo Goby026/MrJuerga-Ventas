@@ -7,16 +7,6 @@ package Controlador;
 
 import Modelo.FlujoCaja;
 import Modelo.FlujoCajaDAO;
-import Modelo.ProductoPresentacionDAO;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
 
 /**
  *
@@ -27,7 +17,7 @@ public class Pruebas {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //        try {
 //            //System.out.print("Ingrese la fecha de ingreso: ");
 //            String hingreso = "19:00";//la hora de inicio se define cuando se apertura la caja
@@ -48,7 +38,21 @@ public class Pruebas {
 //        } catch (DateTimeParseException e) {
 //            System.out.println("Fecha de ingreso o salida inválida");
 //        }
+
+        AbrirCajaControl acc = new AbrirCajaControl();
+        if (acc.verificarApertura(1, 3)) {
+            System.out.println("se aperturo la caja");
+        } else {
+            System.out.println("error");
+        }
         
+//        System.out.println(new FlujoCajaDAO().getIdFlujo(1, 3));
+        
+//        FlujoCajaDAO fcdao = new FlujoCajaDAO();
+//        for (FlujoCaja fc: fcdao.Listar()) {
+//            System.out.println(fc.getEstado());
+//        }
+
     }
 
 }

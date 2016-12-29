@@ -31,7 +31,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
             pst.setInt(5, v.getIdCliente());
             pst.setInt(6, v.getIdComprobante());
             pst.setInt(7, v.getEstado());
-            pst.setString(8,v.getTipopago());
+            pst.setInt(8,v.getTipopago());
             pst.setInt(9, v.getIdcaja());
             int res = pst.executeUpdate();
             if (res > 0) {
@@ -58,7 +58,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
             pst.setInt(4, v.getIdCliente());
             pst.setInt(5, v.getIdComprobante());
             pst.setInt(6, v.getEstado());
-            pst.setString(7,v.getTipopago());
+            pst.setInt(7,v.getTipopago());
             pst.setInt(8, v.getIdcaja());
             pst.setInt(9, v.getIdVenta());
             int res = pst.executeUpdate();
@@ -112,7 +112,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
                 v.setIdCliente(rs.getInt("idcliente"));
                 v.setIdComprobante(rs.getInt("idcomprobante"));
                 v.setEstado(rs.getInt("estado"));
-                v.setTipopago(rs.getString("tipopago"));
+                v.setTipopago(rs.getInt("tipopago"));
                 v.setIdcaja(rs.getInt("idcaja"));
                 lista.add(v);
             }

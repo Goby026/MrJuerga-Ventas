@@ -5,9 +5,13 @@
  */
 package Controlador;
 
+import Modelo.FlujoCaja;
+import Modelo.FlujoCajaDAO;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,14 +24,21 @@ public class PruebasTimer {
      */
     public static void main(String[] args) {
         Timer mytimer = new Timer();
-        final long seg = (1000*2);
+        final long seg = (1000*1);
         
         TimerTask tarea = new TimerTask() {
 
             @Override
             public void run() {
-                //repitiendo tiempos
-                System.out.println(new Date());
+                try {
+                    //repitiendo tiempos
+                    System.out.println(new Date());
+                    FlujoCajaDAO fcdao = new FlujoCajaDAO();
+                    System.out.println(fcdao.Listar().get(1).getIdCaja());
+                    
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         };
         
