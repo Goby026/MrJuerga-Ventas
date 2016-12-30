@@ -86,14 +86,22 @@ public class AbrirCajaControl {
         //obtener el id de la caja asignada al usuario logeado
         String nomCaja = new AbrirCajaControl().getCajaDeUsuario(usuario);
         int idCaja = new AbrirCajaControl().getIdCaja(nomCaja);
-        //verificar si ya se abrio caja del usuario
-        String fecha = new ManejadorFechas().getFechaActualMySQL();
-        FlujoCajaDAO fdao = new FlujoCajaDAO();
-        for (FlujoCaja fc : fdao.Listar()) {
-            if (fc.getFechaInicio().equals(fecha) && fc.getIdCaja() == idCaja) {
-                flag++;
+        System.out.println(idCaja);
+        //obtener el id del usuario
+        int idUsuario = new AbrirCajaControl().getIdUsuario(usuario);
+        System.out.println(idUsuario);
+        //capturo el id de flujo de caja
+        int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(idUsuario, idCaja);
+        System.out.println(idFlujoCaja);        
+        
+        FlujoCajaDAO fcdao = new FlujoCajaDAO();
+        for (FlujoCaja fc : fcdao.Listar()) {
+            if (fc.getIdFlujoCaja()==idFlujoCaja) {
+                flag = Integer.parseInt(fc.getEstado());
+                break;
             }
         }
+        System.out.println(flag);
         return flag;
     }
 
