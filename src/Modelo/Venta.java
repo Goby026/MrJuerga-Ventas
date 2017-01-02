@@ -1,8 +1,7 @@
-
 package Modelo;
 
-
 public class Venta {
+
     int idVenta;
     String fecha;
     String hora;
@@ -10,23 +9,25 @@ public class Venta {
     int idUsuario;
     int idCliente;
     int idComprobante;
+    String nOperacion;
     int estado, idcaja;
 
     public Venta() {
     }
 
-    public Venta(int idVenta, String fecha, String hora, int idUsuario, int idCliente, int idComprobante, int estado,int tipopago ,int idcaja) {
+    public Venta(int idVenta, String fecha, String hora, int idUsuario, int idCliente, int idComprobante, int tipopago, String nOperacion, int estado, int idcaja) {
         this.idVenta = idVenta;
         this.fecha = fecha;
         this.hora = hora;
         this.idUsuario = idUsuario;
         this.idCliente = idCliente;
         this.idComprobante = idComprobante;
-        this.estado = estado;
         this.tipopago = tipopago;
+        this.nOperacion = nOperacion;
+        this.estado = estado;
         this.idcaja = idcaja;
     }
-    
+
     public int getIdVenta() {
         return idVenta;
     }
@@ -75,6 +76,22 @@ public class Venta {
         this.idComprobante = idComprobante;
     }
 
+    public int getTipopago() {
+        return tipopago;
+    }
+
+    public void setTipopago(int tipopago) {
+        this.tipopago = tipopago;
+    }
+
+    public String getnOperacion() {
+        return nOperacion;
+    }
+
+    public void setnOperacion(String nOperacion) {
+        this.nOperacion = nOperacion;
+    }
+
     public int getEstado() {
         return estado;
     }
@@ -83,14 +100,6 @@ public class Venta {
         this.estado = estado;
     }
 
-    public int getTipopago() {
-        return tipopago;
-    }
-
-    public void setTipopago(int tipopago) {
-        this.tipopago = tipopago;
-    }
-    
     public int getIdcaja() {
         return idcaja;
     }
@@ -98,5 +107,5 @@ public class Venta {
     public void setIdcaja(int idcaja) {
         this.idcaja = idcaja;
     }
-    
+
 }

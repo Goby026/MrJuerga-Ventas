@@ -38,13 +38,7 @@ public class Pruebas {
 //        } catch (DateTimeParseException e) {
 //            System.out.println("Fecha de ingreso o salida inválida");
 //        }
-
-        AbrirCajaControl acc = new AbrirCajaControl();
-        if (acc.verificarApertura(1, 3)) {
-            System.out.println("se aperturo la caja");
-        } else {
-            System.out.println("error");
-        }
+        System.out.println(new CerrarCajaControl().getMontoTarjetas(1, 3));
         
 //        System.out.println(new FlujoCajaDAO().getIdFlujo(1, 3));
         

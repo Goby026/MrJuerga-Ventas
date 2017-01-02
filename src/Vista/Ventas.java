@@ -179,12 +179,11 @@ public class Ventas extends javax.swing.JFrame {
         txtRuc = new javax.swing.JTextField();
         btnMasterCard = new javax.swing.JToggleButton();
         btnVisa = new javax.swing.JToggleButton();
-        cmbNotaDePedido = new javax.swing.JCheckBox();
-        cmbFactura = new javax.swing.JCheckBox();
         btnEfectivo = new javax.swing.JToggleButton();
         btnOperacionCombinada = new javax.swing.JToggleButton();
         jLabel20 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
+        btnFactura = new javax.swing.JToggleButton();
 
         panelVuelto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         panelVuelto.setTitle("MONTOS");
@@ -997,21 +996,6 @@ public class Ventas extends javax.swing.JFrame {
         });
         getContentPane().add(btnVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 180, 130, 80));
 
-        cmbNotaDePedido.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
-        cmbNotaDePedido.setForeground(new java.awt.Color(0, 51, 204));
-        cmbNotaDePedido.setText("NOTA DE PEDIDO");
-        getContentPane().add(cmbNotaDePedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, 30));
-
-        cmbFactura.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
-        cmbFactura.setForeground(new java.awt.Color(0, 51, 204));
-        cmbFactura.setText("FACTURA");
-        cmbFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbFacturaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cmbFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, 30));
-
         btnEfectivo.setText("EFECTIVO");
         getContentPane().add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 130, 80));
 
@@ -1027,6 +1011,14 @@ public class Ventas extends javax.swing.JFrame {
         txtDireccion.setEnabled(false);
         getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 800, -1));
 
+        btnFactura.setText("FACTURA");
+        btnFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFacturaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 130, 80));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1041,28 +1033,28 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_listaCategoriasMouseClicked
 
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
-        try {
-            if (btnVisa.isSelected() || btnMasterCard.isSelected()) {
-                panelPagoElectronico.setVisible(true);
-                panelPagoElectronico.setBounds(600, 200, 500, 1020);
-            } else if (btnEfectivo.isSelected()) {
-                //imprimir normalmente la boleta
-                panelVuelto.setVisible(true);
-                //panelVuelto.setModal(closable);
-                panelVuelto.setBounds(580, 100, 460, 950);
-            } else if (btnOperacionCombinada.isSelected()) {
-                operacionCombinada.setVisible(true);
-                operacionCombinada.setBounds(100, 100, 1175, 860);
-            } else if (cmbFactura.isSelected()) {
-                //recibir los tres parametros para la factura
-                String razon = txtRazonSocial.getText();
-                String ruc = txtRuc.getText();
-                String direccion = txtDireccion.getText();
-                //registrar cliente
+            try {
+                if (btnVisa.isSelected() || btnMasterCard.isSelected()) {
+                    panelPagoElectronico.setVisible(true);
+                    panelPagoElectronico.setBounds(600, 200, 500, 1020);
+                } else if (btnEfectivo.isSelected()) {
+                    //imprimir normalmente la boleta
+                    panelVuelto.setVisible(true);
+                    //panelVuelto.setModal(closable);
+                    panelVuelto.setBounds(580, 100, 460, 950);
+                } else if (btnOperacionCombinada.isSelected()) {
+                    operacionCombinada.setVisible(true);
+                    operacionCombinada.setBounds(100, 100, 1175, 860);
+                } else if (btnFactura.isSelected()) {
+                    //recibir los tres parametros para la factura
+                    String razon = txtRazonSocial.getText();
+                    String ruc = txtRuc.getText();
+                    String direccion = txtDireccion.getText();
+                    //registrar cliente
+                }
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
             }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
     }//GEN-LAST:event_btnCobrarActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
@@ -1339,7 +1331,7 @@ public class Ventas extends javax.swing.JFrame {
             //cantidad de que????
             Double subtotal = Double.parseDouble(lblPago.getText());
             //ruc lo pasamos en duro
-            String direccion = "JR AYACUCHO 750";
+            String direccion = "JR AYACUCHO 772";
             //tipo de pago lo pasamos en duro hasta normalizar el TIPODEPAGO
             Double total = Double.parseDouble(lblPago.getText());
             int idTipoComprobante = 1;
@@ -1381,7 +1373,7 @@ public class Ventas extends javax.swing.JFrame {
                 System.out.println("Error");
             }
             //SEGUNDO CAPTURAMOS DATOS PARA REGISTRAR VENTA
-            Object[] datos = new Object[8];
+            Object[] datos = new Object[9];
             datos[0] = fecha;//fecha
             System.out.println("registro fecha");
             datos[1] = txtHora.getText();//hora
@@ -1396,7 +1388,8 @@ public class Ventas extends javax.swing.JFrame {
             System.out.println("registro estado");
             datos[6] = tipoPago;//tipo de transaccion
             System.out.println("registro tipo de transaccion");
-            datos[7] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
+            datos[7] = "";//no se registra numero de operacion
+            datos[8] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
             System.out.println("registro caja que realizo la transaccion");
             VentasControl vc = new VentasControl();
             vc.registrarVenta(datos);
@@ -1495,14 +1488,22 @@ public class Ventas extends javax.swing.JFrame {
             Double subtotal = Double.parseDouble(lblPago.getText());
             //ruc lo pasamos en duro
             String direccion = "JR AYACUCHO 772";
-            String tipoPago = null;
             Double total = Double.parseDouble(lblPago.getText());
             int idTipoComprobante = 1;
 
-            if (btnVisa.isSelected()) {
-                tipoPago = "VISA";
-            } else {
-                tipoPago = "MASTER CARD";
+            int tipoPago=0;
+            if(btnEfectivo.isSelected()){
+                //efectivo = 1
+                tipoPago = 1;
+            }else if(btnMasterCard.isSelected()){
+                //masterCard = 2
+                tipoPago = 2;
+            }else if(btnVisa.isSelected()){
+                //visa = 3
+                tipoPago = 3;
+            }else if(btnOperacionCombinada.isSelected()){
+                //combinada = 4
+                tipoPago = 4;
             }
 
             //creamos el comprobante
@@ -1514,7 +1515,7 @@ public class Ventas extends javax.swing.JFrame {
             c.setSubTotal(subtotal);
             c.setRuc("12345678912");
             c.setDireccion(direccion);
-            c.setTipo_pago(tipoPago);
+            c.setTipo_pago(String.valueOf(tipoPago));
             c.setTotal(total);
             c.setIdtipocomprobante(idTipoComprobante);
 
@@ -1527,7 +1528,7 @@ public class Ventas extends javax.swing.JFrame {
                 System.out.println("Error");
             }
             //SEGUNDO CAPTURAMOS DATOS PARA REGISTRAR VENTA
-            Object[] datos = new Object[8];
+            Object[] datos = new Object[9];
             datos[0] = fecha;//fecha
             System.out.println("registro fecha");
             datos[1] = txtHora.getText();//hora
@@ -1542,12 +1543,14 @@ public class Ventas extends javax.swing.JFrame {
             System.out.println("registro estado");
             datos[6] = tipoPago;//tipo de transaccion en efectivo
             System.out.println("registro tipo de transaccion");
-            datos[7] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
+            datos[7] = txtNumReferencia.getText();//numero de operacion
+            System.out.println(txtNumReferencia.getText());
+            datos[8] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
             System.out.println("registro caja que realizo la transaccion");
             VentasControl vc = new VentasControl();
             vc.registrarVenta(datos);
             System.out.println("venta registrada");
-            //TERCERO REGISTRO LOS DETALLES DE LA VENTA            
+            //TERCERO REGISTRO LOS DETALLES DE LA VENTA
             //obtengo la ultima venta registrada
             int idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
             System.out.println("ultima venta: " + idventa);
@@ -1567,7 +1570,7 @@ public class Ventas extends javax.swing.JFrame {
 //                }
 //                mrv.dispose();
                 new VentasControl().restarStock(tblPedidos);
-                panelVuelto.dispose();
+                panelPagoElectronico.dispose();
                 cargarDatos(usuario);
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR EN REGISTRO DE LAS VENTAS");
@@ -1597,19 +1600,6 @@ public class Ventas extends javax.swing.JFrame {
         panelPagoElectronico.dispose();
     }//GEN-LAST:event_btnCancelarTarjetaActionPerformed
 
-    private void cmbFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFacturaActionPerformed
-        if (cmbFactura.isSelected()) {
-            txtRazonSocial.setEnabled(true);
-            txtRuc.setEnabled(true);
-            txtDireccion.setEnabled(true);
-            txtRazonSocial.requestFocus();
-        } else {
-            txtRazonSocial.setEnabled(false);
-            txtRuc.setEnabled(false);
-            txtDireccion.setEnabled(false);
-        }
-    }//GEN-LAST:event_cmbFacturaActionPerformed
-
     private void btnSalirOpCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirOpCombinadaActionPerformed
         operacionCombinada.dispose();
     }//GEN-LAST:event_btnSalirOpCombinadaActionPerformed
@@ -1628,6 +1618,19 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_btnunoCombinadaActionPerformed
+
+    private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
+        if (btnFactura.isSelected()) {
+            txtRazonSocial.setEnabled(true);
+            txtRuc.setEnabled(true);
+            txtDireccion.setEnabled(true);
+            txtRazonSocial.requestFocus();
+        } else {
+            txtRazonSocial.setEnabled(false);
+            txtRuc.setEnabled(false);
+            txtDireccion.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnFacturaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1700,6 +1703,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnDosCombinada;
     private javax.swing.JButton btnDosTarjeta;
     private javax.swing.JToggleButton btnEfectivo;
+    private javax.swing.JToggleButton btnFactura;
     private javax.swing.JToggleButton btnMasterCard;
     private javax.swing.JButton btnNueve;
     private javax.swing.JButton btnNueveCombinada;
@@ -1727,8 +1731,6 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnVisa;
     private javax.swing.JButton btnunoCombinada;
     private javax.swing.JCheckBox cboxMasVendidos;
-    private javax.swing.JCheckBox cmbFactura;
-    private javax.swing.JCheckBox cmbNotaDePedido;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

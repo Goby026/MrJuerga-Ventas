@@ -10,7 +10,10 @@ import Controlador.CerrarCajaControl;
 import Controlador.ManejadorFechas;
 import Modelo.Caja;
 import Modelo.CajaDAO;
+import Modelo.FlujoCaja;
 import Modelo.FlujoCajaDAO;
+import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,18 +32,26 @@ public class CerrarCaja extends javax.swing.JFrame {
 
     public CerrarCaja() {
     }
-    
-    public void datosIniciales(String usuario) throws Exception{
+
+    public void datosIniciales(String usuario) throws Exception {
         lblFecha.setText(new ManejadorFechas().getFechaActual());
         lblCaja.setText(new AbrirCajaControl().getCajaDeUsuario(usuario));
         txtUsuario.setText(usuario);
-        if (new AbrirCajaControl().verificarEstadoCaja(usuario)>0) {
+        if (new AbrirCajaControl().verificarEstadoCaja(usuario) > 0) {
             lblEstado.setText("CAJA APERTURADA");
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new CerrarCajaControl().getIdUsuario(usuario), new CerrarCajaControl().getIdCaja(lblCaja.getText()));
+            txtMontoApertura.setText("" + new CerrarCajaControl().getSaldoInicial(idFlujoCaja));
+            txtTarjetas.setText("" + new CerrarCajaControl().getMontoTarjetas(new CerrarCajaControl().getIdUsuario(usuario), new CerrarCajaControl().getIdCaja(lblCaja.getText())));
+            txtVentas.setText("" + new CerrarCajaControl().getMontoVentas(new CerrarCajaControl().getIdUsuario(usuario), new CerrarCajaControl().getIdCaja(lblCaja.getText())));
+            txtBalance.setText("" + calcularBalanceTotal());
         } else {
             lblEstado.setText("CAJA CERRADA");
         }
-        int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new CerrarCajaControl().getIdUsuario(usuario), new CerrarCajaControl().getIdCaja(lblCaja.getText()));
-        txtMontoApertura.setText(""+new CerrarCajaControl().getSaldoInicial(idFlujoCaja));
+    }
+
+    public double calcularBalanceTotal() {
+        double saldoInicial = Double.parseDouble(txtMontoApertura.getText()), tarjetas = Double.parseDouble(txtTarjetas.getText()), ventas = Double.parseDouble(txtVentas.getText());
+        return saldoInicial + tarjetas + ventas;
     }
 
     /**
@@ -54,7 +65,7 @@ public class CerrarCaja extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        txtMontoVentas = new javax.swing.JTextField();
+        txtTarjetas = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         txtMontoApertura = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -88,6 +99,7 @@ public class CerrarCaja extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
+        jButton14 = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -98,9 +110,9 @@ public class CerrarCaja extends javax.swing.JFrame {
         jLabel11.setText("VENTAS");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
 
-        txtMontoVentas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtMontoVentas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel2.add(txtMontoVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 120, -1));
+        txtTarjetas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtTarjetas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel2.add(txtTarjetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 120, -1));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel30.setText("SALDO INICIAL");
@@ -113,13 +125,15 @@ public class CerrarCaja extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel12.setText("TARJETAS");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
+
+        txtVentas.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtVentas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel2.add(txtVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 120, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 420, 180));
 
         txtSaldoContabilizado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtSaldoContabilizado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtSaldoContabilizado.setText("0.0");
         getContentPane().add(txtSaldoContabilizado, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 230, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -288,7 +302,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 150, 60));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 70, 60));
 
         jButton13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton13.setText("<");
@@ -308,46 +322,47 @@ public class CerrarCaja extends javax.swing.JFrame {
         txtUsuario.setFocusable(false);
         getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 140, -1));
 
+        jButton14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton14.setText(".");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 440, 70, 60));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCerrarCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarCajaActionPerformed
-//        try {
-//            CajaDAO cdao = new CajaDAO();
-//            Caja c = new Caja();
-//            c.setMontoCierre(Double.parseDouble(txtBalance.getText()));
-//            c.setBalance(txtBalance.getText());
-//            c.setSaldoContabilizado(txtSaldoContabilizado.getText());
-//            c.setDescuadre(lblDescuadre.getText());
-//            c.setObservacion_cierre(txaObsCierre.getText());
-//            c.setIdCaja(new FlujoCajaControl().getIdCajaConFecha(fechaActual));
-//            if (cdao.modificar(c)) {
-//                JOptionPane.showMessageDialog(rootPane, "SE CERRO CORRECTAMENTE LA CAJA");
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "ERROR CONSULTAR AL ADMINISTRADOR");
-//            }
-//        } catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//        }
+        try {
+            FlujoCaja fc = new FlujoCaja();
+            fc.setFechaFinal(new ManejadorFechas().getFechaActualMySQL());
+            fc.setHoraFinal(new ManejadorFechas().getHoraActual());
+            fc.setIngresos(Double.parseDouble(txtBalance.getText()));
+            fc.setEstado("0");
+
+            if (new CerrarCajaControl().cerrarCaja(new CerrarCajaControl().getIdUsuario(txtUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText()), fc)) {
+                JOptionPane.showMessageDialog(null, "SE CERRO LA CAJA CORRECTAMENTE");
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL CERRAR LA CAJA");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_btnCerrarCajaActionPerformed
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        //calcular los montos que deben guardarse al cerrar la caja
-        //ingresos
-
-//        double ingresos = Double.parseDouble(txtMontoApertura.getText()) + Double.parseDouble(txtMontoVentas.getText()) + Double.parseDouble(txtMontoVisa.getText());
-//        double egresos = Double.parseDouble(txtCompras.getText()) + Double.parseDouble(txtGastos.getText());
-//        double saldoContado = Double.parseDouble(txtSaldoContabilizado.getText());
-//        double balance = ingresos - egresos;
-//        double descuadre = balance - saldoContado;
-//        txtBalance.setText(""+balance);
-//        if (descuadre>0) {
-//            lblDescuadre.setForeground(Color.green);
-//            lblDescuadre.setText(""+descuadre);
-//        } else {
-//            lblDescuadre.setForeground(Color.red);
-//            lblDescuadre.setText(""+descuadre);
-//        }
+        double balance = Double.parseDouble(txtBalance.getText());
+        double saldoContado = Double.parseDouble(txtSaldoContabilizado.getText());
+        double descuadre = Math.round(balance - saldoContado);
+        if (descuadre > 0) {
+            lblDescuadre.setForeground(Color.green);
+            lblDescuadre.setText("" + descuadre);
+        } else {
+            lblDescuadre.setForeground(Color.red);
+            lblDescuadre.setText("" + descuadre);
+        }
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -411,8 +426,13 @@ public class CerrarCaja extends javax.swing.JFrame {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         txtSaldoContabilizado.setText("");
     }//GEN-LAST:event_jButton13ActionPerformed
-    
-       /**
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        String numero = txtSaldoContabilizado.getText() + ".";
+        txtSaldoContabilizado.setText(numero);
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -455,6 +475,7 @@ public class CerrarCaja extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -480,8 +501,8 @@ public class CerrarCaja extends javax.swing.JFrame {
     private javax.swing.JLabel lblFecha;
     private javax.swing.JTextField txtBalance;
     private javax.swing.JTextField txtMontoApertura;
-    private javax.swing.JTextField txtMontoVentas;
     private javax.swing.JTextField txtSaldoContabilizado;
+    private javax.swing.JTextField txtTarjetas;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtVentas;
     // End of variables declaration//GEN-END:variables

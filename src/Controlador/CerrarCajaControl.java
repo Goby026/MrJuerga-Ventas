@@ -57,4 +57,64 @@ public class CerrarCajaControl {
             throw e;
         }
     }
+    
+    /*METODO PARA OBTENER EL MONTO DE TARJETAS A PARTIR DE LA APERTURA DE CAJA */
+    public double getMontoTarjetas(int idUsuario, int idCaja) throws Exception{
+        try {
+            String fechaInicial=null;
+            String horaInicial= null;
+            int tipoPago=3;
+            //primero obtengo el id de flujo de caja para obtener la fecha inicial y la hora inical
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(idUsuario, idCaja);
+            //obtengo la fecha inicial y hora inicial para empezar ah contabilizar las operacione con tarjeta
+            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+            for (FlujoCaja fc : fcdao.Listar()) {
+                if (fc.getIdFlujoCaja()==idFlujoCaja) {
+                    fechaInicial = fc.getFechaInicio();
+                    horaInicial = fc.getHoraInicio();
+                }
+            }
+            System.out.println(fechaInicial);
+            System.out.println(horaInicial);
+            return fcdao.getMontoFlujo(fechaInicial, horaInicial, tipoPago);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    /* METODO PARA OBTENER EL MONTO TOTAL DE VENTAS A PARTIR DE LA APERTURA DE CAJA */
+    public double getMontoVentas(int idUsuario, int idCaja) throws Exception{
+        try {
+            String fechaInicial=null;
+            String horaInicial= null;
+            int tipoPago=1;
+            //primero obtengo el id de flujo de caja para obtener la fecha inicial y la hora inical
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(idUsuario, idCaja);
+            //obtengo la fecha inicial y hora inicial para empezar ah contabilizar las operacione con tarjeta
+            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+            for (FlujoCaja fc : fcdao.Listar()) {
+                if (fc.getIdFlujoCaja()==idFlujoCaja) {
+                    fechaInicial = fc.getFechaInicio();
+                    horaInicial = fc.getHoraInicio();
+                }
+            }
+            return fcdao.getMontoFlujo(fechaInicial, horaInicial, tipoPago);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    /* METODO PARA CERRAR CAJA */ 
+    public boolean cerrarCaja(int idUsuario, int idCaja, FlujoCaja fc) throws Exception{
+        try {
+            //obtengo el id de flujo de caja respectivo
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(idUsuario, idCaja);
+            fc.setIdFlujoCaja(idFlujoCaja);
+            if (new FlujoCajaDAO().updateFlujoCaja(fc)) {
+                return true;
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
+    }
 }

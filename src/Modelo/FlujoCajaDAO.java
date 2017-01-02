@@ -46,7 +46,7 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
     @Override
     public boolean Modificar(FlujoCaja fc) throws Exception {
         try {
-            String sql = ("UPDATE caja flujocaja SET fecha_inicio = ?,hora_final=?,fecha_final=? ,hora_final=? ,ingresos = ?, egresos = ?, saldo = ?, idusuario = ?, idcaja = ?, estado= ? WHERE idflujocaja = ?");
+            String sql = ("UPDATE caja flujocaja SET fecha_inicio = ?,hora_inicio=?,fecha_final=? ,hora_final=? ,ingresos = ?, egresos = ?, saldo = ?, idusuario = ?, idcaja = ?, estado= ? WHERE idflujocaja = ?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, fc.getFechaInicio());
@@ -102,7 +102,7 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 FlujoCaja fc = new FlujoCaja();
-                fc.setIdFlujoCaja(res.getInt("idflujocaja"));                
+                fc.setIdFlujoCaja(res.getInt("idflujocaja"));
                 fc.setFechaInicio(res.getString("fecha_inicio"));
                 fc.setHoraInicio(res.getString("hora_inicio"));
                 fc.setFechaFinal(res.getString("fecha_final"));
@@ -124,12 +124,12 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
         }
         return lista;
     }
-    
+
     /* METODO PARA OBTENER EL ID DE FLUJO DE CAJA PARA LA VALIDACION  */
-    public int getIdFlujo(int idUsuario, int idCaja) throws Exception{
+    public int getIdFlujo(int idUsuario, int idCaja) throws Exception {
         try {
-            this.conectar();            
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT MAX(idflujocaja) FROM flujocaja where idusuario= "+idUsuario+" and idcaja="+idCaja+"");
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT MAX(idflujocaja) FROM flujocaja where idusuario= " + idUsuario + " and idcaja=" + idCaja + "");
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 return res.getInt("MAX(idflujocaja)");
@@ -138,11 +138,48 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
             res.close();
         } catch (Exception e) {
             throw e;
-        }finally {
+        } finally {
             this.cerrar();
         }
-       
-       return -1;
+
+        return -1;
     }
 
+    /* METODO PARA CARGAR LAS VENTAS CON TARJETA DESDE QUE SE APERTURA LA CAJA */
+    public double getMontoFlujo(String fechaInicio, String horaInicio, int tipoPago) throws Exception {
+        double monto = 0.0;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.fecha >='" + fechaInicio + "' AND ((venta.hora between '" + horaInicio + "' and '23:59:59')or(venta.hora between '00:00:00' and '06:00:00'))AND tipopago = " + tipoPago +"");
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                monto = res.getDouble("sum(subtotal)");
+            }
+            pst.close();
+            res.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return monto;
+    }
+
+    /* METODO PARA ACTUALIZAR EL FLUJO DE CAJA CUANDO SE CIERRE LA CAJA */
+    public boolean updateFlujoCaja(FlujoCaja fc) throws Exception {
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("UPDATE `mrjuerga`.`flujocaja` SET `fecha_final`='" + fc.getFechaFinal() + "', `hora_final`='" + fc.getHoraFinal() + "', `ingresos`='" + fc.getIngresos() + "', `estado`='0' WHERE `idflujocaja`='" + fc.getIdFlujoCaja() + "'");
+            int res = pst.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return false;
+    }
 }
