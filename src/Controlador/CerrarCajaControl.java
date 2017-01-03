@@ -66,17 +66,7 @@ public class CerrarCajaControl {
             int tipoPago=3;
             //primero obtengo el id de flujo de caja para obtener la fecha inicial y la hora inical
             int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(idUsuario, idCaja);
-            //obtengo la fecha inicial y hora inicial para empezar ah contabilizar las operacione con tarjeta
-            FlujoCajaDAO fcdao = new FlujoCajaDAO();
-            for (FlujoCaja fc : fcdao.Listar()) {
-                if (fc.getIdFlujoCaja()==idFlujoCaja) {
-                    fechaInicial = fc.getFechaInicio();
-                    horaInicial = fc.getHoraInicio();
-                }
-            }
-            System.out.println(fechaInicial);
-            System.out.println(horaInicial);
-            return fcdao.getMontoFlujo(fechaInicial, horaInicial, tipoPago);
+            return new FlujoCajaDAO().getMontoFlujo(idFlujoCaja, tipoPago);
         } catch (Exception e) {
             throw e;
         }
@@ -91,13 +81,7 @@ public class CerrarCajaControl {
             int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(idUsuario, idCaja);
             //obtengo la fecha inicial y hora inicial para empezar ah contabilizar las operacione con tarjeta
             FlujoCajaDAO fcdao = new FlujoCajaDAO();
-            for (FlujoCaja fc : fcdao.Listar()) {
-                if (fc.getIdFlujoCaja()==idFlujoCaja) {
-                    fechaInicial = fc.getFechaInicio();
-                    horaInicial = fc.getHoraInicio();
-                }
-            }
-            return fcdao.getMontoFlujo(fechaInicial, horaInicial, tipoPago);
+            return new FlujoCajaDAO().getMontoFlujo(idFlujoCaja, tipoPago);
         } catch (Exception e) {
             throw e;
         }

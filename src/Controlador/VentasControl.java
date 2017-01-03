@@ -240,6 +240,7 @@ public class VentasControl {
         v.setTipopago((Integer) datos[6]);
         v.setnOperacion((String) datos[7]);
         v.setIdcaja((Integer) datos[8]);
+        v.setIdFlujoCaja((Integer)datos[9]);
         try {
             VentaDAO vdao = new VentaDAO();
             if (vdao.registrar(v)) {

@@ -21,7 +21,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
     @Override
     public boolean registrar(Venta v) throws Exception {
         try {
-            String sql = "insert into venta (idventa, fecha, hora, idusuario, idcliente, idcomprobante, estado, tipopago,noperacion ,idcaja) values (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into venta (idventa, fecha, hora, idusuario, idcliente, idcomprobante, estado, tipopago,noperacion ,idcaja, idflujocaja) values (?,?,?,?,?,?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, v.getIdVenta());
@@ -34,6 +34,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
             pst.setInt(8,v.getTipopago());
             pst.setString(9,v.getnOperacion());
             pst.setInt(10, v.getIdcaja());
+            pst.setInt(11, v.idFlujoCaja);
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -50,7 +51,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
     @Override
     public boolean modificar(Venta v) throws Exception {
         try {
-            String sql = "UPDATE venta SET fecha=?, hora=?, idusuario=?, idcliente=?, idcomprobante=?, estado=?, tipopago = ?,noperacion = ? ,idcaja = ? WHERE idventa = ?";
+            String sql = "UPDATE venta SET fecha=?, hora=?, idusuario=?, idcliente=?, idcomprobante=?, estado=?, tipopago = ?,noperacion = ? ,idcaja = ? ,idflujocaja = ? WHERE idventa = ?";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, v.getFecha());
@@ -62,7 +63,8 @@ public class VentaDAO extends Conexion implements VentaCRUD {
             pst.setInt(7,v.getTipopago());
             pst.setString(8,v.getnOperacion());
             pst.setInt(9, v.getIdcaja());
-            pst.setInt(10, v.getIdVenta());
+            pst.setInt(10, v.idFlujoCaja);
+            pst.setInt(11, v.getIdVenta());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -117,6 +119,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
                 v.setTipopago(rs.getInt("tipopago"));
                 v.setnOperacion(rs.getString("noperacion"));
                 v.setIdcaja(rs.getInt("idcaja"));
+                v.setIdFlujoCaja(rs.getInt("idflujocaja"));
                 lista.add(v);
             }
             rs.close();

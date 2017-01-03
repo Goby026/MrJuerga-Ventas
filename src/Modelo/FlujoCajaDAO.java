@@ -141,16 +141,15 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
         } finally {
             this.cerrar();
         }
-
         return -1;
     }
 
-    /* METODO PARA CARGAR LAS VENTAS CON TARJETA DESDE QUE SE APERTURA LA CAJA */
-    public double getMontoFlujo(String fechaInicio, String horaInicio, int tipoPago) throws Exception {
+    /* METODO PARA CARGAR LAS VENTAS DESDE QUE SE APERTURA LA CAJA */
+    public double getMontoFlujo(int idFlujoCaja, int tipoPago) throws Exception {
         double monto = 0.0;
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.fecha >='" + fechaInicio + "' AND ((venta.hora between '" + horaInicio + "' and '23:59:59')or(venta.hora between '00:00:00' and '06:00:00'))AND tipopago = " + tipoPago +"");
+            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = "+idFlujoCaja+" and tipopago = "+tipoPago+"");
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 monto = res.getDouble("sum(subtotal)");

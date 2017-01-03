@@ -38,7 +38,20 @@ public class Pruebas {
 //        } catch (DateTimeParseException e) {
 //            System.out.println("Fecha de ingreso o salida inválida");
 //        }
-        System.out.println(new CerrarCajaControl().getMontoTarjetas(1, 3));
+        int flag=0;
+        int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(1, 1);
+        FlujoCajaDAO fcdao = new FlujoCajaDAO();
+        for (FlujoCaja fc : fcdao.Listar()) {
+            if (fc.getIdFlujoCaja()==idFlujoCaja && fc.getEstado().equals("1")) {
+                flag++;
+            }
+        }
+        
+        if (flag>0) {
+            System.out.println("se aperturo la caja");
+        }else {
+            System.out.println("caja cerrada");
+        }
         
 //        System.out.println(new FlujoCajaDAO().getIdFlujo(1, 3));
         

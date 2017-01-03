@@ -7,6 +7,7 @@ import Controlador.VentasControl;
 import Modelo.Comprobante;
 import Modelo.ComprobanteDAO;
 import Modelo.Conexion;
+import Modelo.FlujoCajaDAO;
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
@@ -1373,7 +1374,7 @@ public class Ventas extends javax.swing.JFrame {
                 System.out.println("Error");
             }
             //SEGUNDO CAPTURAMOS DATOS PARA REGISTRAR VENTA
-            Object[] datos = new Object[9];
+            Object[] datos = new Object[10];
             datos[0] = fecha;//fecha
             System.out.println("registro fecha");
             datos[1] = txtHora.getText();//hora
@@ -1391,6 +1392,8 @@ public class Ventas extends javax.swing.JFrame {
             datos[7] = "";//no se registra numero de operacion
             datos[8] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
             System.out.println("registro caja que realizo la transaccion");
+            datos[9] = new FlujoCajaDAO().getIdFlujo(new VentasControl().getIdUsuarioConNombre(usuario), new VentasControl().getIdCaja(txtCaja.getText()));
+            System.out.println("id de flujo de caja :" + datos[9]);
             VentasControl vc = new VentasControl();
             vc.registrarVenta(datos);
             System.out.println("venta registrada");
@@ -1547,6 +1550,8 @@ public class Ventas extends javax.swing.JFrame {
             System.out.println(txtNumReferencia.getText());
             datos[8] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
             System.out.println("registro caja que realizo la transaccion");
+            datos[9] = new FlujoCajaDAO().getIdFlujo(new VentasControl().getIdUsuarioConNombre(usuario), new VentasControl().getIdCaja(txtCaja.getText()));
+            System.out.println("id de flujo de caja :" + datos[9]);
             VentasControl vc = new VentasControl();
             vc.registrarVenta(datos);
             System.out.println("venta registrada");

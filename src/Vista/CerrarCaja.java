@@ -8,11 +8,13 @@ package Vista;
 import Controlador.AbrirCajaControl;
 import Controlador.CerrarCajaControl;
 import Controlador.ManejadorFechas;
+import Controlador.MyiReportVisor;
 import Modelo.Caja;
 import Modelo.CajaDAO;
 import Modelo.FlujoCaja;
 import Modelo.FlujoCajaDAO;
 import java.awt.Color;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,9 +23,9 @@ import javax.swing.JOptionPane;
  */
 public class CerrarCaja extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CerrarCaja
-     */
+    MyiReportVisor mrv;
+    HashMap parametros = new HashMap();
+
     public CerrarCaja(String usuario) throws Exception {
         initComponents();
         setLocationRelativeTo(null);
@@ -100,6 +102,7 @@ public class CerrarCaja extends javax.swing.JFrame {
         jButton13 = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
         jButton14 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -130,24 +133,24 @@ public class CerrarCaja extends javax.swing.JFrame {
         txtVentas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel2.add(txtVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 120, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 420, 180));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 420, 210));
 
         txtSaldoContabilizado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtSaldoContabilizado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtSaldoContabilizado, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 230, -1));
+        getContentPane().add(txtSaldoContabilizado, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, 230, 40));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel14.setText("BALANCE TOTAL");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, -1, -1));
 
         lblDescuadre.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         lblDescuadre.setForeground(new java.awt.Color(204, 0, 0));
         lblDescuadre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lblDescuadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 120, 30));
+        getContentPane().add(lblDescuadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 120, 30));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel16.setText("DESCUADRE");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, -1, -1));
 
         btnCerrarCaja.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnCerrarCaja.setText("CERRAR CAJA");
@@ -172,11 +175,11 @@ public class CerrarCaja extends javax.swing.JFrame {
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel33.setText("SALDO CONTABILIZADO");
-        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, -1, -1));
+        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, -1, -1));
 
         txtBalance.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtBalance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 360, 120, -1));
+        getContentPane().add(txtBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 120, -1));
 
         btnCalcular.setBackground(new java.awt.Color(51, 153, 0));
         btnCalcular.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -187,8 +190,8 @@ public class CerrarCaja extends javax.swing.JFrame {
                 btnCalcularActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 510, 230, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, 120, 20));
+        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 470, 230, 40));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 120, 20));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("RESUMEN");
@@ -221,7 +224,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 70, 60));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 70, 60));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton4.setText("8");
@@ -230,7 +233,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 230, 70, 60));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 70, 60));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton5.setText("9");
@@ -239,7 +242,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 230, 70, 60));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 190, 70, 60));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton6.setText("4");
@@ -248,7 +251,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 300, 70, 60));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 260, 70, 60));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton7.setText("5");
@@ -257,7 +260,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 300, 70, 60));
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 260, 70, 60));
 
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton8.setText("6");
@@ -266,7 +269,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 70, 60));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 260, 70, 60));
 
         jButton9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton9.setText("1");
@@ -275,7 +278,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 370, 70, 60));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 70, 60));
 
         jButton10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton10.setText("2");
@@ -284,7 +287,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, 70, 60));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 330, 70, 60));
 
         jButton11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton11.setText("3");
@@ -293,7 +296,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, 70, 60));
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 330, 70, 60));
 
         jButton12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton12.setText("0");
@@ -302,7 +305,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 70, 60));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 400, 70, 60));
 
         jButton13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton13.setText("<");
@@ -311,7 +314,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton13ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 440, 70, 60));
+        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 400, 70, 60));
 
         txtUsuario.setEditable(false);
         txtUsuario.setBackground(new java.awt.Color(102, 102, 102));
@@ -320,7 +323,7 @@ public class CerrarCaja extends javax.swing.JFrame {
         txtUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
         txtUsuario.setEnabled(false);
         txtUsuario.setFocusable(false);
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 140, -1));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, 140, -1));
 
         jButton14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton14.setText(".");
@@ -329,7 +332,10 @@ public class CerrarCaja extends javax.swing.JFrame {
                 jButton14ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 440, 70, 60));
+        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 400, 70, 60));
+
+        jLabel2.setText("alerta de cierre de caja");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 560, -1, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -366,7 +372,10 @@ public class CerrarCaja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+//        parametros.put("total", total);
+//        parametros.put("fecha", ff);
+//        mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\ventadiaria.jrxml", parametros);
+//        mrv.exportarAPdf();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -489,6 +498,7 @@ public class CerrarCaja extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;

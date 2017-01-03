@@ -5,8 +5,12 @@
  */
 package Vista;
 
+import Controlador.AbrirCajaControl;
+import Modelo.FlujoCaja;
+import Modelo.FlujoCajaDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,9 +21,10 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    public Menu(String usuario) {
+    public Menu(String usuario) throws Exception {
         initComponents();
         lblUsuario.setText(usuario);
+        lblCaja.setText(new AbrirCajaControl().getCajaDeUsuario(usuario));
     }
 
     public Menu() {
@@ -51,6 +56,8 @@ public class Menu extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblCaja = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,7 +125,7 @@ public class Menu extends javax.swing.JFrame {
         jButton6.setBackground(new java.awt.Color(255, 102, 51));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("LISTA DE VENTAS");
+        jButton6.setText("GASTOS");
         jButton6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,12 +169,12 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MENU PRINCIPAL");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 100));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 110));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("USUARIO:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jLabel2.setText("CAJA:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
 
         lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblUsuario.setForeground(new java.awt.Color(255, 255, 255));
@@ -176,13 +183,23 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("fecha:");
+        jLabel3.setText("FECHA");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 110, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("hora:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 110, -1, -1));
+        jLabel4.setText("HORA");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 110, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("USUARIO:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        lblCaja.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblCaja.setForeground(new java.awt.Color(255, 255, 255));
+        lblCaja.setText("______");
+        jPanel1.add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 160));
 
@@ -191,8 +208,21 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            Ventas v = new Ventas(lblUsuario.getText().toUpperCase());
-            v.setVisible(true);
+            int flag = 0;
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AbrirCajaControl().getIdUsuario(lblUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()));
+            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+            for (FlujoCaja fc : fcdao.Listar()) {
+                if (fc.getIdFlujoCaja() == idFlujoCaja && fc.getEstado().equals("1")) {
+                    flag++;
+                }
+            }
+            if (flag > 0) {
+                Ventas v = new Ventas(lblUsuario.getText().toUpperCase());
+                v.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "DEBE APERTURAR CAJA PARA REALIZAR VENTAS");
+            }
+
             //dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -293,8 +323,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JLabel lblCaja;
     private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }
