@@ -16,12 +16,15 @@ public class UsuarioGastosDAO extends Conexion implements UsuarioGastosCRUD{
     @Override
     public boolean registrar(UsuarioGastos ug) throws Exception {
         try {
-            String sql = "insert into usuariogastos (idGastos, idusuario, monto) values (?,?,?)";
+            String sql = "insert into usuariogastos (idGastos, idusuario, monto, fecha, hora, idflujocaja) values (?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, ug.getIdGastos());
             pst.setInt(2, ug.getIdUsuario());
             pst.setDouble(3, ug.getMonto());
+            pst.setString(4, ug.getFecha());
+            pst.setString(5, ug.getHora());
+            pst.setInt(6, ug.getIdFlujoCaja());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -38,13 +41,16 @@ public class UsuarioGastosDAO extends Conexion implements UsuarioGastosCRUD{
     @Override
     public boolean modificar(UsuarioGastos ug) throws Exception {
         try {
-            String sql = ("UPDATE usuariogastos set idGastos = ?, idusuario= ?, monto=? where idUsuarioGastos=?");
+            String sql = ("UPDATE usuariogastos set idGastos = ?, idusuario= ?, monto=?, fecha = ?, hora=?, idflujocaja = ? where idUsuarioGastos=?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, ug.getIdGastos());
             pst.setInt(2, ug.getIdUsuario());
             pst.setDouble(3, ug.getMonto());
-            pst.setInt(4, ug.getIdUsuarioGastos());
+            pst.setString(4, ug.getFecha());
+            pst.setString(5, ug.getHora());
+            pst.setInt(6, ug.getIdFlujoCaja());
+            pst.setInt(7, ug.getIdUsuarioGastos());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -92,6 +98,9 @@ public class UsuarioGastosDAO extends Conexion implements UsuarioGastosCRUD{
                 ug.setIdGastos(rs.getInt("idGastos"));
                 ug.setIdUsuario(rs.getInt("idusuario"));
                 ug.setMonto(rs.getDouble("monto"));
+                ug.setFecha(rs.getString("fecha"));
+                ug.setHora(rs.getString("hora"));
+                ug.setIdFlujoCaja(rs.getInt("idflujocaja"));
                 lista.add(ug);
             }
             rs.close();

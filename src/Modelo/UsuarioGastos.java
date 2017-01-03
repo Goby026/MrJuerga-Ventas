@@ -6,17 +6,21 @@ package Modelo;
  * @author Marce
  */
 public class UsuarioGastos {
-    int idUsuarioGastos, idGastos, idUsuario;
+    int idUsuarioGastos, idGastos, idUsuario, idFlujoCaja;
     double monto;
+    String fecha, hora;
 
     public UsuarioGastos() {
     }
 
-    public UsuarioGastos(int idUsuarioGastos, int idGastos, int idUsuario, double monto) {
+    public UsuarioGastos(int idUsuarioGastos, int idGastos, int idUsuario, int idFlujoCaja, double monto, String fecha, String hora) {
         this.idUsuarioGastos = idUsuarioGastos;
         this.idGastos = idGastos;
         this.idUsuario = idUsuario;
+        this.idFlujoCaja = idFlujoCaja;
         this.monto = monto;
+        this.fecha = fecha;
+        this.hora = hora;
     }
 
     public int getIdUsuarioGastos() {
@@ -50,4 +54,30 @@ public class UsuarioGastos {
     public void setMonto(double monto) {
         this.monto = monto;
     }
+
+    public int getIdFlujoCaja() {
+        return idFlujoCaja;
+    }
+
+    public void setIdFlujoCaja(int idFlujoCaja) {
+        this.idFlujoCaja = idFlujoCaja;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+    
+    
 }

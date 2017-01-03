@@ -25,8 +25,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         new PagonPersonalControl().titulosTabla(tblPersonal);
-        new PagonPersonalControl().cargarComboConcepto(cmbConcepto);
-    }   
+    }
 
     public PagosPersonal() {
     }
@@ -54,7 +53,6 @@ public class PagosPersonal extends javax.swing.JFrame {
         txtPago = new javax.swing.JTextField();
         btnRealizarPago = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
-        cmbConcepto = new javax.swing.JComboBox<String>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -69,6 +67,9 @@ public class PagosPersonal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jButton12 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtRegimen = new javax.swing.JTextField();
 
         jDialog1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -86,8 +87,8 @@ public class PagosPersonal extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("CONCEPTO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, -1, -1));
+        jLabel1.setText("DESCUENTO");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 350, -1, -1));
 
         tblPersonal.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         tblPersonal.setModel(new javax.swing.table.DefaultTableModel(
@@ -104,7 +105,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         tblPersonal.setRowHeight(26);
         jScrollPane1.setViewportView(tblPersonal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 570, 170));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 570, 140));
 
         txtPersonal.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtPersonal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -116,12 +117,12 @@ public class PagosPersonal extends javax.swing.JFrame {
         getContentPane().add(txtPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 380, 80));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel2.setText("PAGO S/.");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, -1, -1));
+        jLabel2.setText("MONTO");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 460, -1, -1));
 
         txtPago.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         txtPago.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, 310, -1));
+        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, 310, -1));
 
         btnRealizarPago.setBackground(new java.awt.Color(0, 153, 0));
         btnRealizarPago.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -132,21 +133,18 @@ public class PagosPersonal extends javax.swing.JFrame {
                 btnRealizarPagoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 630, 560, 90));
+        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 590, 560, 90));
 
-        btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnBuscar.setText("BUSCAR");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 680, 380, 80));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 690, 380, 80));
 
-        cmbConcepto.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        getContentPane().add(cmbConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 310, 310, -1));
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton1.setText("9");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,7 +153,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 120, 120));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton2.setText("7");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +162,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 120, 120));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton3.setText("8");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +171,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 120, 120));
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton4.setText("4");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,7 +180,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 120, 120));
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton5.setText("5");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +189,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 120, 120));
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton6.setText("6");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +198,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 120, 120));
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton7.setText("1");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,7 +207,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 120, 120));
 
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton8.setText("2");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +216,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 120, 120));
 
-        jButton9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton9.setText("3");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,7 +225,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 120, 120));
 
-        jButton10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton10.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton10.setText("0");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +234,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 250, 120));
 
-        jButton11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton11.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton11.setText("<");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,7 +254,17 @@ public class PagosPersonal extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 380, 50));
 
         jButton12.setText("REPORTE DE PAGOS");
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 730, 560, -1));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 720, 160, 50));
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 400, 310, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel6.setText("RÉGIMEN");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, -1, -1));
+
+        txtRegimen.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        getContentPane().add(txtRegimen, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, 310, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -281,11 +289,11 @@ public class PagosPersonal extends javax.swing.JFrame {
                 if (new Validaciones().validarCampoVacio(txtPago)) {
                     int fila = tblPersonal.getSelectedRow();
                     int idUsuario = Integer.parseInt(tblPersonal.getValueAt(fila, 0).toString());
-                    int idGasto = new PagonPersonalControl().getIdGasto(cmbConcepto.getSelectedItem().toString());
+                    //int idGasto = new PagonPersonalControl().getIdGasto(cmbConcepto.getSelectedItem().toString());
                     double monto = Double.parseDouble(txtPago.getText());
                     UsuarioGastos ug = new UsuarioGastos();
                     ug.setIdUsuario(idUsuario);
-                    ug.setIdGastos(idGasto);
+                    //ug.setIdGastos(idGasto);
                     ug.setMonto(monto);
                     UsuarioGastosDAO ugdao = new UsuarioGastosDAO();
                     if (ugdao.registrar(ug)) {
@@ -310,8 +318,14 @@ public class PagosPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPersonalActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        String numero = txtPersonal.getText() + 1;
-        txtPersonal.setText(numero);
+
+        if (txtPersonal.getText().trim().length() >= 8) {
+            String numero = txtRegimen.getText() + 1;
+            txtRegimen.setText(numero);
+        } else {
+            String numero = txtPersonal.getText() + 1;
+            txtPersonal.setText(numero);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -363,7 +377,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         txtPersonal.setText(numero);
     }//GEN-LAST:event_jButton10ActionPerformed
 
-        /**
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -405,7 +419,6 @@ public class PagosPersonal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRealizarPago;
-    private javax.swing.JComboBox<String> cmbConcepto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -427,10 +440,13 @@ public class PagosPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblPersonal;
     private javax.swing.JTextField txtPago;
     private javax.swing.JTextField txtPersonal;
+    private javax.swing.JTextField txtRegimen;
     // End of variables declaration//GEN-END:variables
 }

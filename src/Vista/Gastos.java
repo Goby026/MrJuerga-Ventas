@@ -84,26 +84,26 @@ public class Gastos extends javax.swing.JFrame {
         listaGastos.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jScrollPane1.setViewportView(listaGastos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 330, 380));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 240, 330));
 
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel3.setText("IMPORTE");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel4.setText("OBSERVACIONES");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, -1, -1));
 
         txaObservaciones.setColumns(20);
         txaObservaciones.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         txaObservaciones.setRows(5);
         jScrollPane2.setViewportView(txaObservaciones);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(646, 170, 340, 260));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 350, 330));
 
         txtImporte.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtImporte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 230, 40));
+        getContentPane().add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 230, 40));
 
         btn7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn7.setText("7");
@@ -112,7 +112,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn7ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 70, 60));
+        getContentPane().add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 70, 60));
 
         btn8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn8.setText("8");
@@ -121,7 +121,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn8ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 70, 60));
+        getContentPane().add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 70, 60));
 
         btn9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn9.setText("9");
@@ -130,7 +130,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn9ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 70, 60));
+        getContentPane().add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 70, 60));
 
         btn4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn4.setText("4");
@@ -139,7 +139,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn4ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 70, 60));
+        getContentPane().add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 70, 60));
 
         btn5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn5.setText("5");
@@ -148,7 +148,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn5ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 70, 60));
+        getContentPane().add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 70, 60));
 
         btn6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn6.setText("6");
@@ -157,7 +157,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn6ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 70, 60));
+        getContentPane().add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, 70, 60));
 
         btn1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn1.setText("1");
@@ -166,7 +166,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 70, 60));
+        getContentPane().add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 70, 60));
 
         btn2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn2.setText("2");
@@ -175,7 +175,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 70, 60));
+        getContentPane().add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, 70, 60));
 
         btn3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn3.setText("3");
@@ -184,7 +184,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn3ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 70, 60));
+        getContentPane().add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, 70, 60));
 
         btn0.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn0.setText("0");
@@ -193,7 +193,7 @@ public class Gastos extends javax.swing.JFrame {
                 btn0ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn0, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 440, 70, 60));
+        getContentPane().add(btn0, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, 70, 60));
 
         btnpunto.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnpunto.setText(".");
@@ -202,7 +202,7 @@ public class Gastos extends javax.swing.JFrame {
                 btnpuntoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnpunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, 70, 60));
+        getContentPane().add(btnpunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 70, 60));
 
         btnborrar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnborrar.setText("<");
@@ -211,7 +211,7 @@ public class Gastos extends javax.swing.JFrame {
                 btnborrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnborrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, 70, 60));
+        getContentPane().add(btnborrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 440, 70, 60));
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnGuardar.setText("GUARDAR");
@@ -220,23 +220,23 @@ public class Gastos extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, 340, 110));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, 340, 110));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("USUARIO");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("CAJA");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 30, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, -1, -1));
 
         lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblUsuario.setText("jLabel7");
-        getContentPane().add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, -1));
+        getContentPane().add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
 
         lblCaja.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblCaja.setText("jLabel7");
-        getContentPane().add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 30, -1, -1));
+        getContentPane().add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
