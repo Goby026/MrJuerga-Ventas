@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import Controlador.GastosControl;
+import Modelo.Gasto;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ELMER_05
@@ -14,10 +18,22 @@ public class Gastos extends javax.swing.JFrame {
     /**
      * Creates new form Gastos
      */
-    public Gastos() {
+    public Gastos(String usuario) {
         initComponents();
+        cargarDatos(usuario);
     }
 
+    public Gastos() {
+    }
+    
+    public void cargarDatos(String usuario){
+        try {
+            new GastosControl().cargarListaGastos(listaGastos);
+            lblUsuario.setText(usuario);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,11 +46,11 @@ public class Gastos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listaGastos = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txaObservaciones = new javax.swing.JTextArea();
         txtImporte = new javax.swing.JTextField();
         btn7 = new javax.swing.JButton();
         btn8 = new javax.swing.JButton();
@@ -48,16 +64,13 @@ public class Gastos extends javax.swing.JFrame {
         btn0 = new javax.swing.JButton();
         btnpunto = new javax.swing.JButton();
         btnborrar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        btnGuardar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         lblCaja = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
@@ -68,8 +81,8 @@ public class Gastos extends javax.swing.JFrame {
         jLabel2.setText("LISTA DE GASTOS");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
-        jList1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        jScrollPane1.setViewportView(jList1);
+        listaGastos.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        jScrollPane1.setViewportView(listaGastos);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 330, 380));
 
@@ -81,12 +94,12 @@ public class Gastos extends javax.swing.JFrame {
         jLabel4.setText("OBSERVACIONES");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txaObservaciones.setColumns(20);
+        txaObservaciones.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        txaObservaciones.setRows(5);
+        jScrollPane2.setViewportView(txaObservaciones);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(646, 170, 390, 260));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(646, 170, 340, 260));
 
         txtImporte.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtImporte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -200,23 +213,14 @@ public class Gastos extends javax.swing.JFrame {
         });
         getContentPane().add(btnborrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, 70, 60));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jButton1.setText("GUARDAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, 390, 110));
-
-        jToggleButton1.setText("c");
-        getContentPane().add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 570, 60, 50));
-
-        jToggleButton2.setText("a");
-        getContentPane().add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 60, 50));
-
-        jToggleButton3.setText("b");
-        getContentPane().add(jToggleButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 570, 60, 50));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, 340, 110));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("USUARIO");
@@ -296,9 +300,24 @@ public class Gastos extends javax.swing.JFrame {
         txtImporte.setText("");
     }//GEN-LAST:event_btnborrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        if (listaGastos.isSelectionEmpty() || txtImporte.getText().isEmpty() || txaObservaciones.getText().isEmpty()) {
+            System.out.println("indique el gasto correctamente");
+        }else{
+            System.out.println("correcto");
+        }
+        
+        if (!txtImporte.getText().trim().isEmpty()) {
+            if (!listaGastos.isSelectionEmpty() || !txaObservaciones.getText().trim().isEmpty()) {
+                System.out.println("correcto");
+                Gasto g = new Gasto();
+            } else {
+                JOptionPane.showMessageDialog(null, "SELECCIONE UN GASTO O DESCRIBA LA OBSERVACION DEL GASTO");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "INGRESE UN MONTO");
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,24 +365,21 @@ public class Gastos extends javax.swing.JFrame {
     private javax.swing.JButton btn7;
     private javax.swing.JButton btn8;
     private javax.swing.JButton btn9;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnborrar;
     private javax.swing.JButton btnpunto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JLabel lblCaja;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JList listaGastos;
+    private javax.swing.JTextArea txaObservaciones;
     private javax.swing.JTextField txtImporte;
     // End of variables declaration//GEN-END:variables
 }

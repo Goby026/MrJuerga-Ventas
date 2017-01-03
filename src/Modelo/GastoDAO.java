@@ -102,6 +102,8 @@ public class GastoDAO extends Conexion implements GastosCRUD {
             res.close();
         } catch (Exception error) {
             System.out.println(error.getMessage());
+        }finally{
+            this.cerrar();
         }
 
         return li;
