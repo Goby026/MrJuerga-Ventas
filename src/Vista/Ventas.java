@@ -51,7 +51,6 @@ public class Ventas extends javax.swing.JFrame {
         new Cronometro().iniciarCronometro(txtHora);
         txtUsuario.setText(usuario);
         txtFecha.setText(new ManejadorFechas().getFechaActual());
-        btnEfectivo.setSelected(true);
         cargarTitulosTablaPedidos();
         bloquearBotones();
         tablaProductosMasVendidos();
@@ -180,7 +179,6 @@ public class Ventas extends javax.swing.JFrame {
         txtRuc = new javax.swing.JTextField();
         btnMasterCard = new javax.swing.JToggleButton();
         btnVisa = new javax.swing.JToggleButton();
-        btnEfectivo = new javax.swing.JToggleButton();
         btnOperacionCombinada = new javax.swing.JToggleButton();
         jLabel20 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
@@ -997,9 +995,6 @@ public class Ventas extends javax.swing.JFrame {
         });
         getContentPane().add(btnVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 180, 130, 80));
 
-        btnEfectivo.setText("EFECTIVO");
-        getContentPane().add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 180, 130, 80));
-
         btnOperacionCombinada.setText("OPERACIÓN COMBINADA");
         getContentPane().add(btnOperacionCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 180, -1, 80));
 
@@ -1038,11 +1033,6 @@ public class Ventas extends javax.swing.JFrame {
                 if (btnVisa.isSelected() || btnMasterCard.isSelected()) {
                     panelPagoElectronico.setVisible(true);
                     panelPagoElectronico.setBounds(600, 200, 500, 1020);
-                } else if (btnEfectivo.isSelected()) {
-                    //imprimir normalmente la boleta
-                    panelVuelto.setVisible(true);
-                    //panelVuelto.setModal(closable);
-                    panelVuelto.setBounds(580, 100, 460, 950);
                 } else if (btnOperacionCombinada.isSelected()) {
                     operacionCombinada.setVisible(true);
                     operacionCombinada.setBounds(100, 100, 1175, 860);
@@ -1052,6 +1042,11 @@ public class Ventas extends javax.swing.JFrame {
                     String ruc = txtRuc.getText();
                     String direccion = txtDireccion.getText();
                     //registrar cliente
+                }else{
+                    //imprimir normalmente la boleta
+                    panelVuelto.setVisible(true);
+                    //panelVuelto.setModal(closable);
+                    panelVuelto.setBounds(580, 100, 460, 950);
                 }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
@@ -1336,12 +1331,10 @@ public class Ventas extends javax.swing.JFrame {
             //tipo de pago lo pasamos en duro hasta normalizar el TIPODEPAGO
             Double total = Double.parseDouble(lblPago.getText());
             int idTipoComprobante = 1;
+            //efectivo = 1
+            int tipoPago=1;
             
-            int tipoPago=0;
-            if(btnEfectivo.isSelected()){
-                //efectivo = 1
-                tipoPago = 1;
-            }else if(btnMasterCard.isSelected()){
+            if(btnMasterCard.isSelected()){
                 //masterCard = 2
                 tipoPago = 2;
             }else if(btnVisa.isSelected()){
@@ -1493,12 +1486,10 @@ public class Ventas extends javax.swing.JFrame {
             String direccion = "JR AYACUCHO 772";
             Double total = Double.parseDouble(lblPago.getText());
             int idTipoComprobante = 1;
-
-            int tipoPago=0;
-            if(btnEfectivo.isSelected()){
-                //efectivo = 1
-                tipoPago = 1;
-            }else if(btnMasterCard.isSelected()){
+            
+            //efectivo = 1
+            int tipoPago=1;
+            if(btnMasterCard.isSelected()){
                 //masterCard = 2
                 tipoPago = 2;
             }else if(btnVisa.isSelected()){
@@ -1707,7 +1698,6 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnDos;
     private javax.swing.JButton btnDosCombinada;
     private javax.swing.JButton btnDosTarjeta;
-    private javax.swing.JToggleButton btnEfectivo;
     private javax.swing.JToggleButton btnFactura;
     private javax.swing.JToggleButton btnMasterCard;
     private javax.swing.JButton btnNueve;

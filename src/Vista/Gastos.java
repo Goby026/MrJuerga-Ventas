@@ -6,7 +6,11 @@
 package Vista;
 
 import Controlador.GastosControl;
+import Controlador.ManejadorFechas;
+import Modelo.FlujoCajaDAO;
 import Modelo.Gasto;
+import Modelo.UsuarioGastos;
+import Modelo.UsuarioGastosDAO;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,15 +29,17 @@ public class Gastos extends javax.swing.JFrame {
 
     public Gastos() {
     }
-    
-    public void cargarDatos(String usuario){
+
+    public void cargarDatos(String usuario) {
         try {
             new GastosControl().cargarListaGastos(listaGastos);
             lblUsuario.setText(usuario);
+            lblCaja.setText(new GastosControl().getCajaDeUsuario(usuario));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -301,21 +307,44 @@ public class Gastos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnborrarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (listaGastos.isSelectionEmpty() || txtImporte.getText().isEmpty() || txaObservaciones.getText().isEmpty()) {
-            System.out.println("indique el gasto correctamente");
-        }else{
-            System.out.println("correcto");
-        }
-        
-        if (!txtImporte.getText().trim().isEmpty()) {
-            if (!listaGastos.isSelectionEmpty() || !txaObservaciones.getText().trim().isEmpty()) {
-                System.out.println("correcto");
-                Gasto g = new Gasto();
+//        if (listaGastos.isSelectionEmpty() || txtImporte.getText().isEmpty() || txaObservaciones.getText().isEmpty()) {
+//            System.out.println("indique el gasto correctamente");
+//        } else {
+//            System.out.println("correcto");
+//        }
+        try {
+            if (!txtImporte.getText().trim().isEmpty()) {
+                if (!listaGastos.isSelectionEmpty() || !txaObservaciones.getText().trim().isEmpty()) {
+                    System.out.println("correcto");
+                    UsuarioGastos ug = new UsuarioGastos();
+                    
+                    //obtener el id de gasto seleccionado
+                    //obtener el id de usuario
+                    //capturo el monto
+                    //fecha y hora
+                    //obtener el id de flujo de caja
+                    //finalmente capturamos la observacion
+                    
+                    ug.setIdGastos(new GastosControl().getIdGasto((String) listaGastos.getSelectedValue()));
+                    ug.setIdUsuario(new GastosControl().getIdUsuario(lblUsuario.getText()));
+                    ug.setMonto(Double.parseDouble(txtImporte.getText()));
+                    ug.setFecha(new ManejadorFechas().getFechaActualMySQL());
+                    ug.setHora(new ManejadorFechas().getHoraActual());
+                    ug.setIdFlujoCaja(new FlujoCajaDAO().getIdFlujo(new GastosControl().getIdUsuario(lblUsuario.getText()), new GastosControl().getIdCaja(lblCaja.getText())));
+                    ug.setObservacion(txaObservaciones.getText());
+                    
+                    if (new UsuarioGastosDAO().registrar(ug)) {
+                        JOptionPane.showMessageDialog(null, "GASTO REGISTRADO");
+                        cargarDatos(lblUsuario.getText());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "SELECCIONE UN GASTO O DESCRIBA LA OBSERVACION DEL GASTO");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "SELECCIONE UN GASTO O DESCRIBA LA OBSERVACION DEL GASTO");
+                JOptionPane.showMessageDialog(null, "INGRESE UN MONTO");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "INGRESE UN MONTO");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 

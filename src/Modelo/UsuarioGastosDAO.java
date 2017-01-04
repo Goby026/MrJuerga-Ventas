@@ -16,7 +16,7 @@ public class UsuarioGastosDAO extends Conexion implements UsuarioGastosCRUD{
     @Override
     public boolean registrar(UsuarioGastos ug) throws Exception {
         try {
-            String sql = "insert into usuariogastos (idGastos, idusuario, monto, fecha, hora, idflujocaja) values (?,?,?,?,?,?)";
+            String sql = "insert into usuariogastos (idGastos, idusuario, monto, fecha, hora, idflujocaja, observacion) values (?,?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, ug.getIdGastos());
@@ -25,6 +25,7 @@ public class UsuarioGastosDAO extends Conexion implements UsuarioGastosCRUD{
             pst.setString(4, ug.getFecha());
             pst.setString(5, ug.getHora());
             pst.setInt(6, ug.getIdFlujoCaja());
+            pst.setString(7, ug.getObservacion());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -41,7 +42,7 @@ public class UsuarioGastosDAO extends Conexion implements UsuarioGastosCRUD{
     @Override
     public boolean modificar(UsuarioGastos ug) throws Exception {
         try {
-            String sql = ("UPDATE usuariogastos set idGastos = ?, idusuario= ?, monto=?, fecha = ?, hora=?, idflujocaja = ? where idUsuarioGastos=?");
+            String sql = ("UPDATE usuariogastos set idGastos = ?, idusuario= ?, monto=?, fecha = ?, hora=?, idflujocaja = ?, observacion = ? where idUsuarioGastos=?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, ug.getIdGastos());
@@ -50,7 +51,8 @@ public class UsuarioGastosDAO extends Conexion implements UsuarioGastosCRUD{
             pst.setString(4, ug.getFecha());
             pst.setString(5, ug.getHora());
             pst.setInt(6, ug.getIdFlujoCaja());
-            pst.setInt(7, ug.getIdUsuarioGastos());
+            pst.setString(7, ug.getObservacion());
+            pst.setInt(8, ug.getIdUsuarioGastos());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -101,6 +103,7 @@ public class UsuarioGastosDAO extends Conexion implements UsuarioGastosCRUD{
                 ug.setFecha(rs.getString("fecha"));
                 ug.setHora(rs.getString("hora"));
                 ug.setIdFlujoCaja(rs.getInt("idflujocaja"));
+                ug.setObservacion(rs.getString("observacion"));
                 lista.add(ug);
             }
             rs.close();

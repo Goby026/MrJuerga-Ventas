@@ -20,7 +20,7 @@ public class UsuarioDAO extends Conexion implements UsuarioCRUD{
     @Override
     public boolean registrar(Usuario u) throws Exception {
         try {
-            String sql = "insert into usuario (nombre, apellido, dni,ruc, telefono, direccion,imagen, usuario, pass) values (?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into usuario (nombre, apellido, dni,ruc, telefono, direccion,imagen, usuario, pass, sueldo, planilla) values (?,?,?,?,?,?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, u.getNombre());
@@ -32,6 +32,8 @@ public class UsuarioDAO extends Conexion implements UsuarioCRUD{
             pst.setString(7, u.getImagen());
             pst.setString(8, u.getUsuario());
             pst.setString(9, u.getPass());
+            pst.setDouble(10, u.getSueldo());
+            pst.setInt(11, u.getPlanilla());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -48,7 +50,7 @@ public class UsuarioDAO extends Conexion implements UsuarioCRUD{
     @Override
     public boolean modificar(Usuario u) throws Exception {
         try {
-            String sql = ("UPDATE usuario set nombre = ?, apellido= ?, dni=?,ruc = ? ,telefono = ?, direccion = ?, imagen= ?,usuario = ?, pass = ? where idusuario=?");
+            String sql = ("UPDATE usuario set nombre = ?, apellido= ?, dni=?,ruc = ? ,telefono = ?, direccion = ?, imagen= ?,usuario = ?, pass = ?, sueldo = ?, planilla=? where idusuario=?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, u.getNombre());
@@ -60,7 +62,9 @@ public class UsuarioDAO extends Conexion implements UsuarioCRUD{
             pst.setString(7, u.getImagen());
             pst.setString(8, u.getUsuario());
             pst.setString(9, u.getPass());
-            pst.setInt(10, u.getId());
+            pst.setDouble(10, u.getSueldo());
+            pst.setInt(11, u.getPlanilla());
+            pst.setInt(12, u.getId());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -114,6 +118,8 @@ public class UsuarioDAO extends Conexion implements UsuarioCRUD{
                 u.setImagen(rs.getString("imagen"));
                 u.setUsuario(rs.getString("usuario"));
                 u.setPass(rs.getString("pass"));
+                u.setSueldo(rs.getDouble("sueldo"));
+                u.setPlanilla(rs.getInt("planilla"));
                 lista.add(u);
             }
             rs.close();

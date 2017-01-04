@@ -318,14 +318,8 @@ public class PagosPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPersonalActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-
-        if (txtPersonal.getText().trim().length() >= 8) {
-            String numero = txtRegimen.getText() + 1;
-            txtRegimen.setText(numero);
-        } else {
-            String numero = txtPersonal.getText() + 1;
-            txtPersonal.setText(numero);
-        }
+        String numero = txtPersonal.getText() + 1;
+        txtPersonal.setText(numero);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
