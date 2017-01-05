@@ -957,7 +957,7 @@ public class Ventas extends javax.swing.JFrame {
                 cboxMasVendidosActionPerformed(evt);
             }
         });
-        getContentPane().add(cboxMasVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 570, -1, -1));
+        getContentPane().add(cboxMasVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 671, -1, 40));
 
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));

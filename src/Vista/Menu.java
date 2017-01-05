@@ -200,7 +200,7 @@ public class Menu extends javax.swing.JFrame {
                 lblSalirMouseClicked(evt);
             }
         });
-        jPanel1.add(lblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 20, 100, 170));
+        jPanel1.add(lblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1800, 20, 100, 170));
 
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -216,7 +216,7 @@ public class Menu extends javax.swing.JFrame {
         lblFecha.setForeground(new java.awt.Color(255, 255, 255));
         lblFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblFecha.setText("FECHA");
-        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(845, 100, 150, -1));
+        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 100, 150, -1));
 
         jLabel5.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -232,7 +232,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("MENU PRINCIPAL");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 700, 80));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 700, 80));
 
         txtHora.setEditable(false);
         txtHora.setBackground(new java.awt.Color(0, 153, 204));
@@ -241,7 +241,7 @@ public class Menu extends javax.swing.JFrame {
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHora.setText("hora");
         txtHora.setBorder(null);
-        jPanel1.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 460, 70));
+        jPanel1.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, 460, 70));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 220));
 

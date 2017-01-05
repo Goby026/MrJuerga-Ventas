@@ -27,6 +27,7 @@ public class AbrirCaja extends javax.swing.JFrame {
      */
     public AbrirCaja(String usuario) throws Exception {
         initComponents();
+        setLocationRelativeTo(null);
         datosIniciales(usuario);
     }
 

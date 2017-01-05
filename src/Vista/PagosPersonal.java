@@ -70,6 +70,8 @@ public class PagosPersonal extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtRegimen = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         jDialog1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -86,9 +88,9 @@ public class PagosPersonal extends javax.swing.JFrame {
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("DESCUENTO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 350, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 520, -1, -1));
 
         tblPersonal.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         tblPersonal.setModel(new javax.swing.table.DefaultTableModel(
@@ -105,7 +107,7 @@ public class PagosPersonal extends javax.swing.JFrame {
         tblPersonal.setRowHeight(26);
         jScrollPane1.setViewportView(tblPersonal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 570, 140));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 570, 140));
 
         txtPersonal.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtPersonal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -114,15 +116,15 @@ public class PagosPersonal extends javax.swing.JFrame {
                 txtPersonalActionPerformed(evt);
             }
         });
-        getContentPane().add(txtPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 380, 80));
+        getContentPane().add(txtPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 380, 80));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("MONTO");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 460, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 630, -1, -1));
 
         txtPago.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         txtPago.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 510, 310, -1));
+        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 660, 310, -1));
 
         btnRealizarPago.setBackground(new java.awt.Color(0, 153, 0));
         btnRealizarPago.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -133,7 +135,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 btnRealizarPagoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 590, 560, 90));
+        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 790, 560, 90));
 
         btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         btnBuscar.setText("BUSCAR");
@@ -142,7 +144,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 690, 380, 80));
+        getContentPane().add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 840, 380, 80));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton1.setText("9");
@@ -151,7 +153,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 120, 120));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 120, 120));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton2.setText("7");
@@ -160,7 +162,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 120, 120));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 120, 120));
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton3.setText("8");
@@ -169,7 +171,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 120, 120));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 120, 120));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton4.setText("4");
@@ -178,7 +180,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 120, 120));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 120, 120));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton5.setText("5");
@@ -187,7 +189,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 120, 120));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 120, 120));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton6.setText("6");
@@ -196,7 +198,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 120, 120));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 120, 120));
 
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton7.setText("1");
@@ -205,7 +207,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 120, 120));
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 120, 120));
 
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton8.setText("2");
@@ -214,7 +216,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 120, 120));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 570, 120, 120));
 
         jButton9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton9.setText("3");
@@ -223,7 +225,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 120, 120));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 570, 120, 120));
 
         jButton10.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton10.setText("0");
@@ -232,7 +234,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 250, 120));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 700, 250, 120));
 
         jButton11.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton11.setText("<");
@@ -241,7 +243,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 550, 120, 120));
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 700, 120, 120));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -251,20 +253,24 @@ public class PagosPersonal extends javax.swing.JFrame {
         jLabel4.setText("DNI PERSONAL");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 380, 50));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 380, 50));
 
         jButton12.setText("REPORTE DE PAGOS");
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 720, 160, 50));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 890, 560, 30));
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 400, 310, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 550, 310, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText("RÉGIMEN");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 410, -1, -1));
 
         txtRegimen.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        getContentPane().add(txtRegimen, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, 310, -1));
+        getContentPane().add(txtRegimen, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, 310, -1));
+
+        jLabel7.setText("BONIFICACION");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 640, -1, -1));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 660, 180, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -435,9 +441,11 @@ public class PagosPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tblPersonal;
     private javax.swing.JTextField txtPago;
     private javax.swing.JTextField txtPersonal;
