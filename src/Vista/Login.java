@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
-        //setUndecorated(true);
+        setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         camposTransparentes();
@@ -53,6 +53,7 @@ public class Login extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -61,17 +62,17 @@ public class Login extends javax.swing.JFrame {
         customPanel2.setOpaque(false);
         customPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Bauhaus 93", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("USUARIO");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         customPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 190, 40));
 
-        txtUsuario.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -82,18 +83,18 @@ public class Login extends javax.swing.JFrame {
         });
         customPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 280, 40));
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Bauhaus 93", 0, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("CONTRASEÑA");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         customPanel2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 190, 40));
 
         btnIngresar.setBackground(new java.awt.Color(255, 255, 255));
-        btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        btnIngresar.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("INGRESAR");
         btnIngresar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
@@ -104,7 +105,7 @@ public class Login extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
-        customPanel2.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 250, 60));
+        customPanel2.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 310, 80));
 
         jLabel13.setBackground(new java.awt.Color(0, 0, 0));
         jLabel13.setFont(new java.awt.Font("Bauhaus 93", 0, 36)); // NOI18N
@@ -118,7 +119,7 @@ public class Login extends javax.swing.JFrame {
         jLabel16.setText("MISTER JUERGA");
         customPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 420, -1, -1));
 
-        txtPass.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        txtPass.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         txtPass.setForeground(new java.awt.Color(255, 255, 255));
         txtPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPass.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -128,6 +129,21 @@ public class Login extends javax.swing.JFrame {
             }
         });
         customPanel2.add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 270, 40));
+
+        jLabel3.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logout.png"))); // NOI18N
+        jLabel3.setText("SALIR");
+        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        customPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, 70));
 
         getContentPane().add(customPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 530));
 
@@ -157,6 +173,10 @@ public class Login extends javax.swing.JFrame {
     private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
         btnIngresar.doClick();
     }//GEN-LAST:event_txtPassActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -201,6 +221,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField txtPass;
