@@ -16,11 +16,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class Ventas extends javax.swing.JFrame {
@@ -29,6 +26,7 @@ public class Ventas extends javax.swing.JFrame {
     DefaultTableModel modeloMasVendidos;
     MyiReportVisor mrv;
     HashMap parametros = new HashMap();
+    JTextField te = new JTextField();
 
     public Ventas(String usuario) throws Exception {
         initComponents();
@@ -542,6 +540,17 @@ public class Ventas extends javax.swing.JFrame {
         jLabel7.setText("NUMERO REFERENCIA");
         operacionCombinada.getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 160, 40));
         operacionCombinada.getContentPane().add(txtNumReferenciaCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 190, 40));
+        txtNumReferenciaCombinada.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                te = txtNumReferenciaCombinada;
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                //System.out.println("de-selected");
+            }
+        });
 
         jButton2.setText("UP");
         operacionCombinada.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 90, 50));
@@ -552,6 +561,17 @@ public class Ventas extends javax.swing.JFrame {
         jLabel25.setText("MONTO");
         operacionCombinada.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 160, 40));
         operacionCombinada.getContentPane().add(txtMontoCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 190, 40));
+        txtMontoCombinada.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                te = txtMontoCombinada;
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                //System.out.println("de-selected");
+            }
+        });
 
         jLabel26.setText("EFECTIVO");
         operacionCombinada.getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 160, 40));
@@ -560,6 +580,17 @@ public class Ventas extends javax.swing.JFrame {
         jLabel27.setText("RECIBIDO");
         operacionCombinada.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 160, 40));
         operacionCombinada.getContentPane().add(txtRecibidoCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 190, 40));
+        txtRecibidoCombinada.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                te = txtRecibidoCombinada;
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                //System.out.println("de-selected");
+            }
+        });
 
         jLabel28.setText("VUELTO");
         operacionCombinada.getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 160, 40));
@@ -568,6 +599,7 @@ public class Ventas extends javax.swing.JFrame {
         txtCobrarCombinada.setText("COBRAR");
         operacionCombinada.getContentPane().add(txtCobrarCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 360, 50));
 
+        btnSalirOpCombinada.setContentAreaFilled(false);
         btnSalirOpCombinada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirOpCombinadaActionPerformed(evt);
@@ -576,21 +608,51 @@ public class Ventas extends javax.swing.JFrame {
         operacionCombinada.getContentPane().add(btnSalirOpCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 772, 200, 30));
 
         btnCuatroCombinada.setText("4");
+        btnCuatroCombinada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCuatroCombinadaActionPerformed(evt);
+            }
+        });
         operacionCombinada.getContentPane().add(btnCuatroCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 160, 90, 60));
 
         btnSeisCombinada.setText("6");
+        btnSeisCombinada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeisCombinadaActionPerformed(evt);
+            }
+        });
         operacionCombinada.getContentPane().add(btnSeisCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 160, 90, 60));
 
         btnNueveCombinada.setText("9");
+        btnNueveCombinada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNueveCombinadaActionPerformed(evt);
+            }
+        });
         operacionCombinada.getContentPane().add(btnNueveCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, 90, 60));
 
         btnCincoCombinada.setText("5");
+        btnCincoCombinada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCincoCombinadaActionPerformed(evt);
+            }
+        });
         operacionCombinada.getContentPane().add(btnCincoCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 160, 90, 60));
 
         btnSieteCombinada.setText("7");
+        btnSieteCombinada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSieteCombinadaActionPerformed(evt);
+            }
+        });
         operacionCombinada.getContentPane().add(btnSieteCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, 90, 60));
 
         btnOchoCombinada.setText("8");
+        btnOchoCombinada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOchoCombinadaActionPerformed(evt);
+            }
+        });
         operacionCombinada.getContentPane().add(btnOchoCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 90, 60));
 
         btnCeroCombinada.setText("0");
@@ -608,9 +670,19 @@ public class Ventas extends javax.swing.JFrame {
         operacionCombinada.getContentPane().add(btnunoCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 90, 60));
 
         btnDosCombinada.setText("2");
+        btnDosCombinada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDosCombinadaActionPerformed(evt);
+            }
+        });
         operacionCombinada.getContentPane().add(btnDosCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 220, 90, 60));
 
         btnTresCombinada.setText("3");
+        btnTresCombinada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTresCombinadaActionPerformed(evt);
+            }
+        });
         operacionCombinada.getContentPane().add(btnTresCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 220, 90, 60));
 
         tablet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tablet.png"))); // NOI18N
@@ -1029,28 +1101,28 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_listaCategoriasMouseClicked
 
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
-            try {
-                if (btnVisa.isSelected() || btnMasterCard.isSelected()) {
-                    panelPagoElectronico.setVisible(true);
-                    panelPagoElectronico.setBounds(600, 200, 500, 1020);
-                } else if (btnOperacionCombinada.isSelected()) {
-                    operacionCombinada.setVisible(true);
-                    operacionCombinada.setBounds(100, 100, 1175, 860);
-                } else if (btnFactura.isSelected()) {
-                    //recibir los tres parametros para la factura
-                    String razon = txtRazonSocial.getText();
-                    String ruc = txtRuc.getText();
-                    String direccion = txtDireccion.getText();
-                    //registrar cliente
-                }else{
-                    //imprimir normalmente la boleta
-                    panelVuelto.setVisible(true);
-                    //panelVuelto.setModal(closable);
-                    panelVuelto.setBounds(580, 100, 460, 950);
-                }
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+        try {
+            if (btnVisa.isSelected() || btnMasterCard.isSelected()) {
+                panelPagoElectronico.setVisible(true);
+                panelPagoElectronico.setBounds(600, 200, 500, 1020);
+            } else if (btnOperacionCombinada.isSelected()) {
+                operacionCombinada.setVisible(true);
+                operacionCombinada.setBounds(100, 100, 1175, 860);
+            } else if (btnFactura.isSelected()) {
+                //recibir los tres parametros para la factura
+                String razon = txtRazonSocial.getText();
+                String ruc = txtRuc.getText();
+                String direccion = txtDireccion.getText();
+                //registrar cliente
+            } else {
+                //imprimir normalmente la boleta
+                panelVuelto.setVisible(true);
+                //panelVuelto.setModal(closable);
+                panelVuelto.setBounds(580, 100, 460, 950);
             }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btnCobrarActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
@@ -1332,15 +1404,15 @@ public class Ventas extends javax.swing.JFrame {
             Double total = Double.parseDouble(lblPago.getText());
             int idTipoComprobante = 1;
             //efectivo = 1
-            int tipoPago=1;
-            
-            if(btnMasterCard.isSelected()){
+            int tipoPago = 1;
+
+            if (btnMasterCard.isSelected()) {
                 //masterCard = 2
                 tipoPago = 2;
-            }else if(btnVisa.isSelected()){
+            } else if (btnVisa.isSelected()) {
                 //visa = 3
                 tipoPago = 3;
-            }else if(btnOperacionCombinada.isSelected()){
+            } else if (btnOperacionCombinada.isSelected()) {
                 //combinada = 4
                 tipoPago = 4;
             }
@@ -1486,16 +1558,16 @@ public class Ventas extends javax.swing.JFrame {
             String direccion = "JR AYACUCHO 772";
             Double total = Double.parseDouble(lblPago.getText());
             int idTipoComprobante = 1;
-            
+
             //efectivo = 1
-            int tipoPago=1;
-            if(btnMasterCard.isSelected()){
+            int tipoPago = 1;
+            if (btnMasterCard.isSelected()) {
                 //masterCard = 2
                 tipoPago = 2;
-            }else if(btnVisa.isSelected()){
+            } else if (btnVisa.isSelected()) {
                 //visa = 3
                 tipoPago = 3;
-            }else if(btnOperacionCombinada.isSelected()){
+            } else if (btnOperacionCombinada.isSelected()) {
                 //combinada = 4
                 tipoPago = 4;
             }
@@ -1601,18 +1673,8 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirOpCombinadaActionPerformed
 
     private void btnunoCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnunoCombinadaActionPerformed
-        txtNumReferenciaCombinada.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                txtNumReferenciaCombinada.setText("1");
-                System.out.println("get foco");
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
+        String numero = te.getText() + 1;
+        te.setText(numero);
     }//GEN-LAST:event_btnunoCombinadaActionPerformed
 
     private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
@@ -1627,6 +1689,46 @@ public class Ventas extends javax.swing.JFrame {
             txtDireccion.setEnabled(false);
         }
     }//GEN-LAST:event_btnFacturaActionPerformed
+    
+    private void btnDosCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDosCombinadaActionPerformed
+        String numero = te.getText() + 2;
+        te.setText(numero);
+    }//GEN-LAST:event_btnDosCombinadaActionPerformed
+
+    private void btnTresCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTresCombinadaActionPerformed
+        String numero = te.getText() + 3;
+        te.setText(numero);
+    }//GEN-LAST:event_btnTresCombinadaActionPerformed
+
+    private void btnCuatroCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuatroCombinadaActionPerformed
+        String numero = te.getText() + 4;
+        te.setText(numero);
+    }//GEN-LAST:event_btnCuatroCombinadaActionPerformed
+
+    private void btnCincoCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCincoCombinadaActionPerformed
+        String numero = te.getText() + 5;
+        te.setText(numero);
+    }//GEN-LAST:event_btnCincoCombinadaActionPerformed
+
+    private void btnSeisCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeisCombinadaActionPerformed
+        String numero = te.getText() + 6;
+        te.setText(numero);
+    }//GEN-LAST:event_btnSeisCombinadaActionPerformed
+
+    private void btnSieteCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSieteCombinadaActionPerformed
+        String numero = te.getText() + 7;
+        te.setText(numero);
+    }//GEN-LAST:event_btnSieteCombinadaActionPerformed
+
+    private void btnOchoCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOchoCombinadaActionPerformed
+        String numero = te.getText() + 8;
+        te.setText(numero);
+    }//GEN-LAST:event_btnOchoCombinadaActionPerformed
+
+    private void btnNueveCombinadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNueveCombinadaActionPerformed
+        String numero = te.getText() + 9;
+        te.setText(numero);
+    }//GEN-LAST:event_btnNueveCombinadaActionPerformed
 
     /**
      * @param args the command line arguments
