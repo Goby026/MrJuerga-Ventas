@@ -9,7 +9,7 @@ public interface VentaCRUD {
 
     public boolean modificar(Venta v) throws Exception;
 
-    public boolean anular(Venta v) throws Exception;
+    public boolean anular(int numVenta) throws Exception;
 
     public List<Venta> listar() throws Exception;
 }

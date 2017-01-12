@@ -1,4 +1,3 @@
-
 package Modelo;
 
 import Interfaces.VentaProductoCRUD;
@@ -93,7 +92,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
                 vp.setIdVenta(rs.getInt("idventa"));
                 vp.setPrecio(rs.getDouble("preciou"));
                 vp.setCantidad(rs.getInt("cantidad"));
-                vp.setSubtotal(rs.getDouble("subtotal"));                
+                vp.setSubtotal(rs.getDouble("subtotal"));
                 lista.add(vp);
             }
             rs.close();
@@ -105,5 +104,89 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
         }
         return lista;
     }
+
+    public double getMontoDeVenta(int numVenta) throws Exception {
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from ventaproducto where idventa = " + numVenta + "");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getDouble("sum(subtotal)");
+            }
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return -1;
+    }
+
+    public List<DatosAnulacion> getDatosTabla(int numVenta) throws Exception {
+        List<DatosAnulacion> lista = null;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select producto.nombre,presentacion.descripcion ,productopresentacion.precio, ventaproducto.cantidad, ventaproducto.subtotal from caja\n"
+                    + "inner join usuariocaja on caja.idcaja = usuariocaja.idcaja\n"
+                    + "inner join usuario on usuariocaja.idusuario = usuario.idusuario\n"
+                    + "inner join venta on usuario.idusuario = venta.idusuario\n"
+                    + "inner join ventaproducto on venta.idventa = ventaproducto.idventa\n"
+                    + "inner join producto on ventaproducto.idproducto = producto.idproducto\n"
+                    + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
+                    + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                    + "where venta.idventa = " + numVenta + "");
+            lista = new ArrayList();
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                DatosAnulacion da = new DatosAnulacion();
+                da.setProducto(rs.getString("producto.nombre"));
+                da.setPresentacion(rs.getString("presentacion.descripcion"));
+                da.setPrecio(rs.getDouble("productopresentacion.precio"));
+                da.setCantidad(rs.getInt("ventaproducto.cantidad"));
+                da.setSubtotal(rs.getDouble("ventaproducto.subtotal"));
+                lista.add(da);
+                //model_diario.addRow(datos);
+            }
+            //tbl_diario.setModel(model_diario);            
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return lista;
+    }
+
+    public boolean sumarStock(int idProdPresentacion, int stock) throws Exception {
+        String sql = "UPDATE `mrjuerga`.`productopresentacion` SET `stock`="+stock+" WHERE `idproductopresentacion`="+idProdPresentacion+"";
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            int rs = pst.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
+    }
+    
+    public boolean updateVentaProducto(int idVenta) throws Exception {
+        String sql = "UPDATE `mrjuerga`.`ventaproducto` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`="+idVenta+"";
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            int rs = pst.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return false;
+    }    
     
 }

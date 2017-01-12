@@ -121,4 +121,18 @@ public class AbrirCajaControl {
         }
         return false;
     }
+    
+    public String getSaldoInicial(int idFlujoCaja) throws Exception{
+        try {
+            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+            for (FlujoCaja fc : fcdao.Listar()) {
+                if (fc.getIdFlujoCaja() == idFlujoCaja) {                    
+                    return String.valueOf(fc.getSaldo());
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
+    }
 }

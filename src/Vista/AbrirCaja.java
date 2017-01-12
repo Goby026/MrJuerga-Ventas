@@ -41,11 +41,11 @@ public class AbrirCaja extends javax.swing.JFrame {
         new Cronometro().iniciarCronometro(txtHora);
         lblFecha.setText(new ManejadorFechas().getFechaActual());
         lblCaja.setText(new AbrirCajaControl().getCajaDeUsuario(usuario));
-        String captura = txtSaldoInicial.getText();
-        lblMonto.setText(captura);
+        int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AbrirCajaControl().getIdUsuario(txtUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()));
         if (new AbrirCajaControl().verificarEstadoCaja(usuario) > 0) {
             lblEstado.setText("CAJA APERTURADA");
             lblEstado.setForeground(Color.GREEN);
+            lblMonto.setText(new AbrirCajaControl().getSaldoInicial(idFlujoCaja));
         } else {
             lblEstado.setText("CAJA CERRADA");
             lblEstado.setForeground(Color.RED);
@@ -183,7 +183,7 @@ public class AbrirCaja extends javax.swing.JFrame {
         getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 130));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel33.setText("MONTO");
+        jLabel33.setText("MONTO INICIAL");
         getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, -1, -1));
 
         lblEstado.setText("________________");
@@ -194,7 +194,7 @@ public class AbrirCaja extends javax.swing.JFrame {
         getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, -1));
 
         lblMonto.setText("_____");
-        getContentPane().add(lblMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
+        getContentPane().add(lblMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, -1, -1));
 
         jPanel9.setBackground(new java.awt.Color(102, 102, 102));
         jPanel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));

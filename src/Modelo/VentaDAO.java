@@ -79,13 +79,12 @@ public class VentaDAO extends Conexion implements VentaCRUD {
     }
 
     @Override
-    public boolean anular(Venta v) throws Exception {
+    public boolean anular(int numVenta) throws Exception {
         try {
             //estado 0=anulado - 1=activo
-            String sql = "UPDATE venta SET estado = 0 WHERE idventa = ?";
+            String sql = "UPDATE venta SET estado = 0 WHERE idventa = "+numVenta+"";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
-            pst.setInt(1, v.getIdVenta());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;

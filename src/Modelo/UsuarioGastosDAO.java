@@ -116,4 +116,22 @@ public class UsuarioGastosDAO extends Conexion implements UsuarioGastosCRUD{
         return lista;
     }
     
+    public double getMontoEgresos(int idFlujoCaja) throws Exception {
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select sum(monto) from usuariogastos where idflujocaja = "+idFlujoCaja+"");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getDouble("sum(monto)");
+            }
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return -1;
+    }
+    
 }

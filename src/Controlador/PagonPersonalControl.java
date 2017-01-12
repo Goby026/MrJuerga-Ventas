@@ -39,6 +39,7 @@ public class PagonPersonalControl {
                     columna[2] = u.getApellido();
                     columna[3] = u.getDni();
                     
+                    
                     System.out.println(columna[0]);
                     System.out.println(columna[1]);
                     System.out.println(columna[2]);

@@ -7,10 +7,11 @@ package Vista;
 
 import Controlador.GastosControl;
 import Controlador.ManejadorFechas;
+import Controlador.MyiReportVisor;
 import Modelo.FlujoCajaDAO;
-import Modelo.Gasto;
 import Modelo.UsuarioGastos;
 import Modelo.UsuarioGastosDAO;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,11 +20,12 @@ import javax.swing.JOptionPane;
  */
 public class Gastos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Gastos
-     */
+    MyiReportVisor mrv;
+    HashMap parametros = new HashMap();
+    
     public Gastos(String usuario) {
         initComponents();
+        setLocationRelativeTo(null);
         cargarDatos(usuario);
     }
 
@@ -75,6 +77,7 @@ public class Gastos extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         lblCaja = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,9 +110,9 @@ public class Gastos extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 170, 350, 330));
 
-        txtImporte.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtImporte.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         txtImporte.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 230, 40));
+        getContentPane().add(txtImporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 230, 50));
 
         btn7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn7.setText("7");
@@ -226,7 +229,7 @@ public class Gastos extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 520, 340, 110));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 520, 340, 70));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("USUARIO");
@@ -243,6 +246,14 @@ public class Gastos extends javax.swing.JFrame {
         lblCaja.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblCaja.setText("jLabel7");
         getContentPane().add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, -1, -1));
+
+        jButton1.setText("LISTA DE GASTOS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 240, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,6 +346,8 @@ public class Gastos extends javax.swing.JFrame {
                     
                     if (new UsuarioGastosDAO().registrar(ug)) {
                         JOptionPane.showMessageDialog(null, "GASTO REGISTRADO");
+                        txtImporte.setText("");
+                        txaObservaciones.setText("");
                         cargarDatos(lblUsuario.getText());
                     }
                 } else {
@@ -347,6 +360,20 @@ public class Gastos extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new GastosControl().getIdUsuario(lblUsuario.getText()), new GastosControl().getIdCaja(lblCaja.getText()));
+            parametros.put("flujo", idFlujoCaja);
+            parametros.put("usuario", lblUsuario.getText());
+            parametros.put("caja", lblCaja.getText());
+
+            mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\ListaGastos.jrxml", parametros);
+            mrv.exportarAPdf();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,6 +424,7 @@ public class Gastos extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnborrar;
     private javax.swing.JButton btnpunto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

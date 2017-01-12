@@ -34,7 +34,7 @@ public class PruebasTimer {
                     //repitiendo tiempos
                     System.out.println(new Date());
                     FlujoCajaDAO fcdao = new FlujoCajaDAO();
-                    System.out.println(fcdao.Listar().get(1).getIdCaja());
+                    System.out.println(fcdao.Listar().get(0).getIdCaja());
                     
                 } catch (Exception ex) {
                     ex.printStackTrace();

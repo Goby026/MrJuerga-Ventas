@@ -28,6 +28,36 @@ public class CerrarCajaControl {
         return 0.0;
     }
     
+    /*METODO PARA OBTENER EL NOMBRE DE USUARIO CON EL USUARIO*/
+    public String getNombreUsuario(String usuario) throws Exception {
+        try {
+            UsuarioDAO udao = new UsuarioDAO();
+            for (Usuario u : udao.listar()) {
+                if (u.getUsuario().equals(usuario)) {
+                    return u.getNombre();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
+    }
+    
+    /*METODO PARA OBTENER EL APELLIDO DE USUARIO CON EL USUARIO*/
+    public String getApellidoUsuario(String usuario) throws Exception {
+        try {
+            UsuarioDAO udao = new UsuarioDAO();
+            for (Usuario u : udao.listar()) {
+                if (u.getUsuario().equals(usuario)) {
+                    return u.getApellido();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return null;
+    }
+    
     /*METODO PARA OBTENER EL ID DE USUARIO CON EL NOMBRE*/
     public int getIdUsuario(String usuario) throws Exception {
         try {
