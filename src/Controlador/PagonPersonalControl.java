@@ -1,9 +1,13 @@
 package Controlador;
 
+import Modelo.FlujoAsistencia;
+import Modelo.FlujoAsistenciaDAO;
 import Modelo.Gasto;
 import Modelo.GastoDAO;
 import Modelo.Usuario;
 import Modelo.UsuarioDAO;
+import Modelo.UsuarioPerfil;
+import Modelo.UsuarioPerfilDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -17,41 +21,33 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PagonPersonalControl {
 
-    DefaultTableModel modelo;
+    DefaultTableModel modeloAsistencias;
 
     //metodo para establecer los nombres de las columnas de la tabla personal
-    public void titulosTabla(JTable tabla) {
-        String titulos[] = {"ID","NOMBRES", "APELLIDOS","DNI"};
-        modelo = new DefaultTableModel(null, titulos);
-        tabla.setModel(modelo);
+    public void cargarTitulosTabla(JTable tabla) {
+        String titulos[] = {"USUARIO","NOMBRES", "APELLIDOS","DNI"};
+        modeloAsistencias = new DefaultTableModel(null, titulos);
+        tabla.setModel(modeloAsistencias);
     }
 
-    //metodo para llenar la tabla de personales cuando se ingrese el dni
-    public void tablaPersonal(String dni, JTable tabla) throws Exception {
+    public void cargarTabla(JTable tabla) throws Exception {
         try {
-            titulosTabla(tabla);
-            UsuarioDAO udao = new UsuarioDAO();
-            for (Usuario u : udao.listar()) {
-                if (u.getDni().equals(dni)) {
-                    Object[] columna = new Object[4];
-                    columna[0] = u.getId();
-                    columna[1] = u.getNombre();
-                    columna[2] = u.getApellido();
-                    columna[3] = u.getDni();
-                    
-                    
-                    System.out.println(columna[0]);
-                    System.out.println(columna[1]);
-                    System.out.println(columna[2]);
-                    System.out.println(columna[3]);
-                    modelo.addRow(columna);
-                }
+            cargarTitulosTabla(tabla);
+
+            Object[] columna = new Object[5];
+
+            for (int i = 0; i < new FlujoAsistenciaDAO().getDatosTabla().size(); i++) {
+                columna[0] = new FlujoAsistenciaDAO().getDatosTabla().get(i).getIdAsistencia();
+                columna[1] = new FlujoAsistenciaDAO().getDatosTabla().get(i).getNombre();
+                columna[2] = new FlujoAsistenciaDAO().getDatosTabla().get(i).getApellido();
+                columna[3] = new FlujoAsistenciaDAO().getDatosTabla().get(i).getDni();
+                modeloAsistencias.addRow(columna);
             }
-            tabla.setModel(modelo);
-        } catch (Exception e) {
-            throw e;
+        } catch (Exception ex) {
+            throw ex;
         }
     }
+
 
     public boolean registrarPago(String fecha, String concepto, double monto) throws Exception {
         try {
@@ -68,15 +64,50 @@ public class PagonPersonalControl {
         }
     }
     
-    public void cargarComboConcepto(JComboBox cmb) throws Exception{
+    public double getPagoPersonal(int idUsuario) throws Exception{
         try {
-            GastoDAO gdao = new GastoDAO();
-            for (Gasto g : gdao.Listar()) {
-                cmb.addItem(g.getConcepto());
+            UsuarioDAO udao = new UsuarioDAO();
+            for (Usuario u : udao.listar()) {
+                if (u.getId()==idUsuario) {
+                    return u.getSueldo();
+                }
             }
         } catch (Exception e) {
             throw e;
         }
+        return -1;
+    }
+    
+    public int getPlanillaPersonal(int idUsuario) throws Exception{
+        try {
+            //PLANILLA:
+            //2= planilla y familia
+            //1 = esta en planilla
+            //0 = no esta en planilla
+            UsuarioDAO udao = new UsuarioDAO();
+            for (Usuario u : udao.listar()) {
+                if (u.getId()==idUsuario) {
+                    return u.getPlanilla();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return -1;
+    }
+    
+    public int getIdUsuarioConDNI(String dni) throws Exception{
+        try {
+            UsuarioDAO udao = new UsuarioDAO();
+            for (Usuario u : udao.listar()) {
+                if (u.getDni().equals(dni)) {
+                    return u.getId();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return -1;
     }
     
     public int getIdGasto(String concepto) throws Exception{
@@ -93,13 +124,27 @@ public class PagonPersonalControl {
         return -1;
     }
     
+    public int verificarPago(int idAsistencia) throws Exception{
+        try {
+            FlujoAsistenciaDAO fadao= new FlujoAsistenciaDAO();
+            for (FlujoAsistencia fa : fadao.listar()) {
+                if (fa.getIdAsistencia()==idAsistencia) {
+                    return fa.getEstadoPago();
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return -1;
+    }
+    
     public void limpiarCampos(JTextField txtPersonal, JTextField txtPago, JTable tblPersonal) {
-        titulosTabla(tblPersonal);
+        cargarTitulosTabla(tblPersonal);
         txtPersonal.setText("");
         txtPago.setText("");
-        tblPersonal.setModel(modelo);
+        tblPersonal.setModel(modeloAsistencias);
         for (int i = 0; i < tblPersonal.getRowCount(); i++) {
-            modelo.removeRow(i);
+            modeloAsistencias.removeRow(i);
             i -= 1;
         }
     }

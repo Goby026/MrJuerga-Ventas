@@ -149,7 +149,7 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
         double monto = 0.0;
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = "+idFlujoCaja+" and tipopago = "+tipoPago+"");
+            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = " + idFlujoCaja + " and tipopago = " + tipoPago + "");
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 monto = res.getDouble("sum(subtotal)");
@@ -180,5 +180,35 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
             this.cerrar();
         }
         return false;
+    }
+
+    /* METODO PARA OBTENER EL TOTAL DE BONIFICACIONES */
+    public double getCantidadBonos() throws Exception {
+        double cantidad = 0;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select sum(ventaproducto.cantidad)\n"
+                    + "from caja\n"
+                    + "inner join flujocaja on caja.idcaja = flujocaja.idcaja\n"
+                    + "inner join usuariocaja on caja.idcaja = usuariocaja.idcaja\n"
+                    + "inner join usuario on usuariocaja.idusuario = usuario.idusuario\n"
+                    + "inner join venta on usuario.idusuario = venta.idusuario\n"
+                    + "inner join ventaproducto on venta.idventa = ventaproducto.idventa\n"
+                    + "inner join producto on ventaproducto.idproducto = producto.idproducto\n"
+                    + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
+                    + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                    + "where flujocaja.estado = 1 and productopresentacion.precio >= 100");
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                cantidad = res.getInt("sum(ventaproducto.cantidad)");
+            }
+            pst.close();
+            res.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return cantidad;
     }
 }

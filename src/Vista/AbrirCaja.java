@@ -93,6 +93,7 @@ public class AbrirCaja extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -303,6 +304,9 @@ public class AbrirCaja extends javax.swing.JFrame {
         });
         getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 590, 70, 60));
 
+        jButton12.setText("MOVIMIENTO");
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -463,6 +467,7 @@ public class AbrirCaja extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
