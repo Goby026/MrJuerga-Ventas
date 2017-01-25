@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d5f20408-d5ed-403f-b024-261eb061add1">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="250"/>
 	<parameter name="flujo" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -34,17 +34,10 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select sum(ventaproducto.subtotal), count(venta.idventa), flujocaja.hora_inicio, flujocaja.saldo
-from caja
-inner join flujocaja on caja.idcaja = flujocaja.idcaja
-inner join usuariocaja on caja.idcaja = usuariocaja.idcaja
-inner join usuario on usuariocaja.idusuario = usuario.idusuario
-inner join venta on usuario.idusuario = venta.idusuario
+		<![CDATA[select sum(ventaproducto.subtotal),count(venta.idventa), flujocaja.hora_inicio, flujocaja.saldo from venta
 inner join ventaproducto on venta.idventa = ventaproducto.idventa
-inner join producto on ventaproducto.idproducto = producto.idproducto
-inner join productopresentacion on producto.idproducto = productopresentacion.idproducto
-inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion
-where flujocaja.idflujocaja = $P{flujo}]]>
+inner join flujocaja on venta.idflujocaja = flujocaja.idflujocaja
+where venta.idflujocaja = $P{flujo}]]>
 	</queryString>
 	<field name="sum(ventaproducto.subtotal)" class="java.lang.Double"/>
 	<field name="count(venta.idventa)" class="java.lang.Long"/>

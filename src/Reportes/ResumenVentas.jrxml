@@ -34,17 +34,10 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select sum(ventaproducto.subtotal), count(venta.idventa), flujocaja.hora_inicio, flujocaja.saldo
-from caja
-inner join flujocaja on caja.idcaja = flujocaja.idcaja
-inner join usuariocaja on caja.idcaja = usuariocaja.idcaja
-inner join usuario on usuariocaja.idusuario = usuario.idusuario
-inner join venta on usuario.idusuario = venta.idusuario
+		<![CDATA[select sum(ventaproducto.subtotal),count(venta.idventa), flujocaja.hora_inicio, flujocaja.saldo from venta
 inner join ventaproducto on venta.idventa = ventaproducto.idventa
-inner join producto on ventaproducto.idproducto = producto.idproducto
-inner join productopresentacion on producto.idproducto = productopresentacion.idproducto
-inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion
-where flujocaja.idflujocaja = $P{flujo}]]>
+inner join flujocaja on venta.idflujocaja = flujocaja.idflujocaja
+where venta.idflujocaja = $P{flujo}]]>
 	</queryString>
 	<field name="sum(ventaproducto.subtotal)" class="java.lang.Double"/>
 	<field name="count(venta.idventa)" class="java.lang.Long"/>
@@ -69,7 +62,7 @@ where flujocaja.idflujocaja = $P{flujo}]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="153" splitType="Stretch">
+		<band height="179" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="111" height="16" uuid="c170c932-73fd-43d7-b07f-8e2e8f1e79d1"/>
 				<textElement textAlignment="Right">
@@ -99,28 +92,28 @@ where flujocaja.idflujocaja = $P{flujo}]]>
 				<text><![CDATA[CAJA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="75" width="111" height="16" uuid="20758bfd-d75c-4f9b-bb9c-998d14530ed5"/>
+				<reportElement x="0" y="88" width="111" height="16" uuid="20758bfd-d75c-4f9b-bb9c-998d14530ed5"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[TOTAL TARJETAS:]]></text>
+				<text><![CDATA[MASTERCARD:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="94" width="111" height="16" uuid="1387f016-70bd-4fab-b77c-b49c19537587"/>
+				<reportElement x="0" y="107" width="111" height="16" uuid="1387f016-70bd-4fab-b77c-b49c19537587"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[TOTAL EFECTIVO:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="276" y="75" width="113" height="16" uuid="c1358cca-6f83-4dae-a3fc-73b685e989a3"/>
+				<reportElement x="276" y="109" width="113" height="16" uuid="c1358cca-6f83-4dae-a3fc-73b685e989a3"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[TOTAL EGRESOS:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="141" width="552" height="1" uuid="d36cb6d4-1b9b-4d26-9afa-99347e1f5acc"/>
+				<reportElement x="0" y="175" width="552" height="1" uuid="d36cb6d4-1b9b-4d26-9afa-99347e1f5acc"/>
 			</line>
 			<textField>
 				<reportElement x="123" y="0" width="100" height="16" uuid="0e08664d-ed8f-46ff-b1b3-a563c609f03c"/>
@@ -151,25 +144,60 @@ where flujocaja.idflujocaja = $P{flujo}]]>
 				<textFieldExpression><![CDATA[$P{apellidos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="123" y="75" width="100" height="16" uuid="76449729-0012-4d82-a86b-abab447722ed"/>
+				<reportElement x="123" y="69" width="100" height="16" uuid="76449729-0012-4d82-a86b-abab447722ed"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{tarjetas}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="123" y="95" width="100" height="16" uuid="0a6c51fe-2ff5-48bc-8e03-14bda79eb220"/>
+				<reportElement x="123" y="109" width="100" height="16" uuid="0a6c51fe-2ff5-48bc-8e03-14bda79eb220"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{efectivo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="402" y="75" width="100" height="16" uuid="720018b5-d5f3-46e3-8c6a-354ba7e3d0de"/>
+				<reportElement x="402" y="109" width="100" height="16" uuid="720018b5-d5f3-46e3-8c6a-354ba7e3d0de"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{egresos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="126" width="111" height="16" uuid="592b962f-5fa6-4846-878a-1b02c0d777c3"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="145" width="111" height="16" uuid="084608f8-c733-485d-8574-443ece11faeb"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[HORA:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="123" y="127" width="100" height="16" uuid="19e482f1-02f0-48c3-9589-06fa1b81d89a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="69" width="111" height="16" uuid="e28bc8db-44e0-4385-b0e5-1d7ce60dc022"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[VISA:]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement x="123" y="145" width="100" height="16" uuid="a1775bf5-9258-4cda-a56f-6d444242c436"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

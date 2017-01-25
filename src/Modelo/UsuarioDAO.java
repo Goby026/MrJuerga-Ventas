@@ -103,7 +103,7 @@ public class UsuarioDAO extends Conexion implements UsuarioCRUD{
         List<Usuario> lista = null;
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("select * from usuario");
+            PreparedStatement pst = this.conexion.prepareStatement("select * from usuario order by idusuario desc");
             lista = new ArrayList();
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {

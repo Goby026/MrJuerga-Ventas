@@ -54,6 +54,7 @@ public class MyiReportVisor extends javax.swing.JInternalFrame {
    
 
     public MyiReportVisor(String fileName,HashMap parameter){
+        
         this();
         try{
             Conexion con = new Conexion();

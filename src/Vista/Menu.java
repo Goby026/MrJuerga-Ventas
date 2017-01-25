@@ -29,7 +29,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         lblUsuario.setText(usuario);
         lblCaja.setText(new AbrirCajaControl().getCajaDeUsuario(usuario));
-        Color c = new Color(0,0,1,0.15f);
+        Color c = new Color(0, 0, 1, 0.15f);
         this.setBackground(c);
         new Cronometro().iniciarCronometro(txtHora);
         lblFecha.setText(new ManejadorFechas().getFechaActual());
@@ -303,8 +303,21 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
-            CerrarCaja a = new CerrarCaja(lblUsuario.getText().toUpperCase());
-            a.setVisible(true);
+            int flag = 0;
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AbrirCajaControl().getIdUsuario(lblUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()));
+            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+            for (FlujoCaja fc : fcdao.Listar()) {
+                if (fc.getIdFlujoCaja() == idFlujoCaja && fc.getEstado().equals("1")) {
+                    flag++;
+                }
+            }
+            if (flag > 0) {
+                CerrarCaja a = new CerrarCaja(lblUsuario.getText().toUpperCase());
+                a.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "DEBE APERTURAR CAJA PARA REALIZAR EL CIERRE RESPECTIVO");
+            }
+
             //dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -313,8 +326,21 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {
-            Gastos g = new Gastos(lblUsuario.getText().toUpperCase());
-            g.setVisible(true);
+            int flag = 0;
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AbrirCajaControl().getIdUsuario(lblUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()));
+            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+            for (FlujoCaja fc : fcdao.Listar()) {
+                if (fc.getIdFlujoCaja() == idFlujoCaja && fc.getEstado().equals("1")) {
+                    flag++;
+                }
+            }
+            if (flag > 0) {
+                Gastos g = new Gastos(lblUsuario.getText().toUpperCase());
+                g.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "DEBE APERTURAR CAJA PARA REALIZAR GASTOS");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -17,7 +17,7 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
     @Override
     public boolean Registrar(FlujoCaja fc) throws Exception {
         try {
-            String sql = "INSERT INTO flujocaja(fecha_inicio,hora_inicio,fecha_final, hora_final,ingresos,egresos,saldo,idusuario,idcaja, estado)VALUE (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO flujocaja(fecha_inicio,hora_inicio,fecha_final, hora_final,ingresos,egresos,saldo,descuadre,idusuario,idcaja, estado)VALUE (?,?,?,?,?,?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, fc.getFechaInicio());
@@ -27,9 +27,10 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
             pst.setDouble(5, fc.getIngresos());
             pst.setDouble(6, fc.getEgresos());
             pst.setDouble(7, fc.getSaldo());
-            pst.setInt(8, fc.getIdUsuario());
-            pst.setInt(9, fc.getIdCaja());
-            pst.setString(10, fc.getEstado());
+            pst.setDouble(8, fc.getDescuadre());
+            pst.setInt(9, fc.getIdUsuario());
+            pst.setInt(10, fc.getIdCaja());
+            pst.setString(11, fc.getEstado());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -46,7 +47,7 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
     @Override
     public boolean Modificar(FlujoCaja fc) throws Exception {
         try {
-            String sql = ("UPDATE caja flujocaja SET fecha_inicio = ?,hora_inicio=?,fecha_final=? ,hora_final=? ,ingresos = ?, egresos = ?, saldo = ?, idusuario = ?, idcaja = ?, estado= ? WHERE idflujocaja = ?");
+            String sql = ("UPDATE caja flujocaja SET fecha_inicio = ?,hora_inicio=?,fecha_final=? ,hora_final=? ,ingresos = ?, egresos = ?, saldo = ?,descuadre = ? ,idusuario = ?, idcaja = ?, estado= ? WHERE idflujocaja = ?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, fc.getFechaInicio());
@@ -56,10 +57,11 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
             pst.setDouble(5, fc.getIngresos());
             pst.setDouble(6, fc.getEgresos());
             pst.setDouble(7, fc.getSaldo());
-            pst.setInt(8, fc.getIdUsuario());
-            pst.setInt(9, fc.getIdCaja());
-            pst.setString(10, fc.getEstado());
-            pst.setInt(11, fc.getIdFlujoCaja());
+            pst.setDouble(8, fc.getDescuadre());
+            pst.setInt(9, fc.getIdUsuario());
+            pst.setInt(10, fc.getIdCaja());
+            pst.setString(11, fc.getEstado());
+            pst.setInt(12, fc.getIdFlujoCaja());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -110,6 +112,7 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
                 fc.setIngresos(res.getDouble("ingresos"));
                 fc.setEgresos(res.getDouble("egresos"));
                 fc.setSaldo(res.getDouble("saldo"));
+                fc.setSaldo(res.getDouble("descuadre"));
                 fc.setIdUsuario(res.getInt("idusuario"));
                 fc.setIdCaja(res.getInt("idcaja"));
                 fc.setEstado(res.getString("estado"));
@@ -149,7 +152,47 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
         double monto = 0.0;
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = " + idFlujoCaja + " and tipopago = " + tipoPago + "");
+            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = " + idFlujoCaja + " and tipopago = 1 OR tipopago = 2 OR tipopago = 3 OR tipopago = 4");
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                monto = res.getDouble("sum(subtotal)");
+            }
+            pst.close();
+            res.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return monto;
+    }
+    
+    /* METODO PARA OBTENER EL MONTO VISA DESDE QUE SE APERTURA LA CAJA */
+    public double getMontoVISA(int idFlujoCaja) throws Exception {
+        double monto = 0.0;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = "+idFlujoCaja+" and tipopago = 3");
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                monto = res.getDouble("sum(subtotal)");
+            }
+            pst.close();
+            res.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return monto;
+    }
+    
+           /* METODO PARA OBTENER EL MONTO MASTERCARD DESDE QUE SE APERTURA LA CAJA */
+    public double getMontoMASTER(int idFlujoCaja) throws Exception {
+        double monto = 0.0;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = "+idFlujoCaja+" and tipopago = 2");
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 monto = res.getDouble("sum(subtotal)");
@@ -168,7 +211,7 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
     public boolean updateFlujoCaja(FlujoCaja fc) throws Exception {
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("UPDATE `mrjuerga`.`flujocaja` SET `fecha_final`='" + fc.getFechaFinal() + "', `hora_final`='" + fc.getHoraFinal() + "', `ingresos`='" + fc.getIngresos() + "', `estado`='0' WHERE `idflujocaja`='" + fc.getIdFlujoCaja() + "'");
+            PreparedStatement pst = this.conexion.prepareStatement("UPDATE `mrjuerga`.`flujocaja` SET `fecha_final`='" + fc.getFechaFinal() + "', `hora_final`='" + fc.getHoraFinal() + "', `ingresos`='" + fc.getIngresos() + "', egresos = "+fc.getEgresos()+", saldo = "+fc.getSaldo()+ ",descuadre = "+fc.getDescuadre()+" ,`estado`='0' WHERE `idflujocaja`='" + fc.getIdFlujoCaja() + "'");
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;

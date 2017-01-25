@@ -92,7 +92,7 @@ public class AbrirCajaControl {
         System.out.println(idUsuario);
         //capturo el id de flujo de caja
         int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(idUsuario, idCaja);
-        System.out.println(idFlujoCaja);        
+        System.out.println(idFlujoCaja);
         
         FlujoCajaDAO fcdao = new FlujoCajaDAO();
         for (FlujoCaja fc : fcdao.Listar()) {

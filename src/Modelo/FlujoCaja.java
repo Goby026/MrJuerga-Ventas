@@ -12,12 +12,12 @@ public class FlujoCaja {
     int idFlujoCaja, idUsuario, idCaja;
     String fechaInicio, horaInicio, fechaFinal, horaFinal;
     String estado;
-    double ingresos, egresos, saldo;
+    double ingresos, egresos, saldo, descuadre;
 
     public FlujoCaja() {
     }
 
-    public FlujoCaja(int idFlujoCaja, int idUsuario, int idCaja, String fechaInicio, String horaInicio,String fechaFinal, String horaFinal ,double ingresos, double egresos, double saldo, String estado) {
+    public FlujoCaja(int idFlujoCaja, int idUsuario, int idCaja, String fechaInicio, String horaInicio,String fechaFinal, String horaFinal ,double ingresos, double egresos, double saldo,double descuadre ,String estado) {
         this.idFlujoCaja = idFlujoCaja;
         this.idUsuario = idUsuario;
         this.idCaja = idCaja;
@@ -28,6 +28,7 @@ public class FlujoCaja {
         this.ingresos = ingresos;
         this.egresos = egresos;
         this.saldo = saldo;
+        this.descuadre = descuadre;
         this.estado = estado;
     }
 
@@ -109,6 +110,14 @@ public class FlujoCaja {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    public double getDescuadre() {
+        return descuadre;
+    }
+
+    public void setDescuadre(double descuadre) {
+        this.descuadre = descuadre;
     }
 
     public String getEstado() {

@@ -92,7 +92,7 @@ public class Anulaciones extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txt_num_venta = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnListaAnulaciones = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -114,31 +114,31 @@ public class Anulaciones extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel13.setText("CAJA");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 490, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, -1));
 
         txtCaja.setEditable(false);
         txtCaja.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtCaja.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCaja.setBorder(null);
-        getContentPane().add(txtCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 490, 130, -1));
+        getContentPane().add(txtCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 490, 220, -1));
 
         jLabel14.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel14.setText("USUARIO");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 520, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 520, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel15.setText("CONCEPTO");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 460, -1, -1));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 460, -1, -1));
 
         txtHora.setEditable(false);
         txtHora.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHora.setBorder(null);
-        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 550, 130, -1));
+        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 550, 220, -1));
 
         jLabel12.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel12.setText("FECHA");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 580, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 580, -1, -1));
 
         btnAnular.setBackground(new java.awt.Color(255, 102, 0));
         btnAnular.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
@@ -153,7 +153,7 @@ public class Anulaciones extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         jLabel17.setText("S/.");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 640, -1, -1));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 640, -1, -1));
 
         txtMonto.setBackground(new java.awt.Color(240, 240, 240));
         txtMonto.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
@@ -163,34 +163,34 @@ public class Anulaciones extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel18.setText("MONTO");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 620, -1, -1));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 620, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel19.setText("HORA");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 550, -1, -1));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 550, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Consolas", 0, 10)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(153, 153, 153));
         jLabel20.setText("DETALLE DE VENTA");
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, 100, -1));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, 100, -1));
 
         txtConcepto.setEditable(false);
         txtConcepto.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtConcepto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtConcepto.setBorder(null);
-        getContentPane().add(txtConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 460, 130, -1));
+        getContentPane().add(txtConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 460, 220, -1));
 
         txtnumVenta.setEditable(false);
         txtnumVenta.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtnumVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtnumVenta.setBorder(null);
-        getContentPane().add(txtnumVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 430, 130, -1));
+        getContentPane().add(txtnumVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 220, -1));
 
         txtFecha.setEditable(false);
         txtFecha.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtFecha.setBorder(null);
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 580, 130, -1));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 580, 220, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -385,22 +385,22 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(txt_num_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 350, 50));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("LISTA DE ANULACIONES");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnListaAnulaciones.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnListaAnulaciones.setText("LISTA DE ANULACIONES");
+        btnListaAnulaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnListaAnulacionesActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 460, 70));
+        jPanel2.add(btnListaAnulaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, 350, 70));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 480, 650));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 430, 650));
 
         txtUsuario.setEditable(false);
         txtUsuario.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.setBorder(null);
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 520, 130, -1));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 520, 220, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 51, 51));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -460,18 +460,18 @@ public class Anulaciones extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblDetalle);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 440, 190));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 490, 190));
 
         jLabel1.setText("ESTADO:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 174, -1, 20));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, -1, 20));
 
         lblEstado.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblEstado.setText("____________________");
-        getContentPane().add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 174, 140, 20));
+        getContentPane().add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 210, 20));
 
         jLabel21.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel21.setText("N° VENTA");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, -1, -1));
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, -1, -1));
         getContentPane().add(panelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 220, 20));
 
         pack();
@@ -600,7 +600,7 @@ public class Anulaciones extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnListaAnulacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaAnulacionesActionPerformed
         try {
             int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AnulacionesControl().getIdUsuario(txtUsuario.getText()), new AnulacionesControl().getIdCaja(txtCaja.getText()));
             parametros.put("usuario", txtUsuario.getText());
@@ -611,7 +611,7 @@ public class Anulaciones extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Anulaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnListaAnulacionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -661,8 +661,8 @@ public class Anulaciones extends javax.swing.JFrame {
     private javax.swing.JButton btn9;
     private javax.swing.JButton btnAnular;
     private javax.swing.JButton btnDel;
+    private javax.swing.JButton btnListaAnulaciones;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

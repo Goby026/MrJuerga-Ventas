@@ -5,11 +5,14 @@
  */
 package Vista;
 
+import Controlador.ManejadorFechas;
 import Controlador.PagonPersonalControl;
 import Controlador.Redondear;
 import Controlador.Validaciones;
 import Modelo.FlujoAsistenciaDAO;
 import Modelo.FlujoCajaDAO;
+import Modelo.Gasto;
+import Modelo.GastoDAO;
 import Modelo.UsuarioGastos;
 import Modelo.UsuarioGastosDAO;
 import Modelo.UsuarioPerfilDAO;
@@ -199,7 +202,7 @@ public class PagosPersonal extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel1.setText("PAGO");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 280, -1, -1));
 
         tblPersonal.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         tblPersonal.setModel(new javax.swing.table.DefaultTableModel(
@@ -221,15 +224,15 @@ public class PagosPersonal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblPersonal);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 510, 520));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 1100, 520));
 
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel2.setText("BONIFICACION");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 360, -1, -1));
 
         txtBonificacion.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtBonificacion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtBonificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 360, 180, -1));
+        getContentPane().add(txtBonificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 360, 180, -1));
 
         btnRealizarPago.setBackground(new java.awt.Color(0, 153, 0));
         btnRealizarPago.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -240,7 +243,7 @@ public class PagosPersonal extends javax.swing.JFrame {
                 btnRealizarPagoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 570, 310, 90));
+        getContentPane().add(btnRealizarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 570, 310, 90));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -250,45 +253,45 @@ public class PagosPersonal extends javax.swing.JFrame {
         jLabel8.setText("PAGOS PERSONAL");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 150));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1650, 150));
 
         jButton12.setText("REPORTE DE PAGOS");
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 670, 310, 30));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 670, 310, 30));
 
         txtPago.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtPago.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 280, 180, -1));
+        getContentPane().add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 280, 180, -1));
 
         lblTotal.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        getContentPane().add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 710, 120, 30));
+        getContentPane().add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 710, 120, 30));
 
         txtPerfil.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtPerfil.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, 180, -1));
+        getContentPane().add(txtPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 240, 180, -1));
 
         jLabel7.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel7.setText("DESCUENTO");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 320, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 320, -1, -1));
 
         txtDcto.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtDcto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtDcto, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, 180, -1));
+        getContentPane().add(txtDcto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 320, 180, -1));
 
         jLabel9.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel9.setText("MONTO");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 470, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 470, -1, -1));
 
         txtMonto.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtMonto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, 180, -1));
+        getContentPane().add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 470, 180, -1));
 
         jLabel10.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel10.setText("PENALIDAD");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 410, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 410, -1, -1));
 
         txtPenalidad.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtPenalidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtPenalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 400, 180, -1));
+        getContentPane().add(txtPenalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 400, 180, -1));
 
         btnPanelNumerico.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         btnPanelNumerico.setText("C");
@@ -297,11 +300,11 @@ public class PagosPersonal extends javax.swing.JFrame {
                 btnPanelNumericoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPanelNumerico, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 390, 50, 50));
+        getContentPane().add(btnPanelNumerico, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 390, 50, 50));
 
         jLabel11.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel11.setText("PERFIL");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 240, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 240, -1, -1));
 
         panelEstado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -310,44 +313,50 @@ public class PagosPersonal extends javax.swing.JFrame {
         lblEstado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         panelEstado.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 40));
 
-        getContentPane().add(panelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 180, 180, 40));
+        getContentPane().add(panelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(1350, 180, 180, 40));
 
         jLabel12.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel12.setText("ESTADO");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 190, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel13.setText("TOTAL:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 710, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 710, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRealizarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPagoActionPerformed
         try {
-//            if (new Validaciones().validarCampoVacio(txtPersonal)) {
-//                if (new Validaciones().validarCampoVacio(txtBonificacion)) {
-//                    int fila = tblPersonal.getSelectedRow();
-//                    int idUsuario = Integer.parseInt(tblPersonal.getValueAt(fila, 0).toString());
-//                    //int idGasto = new PagonPersonalControl().getIdGasto(cmbConcepto.getSelectedItem().toString());
-//                    double monto = Double.parseDouble(txtBonificacion.getText());
-//                    UsuarioGastos ug = new UsuarioGastos();
-//                    ug.setIdUsuario(idUsuario);
-//                    //ug.setIdGastos(idGasto);
-//                    ug.setMonto(monto);
-//                    UsuarioGastosDAO ugdao = new UsuarioGastosDAO();
-//                    if (ugdao.registrar(ug)) {
-//                        JOptionPane.showMessageDialog(rootPane, "PAGO REGISTRADO");
-//                        new PagonPersonalControl().limpiarCampos(txtPersonal, txtBonificacion, tblPersonal);
-//                    }
-//                } else {
-//                    JOptionPane.showMessageDialog(rootPane, "INGRESE MONTO DE PAGO");
-//                    txtBonificacion.requestFocus();
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "INGRESE DNI DE PERSONAL");
-//                txtPersonal.requestFocus();
-//            }
+            if (new Validaciones().validarCampoVacio(txtPago)) {
+                if (new Validaciones().validarCampoVacio(txtBonificacion)) {
+                    int fila = tblPersonal.getSelectedRow();
+                    int idUsuario = Integer.parseInt(tblPersonal.getValueAt(fila, 0).toString());
+                    int idFlujoAsistencia = new FlujoAsistenciaDAO().getIdFlujo(idUsuario);
+                    if (new FlujoAsistenciaDAO().updateFlujoAssistencia(new ManejadorFechas().getFechaActualMySQL(), new ManejadorFechas().getHoraActual(), idFlujoAsistencia)) {
+                        double monto = Double.parseDouble(txtMonto.getText());
+                        
+                    } else {
+                    }
+                    //int idGasto = new PagonPersonalControl().getIdGasto(cmbConcepto.getSelectedItem().toString());
+                    
+                    UsuarioGastos ug = new UsuarioGastos();
+                    ug.setIdUsuario(idUsuario);
+                    //ug.setIdGastos(idGasto);
+                    //ug.setMonto(monto);
+                    UsuarioGastosDAO ugdao = new UsuarioGastosDAO();
+                    if (ugdao.registrar(ug)) {
+                        JOptionPane.showMessageDialog(rootPane, "PAGO REGISTRADO");
+                        //new PagonPersonalControl().limpiarCampos(txtPersonal, txtBonificacion, tblPersonal);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "INGRESE MONTO DE PAGO");
+                    txtBonificacion.requestFocus();
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "INGRESE DNI DE PERSONAL");
+                //txtPersonal.requestFocus();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -434,10 +443,10 @@ public class PagosPersonal extends javax.swing.JFrame {
             //planilla con hijo = 6.20
             if (new PagonPersonalControl().getPlanillaPersonal(idusuario)>0) {
                 //verificar si tiene carga familiar
-                if (new PagonPersonalControl().getPlanillaPersonal(idusuario)==2) {
+                if (new PagonPersonalControl().getPlanillaPersonal(idusuario)==2) { //2=planilla con hijos
                     txtDcto.setText(""+6.20);
                 }else{
-                    txtDcto.setText(""+5.70);
+                    txtDcto.setText(""+5.70);//planilla sin hijo
                 }
             } else {
                 txtDcto.setText("0");

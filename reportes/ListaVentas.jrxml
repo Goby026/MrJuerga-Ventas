@@ -13,7 +13,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select venta.idventa,producto.nombre,presentacion.descripcion ,productopresentacion.precio,venta.fecha, venta.hora ,ventaproducto.cantidad, ventaproducto.subtotal 
+		<![CDATA[select distinct venta.idventa,producto.nombre,presentacion.descripcion ,productopresentacion.precio,venta.fecha, venta.hora ,ventaproducto.cantidad, ventaproducto.subtotal 
 from caja
 inner join flujocaja on caja.idcaja = flujocaja.idcaja
 inner join usuariocaja on caja.idcaja = usuariocaja.idcaja
@@ -23,7 +23,7 @@ inner join ventaproducto on venta.idventa = ventaproducto.idventa
 inner join producto on ventaproducto.idproducto = producto.idproducto
 inner join productopresentacion on producto.idproducto = productopresentacion.idproducto
 inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion
-where flujocaja.idflujocaja = $P{flujo}]]>
+where venta.idflujocaja = $P{flujo}]]>
 	</queryString>
 	<field name="idventa" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
