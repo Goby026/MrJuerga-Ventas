@@ -403,4 +403,12 @@ public class VentasControl {
         }
         return 0;
     }
+    
+    public int totalJarras(int stockCaboBlanco){
+        try {
+            return stockCaboBlanco * 6;
+        } catch (Exception e) {
+            throw e;
+        }        
+    }
 }

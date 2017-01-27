@@ -12,26 +12,29 @@ public class FlujoCaja {
     int idFlujoCaja, idUsuario, idCaja;
     String fechaInicio, horaInicio, fechaFinal, horaFinal;
     String estado;
-    double ingresos, egresos, saldo, descuadre;
+    double ingresos, egresos, saldo, visa,master,jarras,descuadre;
 
     public FlujoCaja() {
     }
 
-    public FlujoCaja(int idFlujoCaja, int idUsuario, int idCaja, String fechaInicio, String horaInicio,String fechaFinal, String horaFinal ,double ingresos, double egresos, double saldo,double descuadre ,String estado) {
+    public FlujoCaja(int idFlujoCaja, int idUsuario, int idCaja, String fechaInicio, String horaInicio, String fechaFinal, String horaFinal, String estado, double ingresos, double egresos, double saldo, double visa, double master, double jarras, double descuadre) {
         this.idFlujoCaja = idFlujoCaja;
         this.idUsuario = idUsuario;
         this.idCaja = idCaja;
         this.fechaInicio = fechaInicio;
         this.horaInicio = horaInicio;
-        this.fechaFinal =fechaFinal;
-        this.horaFinal=horaFinal;
+        this.fechaFinal = fechaFinal;
+        this.horaFinal = horaFinal;
+        this.estado = estado;
         this.ingresos = ingresos;
         this.egresos = egresos;
         this.saldo = saldo;
+        this.visa = visa;
+        this.master = master;
+        this.jarras = jarras;
         this.descuadre = descuadre;
-        this.estado = estado;
     }
-
+    
     public int getIdFlujoCaja() {
         return idFlujoCaja;
     }
@@ -112,6 +115,30 @@ public class FlujoCaja {
         this.saldo = saldo;
     }
 
+    public double getVisa() {
+        return visa;
+    }
+
+    public void setVisa(double visa) {
+        this.visa = visa;
+    }
+
+    public double getMaster() {
+        return master;
+    }
+
+    public void setMaster(double master) {
+        this.master = master;
+    }
+
+    public double getJarras() {
+        return jarras;
+    }
+
+    public void setJarras(double jarras) {
+        this.jarras = jarras;
+    }
+    
     public double getDescuadre() {
         return descuadre;
     }

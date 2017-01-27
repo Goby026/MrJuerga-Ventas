@@ -44,6 +44,7 @@ public class CerrarCaja extends javax.swing.JFrame {
         txtUsuario.setText(usuario);
         if (new AbrirCajaControl().verificarEstadoCaja(usuario) > 0) {
             lblEstado.setText("CAJA APERTURADA");
+            lblEstado.setForeground(Color.blue);
             int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new CerrarCajaControl().getIdUsuario(usuario), new CerrarCajaControl().getIdCaja(lblCaja.getText()));
             txtMontoApertura.setText("" + new CerrarCajaControl().getSaldoInicial(idFlujoCaja));
             txtVisa.setText("" + new FlujoCajaDAO().getMontoVISA(idFlujoCaja));
@@ -57,8 +58,8 @@ public class CerrarCaja extends javax.swing.JFrame {
     }
 
     public double calcularBalanceTotal() {
-        double saldoInicial = Double.parseDouble(txtMontoApertura.getText()), visa = Double.parseDouble(txtVisa.getText()),mastercard = Double.parseDouble(txtMaster.getText()) ,efectivo = Double.parseDouble(txtEfectivo.getText()), egresos = Double.parseDouble(txtEgresos.getText());
-        return (saldoInicial+ efectivo) - (visa+mastercard + egresos);
+        double saldoInicial = Double.parseDouble(txtMontoApertura.getText()), visa = Double.parseDouble(txtVisa.getText()), mastercard = Double.parseDouble(txtMaster.getText()), efectivo = Double.parseDouble(txtEfectivo.getText()), egresos = Double.parseDouble(txtEgresos.getText()), jarras = Double.parseDouble(txtJarras.getText());
+        return (saldoInicial + efectivo + jarras) - (visa + mastercard + egresos);
     }
 
     /**
@@ -70,17 +71,34 @@ public class CerrarCaja extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        NumericJarras = new javax.swing.JDialog();
+        txtMontoJarras = new javax.swing.JTextField();
+        jLabel35 = new javax.swing.JLabel();
+        jarraCalcular = new javax.swing.JButton();
+        jarraSiete = new javax.swing.JButton();
+        jarraOcho = new javax.swing.JButton();
+        jarraNueve = new javax.swing.JButton();
+        jarraCuatro = new javax.swing.JButton();
+        jarraCinco = new javax.swing.JButton();
+        jarraSeis = new javax.swing.JButton();
+        jarraUno = new javax.swing.JButton();
+        jarraDos = new javax.swing.JButton();
+        jarraTres = new javax.swing.JButton();
+        jarraCero = new javax.swing.JButton();
+        jarraBorrar = new javax.swing.JButton();
+        jarraPunto = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
         txtVisa = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         txtMontoApertura = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         txtEfectivo = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtEgresos = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtMaster = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        txtJarras = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         txtSaldoContabilizado = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         lblDescuadre = new javax.swing.JLabel();
@@ -114,108 +132,270 @@ public class CerrarCaja extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         btnVentasProductos = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        txtEgresos = new javax.swing.JTextField();
+
+        NumericJarras.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtMontoJarras.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtMontoJarras.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        NumericJarras.getContentPane().add(txtMontoJarras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 230, 40));
+
+        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel35.setText("MONTO DE JARRAS");
+        NumericJarras.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 230, -1));
+
+        jarraCalcular.setBackground(new java.awt.Color(51, 153, 0));
+        jarraCalcular.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraCalcular.setForeground(new java.awt.Color(255, 255, 255));
+        jarraCalcular.setText("ACEPTAR");
+        jarraCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraCalcularActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 230, 60));
+
+        jarraSiete.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraSiete.setText("7");
+        jarraSiete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraSieteActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraSiete, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 70, 60));
+
+        jarraOcho.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraOcho.setText("8");
+        jarraOcho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraOchoActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraOcho, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 70, 60));
+
+        jarraNueve.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraNueve.setText("9");
+        jarraNueve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraNueveActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraNueve, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 70, 60));
+
+        jarraCuatro.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraCuatro.setText("4");
+        jarraCuatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraCuatroActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraCuatro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 70, 60));
+
+        jarraCinco.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraCinco.setText("5");
+        jarraCinco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraCincoActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraCinco, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 70, 60));
+
+        jarraSeis.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraSeis.setText("6");
+        jarraSeis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraSeisActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraSeis, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 70, 60));
+
+        jarraUno.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraUno.setText("1");
+        jarraUno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraUnoActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 70, 60));
+
+        jarraDos.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraDos.setText("2");
+        jarraDos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraDosActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 70, 60));
+
+        jarraTres.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraTres.setText("3");
+        jarraTres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraTresActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 70, 60));
+
+        jarraCero.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraCero.setText("0");
+        jarraCero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraCeroActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraCero, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 70, 60));
+
+        jarraBorrar.setBackground(new java.awt.Color(255, 51, 51));
+        jarraBorrar.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraBorrar.setForeground(new java.awt.Color(255, 255, 255));
+        jarraBorrar.setText("<");
+        jarraBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraBorrarActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 70, 60));
+
+        jarraPunto.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jarraPunto.setText(".");
+        jarraPunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jarraPuntoActionPerformed(evt);
+            }
+        });
+        NumericJarras.getContentPane().add(jarraPunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 70, 60));
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("INGRESOS"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INGRESOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 0, 11))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel11.setText("EGRESOS");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
 
         txtVisa.setEditable(false);
         txtVisa.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtVisa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel2.add(txtVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 120, -1));
+        jPanel2.add(txtVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 120, -1));
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jLabel30.setText("SALDO INICIAL");
-        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        jLabel30.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel30.setText("INGRESO POR JARRAS");
+        jPanel2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         txtMontoApertura.setEditable(false);
         txtMontoApertura.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtMontoApertura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel2.add(txtMontoApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 120, -1));
+        jPanel2.add(txtMontoApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 120, -1));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("MASTERCARD");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, -1, -1));
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 180, -1));
 
         txtEfectivo.setEditable(false);
         txtEfectivo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtEfectivo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel2.add(txtEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 120, -1));
+        jPanel2.add(txtEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, 120, -1));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("EFECTIVO");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 180, -1));
 
-        txtEgresos.setEditable(false);
-        txtEgresos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        txtEgresos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel2.add(txtEgresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 120, -1));
-
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("VISA");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, -1));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 180, -1));
 
         txtMaster.setEditable(false);
         txtMaster.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtMaster.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel2.add(txtMaster, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 120, -1));
+        jPanel2.add(txtMaster, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 120, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 420, 250));
+        jLabel34.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel34.setText("SALDO INICIAL");
+        jPanel2.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 180, -1));
+
+        txtJarras.setEditable(false);
+        txtJarras.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        txtJarras.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtJarras.setText("0");
+        txtJarras.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtJarrasKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtJarras, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 120, -1));
+
+        jButton1.setText("C");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 50, 30));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 440, 280));
 
         txtSaldoContabilizado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtSaldoContabilizado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtSaldoContabilizado, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 230, 40));
+        getContentPane().add(txtSaldoContabilizado, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 220, 230, 40));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         jLabel14.setText("BALANCE TOTAL");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
 
-        lblDescuadre.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        lblDescuadre.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         lblDescuadre.setForeground(new java.awt.Color(204, 0, 0));
         lblDescuadre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(lblDescuadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 520, 120, 30));
+        getContentPane().add(lblDescuadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 540, 180, 30));
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         jLabel16.setText("DESCUADRE");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, -1, -1));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 550, -1, -1));
 
-        btnCerrarCaja.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnCerrarCaja.setBackground(new java.awt.Color(0, 102, 255));
+        btnCerrarCaja.setFont(new java.awt.Font("Consolas", 1, 30)); // NOI18N
+        btnCerrarCaja.setForeground(new java.awt.Color(255, 255, 255));
         btnCerrarCaja.setText("CERRAR CAJA");
         btnCerrarCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarCajaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCerrarCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 601, 230, 70));
+        getContentPane().add(btnCerrarCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 840, 250, 70));
 
+        lblFecha.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         lblFecha.setText("____________");
-        getContentPane().add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
+        getContentPane().add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, -1));
 
+        jLabel31.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel31.setText("FECHA:");
-        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, -1, -1));
+        getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 120, -1));
 
+        jLabel32.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel32.setText("ESTADO CAJA:");
-        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, -1, -1));
+        getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 120, -1));
 
+        lblEstado.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         lblEstado.setText("________________");
-        getContentPane().add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 150, -1));
+        getContentPane().add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 200, -1));
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel33.setText("SALDO CONTABILIZADO");
-        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, -1, -1));
+        getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 200, 230, -1));
 
         txtBalance.setEditable(false);
-        txtBalance.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtBalance.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         txtBalance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 470, 120, -1));
+        getContentPane().add(txtBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 550, 170, -1));
 
         btnCalcular.setBackground(new java.awt.Color(51, 153, 0));
-        btnCalcular.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCalcular.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         btnCalcular.setForeground(new java.awt.Color(255, 255, 255));
         btnCalcular.setText("CALCULAR");
         btnCalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -223,140 +403,145 @@ public class CerrarCaja extends javax.swing.JFrame {
                 btnCalcularActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 510, 230, 40));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 550, 120, 20));
+        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 560, 230, 60));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 570, 180, 20));
 
-        btnResumen.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnResumen.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         btnResumen.setText("RESUMEN");
         btnResumen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResumenActionPerformed(evt);
             }
         });
-        getContentPane().add(btnResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 680, 260, -1));
+        getContentPane().add(btnResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 780, 250, 40));
 
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("CAJA:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 120, -1));
 
+        lblCaja.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         lblCaja.setText("____________");
-        getContentPane().add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, -1, -1));
+        getContentPane().add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, -1));
 
-        btnListaDeVentas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnListaDeVentas.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         btnListaDeVentas.setText("DETALLE DE VENTAS");
         btnListaDeVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListaDeVentasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnListaDeVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 260, -1));
+        getContentPane().add(btnListaDeVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 680, 250, 40));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton3.setText("7");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 230, 70, 60));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 280, 70, 60));
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton4.setText("8");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 70, 60));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 280, 70, 60));
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton5.setText("9");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 230, 70, 60));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 280, 70, 60));
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton6.setText("4");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 300, 70, 60));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 350, 70, 60));
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton7.setText("5");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 70, 60));
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 70, 60));
 
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton8.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton8.setText("6");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 300, 70, 60));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 350, 70, 60));
 
-        jButton9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton9.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton9.setText("1");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 370, 70, 60));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 420, 70, 60));
 
-        jButton10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton10.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton10.setText("2");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 370, 70, 60));
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 420, 70, 60));
 
-        jButton11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton11.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton11.setText("3");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 370, 70, 60));
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 420, 70, 60));
 
-        jButton12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton12.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton12.setText("0");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 70, 60));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 490, 70, 60));
 
-        jButton13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton13.setBackground(new java.awt.Color(255, 51, 51));
+        jButton13.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jButton13.setForeground(new java.awt.Color(255, 255, 255));
         jButton13.setText("<");
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton13ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 70, 60));
+        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 490, 70, 60));
 
-        jButton14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButton14.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton14.setText(".");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 440, 70, 60));
+        getContentPane().add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 490, 70, 60));
 
         jPanel1.setBackground(new java.awt.Color(255, 102, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -373,18 +558,33 @@ public class CerrarCaja extends javax.swing.JFrame {
         txtUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true), "USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 8), new java.awt.Color(255, 255, 255))); // NOI18N
         txtUsuario.setEnabled(false);
         txtUsuario.setFocusable(false);
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 230, -1));
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 50, 230, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 110));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 110));
 
-        btnVentasProductos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnVentasProductos.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         btnVentasProductos.setText("VENTAS POR PRODUCTO");
         btnVentasProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVentasProductosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVentasProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 640, 260, -1));
+        getContentPane().add(btnVentasProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 730, 250, 40));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "EGRESOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 0, 11))); // NOI18N
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("EGRESOS");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 100, -1));
+
+        txtEgresos.setEditable(false);
+        txtEgresos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        txtEgresos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel3.add(txtEgresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 120, -1));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 310, 280));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -399,9 +599,12 @@ public class CerrarCaja extends javax.swing.JFrame {
                 fc.setIngresos(Double.parseDouble(txtBalance.getText()));
                 fc.setEgresos(Double.parseDouble(txtEgresos.getText()));
                 fc.setSaldo(Double.parseDouble(txtMontoApertura.getText()));
+                fc.setVisa(Double.parseDouble(txtVisa.getText()));
+                fc.setMaster(Double.parseDouble(txtMaster.getText()));
+                fc.setJarras(Double.parseDouble(txtJarras.getText()));
                 fc.setDescuadre(Double.parseDouble(lblDescuadre.getText()));
                 fc.setEstado("0");
-                
+
                 if (new CerrarCajaControl().cerrarCaja(new CerrarCajaControl().getIdUsuario(txtUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText()), fc)) {
                     JOptionPane.showMessageDialog(null, "SE CERRO LA CAJA CORRECTAMENTE");
                     datosIniciales(txtUsuario.getText());
@@ -419,7 +622,7 @@ public class CerrarCaja extends javax.swing.JFrame {
         double saldoContado = Double.parseDouble(txtSaldoContabilizado.getText());
         double descuadre = Math.round(saldoContado - balance);
         if (descuadre > 0) {
-            lblDescuadre.setForeground(Color.green);
+            lblDescuadre.setForeground(Color.blue);
             lblDescuadre.setText("" + descuadre);
         } else {
             lblDescuadre.setForeground(Color.red);
@@ -437,7 +640,8 @@ public class CerrarCaja extends javax.swing.JFrame {
                 parametros.put("nombres", new CerrarCajaControl().getNombreUsuario(txtUsuario.getText()));
                 parametros.put("apellidos", new CerrarCajaControl().getApellidoUsuario(txtUsuario.getText()));
                 parametros.put("caja", lblCaja.getText());
-                parametros.put("tarjetas", txtVisa.getText());
+                parametros.put("visa", Double.parseDouble(txtVisa.getText()));
+                parametros.put("master", Double.parseDouble(txtMaster.getText()));
                 parametros.put("efectivo", txtEfectivo.getText());
                 parametros.put("egresos", txtEgresos.getText());
                 parametros.put("balance", txtBalance.getText());
@@ -520,6 +724,7 @@ public class CerrarCaja extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         txtSaldoContabilizado.setText("");
+        lblDescuadre.setText("");
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
@@ -540,6 +745,96 @@ public class CerrarCaja extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_btnVentasProductosActionPerformed
+
+    private void txtJarrasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJarrasKeyReleased
+
+    }//GEN-LAST:event_txtJarrasKeyReleased
+
+    private void jarraCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraCalcularActionPerformed
+        try {
+            txtEfectivo.setText("" + new CerrarCajaControl().getMontoVentas(new CerrarCajaControl().getIdUsuario(txtUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText())));
+            if (!txtMontoJarras.getText().trim().isEmpty()) {
+
+                Double efectivo = Double.parseDouble(txtEfectivo.getText());
+                txtJarras.setText(txtMontoJarras.getText());
+                txtBalance.setText("" + calcularBalanceTotal());
+                txtEfectivo.setText("" + (efectivo + Double.parseDouble(txtJarras.getText())));
+                txtMontoJarras.setText("");
+                NumericJarras.dispose();
+            } else {
+                txtJarras.setText("0.0");
+                txtEfectivo.setText("" + new CerrarCajaControl().getMontoVentas(new CerrarCajaControl().getIdUsuario(txtUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText())));
+                txtBalance.setText("" + calcularBalanceTotal());
+                NumericJarras.dispose();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CerrarCaja.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jarraCalcularActionPerformed
+
+    private void jarraSieteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraSieteActionPerformed
+        String numero = txtMontoJarras.getText() + 7;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraSieteActionPerformed
+
+    private void jarraOchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraOchoActionPerformed
+        String numero = txtMontoJarras.getText() + 8;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraOchoActionPerformed
+
+    private void jarraNueveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraNueveActionPerformed
+        String numero = txtMontoJarras.getText() + 9;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraNueveActionPerformed
+
+    private void jarraCuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraCuatroActionPerformed
+        String numero = txtMontoJarras.getText() + 4;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraCuatroActionPerformed
+
+    private void jarraCincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraCincoActionPerformed
+        String numero = txtMontoJarras.getText() + 5;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraCincoActionPerformed
+
+    private void jarraSeisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraSeisActionPerformed
+        String numero = txtMontoJarras.getText() + 6;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraSeisActionPerformed
+
+    private void jarraUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraUnoActionPerformed
+        String numero = txtMontoJarras.getText() + 1;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraUnoActionPerformed
+
+    private void jarraDosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraDosActionPerformed
+        String numero = txtMontoJarras.getText() + 2;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraDosActionPerformed
+
+    private void jarraTresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraTresActionPerformed
+        String numero = txtMontoJarras.getText() + 3;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraTresActionPerformed
+
+    private void jarraCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraCeroActionPerformed
+        String numero = txtMontoJarras.getText() + 0;
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraCeroActionPerformed
+
+    private void jarraBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraBorrarActionPerformed
+        txtMontoJarras.setText("");
+    }//GEN-LAST:event_jarraBorrarActionPerformed
+
+    private void jarraPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraPuntoActionPerformed
+        String numero = txtMontoJarras.getText() + ".";
+        txtMontoJarras.setText(numero);
+    }//GEN-LAST:event_jarraPuntoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        NumericJarras.setVisible(true);
+        NumericJarras.setBounds(200, 200, 300, 550);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -577,11 +872,13 @@ public class CerrarCaja extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog NumericJarras;
     private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCerrarCaja;
     private javax.swing.JButton btnListaDeVentas;
     private javax.swing.JButton btnResumen;
     private javax.swing.JButton btnVentasProductos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -606,9 +903,25 @@ public class CerrarCaja extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jarraBorrar;
+    private javax.swing.JButton jarraCalcular;
+    private javax.swing.JButton jarraCero;
+    private javax.swing.JButton jarraCinco;
+    private javax.swing.JButton jarraCuatro;
+    private javax.swing.JButton jarraDos;
+    private javax.swing.JButton jarraNueve;
+    private javax.swing.JButton jarraOcho;
+    private javax.swing.JButton jarraPunto;
+    private javax.swing.JButton jarraSeis;
+    private javax.swing.JButton jarraSiete;
+    private javax.swing.JButton jarraTres;
+    private javax.swing.JButton jarraUno;
     private javax.swing.JLabel lblCaja;
     private javax.swing.JLabel lblDescuadre;
     private javax.swing.JLabel lblEstado;
@@ -616,8 +929,10 @@ public class CerrarCaja extends javax.swing.JFrame {
     private javax.swing.JTextField txtBalance;
     private javax.swing.JTextField txtEfectivo;
     private javax.swing.JTextField txtEgresos;
+    private javax.swing.JTextField txtJarras;
     private javax.swing.JTextField txtMaster;
     private javax.swing.JTextField txtMontoApertura;
+    private javax.swing.JTextField txtMontoJarras;
     private javax.swing.JTextField txtSaldoContabilizado;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtVisa;

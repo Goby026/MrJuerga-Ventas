@@ -1114,6 +1114,7 @@ public class Ventas extends javax.swing.JFrame {
         getContentPane().add(btnFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 130, 70));
 
         jButton4.setText("B");
+        jButton4.setEnabled(false);
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, -1, -1));
 
         pack();
