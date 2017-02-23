@@ -4,10 +4,10 @@ import Controlador.Cronometro;
 import Controlador.ManejadorFechas;
 import Controlador.MyiReportVisor;
 import Controlador.VentasControl;
-import Modelo.Comprobante;
-import Modelo.ComprobanteDAO;
 import Modelo.Conexion;
 import Modelo.FlujoCajaDAO;
+import Modelo.Venta;
+import Modelo.VentaDAO;
 import com.sun.awt.AWTUtilities;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
@@ -28,6 +28,7 @@ public class Ventas extends javax.swing.JFrame {
     MyiReportVisor mrv;
     HashMap parametros = new HashMap();
     JTextField te = new JTextField();
+    Integer num = null;
 
     public Ventas(String usuario) throws Exception {
         setUndecorated(true);
@@ -35,6 +36,7 @@ public class Ventas extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
         getContentPane().setBackground(Color.white);
         cargarDatos(usuario);
+
     }
 
     public Ventas() {
@@ -46,7 +48,7 @@ public class Ventas extends javax.swing.JFrame {
         AWTUtilities.setWindowOpaque(panelPagoElectronico, false);
         panelVuelto.setUndecorated(true);
         AWTUtilities.setWindowOpaque(panelVuelto, false);
-        new VentasControl().llenarListaCategorias(listaCategorias);
+        //new VentasControl().llenarListaCategorias(listaCategorias);
         txtCaja.setText(new VentasControl().getCajaDeUsuario(usuario));
         new Cronometro().iniciarCronometro(txtHora);
         txtUsuario.setText(usuario);
@@ -57,7 +59,20 @@ public class Ventas extends javax.swing.JFrame {
         cargarTitulosTablaPedidos();
         bloquearBotones();
         int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new VentasControl().getIdUsuarioConNombre(txtUsuario.getText()), new VentasControl().getIdCaja(txtCaja.getText()));
-        tablaProductosMasVendidos(idFlujoCaja);
+        switch (txtCaja.getText()) {
+            case "GENERAL 2":
+                num = 2;
+                tablaProductosMasVendidos2(idFlujoCaja);
+                break;
+            case "VIP":
+                num = 3;
+                tablaProductosMasVendidos3(idFlujoCaja);
+                break;
+            default:
+                num = null;
+                tablaProductosMasVendidos(idFlujoCaja);
+        }
+        System.out.println(num);
     }
 
     @SuppressWarnings("unchecked")
@@ -132,8 +147,8 @@ public class Ventas extends javax.swing.JFrame {
         btnDosCombinada = new javax.swing.JButton();
         btnTresCombinada = new javax.swing.JButton();
         tablet = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaCategorias = new javax.swing.JList();
+        grupoCategorias = new javax.swing.ButtonGroup();
+        grupoTarjetas = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
         btn5 = new javax.swing.JButton();
@@ -153,7 +168,7 @@ public class Ventas extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         scrollProductos = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
+        lblProductos = new javax.swing.JLabel();
         btnQuitar = new javax.swing.JButton();
         btnCobrar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -189,6 +204,12 @@ public class Ventas extends javax.swing.JFrame {
         txtDireccion = new javax.swing.JTextField();
         btnFactura = new javax.swing.JToggleButton();
         jButton4 = new javax.swing.JButton();
+        btnBebidasJarra = new javax.swing.JToggleButton();
+        btnCocteles = new javax.swing.JToggleButton();
+        btnBebidasPorBotella = new javax.swing.JToggleButton();
+        btnGaseosasCervezas = new javax.swing.JToggleButton();
+        btnOtros = new javax.swing.JToggleButton();
+        btnCigarrillos = new javax.swing.JToggleButton();
 
         panelVuelto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         panelVuelto.setTitle("MONTOS");
@@ -282,6 +303,7 @@ public class Ventas extends javax.swing.JFrame {
 
         btnBorrar.setBackground(new java.awt.Color(255, 51, 51));
         btnBorrar.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        btnBorrar.setForeground(new java.awt.Color(255, 255, 255));
         btnBorrar.setText("<");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -516,7 +538,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnCobrarConTarjetaActionPerformed(evt);
             }
         });
-        panelPagoElectronico.getContentPane().add(btnCobrarConTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, 230, 40));
+        panelPagoElectronico.getContentPane().add(btnCobrarConTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 540, 230, 60));
 
         txtNumReferencia.setEditable(false);
         txtNumReferencia.setBackground(new java.awt.Color(255, 255, 255));
@@ -700,16 +722,6 @@ public class Ventas extends javax.swing.JFrame {
         setTitle("PUNTO DE VENTA - BARRA");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        listaCategorias.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
-        listaCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listaCategoriasMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(listaCategorias);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 280, 380));
-
         tblPedidos.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         tblPedidos.setForeground(new java.awt.Color(51, 51, 255));
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -723,8 +735,10 @@ public class Ventas extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblPedidos.setDragEnabled(true);
         tblPedidos.setRowHeight(50);
         tblPedidos.setRowMargin(4);
+        tblPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tblPedidos);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 1390, 220));
@@ -859,9 +873,10 @@ public class Ventas extends javax.swing.JFrame {
         txtCantidad.setBorder(null);
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 110, 410, 70));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Consolas", 0, 28)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("CANTIDAD");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 80, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 80, 410, 30));
 
         btnAgregar.setBackground(new java.awt.Color(255, 102, 0));
         btnAgregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -900,6 +915,7 @@ public class Ventas extends javax.swing.JFrame {
         tblProductos.setDragEnabled(true);
         tblProductos.setRowHeight(50);
         tblProductos.setRowMargin(10);
+        tblProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblProductosMouseClicked(evt);
@@ -907,11 +923,12 @@ public class Ventas extends javax.swing.JFrame {
         });
         scrollProductos.setViewportView(tblProductos);
 
-        getContentPane().add(scrollProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, 1100, 380));
+        getContentPane().add(scrollProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 1100, 440));
 
-        jLabel10.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        jLabel10.setText("PRODUCTOS");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 100, -1));
+        lblProductos.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        lblProductos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblProductos.setText("PRODUCTOS");
+        getContentPane().add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, 1100, -1));
 
         btnQuitar.setBackground(new java.awt.Color(255, 0, 0));
         btnQuitar.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
@@ -933,24 +950,25 @@ public class Ventas extends javax.swing.JFrame {
                 btnCobrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1490, 870, 360, 120));
+        getContentPane().add(btnCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1520, 880, 360, 120));
 
         jLabel11.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         jLabel11.setText("S/.");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 790, -1, -1));
 
-        lblPago.setFont(new java.awt.Font("Dialog", 1, 96)); // NOI18N
+        lblPago.setFont(new java.awt.Font("Consolas", 1, 80)); // NOI18N
         lblPago.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 740, 290, 110));
 
         btnPendientes.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         btnPendientes.setText("LISTA DE PEDIDOS");
+        btnPendientes.setEnabled(false);
         btnPendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPendientesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 950, 340, 50));
+        getContentPane().add(btnPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 970, 340, 30));
 
         jPanel8.setBackground(new java.awt.Color(51, 153, 255));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -1038,8 +1056,9 @@ public class Ventas extends javax.swing.JFrame {
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1010, 1920, 40));
 
         jLabel14.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("CATEGORIAS");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 110, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 300, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 850, 290, 10));
 
         jLabel15.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
@@ -1055,7 +1074,7 @@ public class Ventas extends javax.swing.JFrame {
                 cboxMasVendidosActionPerformed(evt);
             }
         });
-        getContentPane().add(cboxMasVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 671, -1, 40));
+        getContentPane().add(cboxMasVendidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 670, -1, 40));
 
         jLabel3.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
@@ -1075,36 +1094,39 @@ public class Ventas extends javax.swing.JFrame {
         txtRuc.setEnabled(false);
         getContentPane().add(txtRuc, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 240, -1));
 
+        grupoTarjetas.add(btnMasterCard);
         btnMasterCard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/masterCard.png"))); // NOI18N
-        btnMasterCard.setBorderPainted(false);
         btnMasterCard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMasterCardActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMasterCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 180, 130, 80));
+        getContentPane().add(btnMasterCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 80, 130, 80));
 
+        grupoTarjetas.add(btnVisa);
         btnVisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/visa.png"))); // NOI18N
-        btnVisa.setBorderPainted(false);
         btnVisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 180, 130, 80));
+        getContentPane().add(btnVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 80, 130, 80));
 
+        btnOperacionCombinada.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         btnOperacionCombinada.setText("OPERACIÓN COMBINADA");
-        getContentPane().add(btnOperacionCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 180, -1, 80));
+        btnOperacionCombinada.setEnabled(false);
+        getContentPane().add(btnOperacionCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 970, 310, 30));
 
         jLabel20.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(153, 153, 153));
         jLabel20.setText("DIRECCIÓN");
-        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 120, -1));
+        getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 90, -1));
 
         txtDireccion.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         txtDireccion.setEnabled(false);
         getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 800, -1));
 
+        btnFactura.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         btnFactura.setText("FACTURA");
         btnFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1117,22 +1139,112 @@ public class Ventas extends javax.swing.JFrame {
         jButton4.setEnabled(false);
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, -1, -1));
 
+        btnBebidasJarra.setBackground(new java.awt.Color(102, 153, 255));
+        grupoCategorias.add(btnBebidasJarra);
+        btnBebidasJarra.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnBebidasJarra.setForeground(new java.awt.Color(255, 255, 255));
+        btnBebidasJarra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bebidasJarra.png"))); // NOI18N
+        btnBebidasJarra.setText("BEBIDAS EN JARRA");
+        btnBebidasJarra.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnBebidasJarra.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnBebidasJarra.setIconTextGap(10);
+        btnBebidasJarra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBebidasJarraActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBebidasJarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 300, 72));
+
+        btnCocteles.setBackground(new java.awt.Color(102, 102, 255));
+        grupoCategorias.add(btnCocteles);
+        btnCocteles.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnCocteles.setForeground(new java.awt.Color(255, 255, 255));
+        btnCocteles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bebidasCopa.png"))); // NOI18N
+        btnCocteles.setText("COCTELES EN COPA");
+        btnCocteles.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnCocteles.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCocteles.setIconTextGap(10);
+        btnCocteles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCoctelesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCocteles, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 273, 300, 72));
+
+        btnBebidasPorBotella.setBackground(new java.awt.Color(153, 102, 255));
+        grupoCategorias.add(btnBebidasPorBotella);
+        btnBebidasPorBotella.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnBebidasPorBotella.setForeground(new java.awt.Color(255, 255, 255));
+        btnBebidasPorBotella.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bebidasBotella.png"))); // NOI18N
+        btnBebidasPorBotella.setText("BEBIDAS POR BOTELLA");
+        btnBebidasPorBotella.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnBebidasPorBotella.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnBebidasPorBotella.setIconTextGap(10);
+        btnBebidasPorBotella.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBebidasPorBotellaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBebidasPorBotella, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 346, 300, 72));
+
+        btnGaseosasCervezas.setBackground(new java.awt.Color(204, 102, 255));
+        grupoCategorias.add(btnGaseosasCervezas);
+        btnGaseosasCervezas.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnGaseosasCervezas.setForeground(new java.awt.Color(255, 255, 255));
+        btnGaseosasCervezas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gaseosasCervezas.png"))); // NOI18N
+        btnGaseosasCervezas.setText("GASEOSAS Y CERVEZAS");
+        btnGaseosasCervezas.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnGaseosasCervezas.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnGaseosasCervezas.setIconTextGap(10);
+        btnGaseosasCervezas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGaseosasCervezasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGaseosasCervezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 419, 300, 72));
+
+        btnOtros.setBackground(new java.awt.Color(255, 102, 51));
+        grupoCategorias.add(btnOtros);
+        btnOtros.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnOtros.setForeground(new java.awt.Color(255, 255, 255));
+        btnOtros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/otros.png"))); // NOI18N
+        btnOtros.setText("OTROS");
+        btnOtros.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnOtros.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnOtros.setIconTextGap(10);
+        btnOtros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOtrosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnOtros, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 565, 300, 72));
+
+        btnCigarrillos.setBackground(new java.awt.Color(255, 51, 51));
+        grupoCategorias.add(btnCigarrillos);
+        btnCigarrillos.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnCigarrillos.setForeground(new java.awt.Color(255, 255, 255));
+        btnCigarrillos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cigarrillo-con-humo.png"))); // NOI18N
+        btnCigarrillos.setText("CIGARRILLO");
+        btnCigarrillos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnCigarrillos.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCigarrillos.setIconTextGap(10);
+        btnCigarrillos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCigarrillosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCigarrillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 492, 300, 72));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listaCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaCategoriasMouseClicked
-        try {
-            String categoria = listaCategorias.getSelectedValue().toString();
-            VentasControl vc = new VentasControl();
-            vc.llenarTablaProductos(categoria, tblProductos);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }//GEN-LAST:event_listaCategoriasMouseClicked
-
     private void btnCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrarActionPerformed
         try {
-            if (btnVisa.isSelected() || btnMasterCard.isSelected()) {
+            int filaPedidos = tblPedidos.getRowCount();
+            //System.out.println(filaPedidos);
+            if (filaPedidos <= 0) {
+                JOptionPane.showMessageDialog(getRootPane(), "AGREGUE PRODUCTOS A LA LISTA DE PEDIDOS");
+            } else if (btnVisa.isSelected() || btnMasterCard.isSelected()) {
                 panelPagoElectronico.setVisible(true);
                 panelPagoElectronico.setBounds(600, 200, 500, 1020);
             } else if (btnOperacionCombinada.isSelected()) {
@@ -1151,6 +1263,7 @@ public class Ventas extends javax.swing.JFrame {
                 panelVuelto.setVisible(true);
                 panelVuelto.setBounds(580, 100, 460, 950);
             }
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -1235,7 +1348,7 @@ public class Ventas extends javax.swing.JFrame {
                 tblPedidos.setModel(table1);
                 lblPago.setText("" + new VentasControl().calcularMonto(tblPedidos));
                 tblProductos.clearSelection();
-                listaCategorias.clearSelection();
+//                listaCategorias.clearSelection();
 
                 tblPedidos.getColumnModel().getColumn(0).setPreferredWidth(20);
                 tblPedidos.getColumnModel().getColumn(1).setPreferredWidth(200);
@@ -1434,7 +1547,11 @@ public class Ventas extends javax.swing.JFrame {
             if (!txtMontoRecibido.getText().trim().isEmpty()) {//si NO esta vacio
 
                 if (Double.parseDouble(txtVuelto.getText()) >= 0) {//si el monto es MAYOR a cero
-                    //PRIMERO CAPTURAMOS DATOS PARA REGISTRAR COMPROBANTE
+
+                    if (txtCaja.getText().equals("GENERAL 1")) {//VALIDAMOS LA CAJA QUE REALIZA LA OPERACION PARA REGISTRAR EN LA CORRESPONDIENTE TABLA
+
+                    } else {
+                    }
                     String fecha = new ManejadorFechas().getFechaActualMySQL();
                     String usuario = txtUsuario.getText();
                     //cliente lo pasamos en duro
@@ -1444,10 +1561,9 @@ public class Ventas extends javax.swing.JFrame {
                     String direccion = "JR AYACUCHO 772";
                     //tipo de pago lo pasamos en duro hasta normalizar el TIPODEPAGO
                     Double total = Double.parseDouble(lblPago.getText());
-                    int idTipoComprobante = 1;
+//                    int idTipoComprobante = 1;
                     //efectivo = 1
                     int tipoPago = 1;
-
                     if (btnMasterCard.isSelected()) {
                         //masterCard = 2
                         tipoPago = 2;
@@ -1458,58 +1574,54 @@ public class Ventas extends javax.swing.JFrame {
                         //combinada = 4
                         tipoPago = 4;
                     }
-
-                    //creamos el comprobante
-                    Comprobante c = new Comprobante();
-                    c.setFecha(fecha);
-                    c.setUsuario(usuario);
-                    c.setCliente("mrjuerga");
-                    c.setCantidad(0);
-                    c.setSubTotal(subtotal);
-                    c.setRuc("20486243245");
-                    c.setDireccion(direccion);
-                    c.setTipo_pago(String.valueOf(tipoPago));
-                    c.setTotal(total);
-                    c.setIdtipocomprobante(idTipoComprobante);
-
-                    //creamos el comprobante con acceso a datos
-                    ComprobanteDAO cdao = new ComprobanteDAO();
-                    //registramos el comprobante
-                    if (cdao.Registrar(c)) {
-                        System.out.println("Comprobante Registrado");
-                    } else {
-                        System.out.println("Error");
-                    }
                     //SEGUNDO CAPTURAMOS DATOS PARA REGISTRAR VENTA
-                    Object[] datos = new Object[10];
-                    datos[0] = fecha;//fecha
-                    //System.out.println("registro fecha");
-                    datos[1] = txtHora.getText();//hora
-                    //System.out.println("registro hora");
-                    datos[2] = new VentasControl().getIdUsuarioConNombre(usuario);//usuario
-                    //System.out.println("registro usuario");
-                    datos[3] = 1;//cliente
-                    //System.out.println("registro cliente");
-                    datos[4] = new VentasControl().getIdDeUltimoComprobanteRegistrado();//ultimo comprobante registrado
-                    //System.out.println("registro ultimo comprobante");
-                    datos[5] = 1;//ESTADO->> 0:PENDIENTE     1:PAGADO
-                    //System.out.println("registro estado");
-                    datos[6] = tipoPago;//tipo de transaccion
-                    //System.out.println("registro tipo de transaccion");
-                    datos[7] = "";//no se registra numero de operacion
-                    datos[8] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
-                    //System.out.println("registro caja que realizo la transaccion");
-                    datos[9] = new FlujoCajaDAO().getIdFlujo(new VentasControl().getIdUsuarioConNombre(usuario), new VentasControl().getIdCaja(txtCaja.getText()));
-                    //System.out.println("id de flujo de caja :" + datos[9]);
+                    Venta v = new Venta();
+//                    Object[] datos = new Object[10];
+                    v.setFecha(fecha);
+                    v.setHora(new ManejadorFechas().getHoraActual());
+                    v.setIdUsuario(new VentasControl().getIdUsuarioConNombre(usuario));
+                    v.setIdCliente(1);
+                    v.setIdTipoComprobante(1);
+                    v.setEstado(1);//ESTADO->> 0:PENDIENTE     1:PAGADO
+                    v.setTipopago(tipoPago);
+                    v.setnOperacion("");
+                    v.setIdcaja(new VentasControl().getIdCaja(txtCaja.getText()));
+                    v.setIdFlujoCaja(new FlujoCajaDAO().getIdFlujo(new VentasControl().getIdUsuarioConNombre(usuario), new VentasControl().getIdCaja(txtCaja.getText())));
+
                     VentasControl vc = new VentasControl();
-                    vc.registrarVenta(datos);
-                    //System.out.println("venta registrada");
+                    VentaDAO vdao = new VentaDAO();
+                    String caja = txtCaja.getText();
+                    Integer idventa = null;
+                    Integer flag = null;
+                    switch (caja) {
+                        case "GENERAL 1":
+                            if (vdao.registrar(v)) {
+                                idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
+                                flag = vc.registrarDetalleDeVenta(tblPedidos, idventa);
+                                System.out.println("venta registrada");
+                            }
+                            break;
+                        case "GENERAL 2":
+                            if (vdao.registrar2(v)) {
+                                idventa = new VentasControl().getIdDeUltimaVentaRegistrada2();
+                                flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                                System.out.println("ventaCaja2 registrada");
+                            }
+                            break;
+                        case "VIP":
+                            if (vdao.registrar3(v)) {
+                                idventa = new VentasControl().getIdDeUltimaVentaRegistrada3();
+                                flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                                System.out.println("ventaCaja3 registrada");
+                            }
+                            break;
+                    }
                     //TERCERO REGISTRO LOS DETALLES DE LA VENTA
-                    //obtengo la ultima venta registrada
-                    int idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
+                    //comprobar de que tabla se debe tomar el ultimo id registrado                    
                     System.out.println("ultima venta: " + idventa);
-                    int flag = vc.registrarDetalleDeVenta(tblPedidos, idventa);
-                    //System.out.println("flag: " + flag);
+                    System.out.println("flag: " + flag);
+//                    String serie = null;
+
                     if (flag > 0) {
                         JOptionPane.showMessageDialog(null, "VENTA REALIZADA EXITOSAMENTE");
 
@@ -1525,6 +1637,7 @@ public class Ventas extends javax.swing.JFrame {
                             parametros.put("entregado", Double.parseDouble(txtMontoRecibido.getText()));
                             parametros.put("vuelto", Double.parseDouble(txtVuelto.getText()));
                             parametros.put("total", Double.parseDouble(lblPago.getText()));
+                            //parametros.put("nroSerie", serie);
                             mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\FacturaVentaGeneralT3.jrxml", parametros, getPageSizeFactura());
                             mrv.setNombreArchivo("FacturaVentaGeneralT3");
                             try {
@@ -1550,7 +1663,7 @@ public class Ventas extends javax.swing.JFrame {
                             parametros.put("nom_cajero", usuario);
                             parametros.put("recibido", Double.parseDouble(txtMontoRecibido.getText()));
                             parametros.put("vuelto", Double.parseDouble(txtVuelto.getText()));
-
+                            //parametros.put("nroSerie", serie);
                             mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\BoletaVentaT1.jrxml", parametros, getPageSize());
                             mrv.setNombreArchivo("BoletaVentaT1");
                             try {
@@ -1643,13 +1756,8 @@ public class Ventas extends javax.swing.JFrame {
                 //PRIMERO CAPTURAMOS DATOS PARA REGISTRAR COMPROBANTE
                 String fecha = new ManejadorFechas().getFechaActualMySQL();
                 String usuario = txtUsuario.getText();
-                //cliente lo pasamos en duro
-                //cantidad de que????
                 Double subtotal = Double.parseDouble(lblPago.getText());
-                //ruc lo pasamos en duro
-                String direccion = "JR AYACUCHO 772";
                 Double total = Double.parseDouble(lblPago.getText());
-                int idTipoComprobante = 1;
 
 //            //efectivo = 1
                 int tipoPago = 1;
@@ -1665,110 +1773,103 @@ public class Ventas extends javax.swing.JFrame {
                 } else {
                     tipoPago = 1;
                 }
+                //SEGUNDO CAPTURAMOS DATOS PARA REGISTRAR VENTA                
+                Venta v = new Venta();
+                v.setFecha(fecha);
+                v.setHora(new ManejadorFechas().getHoraActual());
+                v.setIdUsuario(new VentasControl().getIdUsuarioConNombre(usuario));//registra el id de usuario que hace la venta
+                v.setIdCliente(1);//siempre sera cliente 1 = mrjuerga
+                v.setIdTipoComprobante(1);//tipo comprobante 1 = boleta
+                v.setEstado(1);//ESTADO->> 0:PENDIENTE     1:PAGADO
+                v.setTipopago(tipoPago);//tipo de pago 2 o 3 segun sea visa o mastercard
+                v.setnOperacion(txtNumReferencia.getText());//numero de operacion
+                v.setIdcaja(new VentasControl().getIdCaja(txtCaja.getText()));//caja que realiza la operacion
+                v.setIdFlujoCaja(new FlujoCajaDAO().getIdFlujo(new VentasControl().getIdUsuarioConNombre(usuario), new VentasControl().getIdCaja(txtCaja.getText())));//flujo de caja que realiza la operacion
 
-                //creamos el comprobante
-                Comprobante c = new Comprobante();
-                c.setFecha(fecha);
-                c.setUsuario(usuario);
-                c.setCliente("mrjuerga");
-                c.setCantidad(0);
-                c.setSubTotal(subtotal);
-                c.setRuc("12345678912");
-                c.setDireccion(direccion);
-                c.setTipo_pago(String.valueOf(2));
-                c.setTotal(total);
-                c.setIdtipocomprobante(idTipoComprobante);
-
-                //creamos el comprobante con acceso a datos
-                ComprobanteDAO cdao = new ComprobanteDAO();
-                //registramos el comprobante
-                if (cdao.Registrar(c)) {
-                    System.out.println("Comprobante Registrado");
-                } else {
-                    System.out.println("Error");
-                }
-                //SEGUNDO CAPTURAMOS DATOS PARA REGISTRAR VENTA
-                Object[] datos = new Object[10];
-                datos[0] = fecha;//fecha
-                System.out.println("registro fecha");
-                datos[1] = txtHora.getText();//hora
-                System.out.println("registro hora");
-                datos[2] = new VentasControl().getIdUsuarioConNombre(usuario);//usuario
-                System.out.println("registro usuario");
-                datos[3] = 1;//cliente
-                System.out.println("registro cliente");
-                datos[4] = new VentasControl().getIdDeUltimoComprobanteRegistrado();//ultimo comprobante registrado
-                System.out.println("registro ultimo comprobante");
-                datos[5] = 1;//ESTADO->> 0:PENDIENTE     1:PAGADO
-                System.out.println("registro estado");
-                datos[6] = tipoPago;//tipo de transaccion
-                System.out.println("registro tipo de transaccion " + datos[6]);
-                datos[7] = txtNumReferencia.getText();//numero de operacion
-                System.out.println(txtNumReferencia.getText());
-                datos[8] = new VentasControl().getIdCaja(txtCaja.getText());//caja que realiza la operacion
-                System.out.println("registro caja que realizo la transaccion " + datos[8]);
-                datos[9] = new FlujoCajaDAO().getIdFlujo(new VentasControl().getIdUsuarioConNombre(usuario), new VentasControl().getIdCaja(txtCaja.getText()));
-                System.out.println("id de flujo de caja :" + datos[9]);
                 VentasControl vc = new VentasControl();
-                if (vc.registrarVenta(datos)) {
-                    System.out.println("venta registrada");
-                    //TERCERO REGISTRO LOS DETALLES DE LA VENTA
-                    //obtengo la ultima venta registrada
-                    int idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
-                    System.out.println("ultima venta: " + idventa);
-                    int flag = vc.registrarDetalleDeVenta(tblPedidos, idventa);
-                    System.out.println("flag: " + flag);
-                    if (flag > 0) {
-                        JOptionPane.showMessageDialog(null, "VENTA REALIZADA EXITOSAMENTE");
-
-                        if (btnVisa.isSelected()) {
-                            parametros.put("id_venta", idventa);
-                            parametros.put("nom_cajero", usuario);
-                            parametros.put("total", total);
-                            mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\BoletaVISAT1.jrxml", parametros, getPageSize());
-                            mrv.setNombreArchivo("BoletaVenta");
-                            try {
-                                mrv.exportarAPdfConCopia();
-                            } catch (Exception ex) {
-                                System.out.println(ex.getMessage());
-                            }
-                            mrv.dispose();
-                            new VentasControl().restarStock(tblPedidos);
-                            panelPagoElectronico.dispose();
-                            lblPago.setText("");
-                            txtNumReferencia.setText("");
-                            btnMasterCard.setSelected(false);
-                            btnVisa.setSelected(false);
-                            btnMasterCard.setEnabled(true);
-                            btnVisa.setEnabled(true);
-                            cargarDatos(usuario);
-                        } else if (btnMasterCard.isSelected()) {
-                            parametros.put("id_venta", idventa);
-                            parametros.put("nom_cajero", usuario);
-                            parametros.put("total", total);
-                            mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\BoletaMASTERT1.jrxml", parametros, getPageSize());
-                            mrv.setNombreArchivo("BoletaVenta");
-                            try {
-                                mrv.exportarAPdfConCopia();
-                            } catch (Exception ex) {
-                                System.out.println(ex.getMessage());
-                            }
-                            mrv.dispose();
-                            new VentasControl().restarStock(tblPedidos);
-                            panelPagoElectronico.dispose();
-                            lblPago.setText("");
-                            txtNumReferencia.setText("");
-                            btnMasterCard.setSelected(false);
-                            btnVisa.setSelected(false);
-                            btnMasterCard.setEnabled(true);
-                            btnVisa.setEnabled(true);
-                            cargarDatos(usuario);
+                VentaDAO vdao = new VentaDAO();
+                String caja = txtCaja.getText();
+                Integer idventa = null;
+                Integer flag = null;
+                switch (caja) {
+                    case "GENERAL 1":
+                        if (vdao.registrar(v)) {
+                            idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
+                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa);
+                            System.out.println("venta registrada");
                         }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "ERROR EN REGISTRO DE LAS VENTAS");
-                    }
+                        break;
+                    case "GENERAL 2":
+                        if (vdao.registrar2(v)) {
+                            idventa = new VentasControl().getIdDeUltimaVentaRegistrada2();
+                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                            System.out.println("ventaCaja2 registrada");
+                        }
+                        break;
+                    case "VIP":
+                        if (vdao.registrar3(v)) {
+                            idventa = new VentasControl().getIdDeUltimaVentaRegistrada3();
+                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                            System.out.println("ventaCaja3 registrada");
+                        }
+                        break;
                 }
+
+                System.out.println("ultima venta: " + idventa);
+                System.out.println("flag: " + flag);
+
+                //TERCERO REGISTRO LOS DETALLES DE LA VENTA
+                if (flag > 0) {
+                    JOptionPane.showMessageDialog(null, "VENTA REALIZADA EXITOSAMENTE");
+
+                    if (btnVisa.isSelected()) {
+                        parametros.put("id_venta", idventa);
+                        parametros.put("nom_cajero", usuario);
+                        parametros.put("total", total);
+                        mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\BoletaVISAT1.jrxml", parametros, getPageSize());
+                        mrv.setNombreArchivo("BoletaVenta");
+                        try {
+                            mrv.exportarAPdfConCopia();
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                        mrv.dispose();
+                        new VentasControl().restarStock(tblPedidos);
+                        panelPagoElectronico.dispose();
+                        lblPago.setText("");
+                        txtNumReferencia.setText("");
+                        btnMasterCard.setSelected(false);
+                        btnVisa.setSelected(false);
+                        btnMasterCard.setEnabled(true);
+                        btnVisa.setEnabled(true);
+                        cargarDatos(usuario);
+                    } else if (btnMasterCard.isSelected()) {
+                        parametros.put("id_venta", idventa);
+                        parametros.put("nom_cajero", usuario);
+                        parametros.put("total", total);
+                        mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\BoletaMASTERT1.jrxml", parametros, getPageSize());
+                        mrv.setNombreArchivo("BoletaVenta");
+                        try {
+                            mrv.exportarAPdfConCopia();
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                        mrv.dispose();
+                        new VentasControl().restarStock(tblPedidos);
+                        panelPagoElectronico.dispose();
+                        lblPago.setText("");
+                        txtNumReferencia.setText("");
+                        btnMasterCard.setSelected(false);
+                        btnVisa.setSelected(false);
+                        btnMasterCard.setEnabled(true);
+                        btnVisa.setEnabled(true);
+                        cargarDatos(usuario);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR EN REGISTRO DE LAS VENTAS");
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "INGRESE UN NUMERO DE REFERENCIA");
             }
@@ -1780,19 +1881,15 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCobrarConTarjetaActionPerformed
 
     private void btnVisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaActionPerformed
-        if (btnVisa.isSelected()) {
-            btnMasterCard.setEnabled(false);
-        } else {
-            btnMasterCard.setEnabled(true);
-        }
+        btnVisa.setSelected(false);
     }//GEN-LAST:event_btnVisaActionPerformed
 
     private void btnMasterCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasterCardActionPerformed
-        if (btnMasterCard.isSelected()) {
-            btnVisa.setEnabled(false);
-        } else {
-            btnVisa.setEnabled(true);
-        }
+//        if (btnMasterCard.isSelected()) {
+//            btnVisa.setEnabled(false);
+//        } else {
+//            btnVisa.setEnabled(true);
+//        }
     }//GEN-LAST:event_btnMasterCardActionPerformed
 
     private void btnCancelarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTarjetaActionPerformed
@@ -1865,6 +1962,78 @@ public class Ventas extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel22MouseClicked
 
+    private void btnBebidasJarraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBebidasJarraActionPerformed
+        try {
+            String categoria = btnBebidasJarra.getText();
+            VentasControl vc = new VentasControl();
+            vc.llenarTablaProductos(categoria, tblProductos);
+            lblProductos.setText(categoria);
+            lblProductos.setForeground(new Color(102, 153, 255));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnBebidasJarraActionPerformed
+
+    private void btnCoctelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCoctelesActionPerformed
+        try {
+            String categoria = btnCocteles.getText();
+            VentasControl vc = new VentasControl();
+            vc.llenarTablaProductos(categoria, tblProductos);
+            lblProductos.setText(categoria);
+            lblProductos.setForeground(new Color(102, 102, 255));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnCoctelesActionPerformed
+
+    private void btnBebidasPorBotellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBebidasPorBotellaActionPerformed
+        try {
+            String categoria = btnBebidasPorBotella.getText();
+            VentasControl vc = new VentasControl();
+            vc.llenarTablaProductos(categoria, tblProductos);
+            lblProductos.setText(categoria);
+            lblProductos.setForeground(new Color(153, 102, 255));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnBebidasPorBotellaActionPerformed
+
+    private void btnGaseosasCervezasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaseosasCervezasActionPerformed
+        try {
+            String categoria = btnGaseosasCervezas.getText();
+            VentasControl vc = new VentasControl();
+            vc.llenarTablaProductos(categoria, tblProductos);
+            lblProductos.setText(categoria);
+            lblProductos.setForeground(new Color(204, 102, 255));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnGaseosasCervezasActionPerformed
+
+    private void btnCigarrillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCigarrillosActionPerformed
+        try {
+            String categoria = btnCigarrillos.getText();
+            VentasControl vc = new VentasControl();
+            vc.llenarTablaProductos(categoria, tblProductos);
+            lblProductos.setText(categoria);
+            lblProductos.setForeground(new Color(255, 51, 51));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnCigarrillosActionPerformed
+
+    private void btnOtrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtrosActionPerformed
+        try {
+            String categoria = btnOtros.getText();
+            VentasControl vc = new VentasControl();
+            vc.llenarTablaProductos(categoria, tblProductos);
+            lblProductos.setText(categoria);
+            lblProductos.setForeground(new Color(255, 102, 51));
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnOtrosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1916,6 +2085,8 @@ public class Ventas extends javax.swing.JFrame {
     public javax.swing.JButton btn8;
     public javax.swing.JButton btn9;
     public javax.swing.JButton btnAgregar;
+    private javax.swing.JToggleButton btnBebidasJarra;
+    private javax.swing.JToggleButton btnBebidasPorBotella;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnBorrarCombinada;
     private javax.swing.JButton btnBorrarTarjeta;
@@ -1923,11 +2094,13 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnCero;
     private javax.swing.JButton btnCeroCombinada;
     private javax.swing.JButton btnCeroTarjeta;
+    private javax.swing.JToggleButton btnCigarrillos;
     private javax.swing.JButton btnCinco;
     private javax.swing.JButton btnCincoCombinada;
     private javax.swing.JButton btnCincoTarjeta;
     private javax.swing.JButton btnCobrar;
     private javax.swing.JButton btnCobrarConTarjeta;
+    private javax.swing.JToggleButton btnCocteles;
     private javax.swing.JButton btnCuatro;
     private javax.swing.JButton btnCuatroCombinada;
     private javax.swing.JButton btnCuatroTarjeta;
@@ -1936,6 +2109,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnDosCombinada;
     private javax.swing.JButton btnDosTarjeta;
     private javax.swing.JToggleButton btnFactura;
+    private javax.swing.JToggleButton btnGaseosasCervezas;
     private javax.swing.JToggleButton btnMasterCard;
     private javax.swing.JButton btnNueve;
     private javax.swing.JButton btnNueveCombinada;
@@ -1944,6 +2118,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnOchoCombinada;
     private javax.swing.JButton btnOchoTarjeta;
     private javax.swing.JToggleButton btnOperacionCombinada;
+    private javax.swing.JToggleButton btnOtros;
     private javax.swing.JButton btnPendientes;
     private javax.swing.JButton btnPunto;
     private javax.swing.JButton btnQuitar;
@@ -1963,12 +2138,13 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnVisa;
     private javax.swing.JButton btnunoCombinada;
     private javax.swing.JCheckBox cboxMasVendidos;
+    private javax.swing.ButtonGroup grupoCategorias;
+    private javax.swing.ButtonGroup grupoTarjetas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1999,13 +2175,12 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lblPago;
-    private javax.swing.JList listaCategorias;
+    private javax.swing.JLabel lblProductos;
     private javax.swing.JDialog operacionCombinada;
     private javax.swing.JDialog panelPagoElectronico;
     private javax.swing.JDialog panelVuelto;
@@ -2097,7 +2272,7 @@ public class Ventas extends javax.swing.JFrame {
                     + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
                     + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
                     + "inner join venta on ventaproducto.idventa = venta.idventa\n"
-                    + "where venta.idflujocaja = "+idFlujoCaja+"\n"
+                    + "where venta.idflujocaja = " + idFlujoCaja + "\n"
                     + "group by producto.nombre\n"
                     + "order by sum(ventaproducto.cantidad) desc");
             ResultSet rs = pst.executeQuery();
@@ -2124,19 +2299,101 @@ public class Ventas extends javax.swing.JFrame {
         }
     }
 
+    //metodo para cargar los productos mas vendidos de ventas 2
+    public void tablaProductosMasVendidos2(int idFlujoCaja) throws Exception {
+        titulosMasVendidos();
+        Conexion con = new Conexion();
+        Object[] lista = new Object[5];
+        try {
+            con.conectar();
+            Connection cc = con.getConexion();
+            PreparedStatement pst = cc.prepareStatement("select producto.nombre,presentacion.descripcion,productopresentacion.stock,productopresentacion.precio, sum(ventaproducto2.cantidad) \n"
+                    + "from ventaproducto2 \n"
+                    + "inner join producto on ventaproducto2.idproducto = producto.idproducto \n"
+                    + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
+                    + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                    + "inner join venta2 on ventaproducto2.idventa = venta2.idventa2\n"
+                    + "where venta2.idflujocaja = " + idFlujoCaja + "\n"
+                    + "group by producto.nombre\n"
+                    + "order by sum(ventaproducto2.cantidad) desc");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                lista[0] = rs.getString("producto.nombre");
+                lista[1] = rs.getString("presentacion.descripcion");
+                lista[2] = rs.getString("productopresentacion.stock");
+                lista[3] = rs.getString("productopresentacion.precio");
+                lista[4] = rs.getString("sum(ventaproducto2.cantidad)");
+                modeloMasVendidos.addRow(lista);
+            }
+            tblProductos.getColumnModel().getColumn(0).setPreferredWidth(200);
+            tblProductos.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblProductos.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tblProductos.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tblProductos.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tblProductos.setModel(modeloMasVendidos);
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            con.cerrar();
+        }
+    }
+
+    //metodo para cargar los productos mas vendidos de ventas 3
+    public void tablaProductosMasVendidos3(int idFlujoCaja) throws Exception {
+        titulosMasVendidos();
+        Conexion con = new Conexion();
+        Object[] lista = new Object[5];
+        try {
+            con.conectar();
+            Connection cc = con.getConexion();
+            PreparedStatement pst = cc.prepareStatement("select producto.nombre,presentacion.descripcion,productopresentacion.stock,productopresentacion.precio, sum(ventaproducto3.cantidad) \n"
+                    + "from ventaproducto3 \n"
+                    + "inner join producto on ventaproducto3.idproducto = producto.idproducto \n"
+                    + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
+                    + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                    + "inner join venta3 on ventaproducto3.idventa = venta3.idventa3\n"
+                    + "where venta3.idflujocaja = " + idFlujoCaja + "\n"
+                    + "group by producto.nombre\n"
+                    + "order by sum(ventaproducto3.cantidad) desc");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                lista[0] = rs.getString("producto.nombre");
+                lista[1] = rs.getString("presentacion.descripcion");
+                lista[2] = rs.getString("productopresentacion.stock");
+                lista[3] = rs.getString("productopresentacion.precio");
+                lista[4] = rs.getString("sum(ventaproducto3.cantidad)");
+                modeloMasVendidos.addRow(lista);
+            }
+            tblProductos.getColumnModel().getColumn(0).setPreferredWidth(200);
+            tblProductos.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblProductos.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tblProductos.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tblProductos.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tblProductos.setModel(modeloMasVendidos);
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            con.cerrar();
+        }
+    }
+
     //METODO PARA LOS TAMAÑOS DE LA IMPRESION
     private int getPageSize() {
         int filas = tblPedidos.getRowCount();
         System.out.println("cantidad de filas: " + filas);
         int rowCount = 2;//FILAS DE GRACIA
-        int fontSize = 7;//TAMAÑO DE LETRA DEL DETAIL
+        int fontSize = 9;//TAMAÑO DE LETRA DEL DETAIL
         int rowSize = fontSize + 2;//TAMAÑO DE LA FILA
-        int caracteresPorLinea = 16;// CANTIDAD DE CARACTERES PARA QUE PASE A LA SIGTE LINEA
+        int caracteresPorLinea = 14;// CANTIDAD DE CARACTERES PARA QUE PASE A LA SIGTE LINEA
         for (int i = 0; i < filas; i++) {
             String descripcionDeProducto = tblPedidos.getValueAt(i, 1).toString();
             rowCount += (1 + (int) (descripcionDeProducto.length() / caracteresPorLinea));
         }
-        int cabecera = 160;
+        int cabecera = 190;
         int piePagina = 122;
         int pageSize = (rowCount * rowSize) + cabecera + piePagina;
         System.out.println("Cantidad de Filas finales:" + rowCount);

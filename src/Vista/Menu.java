@@ -47,6 +47,8 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MenuOpciones = new javax.swing.JPopupMenu();
+        MenuPrecios = new javax.swing.JMenuItem();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -67,6 +69,14 @@ public class Menu extends javax.swing.JFrame {
         lblCaja = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
+
+        MenuPrecios.setText("CONFIGURACIÓN");
+        MenuPrecios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuPreciosActionPerformed(evt);
+            }
+        });
+        MenuOpciones.add(MenuPrecios);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -184,6 +194,7 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.setComponentPopupMenu(MenuOpciones);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSalir.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
@@ -352,6 +363,10 @@ public class Menu extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_lblSalirMouseClicked
 
+    private void MenuPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPreciosActionPerformed
+        JOptionPane.showMessageDialog(getRootPane(), "ESTE ES EL  MENU DE CONFIGURACION DE PRECIOS DE PRODUCTOS MAS VENDIDOS");
+    }//GEN-LAST:event_MenuPreciosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -388,6 +403,8 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPopupMenu MenuOpciones;
+    private javax.swing.JMenuItem MenuPrecios;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

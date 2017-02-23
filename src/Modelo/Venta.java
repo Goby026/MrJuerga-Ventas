@@ -5,23 +5,23 @@ public class Venta {
     int idVenta;
     String fecha;
     String hora;
-    int tipopago;
     int idUsuario;
     int idCliente;
-    int idComprobante;
+    int idTipoComprobante;
+    int tipopago;
     String nOperacion;
     int estado, idcaja, idFlujoCaja;
 
     public Venta() {
     }
 
-    public Venta(int idVenta, String fecha, String hora, int idUsuario, int idCliente, int idComprobante, int tipopago, String nOperacion, int estado, int idcaja, int idFlujoCaja) {
+    public Venta(int idVenta, String fecha, String hora, int idUsuario, int idCliente, int idTipoComprobante, int tipopago, String nOperacion, int estado, int idcaja, int idFlujoCaja) {
         this.idVenta = idVenta;
         this.fecha = fecha;
         this.hora = hora;
         this.idUsuario = idUsuario;
         this.idCliente = idCliente;
-        this.idComprobante = idComprobante;
+        this.idTipoComprobante = idTipoComprobante;
         this.tipopago = tipopago;
         this.nOperacion = nOperacion;
         this.estado = estado;
@@ -69,12 +69,12 @@ public class Venta {
         this.idCliente = idCliente;
     }
 
-    public int getIdComprobante() {
-        return idComprobante;
+    public int getIdTipoComprobante() {
+        return idTipoComprobante;
     }
 
-    public void setIdComprobante(int idComprobante) {
-        this.idComprobante = idComprobante;
+    public void setIdTipoComprobante(int idTipoComprobante) {
+        this.idTipoComprobante = idTipoComprobante;
     }
 
     public int getTipopago() {

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-01-27T05:20:14 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d5f20408-d5ed-403f-b024-261eb061add1">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="142"/>
@@ -36,6 +38,7 @@
 	<parameter name="master" class="java.lang.Double">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="jarras" class="java.lang.Double"/>
 	<queryString>
 		<![CDATA[select sum(ventaproducto.subtotal),count(venta.idventa), flujocaja.hora_inicio, flujocaja.saldo from venta
 inner join ventaproducto on venta.idventa = ventaproducto.idventa
@@ -106,7 +109,7 @@ where venta.idflujocaja = $P{flujo}]]>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[TOTAL EFECTIVO:]]></text>
+				<text><![CDATA[TOTAL SISTEMA:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="109" width="110" height="16" uuid="c1358cca-6f83-4dae-a3fc-73b685e989a3"/>
@@ -140,7 +143,7 @@ where venta.idflujocaja = $P{flujo}]]>
 				<textFieldExpression><![CDATA[$P{caja}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="402" y="19" width="100" height="16" uuid="3ee43253-dc25-4011-add4-4d1cc84d1d05"/>
+				<reportElement x="399" y="19" width="100" height="16" uuid="3ee43253-dc25-4011-add4-4d1cc84d1d05"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -209,6 +212,22 @@ where venta.idflujocaja = $P{flujo}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{master}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="327" y="69" width="111" height="16" uuid="1264bba7-4186-4d18-baec-cc72e1b13401"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[TOTAL JARRAS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="450" y="69" width="100" height="16" uuid="c32ac3b4-7b26-4d8c-b3a2-9cb6035c3713">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{jarras}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -258,7 +277,7 @@ where venta.idflujocaja = $P{flujo}]]>
 				<textElement textAlignment="Right">
 					<font size="20"/>
 				</textElement>
-				<text><![CDATA[BALANCE:]]></text>
+				<text><![CDATA[EFECTIVO:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="281" y="5" width="133" height="27" uuid="b4e9f27c-91be-4b94-9ab1-eca40e95f5b5"/>

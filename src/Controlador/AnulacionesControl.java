@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.Caja;
@@ -14,13 +10,13 @@ import Modelo.ProductoDAO;
 import Modelo.ProductoPresentacion;
 import Modelo.ProductoPresentacionDAO;
 import Modelo.Usuario;
+import Modelo.UsuarioCaja;
+import Modelo.UsuarioCajaDAO;
 import Modelo.UsuarioDAO;
 import Modelo.Venta;
 import Modelo.VentaDAO;
 import Modelo.VentaProducto;
 import Modelo.VentaProductoDAO;
-//import Modelo.VentaEntrada;
-//import Modelo.VentaEntradaDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -32,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AnulacionesControl {
 
-    DefaultTableModel modeloDetalle;
+    DefaultTableModel modeloDetalle;    
 
     public void cargarTitulosTabla(JTable tabla) {
         String titulos[] = {"PRODUCTO","PRESENTACION" ,"PRECIO", "CANTIDAD", "SUBTOTAL"};
@@ -40,11 +36,11 @@ public class AnulacionesControl {
         tabla.setModel(modeloDetalle);
     }
 
-    public String[] CargarDatos(int numboleta) throws Exception {
+    public String[] CargarDatos(int numboleta, Integer num) throws Exception {
         try {
             String[] datos = new String[6];
             VentaDAO vdao = new VentaDAO();
-            for (Venta v : vdao.listar()) {
+            for (Venta v : vdao.listar(num)) {
                 if (v.getIdVenta() == numboleta) {
                     datos[0] = String.valueOf(numboleta);
                     datos[1] = "VENTA";
@@ -59,6 +55,22 @@ public class AnulacionesControl {
             throw ex;
         }
         return null;
+    }
+    
+    //METODO PARA OBTENER EL NOMBRE DE CAJA DEL USUARIO LOGEADO
+    public String getCajaDeUsuario(String usuario) throws Exception {
+        try {
+            int idUsuario = getIdUsuario(usuario);
+            UsuarioCajaDAO udao = new UsuarioCajaDAO();
+            for (UsuarioCaja uc : udao.Listar()) {
+                if (uc.getIdusuario() == idUsuario) {
+                    return getCajaConId(uc.getIdcaja());
+                }
+            }
+            return "NULL de getCajaDeUsuario";
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     //METODO PARA OBTENER EL ID DEL USUARIO QUE REALIZO LA VENTA
@@ -225,18 +237,18 @@ public class AnulacionesControl {
         }
     }
 
-    public void cargarTabla(int numVenta, JTable tabla) throws Exception {
+    public void cargarTabla(int numVenta, JTable tabla, Integer num) throws Exception {
         try {
             cargarTitulosTabla(tabla);
 
             Object[] columna = new Object[5];
 
-            for (int i = 0; i < new VentaProductoDAO().getDatosTabla(numVenta).size(); i++) {
-                columna[0] = new VentaProductoDAO().getDatosTabla(numVenta).get(i).getProducto();
-                columna[1] = new VentaProductoDAO().getDatosTabla(numVenta).get(i).getPresentacion();
-                columna[2] = new VentaProductoDAO().getDatosTabla(numVenta).get(i).getPrecio();
-                columna[3] = new VentaProductoDAO().getDatosTabla(numVenta).get(i).getCantidad();
-                columna[4] = new VentaProductoDAO().getDatosTabla(numVenta).get(i).getSubtotal();
+            for (int i = 0; i < new VentaProductoDAO().getDatosTabla(numVenta, num).size(); i++) {
+                columna[0] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getProducto();
+                columna[1] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getPresentacion();
+                columna[2] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getPrecio();
+                columna[3] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getCantidad();
+                columna[4] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getSubtotal();
                 modeloDetalle.addRow(columna);
             }
         } catch (Exception ex) {

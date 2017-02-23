@@ -1,28 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
 import Controlador.AnulacionesControl;
 import Controlador.Cronometro;
 import Controlador.ManejadorFechas;
 import Controlador.MyiReportVisor;
-import Controlador.Validaciones;
-import Modelo.Conexion;
 import Modelo.FlujoCajaDAO;
-import Modelo.Venta;
 import Modelo.VentaDAO;
 import Modelo.VentaProductoDAO;
 import java.awt.Color;
-//import Modelo.VentaEntrada;
-//import Modelo.VentaEntradaDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,23 +18,44 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author
+ * Grøver R£ndiÇh
  */
 public class Anulaciones extends javax.swing.JFrame {
 
     MyiReportVisor mrv;
     HashMap parametros = new HashMap();
+    Integer num = 1;
 
     public Anulaciones(String Usuario) {
         initComponents();
         setLocationRelativeTo(null);
-        lblUsuario.setText(Usuario);
-        lblFecha.setText(new ManejadorFechas().getFechaActual());
-        new Cronometro().iniciarCronometro(txtHoraCronometro);
-        new AnulacionesControl().cargarTitulosTabla(tblDetalle);
+        datosIniciales(Usuario);
     }
 
     public Anulaciones() {
+    }
+
+    public void datosIniciales(String Usuario) {
+        try {
+            lblUsuario.setText(Usuario);
+            lblFecha.setText(new ManejadorFechas().getFechaActual());
+            lblCaja.setText(new AnulacionesControl().getCajaDeUsuario(Usuario));
+            new Cronometro().iniciarCronometro(txtHoraCronometro);
+            new AnulacionesControl().cargarTitulosTabla(tblDetalle);
+            //int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new GastosControl().getIdUsuario(lblUsuario.getText()), new GastosControl().getIdCaja(lblCaja.getText()));
+            switch (lblCaja.getText()) {
+                case "GENERAL 2":
+                    num = 2;
+                    break;
+                case "VIP":
+                    num = 3;
+                    break;
+                default:
+                    num = 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     Connection Connection;
@@ -62,6 +71,12 @@ public class Anulaciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelConceptoAnulacion = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaConceptoAnulacion = new javax.swing.JTextArea();
+        btnConceptoAnulacion = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txtCaja = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -96,12 +111,14 @@ public class Anulaciones extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblCaja = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtHoraCronometro = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetalle = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -109,38 +126,76 @@ public class Anulaciones extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         panelEstado = new javax.swing.JPanel();
 
+        panelConceptoAnulacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("INGRESE CONCEPTO DE ANULACION DE BOLETA");
+        panelConceptoAnulacion.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 30));
+
+        txaConceptoAnulacion.setColumns(20);
+        txaConceptoAnulacion.setLineWrap(true);
+        txaConceptoAnulacion.setRows(5);
+        jScrollPane2.setViewportView(txaConceptoAnulacion);
+
+        panelConceptoAnulacion.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 420, 260));
+
+        btnConceptoAnulacion.setBackground(new java.awt.Color(0, 102, 0));
+        btnConceptoAnulacion.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        btnConceptoAnulacion.setForeground(new java.awt.Color(255, 255, 255));
+        btnConceptoAnulacion.setText("ANULAR");
+        btnConceptoAnulacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConceptoAnulacionActionPerformed(evt);
+            }
+        });
+        panelConceptoAnulacion.getContentPane().add(btnConceptoAnulacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 420, 60));
+
+        jButton2.setBackground(new java.awt.Color(255, 0, 0));
+        jButton2.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("CANCELAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        panelConceptoAnulacion.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 420, -1));
+
         setTitle("Anulaciones");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel13.setText("CAJA");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 490, -1, -1));
 
         txtCaja.setEditable(false);
         txtCaja.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txtCaja.setForeground(new java.awt.Color(0, 102, 204));
         txtCaja.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCaja.setBorder(null);
-        getContentPane().add(txtCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 490, 220, -1));
+        txtCaja.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        getContentPane().add(txtCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 490, 220, -1));
 
         jLabel14.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel14.setText("USUARIO");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 520, -1, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 520, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel15.setText("CONCEPTO");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 460, -1, -1));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 460, -1, -1));
 
         txtHora.setEditable(false);
         txtHora.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txtHora.setForeground(new java.awt.Color(0, 102, 204));
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtHora.setBorder(null);
-        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 550, 220, -1));
+        txtHora.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        getContentPane().add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 550, 220, -1));
 
         jLabel12.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel12.setText("FECHA");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 580, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 580, -1, -1));
 
-        btnAnular.setBackground(new java.awt.Color(255, 102, 0));
+        btnAnular.setBackground(new java.awt.Color(255, 0, 0));
         btnAnular.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
         btnAnular.setForeground(new java.awt.Color(255, 255, 255));
         btnAnular.setText("ANULAR");
@@ -149,25 +204,25 @@ public class Anulaciones extends javax.swing.JFrame {
                 btnAnularActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 720, 220, 70));
+        getContentPane().add(btnAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 720, 280, 70));
 
         jLabel17.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         jLabel17.setText("S/.");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 640, -1, -1));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 480, -1, -1));
 
         txtMonto.setBackground(new java.awt.Color(240, 240, 240));
         txtMonto.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         txtMonto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtMonto.setBorder(null);
-        getContentPane().add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 640, 210, 70));
+        getContentPane().add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 480, 280, 70));
 
         jLabel18.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel18.setText("MONTO");
-        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 620, -1, -1));
+        getContentPane().add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 460, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel19.setText("HORA");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 550, -1, -1));
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Consolas", 0, 10)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(153, 153, 153));
@@ -176,28 +231,31 @@ public class Anulaciones extends javax.swing.JFrame {
 
         txtConcepto.setEditable(false);
         txtConcepto.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txtConcepto.setForeground(new java.awt.Color(0, 102, 204));
         txtConcepto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtConcepto.setBorder(null);
-        getContentPane().add(txtConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 460, 220, -1));
+        txtConcepto.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        getContentPane().add(txtConcepto, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 460, 220, -1));
 
         txtnumVenta.setEditable(false);
         txtnumVenta.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txtnumVenta.setForeground(new java.awt.Color(0, 102, 204));
         txtnumVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtnumVenta.setBorder(null);
-        getContentPane().add(txtnumVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 430, 220, -1));
+        txtnumVenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        getContentPane().add(txtnumVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 430, 220, -1));
 
         txtFecha.setEditable(false);
         txtFecha.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txtFecha.setForeground(new java.awt.Color(0, 102, 204));
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFecha.setBorder(null);
-        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 580, 220, -1));
+        txtFecha.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        getContentPane().add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 580, 220, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn7.setBackground(new java.awt.Color(255, 153, 0));
-        btn7.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn7.setBackground(new java.awt.Color(0, 153, 255));
+        btn7.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn7.setForeground(new java.awt.Color(255, 255, 255));
         btn7.setText("7");
         btn7.setBorder(null);
@@ -211,8 +269,8 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 110, 100));
 
-        btn8.setBackground(new java.awt.Color(255, 153, 0));
-        btn8.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn8.setBackground(new java.awt.Color(0, 153, 255));
+        btn8.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn8.setForeground(new java.awt.Color(255, 255, 255));
         btn8.setText("8");
         btn8.setBorder(null);
@@ -226,8 +284,8 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 110, 100));
 
-        btn9.setBackground(new java.awt.Color(255, 153, 0));
-        btn9.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn9.setBackground(new java.awt.Color(0, 153, 255));
+        btn9.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn9.setForeground(new java.awt.Color(255, 255, 255));
         btn9.setText("9");
         btn9.setBorder(null);
@@ -241,8 +299,8 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 110, 100));
 
-        btn4.setBackground(new java.awt.Color(255, 153, 0));
-        btn4.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn4.setBackground(new java.awt.Color(0, 153, 255));
+        btn4.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn4.setForeground(new java.awt.Color(255, 255, 255));
         btn4.setText("4");
         btn4.setBorder(null);
@@ -256,8 +314,8 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 110, 100));
 
-        btn5.setBackground(new java.awt.Color(255, 153, 0));
-        btn5.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn5.setBackground(new java.awt.Color(0, 153, 255));
+        btn5.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn5.setForeground(new java.awt.Color(255, 255, 255));
         btn5.setText("5");
         btn5.setBorder(null);
@@ -271,8 +329,8 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 110, 100));
 
-        btn6.setBackground(new java.awt.Color(255, 153, 0));
-        btn6.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn6.setBackground(new java.awt.Color(0, 153, 255));
+        btn6.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn6.setForeground(new java.awt.Color(255, 255, 255));
         btn6.setText("6");
         btn6.setBorder(null);
@@ -286,8 +344,8 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 110, 100));
 
-        btn1.setBackground(new java.awt.Color(255, 153, 0));
-        btn1.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn1.setBackground(new java.awt.Color(0, 153, 255));
+        btn1.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn1.setForeground(new java.awt.Color(255, 255, 255));
         btn1.setText("1");
         btn1.setBorder(null);
@@ -301,8 +359,8 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 110, 100));
 
-        btn2.setBackground(new java.awt.Color(255, 153, 0));
-        btn2.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn2.setBackground(new java.awt.Color(0, 153, 255));
+        btn2.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn2.setForeground(new java.awt.Color(255, 255, 255));
         btn2.setText("2");
         btn2.setBorder(null);
@@ -316,8 +374,8 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 110, 100));
 
-        btn3.setBackground(new java.awt.Color(255, 153, 0));
-        btn3.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn3.setBackground(new java.awt.Color(0, 153, 255));
+        btn3.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn3.setForeground(new java.awt.Color(255, 255, 255));
         btn3.setText("3");
         btn3.setBorder(null);
@@ -331,8 +389,8 @@ public class Anulaciones extends javax.swing.JFrame {
         });
         jPanel2.add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 110, 100));
 
-        btn0.setBackground(new java.awt.Color(255, 153, 0));
-        btn0.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        btn0.setBackground(new java.awt.Color(0, 153, 255));
+        btn0.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         btn0.setForeground(new java.awt.Color(255, 255, 255));
         btn0.setText("0");
         btn0.setBorder(null);
@@ -362,9 +420,10 @@ public class Anulaciones extends javax.swing.JFrame {
         jPanel2.add(btnDel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 110, 100));
 
         jButton1.setBackground(new java.awt.Color(0, 204, 51));
-        jButton1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 20)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("BUSCAR");
+        jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -378,11 +437,6 @@ public class Anulaciones extends javax.swing.JFrame {
 
         txt_num_venta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         txt_num_venta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_num_venta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_num_ventaKeyReleased(evt);
-            }
-        });
         jPanel2.add(txt_num_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 350, 50));
 
         btnListaAnulaciones.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -398,44 +452,45 @@ public class Anulaciones extends javax.swing.JFrame {
 
         txtUsuario.setEditable(false);
         txtUsuario.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        txtUsuario.setForeground(new java.awt.Color(0, 102, 204));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtUsuario.setBorder(null);
-        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 520, 220, -1));
+        txtUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 220, -1));
 
-        jPanel1.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 0, 0));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 60)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 60)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("ANULACIONES");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 930, 60));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1340, 60));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("USUARIO:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        lblCaja.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblCaja.setForeground(new java.awt.Color(255, 255, 255));
+        lblCaja.setText("__________");
+        jPanel1.add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 240, -1));
 
         lblUsuario.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblUsuario.setForeground(new java.awt.Color(255, 255, 255));
         lblUsuario.setText("_______");
-        jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
+        jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 210, -1));
 
         lblFecha.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblFecha.setForeground(new java.awt.Color(255, 255, 255));
         lblFecha.setText("_____");
-        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 160, -1));
+        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 120, 160, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("FECHA:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 120, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("HORA:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 120, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 120, -1, -1));
 
         txtHoraCronometro.setEditable(false);
         txtHoraCronometro.setBackground(new java.awt.Color(255, 51, 51));
@@ -443,9 +498,19 @@ public class Anulaciones extends javax.swing.JFrame {
         txtHoraCronometro.setForeground(new java.awt.Color(255, 255, 255));
         txtHoraCronometro.setText("______");
         txtHoraCronometro.setBorder(null);
-        jPanel1.add(txtHoraCronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 120, 120, -1));
+        jPanel1.add(txtHoraCronometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 120, 120, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 160));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("USUARIO:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("CAJA:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 160));
 
         tblDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -460,7 +525,7 @@ public class Anulaciones extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblDetalle);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 490, 190));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 890, 190));
 
         jLabel1.setText("ESTADO:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, -1, 20));
@@ -471,38 +536,22 @@ public class Anulaciones extends javax.swing.JFrame {
 
         jLabel21.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel21.setText("N° VENTA");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 430, -1, -1));
-        getContentPane().add(panelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 220, 20));
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, -1, -1));
+        getContentPane().add(panelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, 620, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_num_ventaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_num_ventaKeyReleased
-//        int id = Integer.parseInt(txt_num_venta.getText());
-        try {
-//            if (!txt_num_venta.getText().trim().isEmpty()) {
-//                cargarVentasConId(id);
-//            } else {
-//                limpiarTablaVentas();
-//            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }//GEN-LAST:event_txt_num_ventaKeyReleased
-
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         try {
-            int numVenta = Integer.parseInt(txt_num_venta.getText());
-            if (new VentaDAO().anular(numVenta)) {
-                new AnulacionesControl().sumarStock(tblDetalle);
-                new VentaProductoDAO().updateVentaProducto(numVenta);
-                JOptionPane.showMessageDialog(getRootPane(), "LA VENTA: " + numVenta + " FUE ANULADA EXITOSAMENTE");
+            if (!txt_num_venta.getText().trim().isEmpty()) {
+                panelConceptoAnulacion.setVisible(true);
+                panelConceptoAnulacion.setBounds(700, 250, 435, 431);
             } else {
-                System.out.println("error");
+                JOptionPane.showMessageDialog(getRootPane(), "INGRESE NUMERO DE BOLETA");
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(getRootPane(), e.getMessage());
         }
     }//GEN-LAST:event_btnAnularActionPerformed
 
@@ -585,7 +634,7 @@ public class Anulaciones extends javax.swing.JFrame {
 
             AnulacionesControl ac = new AnulacionesControl();
             //String datos[] = new String[5];
-            String array[] = ac.CargarDatos(numBoleta);
+            String array[] = ac.CargarDatos(numBoleta, num);
             txtnumVenta.setText(array[0]);
             txtConcepto.setText(array[1]);
             txtCaja.setText(new AnulacionesControl().getCajaConId(Integer.parseInt(array[2])));
@@ -594,7 +643,7 @@ public class Anulaciones extends javax.swing.JFrame {
             txtHora.setText(array[4]);
             txtFecha.setText(array[5]);
             txtMonto.setText("" + new VentaProductoDAO().getMontoDeVenta(numBoleta));
-            new AnulacionesControl().cargarTabla(numBoleta, tblDetalle);
+            new AnulacionesControl().cargarTabla(numBoleta, tblDetalle, num);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -602,16 +651,42 @@ public class Anulaciones extends javax.swing.JFrame {
 
     private void btnListaAnulacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaAnulacionesActionPerformed
         try {
-            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AnulacionesControl().getIdUsuario(txtUsuario.getText()), new AnulacionesControl().getIdCaja(txtCaja.getText()));
-            parametros.put("usuario", txtUsuario.getText());
-            parametros.put("caja", txtCaja.getText());
-            parametros.put("flujo", idFlujoCaja);
-            mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\ListaAnulaciones.jrxml", parametros);
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AnulacionesControl().getIdUsuario(lblUsuario.getText()), new AnulacionesControl().getIdCaja(lblCaja.getText()));
+            System.out.println(idFlujoCaja);
+//            parametros.put("Usuario", txtUsuario.getText());
+//            parametros.put("Caja", txtCaja.getText());
+            parametros.put("idFlujo", idFlujoCaja);
+            mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\Anulaciones.jrxml", parametros);
             mrv.exportarAPdf();
         } catch (Exception ex) {
             Logger.getLogger(Anulaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnListaAnulacionesActionPerformed
+
+    private void btnConceptoAnulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConceptoAnulacionActionPerformed
+        try {
+            int numVenta = Integer.parseInt(txt_num_venta.getText());
+            if (new VentaDAO().anular(numVenta)) {
+                new AnulacionesControl().sumarStock(tblDetalle);
+                new VentaProductoDAO().updateVentaProducto(numVenta, num);
+                JOptionPane.showMessageDialog(getRootPane(), "LA VENTA: " + numVenta + " FUE ANULADA EXITOSAMENTE");
+                panelConceptoAnulacion.dispose();
+                //limpiarCampos();
+//                JPanel temp=(JPanel) this.getContentPane(); 
+//                SwingUtilities.updateComponentTreeUI(temp);
+//                this.validateTree();
+            } else {
+                System.out.println("error");
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnConceptoAnulacionActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        panelConceptoAnulacion.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -660,9 +735,11 @@ public class Anulaciones extends javax.swing.JFrame {
     private javax.swing.JButton btn8;
     private javax.swing.JButton btn9;
     private javax.swing.JButton btnAnular;
+    private javax.swing.JButton btnConceptoAnulacion;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnListaAnulaciones;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -674,18 +751,24 @@ public class Anulaciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCaja;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblUsuario;
+    private javax.swing.JDialog panelConceptoAnulacion;
     private javax.swing.JPanel panelEstado;
     private javax.swing.JTable tblDetalle;
+    private javax.swing.JTextArea txaConceptoAnulacion;
     private javax.swing.JTextField txtCaja;
     private javax.swing.JTextField txtConcepto;
     private javax.swing.JTextField txtFecha;
@@ -696,4 +779,18 @@ public class Anulaciones extends javax.swing.JFrame {
     private javax.swing.JTextField txt_num_venta;
     private javax.swing.JTextField txtnumVenta;
     // End of variables declaration//GEN-END:variables
+
+    public void limpiarCampos() {
+        txt_num_venta.setText("");
+        lblEstado.setText("");
+        new AnulacionesControl().limpiarTabla(tblDetalle);
+        panelEstado.setBackground(new Color(240, 240, 240));
+        txtnumVenta.setText("");
+        txtConcepto.setText("");
+        txtCaja.setText("");
+        txtUsuario.setText("");
+        txtHora.setText("");
+        txtFecha.setText("");
+        txtMonto.setText("");
+    }
 }

@@ -5,7 +5,11 @@
  */
 package Vista;
 
+import Controlador.AbrirCajaControl;
 import Controlador.LoginControl;
+import Controlador.ManejadorFechas;
+import Modelo.FlujoCajaDAO;
+import Modelo.UsuarioCajaDAO;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,21 +21,23 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    int botonSeleccionado = 0;
+
     public Login() {
         setUndecorated(true);
         initComponents();
         setLocationRelativeTo(null);
         camposTransparentes();
     }
-    
-    public void camposTransparentes(){        
-        Color c = new Color(0,0,1,0.01f);
+
+    public void camposTransparentes() {
+        Color c = new Color(0, 0, 1, 0.01f);
         txtUsuario.setBackground(c);
         txtPass.setBackground(c);
         btnIngresar.setBackground(c);
+        grupoBotones.add(btnCaja1);
+        grupoBotones.add(btnCaja2);
+        grupoBotones.add(btnVIP);
     }
 
     /**
@@ -43,6 +49,14 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelSeleccionarCaja = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
+        btnVIP = new javax.swing.JToggleButton();
+        btnCaja1 = new javax.swing.JToggleButton();
+        btnCaja2 = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        grupoBotones = new javax.swing.ButtonGroup();
         customPanel2 = new Controlador.CustomPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -54,6 +68,62 @@ public class Login extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         txtPass = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+
+        panelSeleccionarCaja.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("INDIQUE SU CAJA");
+        panelSeleccionarCaja.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 40));
+
+        btnVIP.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        btnVIP.setText("VIP");
+        btnVIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVIPActionPerformed(evt);
+            }
+        });
+        panelSeleccionarCaja.getContentPane().add(btnVIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 170, 80));
+
+        btnCaja1.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        btnCaja1.setText("GENERAL 1");
+        btnCaja1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCaja1ActionPerformed(evt);
+            }
+        });
+        panelSeleccionarCaja.getContentPane().add(btnCaja1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 170, 80));
+
+        btnCaja2.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        btnCaja2.setText("GENERAL 2");
+        btnCaja2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCaja2ActionPerformed(evt);
+            }
+        });
+        panelSeleccionarCaja.getContentPane().add(btnCaja2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 170, 80));
+
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("CANCELAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        panelSeleccionarCaja.getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 170, 40));
+
+        jButton2.setBackground(new java.awt.Color(0, 153, 0));
+        jButton2.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("INGRESAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        panelSeleccionarCaja.getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 170, 60));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -155,19 +225,45 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        String usuario = txtUsuario.getText().toUpperCase();
-        String pass = String.valueOf(txtPass.getPassword()).toUpperCase();
+        //173, 431
         try {
-            if (new LoginControl().validar(usuario, pass)) {
-                Menu m = new Menu(usuario);
-                m.setVisible(true);
-                dispose();
-            }else{
-                JOptionPane.showMessageDialog(getRootPane(), "ERROR DE DATOS, VERIFICA TU USUARIO O CONTRASEÑA");
+            String usuario = txtUsuario.getText().toUpperCase();
+            String pass = String.valueOf(txtPass.getPassword()).toUpperCase();
+            String fechaInicio = new FlujoCajaDAO().getFechaDeMaxIdFlujoDeUsuario(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()));
+            System.out.println(fechaInicio);
+            int idFlujoCaja = new FlujoCajaDAO().getEstadoConFecha(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()), fechaInicio);
+            System.out.println(idFlujoCaja);
+            int flag = 0;
+            if (idFlujoCaja > 0) {
+                flag++;
             }
+            System.out.println(flag);
+            System.out.println(idFlujoCaja);
+            if (flag > 0) {
+                //si ya se aperturo la caja entonces logearse normal
+                if (new LoginControl().validar(usuario, pass)) {
+                    //validar que ya haya seleccionado una caja despues de haber aperturado
+                    //si ya selecciono una caja, este panel no debe aparecer                
+                    Menu m = new Menu(usuario);
+                    m.setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(getRootPane(), "ERROR DE DATOS, VERIFICA TU USUARIO O CONTRASEÑA");
+                }
+            } else {
+                //actualizar segun la caja que se seleccionó
+                panelSeleccionarCaja.setVisible(true);
+                panelSeleccionarCaja.setBounds(800, 300, 220, 490);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
@@ -177,6 +273,64 @@ public class Login extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            int idUsuario = new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase());
+            System.out.println(idUsuario);
+            if (botonSeleccionado > 0) {
+                switch (botonSeleccionado) {
+                    case 3:
+                        //actualizar la tabla usuariocaja
+                        if (new UsuarioCajaDAO().updateUsuarioCaja(3, idUsuario)) {
+                            System.out.println("caja general 1");
+                        }
+                        break;
+                    case 4:
+                        if (new UsuarioCajaDAO().updateUsuarioCaja(4, idUsuario)) {
+                            System.out.println("caja general 2");
+                        }
+                        break;
+                    case 5:
+                        if (new UsuarioCajaDAO().updateUsuarioCaja(5, idUsuario)) {
+                            System.out.println("caja VIP");
+                        }
+                        break;
+                }
+
+                Menu m = new Menu(txtUsuario.getText().toUpperCase());
+                m.setVisible(true);
+                dispose();
+                panelSeleccionarCaja.dispose();
+            } else {
+                JOptionPane.showMessageDialog(getRootPane(), "SELECCIONE UNA CAJA");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        panelSeleccionarCaja.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnCaja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaja1ActionPerformed
+        if (btnCaja1.isSelected()) {
+            botonSeleccionado = 3;
+        }
+    }//GEN-LAST:event_btnCaja1ActionPerformed
+
+    private void btnCaja2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaja2ActionPerformed
+        if (btnCaja2.isSelected()) {
+            botonSeleccionado = 4;
+        }
+    }//GEN-LAST:event_btnCaja2ActionPerformed
+
+    private void btnVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVIPActionPerformed
+        if (btnVIP.isSelected()) {
+            botonSeleccionado = 5;
+        }
+    }//GEN-LAST:event_btnVIPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,15 +369,23 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnCaja1;
+    private javax.swing.JToggleButton btnCaja2;
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JToggleButton btnVIP;
     private Controlador.CustomPanel customPanel2;
+    private javax.swing.ButtonGroup grupoBotones;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JDialog panelSeleccionarCaja;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

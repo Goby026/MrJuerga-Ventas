@@ -101,7 +101,24 @@ pst.close();
         }finally{
             this.cerrar();
         }
-        return li;    
+        return li;
     }
     
+    public int getIdCategoria(String nomCate) throws Exception {
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT idcategoria FROM categoria WHERE descripcion = '"+nomCate+"'");
+            ResultSet res = pst.executeQuery();
+            if (res.next()) {
+                return res.getInt("idcategoria");
+            }
+            pst.close();
+            res.close();
+        } catch (Exception error) {
+            System.out.println(error.getMessage());
+        }finally{
+            this.cerrar();
+        }
+        return -1;
+    }
 }

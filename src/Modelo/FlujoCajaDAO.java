@@ -155,14 +155,59 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
         }
         return -1;
     }
+    
+    /* METODO PARA OBTENER EL ID DE FLUJO DE CAJA PARA VALIDAR EL LOGIN CUANDO YA SELECCIONO UNA CAJA */
+    public int getEstadoConFecha(int idUsuario, String fecha) throws Exception {
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select MAX(estado) from flujocaja where fecha_inicio = '"+fecha+"' and idusuario = "+idUsuario+"");
+            ResultSet res = pst.executeQuery();
+            if (res.next()) {
+                return res.getInt("MAX(estado)");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return -1;
+    }
+    
+    /* METODO PARA OBTENER LA FECHA DE UN DETERMINADO FLUJO DE CAJA */
+    public String getFechaDeMaxIdFlujoDeUsuario(int idUsuario) throws Exception {
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT MAX(fecha_inicio) FROM flujocaja where idusuario="+idUsuario+"");
+            ResultSet res = pst.executeQuery();
+            if (res.next()) {
+                return res.getString("MAX(fecha_inicio)");
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return null;
+    }
 
-    /* METODO PARA CARGAR MONTO DE VENTAS DESDE QUE SE APERTURA LA CAJA */
-    public double getMontoFlujo(int idFlujoCaja, int tipoPago) throws Exception {
+    /* monto total del flujo de caja */
+    public double getMontoFlujo(int idFlujoCaja, int tipoPago, int numCaja) throws Exception {
         double monto = 0.0;
         try {
             this.conectar();
-            //PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = " + idFlujoCaja + " and tipopago = 1 OR tipopago = 2 OR tipopago = 3 OR tipopago = 4");
-            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = " + idFlujoCaja +"");
+            //PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = " + idFlujoCaja + " and tipopago = 1 OR tipopago = 2 OR tipopago = 3 OR tipopago = 4");            
+            PreparedStatement pst = null;
+            switch(numCaja){
+                case 2:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from venta2 inner join ventaproducto2 on venta2.idventa2 = ventaproducto2.idventa where venta2.idflujocaja = "+idFlujoCaja+"");
+                    break;
+                case 3:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from venta3 inner join ventaproducto3 on venta3.idventa3 = ventaproducto3.idventa where venta3.idflujocaja = "+idFlujoCaja+"");
+                    break;
+                default:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = " + idFlujoCaja +"");
+                    break;
+            }
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 monto = res.getDouble("sum(subtotal)");
@@ -178,11 +223,23 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
     }
     
     /* METODO PARA OBTENER EL MONTO VISA DESDE QUE SE APERTURA LA CAJA */
-    public double getMontoVISA(int idFlujoCaja) throws Exception {
+    public double getMontoVISA(int idFlujoCaja, int numCaja) throws Exception {
         double monto = 0.0;
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = "+idFlujoCaja+" and tipopago = 3");
+            PreparedStatement pst = null;
+            switch(numCaja){
+                case 2:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from venta2 inner join ventaproducto2 on venta2.idventa2 = ventaproducto2.idventa where venta2.idflujocaja = "+idFlujoCaja+" and tipopago = 3");
+                    break;
+                case 3:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from venta3 inner join ventaproducto3 on venta3.idventa3 = ventaproducto3.idventa where venta3.idflujocaja = "+idFlujoCaja+" and tipopago = 3");
+                    break;
+                default:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = "+idFlujoCaja+" and tipopago = 3");
+                    break;
+            }
+            
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 monto = res.getDouble("sum(subtotal)");
@@ -197,12 +254,23 @@ public class FlujoCajaDAO extends Conexion implements FlujoCajaCRUD {
         return monto;
     }
     
-           /* METODO PARA OBTENER EL MONTO MASTERCARD DESDE QUE SE APERTURA LA CAJA */
-    public double getMontoMASTER(int idFlujoCaja) throws Exception {
+    /* METODO PARA OBTENER EL MONTO MASTERCARD DESDE QUE SE APERTURA LA CAJA */
+    public double getMontoMASTER(int idFlujoCaja, int numCaja) throws Exception {
         double monto = 0.0;
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = "+idFlujoCaja+" and tipopago = 2");
+            PreparedStatement pst = null;
+            switch(numCaja){
+                case 2:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from venta2 inner join ventaproducto2 on venta2.idventa2 = ventaproducto2.idventa where venta2.idflujocaja = "+idFlujoCaja+" and tipopago = 2");
+                    break;
+                case 3:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from venta3 inner join ventaproducto3 on venta3.idventa3 = ventaproducto3.idventa where venta3.idflujocaja = "+idFlujoCaja+" and tipopago = 2");
+                    break;
+                default:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from venta inner join ventaproducto on venta.idventa = ventaproducto.idventa where venta.idflujocaja = "+idFlujoCaja+" and tipopago = 2");
+                    break;
+            }
             ResultSet res = pst.executeQuery();
             while (res.next()) {
                 monto = res.getDouble("sum(subtotal)");

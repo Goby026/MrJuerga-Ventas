@@ -22,4 +22,21 @@ public class LoginControl {
         }
         return false;
     }
+    
+    //metodo para obtener el id de usuario cob su nombre de usuario
+    public int getIdUsuarioConNombre(String nombre) throws Exception {
+        try {
+            UsuarioDAO udao = new UsuarioDAO();
+            for (Usuario u : udao.listar()) {
+                if (u.getUsuario().equals(nombre)) {
+                    return u.getId();
+                }
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return -1;
+    }
+    
+    
 }

@@ -1,4 +1,3 @@
-
 package Modelo;
 
 import Interfaces.UsuarioCajaCRUD;
@@ -7,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioCajaDAO extends Conexion implements UsuarioCajaCRUD{
+public class UsuarioCajaDAO extends Conexion implements UsuarioCajaCRUD {
 
     @Override
     public boolean Registrar(UsuarioCaja uc) throws Exception {
@@ -96,5 +95,22 @@ public class UsuarioCajaDAO extends Conexion implements UsuarioCajaCRUD{
         }
         return lista;
     }
-    
+
+    public boolean updateUsuarioCaja(int idCaja, int idUsuario) throws Exception {
+        try {            
+            String sql = "update usuariocaja set idcaja = " + idCaja + " where idusuario = " + idUsuario + "";
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            if (pst.executeUpdate() > 0) {
+                return true;
+            }
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        }finally{
+            this.cerrar();
+        }
+        return false;
+    }
+
 }

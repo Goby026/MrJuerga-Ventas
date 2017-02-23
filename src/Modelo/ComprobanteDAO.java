@@ -141,5 +141,23 @@ public class ComprobanteDAO extends Conexion implements ComprobanteCRUD {
         }
         return lista;
     }
+    
+    public int getIdUltimoComprobante() throws Exception {        
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT  idcomprobante FROM comprobante ORDER BY fechacomprobante DESC limit 1");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("idcomprobante");
+            }
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return -1;
+    }
 
 }

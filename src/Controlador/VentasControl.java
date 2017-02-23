@@ -61,23 +61,18 @@ public class VentasControl {
         tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
 
     }
-    
+
     public void llenarTablaProductos(String nomCate, JTable tabla) throws Exception {
-        CategoriaDAO dcate = new CategoriaDAO();
-        for (Categoria c : dcate.Listar()) {
-            if (c.getDescripcion().equals(nomCate)) {
-                int id = c.getIdcategoria();
-                new VentasControl().LlenarTablaProductosConId(id, tabla, 50, 100, 200);
-            }
-        }
+        int id = new CategoriaDAO().getIdCategoria(nomCate);
+        new VentasControl().LlenarTablaProductosConId(id, tabla, 50, 100, 200);
     }
 
-    public void cargarTipoDocumento(JComboBox combo) throws Exception {
-        TipoComprobanteDAO cdao = new TipoComprobanteDAO();
-        for (TipoComprobante c : cdao.Listar()) {
-            combo.addItem(c.getDescripcion());
-        }
-    }
+//    public void cargarTipoDocumento(JComboBox combo) throws Exception {
+//        TipoComprobanteDAO cdao = new TipoComprobanteDAO();
+//        for (TipoComprobante c : cdao.Listar()) {
+//            combo.addItem(c.getDescripcion());
+//        }
+//    }
 
     //metodo para cargar la lista de categorias
     public void llenarListaCategorias(JList lista) throws Exception {
@@ -212,47 +207,54 @@ public class VentasControl {
         return -1;
     }
 
-    /*OBTENER ULTIMO REGISTRO DE VENTA */
+    /*OBTENER ULTIMO REGISTRO DE VENTA CAJA 1 */
     public int getIdDeUltimaVentaRegistrada() throws Exception {
-        VentaDAO vdao = new VentaDAO();
-        int ultimaFila = vdao.listar().size() - 1;
-        Venta v = vdao.listar().get(ultimaFila);
-        return v.getIdVenta();
+        return new VentaDAO().getIdUltimaVenta();
     }
-    
-     /*OBTENER ULTIMO REGISTRO DE COMPROBANTE */
+
+    /*OBTENER ULTIMO REGISTRO DE VENTA CAJA 2 */
+    public int getIdDeUltimaVentaRegistrada2() throws Exception {
+        return new VentaDAO().getIdUltimaVenta2();
+    }
+
+    /*OBTENER ULTIMO REGISTRO DE VENTA CAJA 3*/
+    public int getIdDeUltimaVentaRegistrada3() throws Exception {
+        return new VentaDAO().getIdUltimaVenta3();
+    }
+
+    /*OBTENER ULTIMO REGISTRO DE COMPROBANTE */
     public int getIdDeUltimoComprobanteRegistrado() throws Exception {
-        ComprobanteDAO cdao = new ComprobanteDAO();
-        int ultimaFila = cdao.Listar().size() - 1;
-        Comprobante c = cdao.Listar().get(ultimaFila);
-        return c.getIdcomprobante();
+//        ComprobanteDAO cdao = new ComprobanteDAO();
+//        int ultimaFila = cdao.Listar().size() - 1;
+//        Comprobante c = cdao.Listar().get(ultimaFila);
+//        return c.getIdcomprobante();
+        return new ComprobanteDAO().getIdUltimoComprobante();
     }
 
     //metodo para registrar la venta
-    public boolean registrarVenta(Object[] datos) throws Exception {
-        Venta v = new Venta();
-        v.setFecha((String) datos[0]);
-        v.setHora((String) datos[1]);
-        v.setIdUsuario((Integer) datos[2]);
-        v.setIdCliente((Integer) datos[3]);
-        v.setIdComprobante((Integer) datos[4]);
-        v.setEstado((Integer) datos[5]);
-        v.setTipopago((Integer) datos[6]);
-        v.setnOperacion((String) datos[7]);
-        v.setIdcaja((Integer) datos[8]);
-        v.setIdFlujoCaja((Integer)datos[9]);
-        try {
-            VentaDAO vdao = new VentaDAO();
-            if (vdao.registrar(v)) {
-                return true;
-            }
-        } catch (Exception e) {
-            throw e;
-        }
-        return false;
-    }
-
-    //metodo para registrar detalles de venta
+//    public boolean registrarVenta(Object[] datos) throws Exception {
+//        Venta v = new Venta();
+//        v.setFecha((String) datos[0]);
+//        v.setHora((String) datos[1]);
+//        v.setIdUsuario((Integer) datos[2]);
+//        v.setIdCliente((Integer) datos[3]);
+//        v.setIdTipoComprobante((Integer) datos[4]);
+//        v.setEstado((Integer) datos[5]);
+//        v.setTipopago((Integer) datos[6]);
+//        v.setnOperacion((String) datos[7]);
+//        v.setIdcaja((Integer) datos[8]);
+//        v.setIdFlujoCaja((Integer) datos[9]);
+//        try {
+//            VentaDAO vdao = new VentaDAO();
+//            if (vdao.registrar(v)) {
+//                return true;
+//            }
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//        return false;
+//    }
+    //metodo para registrar detalles de venta sin parametros
     public int registrarDetalleDeVenta(JTable tabla, int numVenta) throws Exception {
         try {
             int flag = 0;
@@ -267,6 +269,43 @@ public class VentasControl {
                 VentaProductoDAO vpdao = new VentaProductoDAO();
                 if (vpdao.registrar(vp)) {
                     flag++;
+                }
+            }
+            return flag;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    /* MRTODO PARA REGISTRAR DETALLE DE VENTA DE CAJA 2 O 3 CON PARAMETRO numCaja */
+    public int registrarDetalleDeVenta(JTable tabla, int numVenta, int numCaja) throws Exception {
+        try {
+            int flag = 0;
+            int numFilas = tabla.getRowCount();
+            for (int i = 0; i < numFilas; i++) {
+                VentaProducto vp = new VentaProducto();
+                vp.setIdProducto(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
+                vp.setIdVenta(numVenta);
+                vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
+                vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
+                vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                VentaProductoDAO vpdao = new VentaProductoDAO();
+                switch (numCaja) {
+                    case 2:
+                        if (vpdao.registrar2(vp)) {
+                            flag++;
+                        }
+                        break;
+                    case 3:
+                        if (vpdao.registrar3(vp)) {
+                            flag++;
+                        }
+                        break;
+                    default:
+                        if (vpdao.registrar(vp)) {
+                            flag++;
+                        }
+                        break;
                 }
             }
             return flag;
@@ -305,7 +344,7 @@ public class VentasControl {
             throw e;
         }
     }
-    
+
     /*METODO PARA OBTENER EL ID DE CAJA CON SU NOMBRE*/
     public int getIdCaja(String caja) throws Exception {
         try {
@@ -388,7 +427,7 @@ public class VentasControl {
         }
         return 0;
     }
-    
+
     //metodo para obtener el stock de producto con idProducto e idPresentacion
     public int getStockProductoPresentacion(int idProducto, int idPresentacion) throws Exception {
         try {
@@ -403,12 +442,12 @@ public class VentasControl {
         }
         return 0;
     }
-    
-    public int totalJarras(int stockCaboBlanco){
+
+    public int totalJarras(int stockCaboBlanco) {
         try {
             return stockCaboBlanco * 6;
         } catch (Exception e) {
             throw e;
-        }        
+        }
     }
 }

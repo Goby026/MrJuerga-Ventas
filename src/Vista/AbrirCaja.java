@@ -131,7 +131,7 @@ public class AbrirCaja extends javax.swing.JFrame {
                 btnAperturarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAperturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 690, 230, -1));
+        getContentPane().add(btnAperturar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 683, 230, 40));
 
         btnCancelar.setBackground(new java.awt.Color(255, 0, 0));
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N

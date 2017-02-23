@@ -22,12 +22,13 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Marce
+ * Grøver R£ndiÇh
  */
 public class CerrarCaja extends javax.swing.JFrame {
 
     MyiReportVisor mrv;
     HashMap parametros = new HashMap();
+    int numCaja = 1;
 
     public CerrarCaja(String usuario) throws Exception {
         initComponents();
@@ -42,14 +43,25 @@ public class CerrarCaja extends javax.swing.JFrame {
         lblFecha.setText(new ManejadorFechas().getFechaActual());
         lblCaja.setText(new AbrirCajaControl().getCajaDeUsuario(usuario));
         txtUsuario.setText(usuario);
+        switch (lblCaja.getText()) {
+            case "GENERAL 2":
+                numCaja =2;
+                break;
+            case "VIP":
+                numCaja = 3;
+                break;
+            default:
+                numCaja = 1;
+                break;
+        }
         if (new AbrirCajaControl().verificarEstadoCaja(usuario) > 0) {
             lblEstado.setText("CAJA APERTURADA");
             lblEstado.setForeground(Color.blue);
             int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new CerrarCajaControl().getIdUsuario(usuario), new CerrarCajaControl().getIdCaja(lblCaja.getText()));
             txtMontoApertura.setText("" + new CerrarCajaControl().getSaldoInicial(idFlujoCaja));
-            txtVisa.setText("" + new FlujoCajaDAO().getMontoVISA(idFlujoCaja));
-            txtMaster.setText("" + new FlujoCajaDAO().getMontoMASTER(idFlujoCaja));
-            txtEfectivo.setText("" + new CerrarCajaControl().getMontoVentas(new CerrarCajaControl().getIdUsuario(usuario), new CerrarCajaControl().getIdCaja(lblCaja.getText())));
+            txtVisa.setText("" + new FlujoCajaDAO().getMontoVISA(idFlujoCaja,numCaja));
+            txtMaster.setText("" + new FlujoCajaDAO().getMontoMASTER(idFlujoCaja, numCaja));
+            txtEfectivo.setText("" + new CerrarCajaControl().getMontoVentas(new CerrarCajaControl().getIdUsuario(usuario), new CerrarCajaControl().getIdCaja(lblCaja.getText()),numCaja));
             txtEgresos.setText("" + new UsuarioGastosDAO().getMontoEgresos(idFlujoCaja));
             txtBalance.setText("" + calcularBalanceTotal());
         } else {
@@ -59,7 +71,7 @@ public class CerrarCaja extends javax.swing.JFrame {
 
     public double calcularBalanceTotal() {
         double saldoInicial = Double.parseDouble(txtMontoApertura.getText()), visa = Double.parseDouble(txtVisa.getText()), mastercard = Double.parseDouble(txtMaster.getText()), efectivo = Double.parseDouble(txtEfectivo.getText()), egresos = Double.parseDouble(txtEgresos.getText()), jarras = Double.parseDouble(txtJarras.getText());
-        return (saldoInicial + efectivo + jarras) - (visa + mastercard + egresos);
+        return (efectivo + jarras) - (visa + mastercard + egresos);
     }
 
     /**
@@ -608,6 +620,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 if (new CerrarCajaControl().cerrarCaja(new CerrarCajaControl().getIdUsuario(txtUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText()), fc)) {
                     JOptionPane.showMessageDialog(null, "SE CERRO LA CAJA CORRECTAMENTE");
                     datosIniciales(txtUsuario.getText());
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "ERROR AL CERRAR LA CAJA");
                 }
@@ -643,6 +656,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 parametros.put("visa", Double.parseDouble(txtVisa.getText()));
                 parametros.put("master", Double.parseDouble(txtMaster.getText()));
                 parametros.put("efectivo", txtEfectivo.getText());
+                parametros.put("jarras", Double.parseDouble(txtJarras.getText()));
                 parametros.put("egresos", txtEgresos.getText());
                 parametros.put("balance", txtBalance.getText());
                 parametros.put("descuadre", lblDescuadre.getText());
@@ -752,9 +766,8 @@ public class CerrarCaja extends javax.swing.JFrame {
 
     private void jarraCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jarraCalcularActionPerformed
         try {
-            txtEfectivo.setText("" + new CerrarCajaControl().getMontoVentas(new CerrarCajaControl().getIdUsuario(txtUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText())));
+            txtEfectivo.setText("" + new CerrarCajaControl().getMontoVentas(new CerrarCajaControl().getIdUsuario(txtUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText()),numCaja));
             if (!txtMontoJarras.getText().trim().isEmpty()) {
-
                 Double efectivo = Double.parseDouble(txtEfectivo.getText());
                 txtJarras.setText(txtMontoJarras.getText());
                 txtBalance.setText("" + calcularBalanceTotal());
@@ -763,7 +776,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 NumericJarras.dispose();
             } else {
                 txtJarras.setText("0.0");
-                txtEfectivo.setText("" + new CerrarCajaControl().getMontoVentas(new CerrarCajaControl().getIdUsuario(txtUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText())));
+                txtEfectivo.setText("" + new CerrarCajaControl().getMontoVentas(new CerrarCajaControl().getIdUsuario(txtUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText()),numCaja));
                 txtBalance.setText("" + calcularBalanceTotal());
                 NumericJarras.dispose();
             }
