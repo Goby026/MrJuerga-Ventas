@@ -5,14 +5,10 @@
  */
 package Vista;
 
-import Controlador.AbrirCajaControl;
 import Controlador.LoginControl;
-import Controlador.ManejadorFechas;
 import Modelo.FlujoCajaDAO;
 import Modelo.UsuarioCajaDAO;
 import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -229,9 +225,10 @@ public class Login extends javax.swing.JFrame {
         try {
             String usuario = txtUsuario.getText().toUpperCase();
             String pass = String.valueOf(txtPass.getPassword()).toUpperCase();
-            String fechaInicio = new FlujoCajaDAO().getFechaDeMaxIdFlujoDeUsuario(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()));
+            String fechaInicio = new FlujoCajaDAO().getFechaDeMaxIdFlujoDeUsuario(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()));            
             System.out.println(fechaInicio);
-            int idFlujoCaja = new FlujoCajaDAO().getEstadoConFecha(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()), fechaInicio);
+            //int idFlujoCaja = new FlujoCajaDAO().getEstadoConFecha(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()), fechaInicio);
+            int idFlujoCaja = new FlujoCajaDAO().getEstadoConFecha(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()));
             System.out.println(idFlujoCaja);
             int flag = 0;
             if (idFlujoCaja > 0) {

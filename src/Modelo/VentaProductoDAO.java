@@ -151,10 +151,22 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
         return lista;
     }
 
-    public double getMontoDeVenta(int numVenta) throws Exception {
+    public double getMontoDeVenta(int numVenta, int num) throws Exception {
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("select sum(subtotal) from ventaproducto where idventa = " + numVenta + "");
+            PreparedStatement pst = null;
+            switch (num) {
+                case 1:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from ventaproducto where idventa = " + numVenta + "");
+                    break;
+                case 2:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from ventaproducto2 where idventa = " + numVenta + "");
+                    break;
+                case 3:
+                    pst = this.conexion.prepareStatement("select sum(subtotal) from ventaproducto3 where idventa = " + numVenta + "");
+                    break;
+            }
+
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 return rs.getDouble("sum(subtotal)");
@@ -169,33 +181,55 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
         return -1;
     }
 
-    public List<DatosAnulacion> getDatosTabla(int numVenta, Integer num) throws Exception {
+    public List<DatosAnulacion> getDatosTabla(int numVenta, Integer num, Integer idAlmacen) throws Exception {
         try {
             List<DatosAnulacion> lista = null;
             PreparedStatement pst = null;
             ResultSet rs = null;
             this.conectar();
             switch (num) {
+                case 1:
+                    pst = this.conexion.prepareStatement("SELECT productopresentacion.idproductopresentacion, producto.nombre, presentacion.descripcion,productopresentacion.precio, ventaproducto.cantidad, ventaproducto.subtotal\n"
+                            + "from venta\n"
+                            + "inner join ventaproducto on ventaproducto.idventa = venta.idventa\n"
+                            + "inner join producto on ventaproducto.idproducto = producto.idproducto\n"
+                            + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
+                            + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
+                            + "WHERE venta.idventa = " + numVenta + " and productopresentacion.idalmacen = " + idAlmacen);
+                    lista = new ArrayList();
+                    rs = pst.executeQuery();
+                    while (rs.next()) {
+                        DatosAnulacion da = new DatosAnulacion();
+                        da.setIdProductoPresentacion(rs.getInt(1));
+                        da.setProducto(rs.getString(2));
+                        da.setPresentacion(rs.getString(3));
+                        da.setPrecio(rs.getDouble(4));
+                        da.setCantidad(rs.getInt(5));
+                        da.setSubtotal(rs.getDouble(6));
+                        lista.add(da);
+                        //model_diario.addRow(datos);
+                    }
+                    //tbl_diario.setModel(model_diario);    
+                    break;
                 case 2:
-                    pst = this.conexion.prepareStatement("select producto.nombre,presentacion.descripcion ,productopresentacion.precio, ventaproducto2.cantidad, ventaproducto2.subtotal from caja\n"
-                            + "inner join usuariocaja on caja.idcaja = usuariocaja.idcaja\n"
-                            + "inner join usuario on usuariocaja.idusuario = usuario.idusuario\n"
-                            + "inner join venta2 on usuario.idusuario = venta2.idusuario\n"
-                            + "inner join ventaproducto2 on venta2.idventa2 = ventaproducto2.idventa\n"
+                    pst = this.conexion.prepareStatement("SELECT productopresentacion.idproductopresentacion, producto.nombre, presentacion.descripcion,productopresentacion.precio, ventaproducto2.cantidad, ventaproducto2.subtotal\n"
+                            + "from venta2\n"
+                            + "inner join ventaproducto2 on ventaproducto2.idventa = venta2.idventa2\n"
                             + "inner join producto on ventaproducto2.idproducto = producto.idproducto\n"
                             + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
                             + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                            + "where venta2.idventa2 = " + numVenta + "");
+                            + "WHERE venta2.idventa2 = " + numVenta + " and productopresentacion.idalmacen = " + idAlmacen);
 
                     lista = new ArrayList();
                     rs = pst.executeQuery();
                     while (rs.next()) {
                         DatosAnulacion da = new DatosAnulacion();
-                        da.setProducto(rs.getString("producto.nombre"));
-                        da.setPresentacion(rs.getString("presentacion.descripcion"));
-                        da.setPrecio(rs.getDouble("productopresentacion.precio"));
-                        da.setCantidad(rs.getInt("ventaproducto.cantidad"));
-                        da.setSubtotal(rs.getDouble("ventaproducto.subtotal"));
+                        da.setIdProductoPresentacion(rs.getInt(1));
+                        da.setProducto(rs.getString(2));
+                        da.setPresentacion(rs.getString(3));
+                        da.setPrecio(rs.getDouble(4));
+                        da.setCantidad(rs.getInt(5));
+                        da.setSubtotal(rs.getDouble(6));
                         lista.add(da);
                         //model_diario.addRow(datos);
                     }
@@ -203,52 +237,27 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
 
                     break;
                 case 3:
-                    pst = this.conexion.prepareStatement("select producto.nombre,presentacion.descripcion ,productopresentacion.precio, ventaproducto3.cantidad, ventaproducto3.subtotal from caja\n"
-                            + "inner join usuariocaja on caja.idcaja = usuariocaja.idcaja\n"
-                            + "inner join usuario on usuariocaja.idusuario = usuario.idusuario\n"
-                            + "inner join venta3 on usuario.idusuario = venta3.idusuario\n"
-                            + "inner join ventaproducto3 on venta3.idventa3 = ventaproducto3.idventa\n"
+                    pst = this.conexion.prepareStatement("SELECT productopresentacion.idproductopresentacion, producto.nombre, presentacion.descripcion,productopresentacion.precio, ventaproducto3.cantidad, ventaproducto3.subtotal\n"
+                            + "from venta3\n"
+                            + "inner join ventaproducto3 on ventaproducto3.idventa = venta3.idventa3\n"
                             + "inner join producto on ventaproducto3.idproducto = producto.idproducto\n"
                             + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
                             + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                            + "where venta3.idventa3 = " + numVenta + "");
+                            + "WHERE venta3.idventa3 = " + numVenta + " and productopresentacion.idalmacen = " + idAlmacen);
                     lista = new ArrayList();
                     rs = pst.executeQuery();
                     while (rs.next()) {
                         DatosAnulacion da = new DatosAnulacion();
-                        da.setProducto(rs.getString("producto.nombre"));
-                        da.setPresentacion(rs.getString("presentacion.descripcion"));
-                        da.setPrecio(rs.getDouble("productopresentacion.precio"));
-                        da.setCantidad(rs.getInt("ventaproducto.cantidad"));
-                        da.setSubtotal(rs.getDouble("ventaproducto.subtotal"));
+                        da.setIdProductoPresentacion(rs.getInt(1));
+                        da.setProducto(rs.getString(2));
+                        da.setPresentacion(rs.getString(3));
+                        da.setPrecio(rs.getDouble(4));
+                        da.setCantidad(rs.getInt(5));
+                        da.setSubtotal(rs.getDouble(6));
                         lista.add(da);
                         //model_diario.addRow(datos);
                     }
                     //tbl_diario.setModel(model_diario);     
-                    break;
-                default:
-                    pst = this.conexion.prepareStatement("select producto.nombre,presentacion.descripcion ,productopresentacion.precio, ventaproducto.cantidad, ventaproducto.subtotal from caja\n"
-                            + "inner join usuariocaja on caja.idcaja = usuariocaja.idcaja\n"
-                            + "inner join usuario on usuariocaja.idusuario = usuario.idusuario\n"
-                            + "inner join venta on usuario.idusuario = venta.idusuario\n"
-                            + "inner join ventaproducto on venta.idventa = ventaproducto.idventa\n"
-                            + "inner join producto on ventaproducto.idproducto = producto.idproducto\n"
-                            + "inner join productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
-                            + "inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion\n"
-                            + "where venta.idventa = " + numVenta + "");
-                    lista = new ArrayList();
-                    rs = pst.executeQuery();
-                    while (rs.next()) {
-                        DatosAnulacion da = new DatosAnulacion();
-                        da.setProducto(rs.getString("producto.nombre"));
-                        da.setPresentacion(rs.getString("presentacion.descripcion"));
-                        da.setPrecio(rs.getDouble("productopresentacion.precio"));
-                        da.setCantidad(rs.getInt("ventaproducto.cantidad"));
-                        da.setSubtotal(rs.getDouble("ventaproducto.subtotal"));
-                        lista.add(da);
-                        //model_diario.addRow(datos);
-                    }
-                    //tbl_diario.setModel(model_diario);    
                     break;
             }
 
@@ -262,8 +271,14 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
         }
     }
 
-    public boolean sumarStock(int idProdPresentacion, int stock) throws Exception {
-        String sql = "UPDATE `mrjuerga`.`productopresentacion` SET `stock`=" + stock + " WHERE `idproductopresentacion`=" + idProdPresentacion + "";
+    public boolean sumarStock(int idProdPresentacion, int cant, int tipoVenta) throws Exception {
+        //tipoVenta ==> 1= venta Real; 2= venta nota pedido
+        String stock = "stock";
+        if (tipoVenta == 2) {
+            stock = "stock2";
+        }
+        
+        String sql = "UPDATE `productopresentacion` SET "+stock+"=" + cant + " WHERE `idproductopresentacion`=" + idProdPresentacion + "";
         try {
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
@@ -273,21 +288,26 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             }
         } catch (Exception e) {
             throw e;
+        } finally {
+            this.cerrar();
         }
         return false;
     }
 
+    /* ACTUALIZAR LOS DETALLES DE VENTA CUANDO SE ANULE UNA VENTA */
     public boolean updateVentaProducto(int idVenta, Integer num) throws Exception {
         String sql = null;
         switch (num) {
+            case 1:
+                sql = "UPDATE `ventaproducto` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`=" + idVenta + "";
+                break;
             case 2:
-                sql = "UPDATE `mrjuerga`.`ventaproducto2` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`=" + idVenta + "";
+                sql = "UPDATE `ventaproducto2` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`=" + idVenta + "";
                 break;
             case 3:
-                sql = "UPDATE `mrjuerga`.`ventaproducto3` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`=" + idVenta + "";
+                sql = "UPDATE `ventaproducto3` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`=" + idVenta + "";
                 break;
             default:
-                sql = "UPDATE `mrjuerga`.`ventaproducto` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`=" + idVenta + "";
                 break;
         }
         try {
@@ -299,6 +319,39 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             }
         } catch (Exception e) {
             throw e;
+        } finally {
+            this.cerrar();
+        }
+        return false;
+    }
+
+    /* ACTUALIZAR LOS MONTOS DE OPERACION CUANDO SE ANULE UNA VENTA CON OPERACION COMBINADA */
+    public boolean updateVentaProductoOP(int idventa, Integer num) throws Exception {
+        String sql = null;
+        switch (num) {
+            case 1:
+                sql = "UPDATE `operacion` SET `monto`='0' WHERE `idventa`=" + idventa + "";
+                break;
+            case 2:
+                sql = "UPDATE `operacion2` SET `monto`='0' WHERE `idventa2`=" + idventa + "";
+                break;
+            case 3:
+                sql = "UPDATE `operacion3` SET `monto`='0' WHERE `idventa3`=" + idventa + "";
+                break;
+            default:
+                break;
+        }
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            int rs = pst.executeUpdate();
+            if (rs > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
         }
         return false;
     }

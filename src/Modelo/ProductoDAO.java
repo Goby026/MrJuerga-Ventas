@@ -101,4 +101,26 @@ public class ProductoDAO extends Conexion implements ProductoCRUD {
         }
         return lista;
     }
+    
+    public Producto obtener(int id) throws Exception {
+        Producto p =  null;
+        try {            
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select * from producto where idproducto = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                p = new Producto();
+                p.setIdProducto(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+            }
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return p;
+    }
 }

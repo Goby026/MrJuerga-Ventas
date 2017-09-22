@@ -49,12 +49,12 @@ public class Menu extends javax.swing.JFrame {
 
         MenuOpciones = new javax.swing.JPopupMenu();
         MenuPrecios = new javax.swing.JMenuItem();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnVentas = new javax.swing.JButton();
+        btnAnulaciones = new javax.swing.JButton();
+        btnPagosPersonal = new javax.swing.JButton();
+        btnAperturarCaja = new javax.swing.JButton();
+        btnCerrarCaja = new javax.swing.JButton();
+        btnGastos = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -69,6 +69,7 @@ public class Menu extends javax.swing.JFrame {
         lblCaja = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtHora = new javax.swing.JTextField();
+        lblLogoIdSoft = new javax.swing.JLabel();
 
         MenuPrecios.setText("CONFIGURACIÓN");
         MenuPrecios.addActionListener(new java.awt.event.ActionListener() {
@@ -81,89 +82,89 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(102, 153, 255));
-        jButton1.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ventas.png"))); // NOI18N
-        jButton1.setText("VENTAS");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVentas.setBackground(new java.awt.Color(102, 153, 255));
+        btnVentas.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ventas.png"))); // NOI18N
+        btnVentas.setText("VENTAS");
+        btnVentas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnVentas.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnVentas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVentasActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 250, 210));
+        getContentPane().add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 250, 210));
 
-        jButton2.setBackground(new java.awt.Color(153, 255, 153));
-        jButton2.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anulaciones.png"))); // NOI18N
-        jButton2.setText("ANULACIONES");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAnulaciones.setBackground(new java.awt.Color(153, 255, 153));
+        btnAnulaciones.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        btnAnulaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anulaciones.png"))); // NOI18N
+        btnAnulaciones.setText("ANULACIONES");
+        btnAnulaciones.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAnulaciones.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnAnulaciones.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAnulaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAnulacionesActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 370, 250, 210));
+        getContentPane().add(btnAnulaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 330, 250, 210));
 
-        jButton3.setBackground(new java.awt.Color(102, 255, 102));
-        jButton3.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pagospersonal.png"))); // NOI18N
-        jButton3.setText("PAGOS PERSONAL");
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnPagosPersonal.setBackground(new java.awt.Color(102, 255, 102));
+        btnPagosPersonal.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        btnPagosPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pagospersonal.png"))); // NOI18N
+        btnPagosPersonal.setText("PAGOS PERSONAL");
+        btnPagosPersonal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPagosPersonal.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnPagosPersonal.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPagosPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnPagosPersonalActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 370, 250, 210));
+        getContentPane().add(btnPagosPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 330, 250, 210));
 
-        jButton4.setBackground(new java.awt.Color(255, 51, 0));
-        jButton4.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/abrirCaja.png"))); // NOI18N
-        jButton4.setText("APERTURAR CAJA");
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnAperturarCaja.setBackground(new java.awt.Color(255, 51, 0));
+        btnAperturarCaja.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        btnAperturarCaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/abrirCaja.png"))); // NOI18N
+        btnAperturarCaja.setText("APERTURAR CAJA");
+        btnAperturarCaja.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAperturarCaja.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnAperturarCaja.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAperturarCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnAperturarCajaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 590, 250, 210));
+        getContentPane().add(btnAperturarCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 550, 250, 210));
 
-        jButton5.setBackground(new java.awt.Color(255, 153, 102));
-        jButton5.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrarCaja.png"))); // NOI18N
-        jButton5.setText("CERRAR CAJA");
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrarCaja.setBackground(new java.awt.Color(255, 153, 102));
+        btnCerrarCaja.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        btnCerrarCaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrarCaja.png"))); // NOI18N
+        btnCerrarCaja.setText("CERRAR CAJA");
+        btnCerrarCaja.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCerrarCaja.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnCerrarCaja.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCerrarCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnCerrarCajaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 590, 250, 210));
+        getContentPane().add(btnCerrarCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 550, 250, 210));
 
-        jButton6.setBackground(new java.awt.Color(255, 204, 51));
-        jButton6.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gastos.png"))); // NOI18N
-        jButton6.setText("GASTOS");
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnGastos.setBackground(new java.awt.Color(255, 204, 51));
+        btnGastos.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        btnGastos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gastos.png"))); // NOI18N
+        btnGastos.setText("GASTOS");
+        btnGastos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGastos.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnGastos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGastos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnGastosActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 590, 250, 210));
+        getContentPane().add(btnGastos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 550, 250, 210));
 
         jPanel6.setBackground(new java.awt.Color(51, 153, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -251,38 +252,52 @@ public class Menu extends javax.swing.JFrame {
         txtHora.setForeground(new java.awt.Color(255, 255, 255));
         txtHora.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHora.setText("hora");
-        txtHora.setBorder(null);
         jPanel1.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, 460, 70));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 220));
 
+        lblLogoIdSoft.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoIdSoft.PNG"))); // NOI18N
+        lblLogoIdSoft.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLogoIdSoftMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblLogoIdSoft, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 800, -1, 160));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         try {
             int flag = 0;
-            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AbrirCajaControl().getIdUsuario(lblUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()));
             FlujoCajaDAO fcdao = new FlujoCajaDAO();
-            for (FlujoCaja fc : fcdao.Listar()) {
-                if (fc.getIdFlujoCaja() == idFlujoCaja && fc.getEstado().equals("1")) {
-                    flag++;
+            FlujoCaja fcaja = new FlujoCaja();
+            int idFlujoCaja = fcdao.getIdFlujo(new AbrirCajaControl().getIdUsuario(lblUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()));
+            System.out.println("idflujo de caja: " + idFlujoCaja);
+            fcaja = fcdao.obtener(idFlujoCaja);
+//            if (fcaja.getIdFlujoCaja() == idFlujoCaja && fcaja.getEstado().equals("1")) {
+//                flag++;
+//            }
+            if (idFlujoCaja != 0) {
+
+                System.out.println("idCaja: " + fcaja.getIdCaja());
+
+                if (fcaja.getIdCaja() == 5) {
+                    VentasVIP vvip = new VentasVIP(lblUsuario.getText().toUpperCase());
+                    vvip.setVisible(true);
+                } else {
+                    Ventas v = new Ventas(lblUsuario.getText().toUpperCase());
+                    v.setVisible(true);
                 }
-            }
-            if (flag > 0) {
-                Ventas v = new Ventas(lblUsuario.getText().toUpperCase());
-                v.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "DEBE APERTURAR CAJA PARA REALIZAR VENTAS");
             }
-
-            //dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnVentasActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAnulacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnulacionesActionPerformed
         try {
             Anulaciones a = new Anulaciones(lblUsuario.getText().toUpperCase());
             a.setVisible(true);
@@ -290,9 +305,9 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAnulacionesActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnPagosPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagosPersonalActionPerformed
         try {
             PagosPersonal a = new PagosPersonal(lblUsuario.getText().toUpperCase());
             a.setVisible(true);
@@ -300,9 +315,9 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnPagosPersonalActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnAperturarCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAperturarCajaActionPerformed
         try {
             AbrirCaja a = new AbrirCaja(lblUsuario.getText().toUpperCase());
             a.setVisible(true);
@@ -310,9 +325,9 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnAperturarCajaActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnCerrarCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarCajaActionPerformed
         try {
             int flag = 0;
             int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AbrirCajaControl().getIdUsuario(lblUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()));
@@ -333,9 +348,9 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnCerrarCajaActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnGastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGastosActionPerformed
         try {
             int flag = 0;
             int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AbrirCajaControl().getIdUsuario(lblUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()));
@@ -355,7 +370,7 @@ public class Menu extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnGastosActionPerformed
 
     private void lblSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseClicked
         Login l = new Login();
@@ -366,6 +381,30 @@ public class Menu extends javax.swing.JFrame {
     private void MenuPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPreciosActionPerformed
         JOptionPane.showMessageDialog(getRootPane(), "ESTE ES EL  MENU DE CONFIGURACION DE PRECIOS DE PRODUCTOS MAS VENDIDOS");
     }//GEN-LAST:event_MenuPreciosActionPerformed
+
+    private void lblLogoIdSoftMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoIdSoftMouseClicked
+        /* ABRIR NOTA DE PEDIDO */
+        try {
+            int flag = 0;
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AbrirCajaControl().getIdUsuario(lblUsuario.getText()), new AbrirCajaControl().getIdCaja(lblCaja.getText()));
+            FlujoCajaDAO fcdao = new FlujoCajaDAO();
+            for (FlujoCaja fc : fcdao.Listar()) {
+                if (fc.getIdFlujoCaja() == idFlujoCaja && fc.getEstado().equals("1")) {
+                    flag++;
+                }
+            }
+
+            if (flag > 0) {
+                VentasNotaPedido vnp = new VentasNotaPedido(lblUsuario.getText());
+                vnp.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "DEBE APERTURAR CAJA PARA COBRAR NOTAS DE PEDIDO");
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_lblLogoIdSoftMouseClicked
 
     /**
      * @param args the command line arguments
@@ -405,12 +444,12 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu MenuOpciones;
     private javax.swing.JMenuItem MenuPrecios;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btnAnulaciones;
+    private javax.swing.JButton btnAperturarCaja;
+    private javax.swing.JButton btnCerrarCaja;
+    private javax.swing.JButton btnGastos;
+    private javax.swing.JButton btnPagosPersonal;
+    private javax.swing.JButton btnVentas;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
@@ -422,6 +461,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblCaja;
     private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblLogoIdSoft;
     private javax.swing.JLabel lblSalir;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JTextField txtHora;

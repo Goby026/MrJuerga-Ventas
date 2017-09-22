@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-02-09T18:03:31 -->
+<!-- 2017-09-07T11:56:07 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01290089-76cd-4858-86f1-b1dcfee53afb">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idFlujo" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[select venta.idventa, producto.nombre, presentacion.descripcion, ventaproducto.preciou, venta.fecha, venta.hora from venta
-inner join ventaproducto on venta.idventa = ventaproducto.idventa
-inner join producto on ventaproducto.idproducto = producto.idproducto
+		<![CDATA[select venta2.idventa2, producto.nombre, presentacion.descripcion, ventaproducto2.preciou, venta2.fecha, venta2.hora from venta2
+inner join ventaproducto2 on venta2.idventa2 = ventaproducto2.idventa
+inner join producto on ventaproducto2.idproducto = producto.idproducto
 inner join productopresentacion on producto.idproducto = productopresentacion.idproducto
 inner join presentacion on productopresentacion.idpresentacion = presentacion.idpresentacion
-inner join flujocaja on venta.idflujocaja = flujocaja.idflujocaja
-where venta.estado = 0 and flujocaja.idflujocaja = $P{idFlujo};]]>
+inner join flujocaja on venta2.idflujocaja = flujocaja.idflujocaja
+where venta2.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idflujocaja = $P{idFlujo};]]>
 	</queryString>
-	<field name="idventa" class="java.lang.Integer">
+	<field name="idventa2" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nombre" class="java.lang.String">
@@ -105,7 +105,7 @@ where venta.estado = 0 and flujocaja.idflujocaja = $P{idFlujo};]]>
 		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="60" height="20" uuid="87567454-c62d-4bca-98a0-fdeb9e8fab11"/>
-				<textFieldExpression><![CDATA[$F{idventa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{idventa2}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="60" y="0" width="166" height="20" uuid="74a4b95d-d1f8-4878-ae71-11c1dccff719"/>

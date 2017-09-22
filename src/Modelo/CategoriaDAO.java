@@ -15,12 +15,12 @@ import java.util.List;
  *
  * @author toshiba
  */
-public class CategoriaDAO extends Conexion implements CategoriaCRUD{
+public class CategoriaDAO extends Conexion implements CategoriaCRUD {
 
     @Override
     public boolean Registrar(Categoria ca) throws Exception {
-    try {
-            String sql = "INSERT INTO categoria(descripcion,codcategoria)VALUE (?,?)";
+        try {
+            String sql = "INSERT INTO categoria(descripcion,codcategoria)VALUES (?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setString(1, ca.getDescripcion());
@@ -32,15 +32,15 @@ public class CategoriaDAO extends Conexion implements CategoriaCRUD{
             pst.close();
         } catch (Exception e) {
             throw e;
-        }finally{
-        this.cerrar();
-    }
-        return false;    
+        } finally {
+            this.cerrar();
+        }
+        return false;
     }
 
     @Override
     public boolean Modificar(Categoria ca) throws Exception {
-    try {
+        try {
             String sql = ("UPDATE categoria set descripcion = ?, codcategoria=? where idcategoria=?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
@@ -51,13 +51,13 @@ public class CategoriaDAO extends Conexion implements CategoriaCRUD{
             if (res > 0) {
                 return true;
             }
-pst.close();
+            pst.close();
         } catch (Exception e) {
             e.getMessage();
-        }finally{
-        this.cerrar();
-    }
-        return false;    
+        } finally {
+            this.cerrar();
+        }
+        return false;
     }
 
     @Override
@@ -72,17 +72,17 @@ pst.close();
             if (res > 0) {
                 b = true;
             }
-pst.close();
+            pst.close();
         } catch (Exception e) {
             e.getMessage();
-        }finally{
+        } finally {
             this.cerrar();
         }
     }
 
     @Override
     public List<Categoria> Listar() throws Exception {
-    List<Categoria> li = new ArrayList<>();
+        List<Categoria> li = new ArrayList<>();
         try {
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement("SELECT * FROM categoria");
@@ -98,16 +98,16 @@ pst.close();
             res.close();
         } catch (Exception error) {
             System.out.println(error.getMessage());
-        }finally{
+        } finally {
             this.cerrar();
         }
         return li;
     }
-    
+
     public int getIdCategoria(String nomCate) throws Exception {
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT idcategoria FROM categoria WHERE descripcion = '"+nomCate+"'");
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT idcategoria FROM categoria WHERE descripcion = '" + nomCate + "'");
             ResultSet res = pst.executeQuery();
             if (res.next()) {
                 return res.getInt("idcategoria");
@@ -116,7 +116,7 @@ pst.close();
             res.close();
         } catch (Exception error) {
             System.out.println(error.getMessage());
-        }finally{
+        } finally {
             this.cerrar();
         }
         return -1;

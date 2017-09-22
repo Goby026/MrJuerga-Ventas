@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-02-03T21:05:01 -->
+<!-- 2017-02-24T15:57:24 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="215" pageHeight="842" columnWidth="169" leftMargin="26" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d99629a-5971-4d16-983b-daa4be63d3cb">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
@@ -174,15 +174,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{nom_cajero}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="55" y="90" width="54" height="16" uuid="7b7bbf01-9d0d-4d89-99ed-e34447c5d338">
-					<property name="com.jaspersoft.studio.unit.width" value="cm"/>
-				</reportElement>
+			<textField>
+				<reportElement x="54" y="91" width="55" height="15" uuid="6e89e307-4ad7-48e6-b4f8-9acef4ee88c3"/>
 				<textElement textAlignment="Center">
 					<font fontName="Consolas" size="12"/>
 				</textElement>
-				<text><![CDATA[001 -]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{nroSerie}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

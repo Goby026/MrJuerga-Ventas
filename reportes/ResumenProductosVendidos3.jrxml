@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-02-25T05:01:19 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="518" leftMargin="57" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b225fa72-f7de-457f-90cd-c2a1b1eb7795">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="idflujo" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -13,16 +16,16 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select producto.nombre, sum(ventaproducto.cantidad), sum(subtotal) from venta 
-inner join ventaproducto on venta.idventa = ventaproducto.idventa
-inner join producto on ventaproducto.idproducto = producto.idproducto
-where venta.idflujocaja = $P{idflujo}
+		<![CDATA[select producto.nombre, sum(ventaproducto3.cantidad), sum(subtotal) from venta3 
+inner join ventaproducto3 on venta3.idventa3 = ventaproducto3.idventa
+inner join producto on ventaproducto3.idproducto = producto.idproducto
+where venta3.idflujocaja = $P{idflujo}
 group by producto.nombre]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="sum(ventaproducto.cantidad)" class="java.lang.Double"/>
+	<field name="sum(ventaproducto3.cantidad)" class="java.lang.Double"/>
 	<field name="sum(subtotal)" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -90,21 +93,21 @@ group by producto.nombre]]>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="185" height="20" uuid="8b7576fa-ec1b-4864-bc47-7ea65d8204bd"/>
+				<reportElement x="0" y="0" width="300" height="20" uuid="8b7576fa-ec1b-4864-bc47-7ea65d8204bd"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PRODUCTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="185" y="0" width="185" height="20" uuid="02346f52-f32a-409b-89fc-83425ad284ad"/>
+				<reportElement x="300" y="0" width="120" height="20" uuid="02346f52-f32a-409b-89fc-83425ad284ad"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[VENTAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="0" width="148" height="20" uuid="25b9a0e1-cd2c-4d02-ace1-842e74206c67"/>
+				<reportElement x="420" y="0" width="98" height="20" uuid="25b9a0e1-cd2c-4d02-ace1-842e74206c67"/>
 				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
@@ -115,21 +118,21 @@ group by producto.nombre]]>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="185" height="20" uuid="7502408c-37b0-4934-a6e0-39a530cf5426"/>
+				<reportElement x="0" y="0" width="300" height="20" uuid="7502408c-37b0-4934-a6e0-39a530cf5426"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="185" y="0" width="185" height="20" uuid="41d94410-db7a-4087-ba7c-a2ed762196cc"/>
+				<reportElement x="300" y="0" width="120" height="20" uuid="41d94410-db7a-4087-ba7c-a2ed762196cc"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sum(ventaproducto.cantidad)}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{sum(ventaproducto3.cantidad)}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="0" width="148" height="20" uuid="ff0b72d0-0162-4c0a-8771-25b2eb2efcf9"/>
+				<reportElement x="420" y="0" width="98" height="20" uuid="ff0b72d0-0162-4c0a-8771-25b2eb2efcf9"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>

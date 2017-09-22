@@ -1,4 +1,3 @@
-
 package Controlador;
 
 import Modelo.Caja;
@@ -28,17 +27,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AnulacionesControl {
 
-    DefaultTableModel modeloDetalle;    
+    DefaultTableModel modeloDetalle;
 
     public void cargarTitulosTabla(JTable tabla) {
-        String titulos[] = {"PRODUCTO","PRESENTACION" ,"PRECIO", "CANTIDAD", "SUBTOTAL"};
+        String titulos[] = {"COD","PRODUCTO", "PRESENTACION", "PRECIO", "CANTIDAD", "SUBTOTAL"};
         modeloDetalle = new DefaultTableModel(null, titulos);
         tabla.setModel(modeloDetalle);
     }
 
     public String[] CargarDatos(int numboleta, Integer num) throws Exception {
         try {
-            String[] datos = new String[6];
+            String[] datos = new String[7];
             VentaDAO vdao = new VentaDAO();
             for (Venta v : vdao.listar(num)) {
                 if (v.getIdVenta() == numboleta) {
@@ -48,6 +47,7 @@ public class AnulacionesControl {
                     datos[3] = String.valueOf(v.getIdUsuario());
                     datos[4] = v.getHora();
                     datos[5] = v.getFecha();
+                    datos[6] = String.valueOf(v.getTipopago());
                     return datos;
                 }
             }
@@ -56,7 +56,7 @@ public class AnulacionesControl {
         }
         return null;
     }
-    
+
     //METODO PARA OBTENER EL NOMBRE DE CAJA DEL USUARIO LOGEADO
     public String getCajaDeUsuario(String usuario) throws Exception {
         try {
@@ -87,7 +87,7 @@ public class AnulacionesControl {
         }
         return 0;
     }
-    
+
     /*METODO PARA OBTENER EL ID DE CAJA CON SU NOMBRE*/
     public int getIdCaja(String nomCaja) throws Exception {
         try {
@@ -102,7 +102,7 @@ public class AnulacionesControl {
             throw e;
         }
     }
-    
+
     /*METODO PARA OBTENER EL ID DE USUARIO CON EL NOMBRE*/
     public int getIdUsuario(String usuario) throws Exception {
         try {
@@ -132,7 +132,7 @@ public class AnulacionesControl {
         }
         return null;
     }
-    
+
     /*METODO PARA OBTENER EL NOMBRE DE CAJA CON SU ID*/
     public String getCajaConId(int idCaja) throws Exception {
         try {
@@ -192,8 +192,8 @@ public class AnulacionesControl {
         }
         return -1;
     }
-    
-    public int getStockProducto(int idProdPresentacion) throws Exception{
+
+    public int getStockProducto(int idProdPresentacion) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
             for (ProductoPresentacion pp : ppdao.listar()) {
@@ -206,12 +206,12 @@ public class AnulacionesControl {
         }
         return -1;
     }
-    
-    public boolean getEstadoDeVenta(int numVenta) throws Exception{
+
+    public boolean getEstadoDeVenta(int numVenta, int num) throws Exception {
         try {
             VentaDAO vdao = new VentaDAO();
-            for (Venta v : vdao.listar()) {
-                if (v.getIdVenta()==numVenta && v.getEstado()>0) {
+            for (Venta v : vdao.listar(num)) {
+                if (v.getIdVenta() == numVenta && v.getEstado() > 0) {
                     return true;
                 }
             }
@@ -221,34 +221,36 @@ public class AnulacionesControl {
         return false;
     }
 
-    public void sumarStock(JTable tabla) throws Exception {
+    public void sumarStock(JTable tabla, int tipoVenta) throws Exception {
         try {
             for (int i = 0; i < tabla.getRowCount(); i++) {
-                String producto = tabla.getValueAt(i, 0).toString();
-                String presentacion = tabla.getValueAt(i, 1).toString();
-                int idProdPresentacion = getIdProductoPresentacion(presentacion, producto);
-                int stockDeTabla = Integer.parseInt(tabla.getValueAt(i, 3).toString());
-                int nuevoStock = getStockProducto(idProdPresentacion)+ stockDeTabla;
-                
-                new VentaProductoDAO().sumarStock(idProdPresentacion, nuevoStock);
+                //String producto = tabla.getValueAt(i, 0).toString();
+                //String presentacion = tabla.getValueAt(i, 1).toString();
+                //int idProdPresentacion = getIdProductoPresentacion(presentacion, producto);
+                int idProdPresentacion = Integer.parseInt(tabla.getValueAt(i, 0).toString());
+                int cant = Integer.parseInt(tabla.getValueAt(i, 4).toString());
+                int nuevoStock = getStockProducto(idProdPresentacion) + cant;
+
+                new VentaProductoDAO().sumarStock(idProdPresentacion, nuevoStock, tipoVenta);
             }
         } catch (Exception e) {
             throw e;
         }
     }
 
-    public void cargarTabla(int numVenta, JTable tabla, Integer num) throws Exception {
+    public void cargarTabla(int numVenta, JTable tabla, Integer num, Integer idAlmacen) throws Exception {
         try {
             cargarTitulosTabla(tabla);
 
-            Object[] columna = new Object[5];
+            Object[] columna = new Object[6];
 
-            for (int i = 0; i < new VentaProductoDAO().getDatosTabla(numVenta, num).size(); i++) {
-                columna[0] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getProducto();
-                columna[1] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getPresentacion();
-                columna[2] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getPrecio();
-                columna[3] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getCantidad();
-                columna[4] = new VentaProductoDAO().getDatosTabla(numVenta, num).get(i).getSubtotal();
+            for (int i = 0; i < new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).size(); i++) {
+                columna[0] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getIdProductoPresentacion();
+                columna[1] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getProducto();
+                columna[2] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getPresentacion();
+                columna[3] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getPrecio();
+                columna[4] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getCantidad();
+                columna[5] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getSubtotal();
                 modeloDetalle.addRow(columna);
             }
         } catch (Exception ex) {

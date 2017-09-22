@@ -9,20 +9,20 @@ import java.io.Serializable;
 
 /**
  *
- * @author Adolfo
+ * @author Adolfo -- updated by Grover
  */
 public class Presentacion implements Serializable{
     private Integer idPresentacion;
     private String descripcion;
-    private String codPresentacion;
+    private Double valorMl;
 
     public Presentacion() {
     }
 
-    public Presentacion(Integer idPresentacion, String descripcion, String codPresentacion) {
+    public Presentacion(Integer idPresentacion, String descripcion, Double valorMl) {
         this.idPresentacion = idPresentacion;
         this.descripcion = descripcion;
-        this.codPresentacion = codPresentacion;
+        this.valorMl = valorMl;
     }
 
     public Integer getIdPresentacion() {
@@ -41,14 +41,17 @@ public class Presentacion implements Serializable{
         this.descripcion = descripcion;
     }
 
-    public String getCodPresentacion() {
-        return codPresentacion;
+    public Double getValorMl() {
+        return valorMl;
     }
 
-    public void setCodPresentacion(String codPresentacion) {
-        this.codPresentacion = codPresentacion;
+    public void setValorMl(Double valorMl) {
+        this.valorMl = valorMl;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return descripcion ;
+    }
     
 }

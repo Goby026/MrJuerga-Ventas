@@ -153,6 +153,37 @@ public class VentaDAO extends Conexion implements VentaCRUD {
         return false;
     }
 
+    public boolean anular(int numVenta, int num) throws Exception {
+        try {
+            //estado 0=anulado - 1=activo
+            String sql = null;
+            switch (num) {
+                case 1:
+                    sql = "UPDATE venta SET estado = 0 WHERE idventa = " + numVenta + "";
+                    break;
+                case 2:
+                    sql = "UPDATE venta2 SET estado = 0 WHERE idventa2 = " + numVenta + "";
+                    break;
+                case 3:
+                    sql = "UPDATE venta3 SET estado = 0 WHERE idventa3 = " + numVenta + "";
+                    break;
+            }
+
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            int res = pst.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return false;
+    }
+
     @Override
     public List<Venta> listar() throws Exception {
         List<Venta> lista = null;
@@ -244,7 +275,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
     public int getIdUltimaVenta() throws Exception {
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT  idventa FROM venta ORDER BY fechasistema DESC limit 1");
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT  idventa FROM venta ORDER BY idventa DESC limit 1");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 return rs.getInt("idventa");
@@ -263,7 +294,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
     public int getIdUltimaVenta2() throws Exception {
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT  idventa2 FROM venta2 ORDER BY fechasistema DESC limit 1");
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT  idventa2 FROM venta2 ORDER BY idventa2 DESC limit 1");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 return rs.getInt("idventa2");
@@ -282,7 +313,7 @@ public class VentaDAO extends Conexion implements VentaCRUD {
     public int getIdUltimaVenta3() throws Exception {
         try {
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT  idventa3 FROM venta3 ORDER BY fechasistema DESC limit 1");
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT  idventa3 FROM venta3 ORDER BY idventa3 DESC limit 1");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 return rs.getInt("idventa3");
@@ -295,5 +326,53 @@ public class VentaDAO extends Conexion implements VentaCRUD {
             this.cerrar();
         }
         return -1;
+    }
+
+//obtener una venta completa a partir de su id
+    public Venta obtener(int idVenta, int numCaja) throws Exception {
+        String idventa = "";
+        String venta = "";
+        Venta v = null;
+        try {
+
+            switch (numCaja) {
+                case 1:
+                    idventa = "idventa";
+                    venta = "venta";
+                    break;
+                case 2:
+                    idventa = "idventa2";
+                    venta = "venta2";
+                    break;
+                case 3:
+                    idventa = "idventa3";
+                    venta = "venta3";
+                    break;
+            }
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select '"+idventa+"', fecha, hora, idusuario, idcliente, idtipocomprobante, estado, tipopago, noperacion, idcaja, idflujocaja from '"+venta+"' where '"+idventa+"' = "+idVenta);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                v = new Venta();
+                v.setIdVenta(rs.getInt(1));
+                v.setFecha(rs.getString(2));
+                v.setHora(rs.getString(3));
+                v.setIdUsuario(rs.getInt(4));
+                v.setIdCliente(rs.getInt(5));
+                v.setIdTipoComprobante(rs.getInt(6));
+                v.setEstado(rs.getInt(7));
+                v.setTipopago(rs.getInt(8));
+                v.setnOperacion(rs.getString(9));
+                v.setIdcaja(rs.getInt(10));
+                v.setIdFlujoCaja(rs.getInt(11));
+            }
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return v;
     }
 }

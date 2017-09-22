@@ -4,8 +4,8 @@ import Modelo.Caja;
 import Modelo.CajaDAO;
 import Modelo.Categoria;
 import Modelo.CategoriaDAO;
-import Modelo.Comprobante;
 import Modelo.ComprobanteDAO;
+import Modelo.Conexion;
 import Modelo.Presentacion;
 import Modelo.PresentacionDAO;
 import Modelo.Producto;
@@ -18,12 +18,13 @@ import Modelo.Usuario;
 import Modelo.UsuarioCaja;
 import Modelo.UsuarioCajaDAO;
 import Modelo.UsuarioDAO;
-import Modelo.Venta;
 import Modelo.VentaDAO;
 import Modelo.VentaProducto;
 import Modelo.VentaProductoDAO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.DefaultListModel;
-import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +33,8 @@ public class VentasControl {
 
     DefaultTableModel modelo;
 
-    public void LlenarTablaProductosConId(int idCategoria, JTable tabla, int small, int large, int xl) throws Exception {
+    //metodo para llenar tabla segun categoria
+    public void LlenarTablaProductosConId(int idCategoria, int idAlmacen, JTable tabla, int small, int large, int xl) throws Exception {
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
@@ -46,7 +48,7 @@ public class VentasControl {
 
         //int numeroRegistros = ved.listar().size();
         //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
-        for (ProductoPresentacion pp : ppdao.listar()) {
+        for (ProductoPresentacion pp : ppdao.listar(idAlmacen)) {
             if (pp.getIdcategoria() == idCategoria) {
                 columna[0] = getProductoConId(pp.getIdProducto());
                 columna[1] = getPresentacionConId(pp.getIdPresentacion());
@@ -62,17 +64,12 @@ public class VentasControl {
 
     }
 
-    public void llenarTablaProductos(String nomCate, JTable tabla) throws Exception {
-        int id = new CategoriaDAO().getIdCategoria(nomCate);
-        new VentasControl().LlenarTablaProductosConId(id, tabla, 50, 100, 200);
-    }
+    public void llenarTablaProductos(String nomCate, JTable tabla, int idAlmacen) throws Exception {
+        int idCategoria = new CategoriaDAO().getIdCategoria(nomCate);
+        //LOS IDS DE ALMACEN SE MANDAN EN DURO POR QUE SOLO VARIAN ENTRE 3 (1:almacen principal, 2:barra general, 3: barra VIP)        
 
-//    public void cargarTipoDocumento(JComboBox combo) throws Exception {
-//        TipoComprobanteDAO cdao = new TipoComprobanteDAO();
-//        for (TipoComprobante c : cdao.Listar()) {
-//            combo.addItem(c.getDescripcion());
-//        }
-//    }
+        new VentasControl().LlenarTablaProductosConId(idCategoria, idAlmacen, tabla, 50, 100, 200);
+    }
 
     //metodo para cargar la lista de categorias
     public void llenarListaCategorias(JList lista) throws Exception {
@@ -192,21 +189,6 @@ public class VentasControl {
         return "";
     }
 
-    //obtener el id de producto con el nombre
-    public int getIdProductoConNombre(String prod) throws Exception {
-        try {
-            ProductoDAO pdao = new ProductoDAO();
-            for (Producto p : pdao.listar()) {
-                if (p.getNombre().equals(prod)) {
-                    return p.getIdProducto();
-                }
-            }
-        } catch (Exception e) {
-            throw e;
-        }
-        return -1;
-    }
-
     /*OBTENER ULTIMO REGISTRO DE VENTA CAJA 1 */
     public int getIdDeUltimaVentaRegistrada() throws Exception {
         return new VentaDAO().getIdUltimaVenta();
@@ -230,45 +212,38 @@ public class VentasControl {
 //        return c.getIdcomprobante();
         return new ComprobanteDAO().getIdUltimoComprobante();
     }
-
-    //metodo para registrar la venta
-//    public boolean registrarVenta(Object[] datos) throws Exception {
-//        Venta v = new Venta();
-//        v.setFecha((String) datos[0]);
-//        v.setHora((String) datos[1]);
-//        v.setIdUsuario((Integer) datos[2]);
-//        v.setIdCliente((Integer) datos[3]);
-//        v.setIdTipoComprobante((Integer) datos[4]);
-//        v.setEstado((Integer) datos[5]);
-//        v.setTipopago((Integer) datos[6]);
-//        v.setnOperacion((String) datos[7]);
-//        v.setIdcaja((Integer) datos[8]);
-//        v.setIdFlujoCaja((Integer) datos[9]);
-//        try {
-//            VentaDAO vdao = new VentaDAO();
-//            if (vdao.registrar(v)) {
-//                return true;
-//            }
-//        } catch (Exception e) {
-//            throw e;
-//        }
-//        return false;
-//    }
-    //metodo para registrar detalles de venta sin parametros
-    public int registrarDetalleDeVenta(JTable tabla, int numVenta) throws Exception {
+    
+    //metodo para registrar detalles de venta normal en barra general y barra VIP
+    public int registrarDetalleDeVenta(JTable tabla, int numVenta, int numCaja) throws Exception {
         try {
             int flag = 0;
             int numFilas = tabla.getRowCount();
+            ProductoPresentacion pp = null;//se debe obtener el idProducto a partir del idProductoPresentacion
             for (int i = 0; i < numFilas; i++) {
                 VentaProducto vp = new VentaProducto();
-                vp.setIdProducto(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
+                pp = new ProductoPresentacionDAO().obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString())) ;
+                vp.setIdProducto(pp.getIdProducto());
                 vp.setIdVenta(numVenta);
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                 vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
                 vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
                 VentaProductoDAO vpdao = new VentaProductoDAO();
-                if (vpdao.registrar(vp)) {
-                    flag++;
+                switch (numCaja) {
+                    case 1:
+                        if (vpdao.registrar(vp)) {
+                            flag++;
+                        }
+                        break;
+                    case 2:
+                        if (vpdao.registrar2(vp)) {
+                            flag++;
+                        }
+                        break;
+                    case 3:
+                        if (vpdao.registrar3(vp)) {
+                            flag++;
+                        }
+                        break;
                 }
             }
             return flag;
@@ -277,20 +252,27 @@ public class VentasControl {
         }
     }
 
-    /* MRTODO PARA REGISTRAR DETALLE DE VENTA DE CAJA 2 O 3 CON PARAMETRO numCaja */
-    public int registrarDetalleDeVenta(JTable tabla, int numVenta, int numCaja) throws Exception {
+    /* MRTODO PARA REGISTRAR DETALLE DE VENTA DE OPERACIONES COMBINADAS Y POR CAJA*/
+    public int registrarDetalleDeVenta(JTable tabla, int numVenta, double monto, int numCaja) throws Exception {
         try {
             int flag = 0;
             int numFilas = tabla.getRowCount();
+            ProductoPresentacion pp = null;//se debe obtener el idProducto a partir del idProductoPresentacion
             for (int i = 0; i < numFilas; i++) {
                 VentaProducto vp = new VentaProducto();
-                vp.setIdProducto(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
+                pp = new ProductoPresentacionDAO().obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString())) ;
+                vp.setIdProducto(pp.getIdProducto());
                 vp.setIdVenta(numVenta);
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                 vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
                 vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
                 VentaProductoDAO vpdao = new VentaProductoDAO();
                 switch (numCaja) {
+                    case 1:
+                        if (vpdao.registrar(vp)) {
+                            flag++;
+                        }
+                        break;
                     case 2:
                         if (vpdao.registrar2(vp)) {
                             flag++;
@@ -302,9 +284,6 @@ public class VentasControl {
                         }
                         break;
                     default:
-                        if (vpdao.registrar(vp)) {
-                            flag++;
-                        }
                         break;
                 }
             }
@@ -370,7 +349,7 @@ public class VentasControl {
         }
     }
 
-    //metodo para restar stock en una venta
+    //metodo para restar stock en una venta real
     public boolean restarStock(JTable tabla) throws Exception {
         int numFilas = tabla.getRowCount();
         try {
@@ -380,17 +359,9 @@ public class VentasControl {
                 int cantidad = Integer.parseInt(tabla.getValueAt(i, 4).toString());
                 System.out.println("cantidad: " + cantidad);
                 ProductoPresentacionDAO pdao = new ProductoPresentacionDAO();
-                int stock = getStockProductoPresentacion(id, getIdPresentacion(tabla.getValueAt(i, 2).toString())) - cantidad;
+                int stock = getStockProductoPresentacion(id,1) - cantidad;//-------
                 System.out.println(stock);
-                ProductoPresentacion pp = new ProductoPresentacion();
-                pp.setIdProducto(id);//mando el mismo id de producto
-                pp.setIdPresentacion(getIdPresentacion(tabla.getValueAt(i, 2).toString())); //mando el nombre de presentacion al metodo para obtener el id
-                pp.setIdalmacen(1);
-                pp.setStock(stock);
-                pp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
-                pp.setIdcategoria(getIdCategoria(id, getIdPresentacion(tabla.getValueAt(i, 2).toString())));
-                pp.setIdProductoPresentacion(getIdProductoPresentacion(id, getIdPresentacion(tabla.getValueAt(i, 2).toString())));
-                pdao.modificar(pp);
+                pdao.modificar(id, stock, 1);//tercer parametro 1 => ventas reales ; 2=>nota de pedido
             }
         } catch (Exception e) {
             throw e;
@@ -429,25 +400,62 @@ public class VentasControl {
     }
 
     //metodo para obtener el stock de producto con idProducto e idPresentacion
-    public int getStockProductoPresentacion(int idProducto, int idPresentacion) throws Exception {
-        try {
-            ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
-                if (pp.getIdProducto() == idProducto && pp.getIdPresentacion() == idPresentacion) {
-                    return pp.getStock();
-                }
-            }
-        } catch (Exception e) {
-            throw e;
-        }
-        return 0;
-    }
-
+//    public int getStockProductoPresentacion(int idProducto, int idPresentacion) throws Exception {
+//        try {
+//            ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+//            for (ProductoPresentacion pp : ppdao.listar()) {
+//                if (pp.getIdProducto() == idProducto && pp.getIdPresentacion() == idPresentacion) {
+//                    return pp.getStock();
+//                }
+//            }
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//        return 0;
+//    }
     public int totalJarras(int stockCaboBlanco) {
         try {
             return stockCaboBlanco * 6;
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    public int getStockProductoPresentacion(int idProducto, int caja) throws SQLException {
+        Conexion con = new Conexion();
+        String sql = "";
+        switch (caja) {
+            case 1://ventas reales
+                sql = "SELECT productopresentacion.stock FROM\n"
+                + "producto\n"
+                + "INNER JOIN productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
+                + "WHERE productopresentacion.idproductopresentacion =" + idProducto;
+                break;
+            case 2://nota pedido
+                sql = "SELECT productopresentacion.stock2 FROM\n"
+                + "producto\n"
+                + "INNER JOIN productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
+                + "WHERE productopresentacion.idproductopresentacion =" + idProducto;
+                break;
+        }
+        
+        try {
+            con.conectar();
+            PreparedStatement pst = con.getConexion().prepareStatement(sql);
+            ResultSet res = pst.executeQuery();
+
+            if (res.next()) {
+                return res.getInt(1);
+            }
+
+            pst.close();
+            res.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            con.cerrar();
+        }
+        return -1;
     }
 }
