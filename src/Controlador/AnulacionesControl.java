@@ -182,7 +182,7 @@ public class AnulacionesControl {
     public int getIdProductoPresentacion(String pres, String prod) throws Exception {
         try {
             ProductoPresentacionDAO pdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : pdao.listar()) {
+            for (ProductoPresentacion pp : pdao.Listar()) {
                 if (pp.getIdProducto() == getIdProducto(prod) && pp.getIdPresentacion() == getIdPresentacion(pres)) {
                     return pp.getIdProductoPresentacion();
                 }
@@ -193,10 +193,10 @@ public class AnulacionesControl {
         return -1;
     }
 
-    public int getStockProducto(int idProdPresentacion) throws Exception {
+    public double getStockProducto(int idProdPresentacion) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
+            for (ProductoPresentacion pp : ppdao.Listar()) {
                 if (pp.getIdProductoPresentacion() == idProdPresentacion) {
                     return pp.getStock();
                 }
@@ -229,7 +229,7 @@ public class AnulacionesControl {
                 //int idProdPresentacion = getIdProductoPresentacion(presentacion, producto);
                 int idProdPresentacion = Integer.parseInt(tabla.getValueAt(i, 0).toString());
                 int cant = Integer.parseInt(tabla.getValueAt(i, 4).toString());
-                int nuevoStock = getStockProducto(idProdPresentacion) + cant;
+                double nuevoStock = getStockProducto(idProdPresentacion) + cant;
 
                 new VentaProductoDAO().sumarStock(idProdPresentacion, nuevoStock, tipoVenta);
             }

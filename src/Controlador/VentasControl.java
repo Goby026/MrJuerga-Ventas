@@ -48,7 +48,7 @@ public class VentasControl {
 
         //int numeroRegistros = ved.listar().size();
         //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
-        for (ProductoPresentacion pp : ppdao.listar(idAlmacen)) {
+        for (ProductoPresentacion pp : ppdao.Listar(idAlmacen)) {
             if (pp.getIdcategoria() == idCategoria) {
                 columna[0] = getProductoConId(pp.getIdProducto());
                 columna[1] = getPresentacionConId(pp.getIdPresentacion());
@@ -163,7 +163,7 @@ public class VentasControl {
     public String getPrecio(int idProd, int presentacion) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
+            for (ProductoPresentacion pp : ppdao.Listar()) {
                 if (pp.getIdProducto() == idProd && pp.getIdPresentacion() == presentacion) {
                     return "" + pp.getPrecio();
                 }
@@ -221,16 +221,23 @@ public class VentasControl {
             ProductoPresentacion pp = null;//se debe obtener el idProducto a partir del idProductoPresentacion
             for (int i = 0; i < numFilas; i++) {
                 VentaProducto vp = new VentaProducto();
-                pp = new ProductoPresentacionDAO().obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString())) ;
+                pp = new ProductoPresentacionDAO().Obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString())) ;
                 vp.setIdProducto(pp.getIdProducto());
                 vp.setIdVenta(numVenta);
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                 vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
                 vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
                 VentaProductoDAO vpdao = new VentaProductoDAO();
+                PresentacionDAO pdao = new PresentacionDAO();
+                
+                int idPresentacion = pdao.getIdPresentacion(tabla.getValueAt(i, 2).toString());
+                Presentacion p = new PresentacionDAO().obtenerPresentacion(idPresentacion);
+                
                 switch (numCaja) {
                     case 1:
                         if (vpdao.registrar(vp)) {
+                            StockBebidasPreparadas sbp = new StockBebidasPreparadas(vp.getIdProducto(), 2);
+                            sbp.updateStockVenta(p, 2);
                             flag++;
                         }
                         break;
@@ -244,7 +251,7 @@ public class VentasControl {
                             flag++;
                         }
                         break;
-                }
+                }                
             }
             return flag;
         } catch (Exception e) {
@@ -260,7 +267,7 @@ public class VentasControl {
             ProductoPresentacion pp = null;//se debe obtener el idProducto a partir del idProductoPresentacion
             for (int i = 0; i < numFilas; i++) {
                 VentaProducto vp = new VentaProducto();
-                pp = new ProductoPresentacionDAO().obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString())) ;
+                pp = new ProductoPresentacionDAO().Obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString())) ;
                 vp.setIdProducto(pp.getIdProducto());
                 vp.setIdVenta(numVenta);
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
@@ -373,7 +380,7 @@ public class VentasControl {
     public int getIdProductoPresentacion(int idProducto, int idPresentacion) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
+            for (ProductoPresentacion pp : ppdao.Listar()) {
                 if (pp.getIdProducto() == idProducto && pp.getIdPresentacion() == idPresentacion) {
                     return pp.getIdProductoPresentacion();
                 }
@@ -388,7 +395,7 @@ public class VentasControl {
     public int getIdCategoria(int idProducto, int idPresentacion) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
+            for (ProductoPresentacion pp : ppdao.Listar()) {
                 if (pp.getIdProducto() == idProducto && pp.getIdPresentacion() == idPresentacion) {
                     return pp.getIdcategoria();
                 }

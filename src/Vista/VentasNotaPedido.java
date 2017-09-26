@@ -1687,7 +1687,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
 
                 String nomProd = tblProductos.getValueAt(fila, 0).toString();
                 int idProd = getIdProductoConNombre(nomProd, 2);
-                ProductoPresentacion pp = new ProductoPresentacionDAO().obtener(idProd);
+                ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProd);
 
                 if (pp.getIdcategoria() == 3) {
                     complemento = 1;
@@ -2786,7 +2786,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 break;
             }
 
-            ProductoPresentacion pp = new ProductoPresentacionDAO().obtener(idProducto, idAlmacen);
+            ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProducto, idAlmacen);
 
             if (pp.getStock() > 0) {
                 Producto prod = new ProductoDAO().obtener(idProducto);
@@ -2815,7 +2815,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 break;
             }
 
-            ProductoPresentacion pp = new ProductoPresentacionDAO().obtener(idProducto, idAlmacen);
+            ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProducto, idAlmacen);
 
             if (pp.getStock() > 0) {
                 Producto prod = new ProductoDAO().obtener(idProducto);
@@ -2844,7 +2844,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 break;
             }
 
-            ProductoPresentacion pp = new ProductoPresentacionDAO().obtener(idProducto, idAlmacen);
+            ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProducto, idAlmacen);
 
             if (pp.getStock() > 0) {
                 Producto prod = new ProductoDAO().obtener(idProducto);
@@ -2873,7 +2873,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 break;
             }
 
-            ProductoPresentacion pp = new ProductoPresentacionDAO().obtener(idProducto, idAlmacen);
+            ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProducto, idAlmacen);
 
             if (pp.getStock() > 0) {
                 Producto prod = new ProductoDAO().obtener(idProducto);
@@ -2902,7 +2902,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 break;
             }
 
-            ProductoPresentacion pp = new ProductoPresentacionDAO().obtener(idProducto, idAlmacen);
+            ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProducto, idAlmacen);
 
             if (pp.getStock() > 0) {
                 Producto prod = new ProductoDAO().obtener(idProducto);
@@ -2931,7 +2931,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 break;
             }
 
-            ProductoPresentacion pp = new ProductoPresentacionDAO().obtener(idProducto, idAlmacen);
+            ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProducto, idAlmacen);
 
             if (pp.getStock() > 0) {
                 Producto prod = new ProductoDAO().obtener(idProducto);
@@ -2999,7 +2999,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                     break;
             }
 
-            ProductoPresentacion pp = new ProductoPresentacionDAO().obtener(idProducto, idAlmacen);
+            ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProducto, idAlmacen);
 
             if (pp.getStock() > 0) {
                 Producto prod = new ProductoDAO().obtener(idProducto);

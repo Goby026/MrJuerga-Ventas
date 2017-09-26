@@ -50,7 +50,7 @@ public class NpBarrasControl {
 
         //int numeroRegistros = ved.listar().size();
         //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
-        for (ProductoPresentacion pp : ppdao.listar(idAlmacen)) {
+        for (ProductoPresentacion pp : ppdao.Listar(idAlmacen)) {
             if (pp.getIdcategoria() == idCategoria) {
                 columna[0] = getProductoConId(pp.getIdProducto());
                 columna[1] = getPresentacionConId(pp.getIdPresentacion());
@@ -161,7 +161,7 @@ public class NpBarrasControl {
     public String getPrecio(int idProd, int presentacion) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
+            for (ProductoPresentacion pp : ppdao.Listar()) {
                 if (pp.getIdProducto() == idProd && pp.getIdPresentacion() == presentacion) {
                     return "" + pp.getPrecio();
                 }
@@ -380,7 +380,7 @@ public class NpBarrasControl {
     public int getIdProductoPresentacion(int idProducto, int idPresentacion) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
+            for (ProductoPresentacion pp : ppdao.Listar()) {
                 if (pp.getIdProducto() == idProducto && pp.getIdPresentacion() == idPresentacion) {
                     return pp.getIdProductoPresentacion();
                 }
@@ -395,7 +395,7 @@ public class NpBarrasControl {
     public int getIdCategoria(int idProducto, int idPresentacion) throws Exception {
         try {
             ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
-            for (ProductoPresentacion pp : ppdao.listar()) {
+            for (ProductoPresentacion pp : ppdao.Listar()) {
                 if (pp.getIdProducto() == idProducto && pp.getIdPresentacion() == idPresentacion) {
                     return pp.getIdcategoria();
                 }

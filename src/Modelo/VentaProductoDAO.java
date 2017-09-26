@@ -271,7 +271,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
         }
     }
 
-    public boolean sumarStock(int idProdPresentacion, int cant, int tipoVenta) throws Exception {
+    public boolean sumarStock(int idProdPresentacion, double cant, int tipoVenta) throws Exception {
         //tipoVenta ==> 1= venta Real; 2= venta nota pedido
         String stock = "stock";
         if (tipoVenta == 2) {
