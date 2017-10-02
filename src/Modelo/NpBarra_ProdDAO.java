@@ -26,7 +26,7 @@ public class NpBarra_ProdDAO extends Conexion implements NpBarraProdCRUD<NpBarra
             pst.setInt(1, pp.getIdProductoPresentacion());
             pst.setInt(2, pp.getIdNpBarra());
             pst.setDouble(3, pp.getPrecioU());
-            pst.setInt(4, pp.getCantidad());
+            pst.setDouble(4, pp.getCantidad());
             pst.setDouble(5, pp.getSubtotal());
             int res = pst.executeUpdate();
             if (res > 0) {
@@ -47,13 +47,13 @@ public class NpBarra_ProdDAO extends Conexion implements NpBarraProdCRUD<NpBarra
     }
 
     @Override
-    public boolean anular(NpBarra_Prod pp) throws Exception {
+    public boolean anular(int id) throws Exception {
         try {
             //estado 0=anulado - 1=activo
             String sql = "UPDATE npbarra_prod SET cantidad = 0, subtotal = 0 WHERE idventa = ?";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
-            pst.setInt(1, pp.getIdNpBarraProd());
+            pst.setInt(1, id);
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -81,7 +81,7 @@ public class NpBarra_ProdDAO extends Conexion implements NpBarraProdCRUD<NpBarra
                 vp.setIdProductoPresentacion(rs.getInt("idproductopresentacion"));
                 vp.setIdNpBarra(rs.getInt("idnpbarra"));
                 vp.setPrecioU(rs.getDouble("preciou"));
-                vp.setCantidad(rs.getInt("cantidad"));
+                vp.setCantidad(rs.getDouble("cantidad"));
                 vp.setSubtotal(rs.getDouble("subtotal"));
                 lista.add(vp);
             }

@@ -10,13 +10,13 @@ public class NpBarra_Prod {
     int idProductoPresentacion;
     int idNpBarra;
     double precioU;
-    int cantidad;
+    double cantidad;
     double subtotal;
 
     public NpBarra_Prod() {
     }
 
-    public NpBarra_Prod(int idNpBarraProd, int idProductoPresentacion, int idNpBarra, double precioU, int cantidad, double subtotal) {
+    public NpBarra_Prod(int idNpBarraProd, int idProductoPresentacion, int idNpBarra, double precioU, double cantidad, double subtotal) {
         this.idNpBarraProd = idNpBarraProd;
         this.idProductoPresentacion = idProductoPresentacion;
         this.idNpBarra = idNpBarra;
@@ -57,11 +57,11 @@ public class NpBarra_Prod {
         this.precioU = precioU;
     }
 
-    public int getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -71,12 +71,6 @@ public class NpBarra_Prod {
 
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
-    }
-
-    @Override
-    public String toString() {
-        return "NpBarra_Prod{" + "idNpBarraProd=" + idNpBarraProd + ", idProductoPresentacion=" + idProductoPresentacion + ", idNpBarra=" + idNpBarra + ", precioU=" + precioU + ", cantidad=" + cantidad + ", subtotal=" + subtotal + '}';
-    }
-    
+    }    
     
 }

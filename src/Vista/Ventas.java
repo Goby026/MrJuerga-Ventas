@@ -205,6 +205,7 @@ public class Ventas extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         btnConfirmarComplemento = new javax.swing.JButton();
         btnAguaMineral = new javax.swing.JToggleButton();
+        PanelPromocion = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
         btn5 = new javax.swing.JButton();
@@ -266,6 +267,7 @@ public class Ventas extends javax.swing.JFrame {
         btnvisa = new javax.swing.JButton();
         btnMastercard = new javax.swing.JButton();
         btnOpCombinada = new javax.swing.JButton();
+        btn3x2 = new javax.swing.JButton();
 
         panelVuelto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         panelVuelto.setTitle("MONTOS");
@@ -1106,7 +1108,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn5ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1650, 290, 90, 90));
+        getContentPane().add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 280, 90, 100));
 
         btn7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-seven.png"))); // NOI18N
         btn7.setBorderPainted(false);
@@ -1116,7 +1118,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn7ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 190, 90, 90));
+        getContentPane().add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 180, 90, 100));
 
         btn9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-nine.png"))); // NOI18N
         btn9.setBorderPainted(false);
@@ -1126,7 +1128,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn9ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1760, 190, 90, 90));
+        getContentPane().add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1690, 180, 90, 100));
 
         btn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-six.png"))); // NOI18N
         btn6.setBorderPainted(false);
@@ -1136,7 +1138,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn6ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1760, 290, 90, 90));
+        getContentPane().add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1690, 280, 90, 100));
 
         btn8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-eight.png"))); // NOI18N
         btn8.setBorderPainted(false);
@@ -1146,7 +1148,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn8ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1650, 190, 90, 90));
+        getContentPane().add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 180, 90, 100));
 
         btn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-four.png"))); // NOI18N
         btn4.setBorderPainted(false);
@@ -1156,7 +1158,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn4ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 290, 90, 90));
+        getContentPane().add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 280, 90, 100));
 
         btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-one.png"))); // NOI18N
         btn1.setBorderPainted(false);
@@ -1166,7 +1168,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 390, 90, 90));
+        getContentPane().add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 380, 90, 100));
 
         btn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-three.png"))); // NOI18N
         btn3.setBorderPainted(false);
@@ -1176,7 +1178,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn3ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1760, 390, 90, 90));
+        getContentPane().add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1690, 380, 90, 100));
 
         btn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-two.png"))); // NOI18N
         btn2.setBorderPainted(false);
@@ -1186,7 +1188,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1650, 390, 90, 90));
+        getContentPane().add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 380, 90, 100));
 
         btn0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-ten.png"))); // NOI18N
         btn0.setBorderPainted(false);
@@ -1196,7 +1198,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn0ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn0, new org.netbeans.lib.awtextra.AbsoluteConstraints(1650, 490, 90, 100));
+        getContentPane().add(btn0, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 490, 90, 100));
 
         btnDel.setBackground(new java.awt.Color(255, 0, 0));
         btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escobilla-de-suelo.png"))); // NOI18N
@@ -1205,7 +1207,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnDelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1760, 490, 90, 90));
+        getContentPane().add(btnDel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1680, 490, 90, 90));
 
         jLabel8.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel8.setText("LISTA DE PEDIDOS");
@@ -1213,12 +1215,12 @@ public class Ventas extends javax.swing.JFrame {
 
         txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 55)); // NOI18N
         txtCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 110, 310, 70));
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 110, 310, 70));
 
         jLabel9.setFont(new java.awt.Font("Consolas", 0, 28)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("CANTIDAD");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1480, 80, 410, 30));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 80, 310, 30));
 
         btnAgregar.setBackground(new java.awt.Color(0, 102, 255));
         btnAgregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -1231,7 +1233,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 490, 90, 90));
+        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 490, 90, 90));
 
         tblProductos = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -1408,7 +1410,7 @@ public class Ventas extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jLabel15.setText("PAGO");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 620, -1, -1));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 180, 310, 10));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 180, 310, 10));
 
         cboxMasVendidos.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         cboxMasVendidos.setForeground(new java.awt.Color(0, 102, 255));
@@ -1587,6 +1589,14 @@ public class Ventas extends javax.swing.JFrame {
         });
         getContentPane().add(btnOpCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 740, 140, 220));
 
+        btn3x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3x2.png"))); // NOI18N
+        btn3x2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn3x2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn3x2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 80, 90, 90));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1688,11 +1698,11 @@ public class Ventas extends javax.swing.JFrame {
             String prod = tblProductos.getValueAt(fila, 0).toString();
             String presentacion = tblProductos.getValueAt(fila, 1).toString();
             Double prec = Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
-            System.out.println("precio: "+prec);
+            System.out.println("precio: " + prec);
             Double cant = Double.parseDouble(txtCantidad.getText());
-            System.out.println("cantidad: "+cant);
+            System.out.println("cantidad: " + cant);
             double subtotal = prec * cant;
-            System.out.println("subtotal: "+subtotal);
+            System.out.println("subtotal: " + subtotal);
             if (cant == 0) {
                 JOptionPane.showMessageDialog(getRootPane(), "EL VALOR 0 NO DISPONE DE OPERACIONES");
             } else if (Double.parseDouble(tblProductos.getValueAt(fila, 2).toString()) < cant) {
@@ -1711,8 +1721,8 @@ public class Ventas extends javax.swing.JFrame {
 //                listaCategorias.clearSelection();
 
                 tblPedidos.getColumnModel().getColumn(0).setPreferredWidth(20);
-                tblPedidos.getColumnModel().getColumn(1).setPreferredWidth(200);
-                tblPedidos.getColumnModel().getColumn(2).setPreferredWidth(100);
+                tblPedidos.getColumnModel().getColumn(1).setPreferredWidth(300);
+                tblPedidos.getColumnModel().getColumn(2).setPreferredWidth(200);
                 tblPedidos.getColumnModel().getColumn(3).setPreferredWidth(50);
                 tblPedidos.getColumnModel().getColumn(4).setPreferredWidth(50);
                 tblPedidos.getColumnModel().getColumn(5).setPreferredWidth(50);
@@ -1732,13 +1742,13 @@ public class Ventas extends javax.swing.JFrame {
                 String nomProd = tblProductos.getValueAt(fila, 0).toString();
                 int idProd = getIdProductoConNombre(nomProd, 2);
                 ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProd);
-                
+
                 if (pp.getIdcategoria() == 3) {
                     complemento = 1;
-                }else{
+                } else {
                     complemento = 0;
                 }
-                
+
                 desbloquearBotones();
                 txtCantidad.setText("");
             } catch (Exception e) {
@@ -1939,7 +1949,7 @@ public class Ventas extends javax.swing.JFrame {
                     String fecha = new ManejadorFechas().getFechaActualMySQL();
                     String usuario = txtUsuario.getText();
                     //cliente lo pasamos en duro
-                    //cantidad de que????
+                    //cantidad, de que????
                     Double subtotal = Double.parseDouble(lblPago.getText());
                     //ruc lo pasamos en duro
                     String direccion = "JR AYACUCHO 772";
@@ -2063,7 +2073,7 @@ public class Ventas extends javax.swing.JFrame {
                             txtVuelto.setText("");
                             txtMontoRecibido.setText("");
                             lblPago.setText("");
-                            txtCantidad.setText("");                            
+                            txtCantidad.setText("");
                             cargarDatos(usuario);
                         }
 
@@ -2780,7 +2790,7 @@ public class Ventas extends javax.swing.JFrame {
                 tblPedidos.getColumnModel().getColumn(3).setPreferredWidth(50);
                 tblPedidos.getColumnModel().getColumn(4).setPreferredWidth(50);
                 tblPedidos.getColumnModel().getColumn(5).setPreferredWidth(50);
-                
+
                 sliderCantidad.setValue(1);
 
                 PanelComplementos.dispose();
@@ -2789,7 +2799,7 @@ public class Ventas extends javax.swing.JFrame {
                 System.out.println(ex.getMessage());
             }
 
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "SELECCIONE UN COMPLEMENTO PARA LA BEBIDA");
         }
     }//GEN-LAST:event_btnConfirmarComplementoActionPerformed
@@ -2997,6 +3007,81 @@ public class Ventas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAguaMineralActionPerformed
 
+    private void btn3x2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3x2ActionPerformed
+        //analizar si el producto seleccionado esta en promocion
+        int fila = tblProductos.getSelectedRow();
+        if (fila >= 0) {
+            String nomProd[] = {"CUBA LIBRE CABO BLANCO"};
+
+            String prodSelec = tblProductos.getValueAt(fila, 0).toString();
+
+            int c = 0;
+
+            for (String prod : nomProd) {
+                if (prod.equals(prodSelec)) {
+                    c++;
+                }
+            }
+
+            if (c > 0) {
+                //JOptionPane.showMessageDialog(getRootPane(), "EL PRODUCTO SI TIENE 3X2");
+
+                try {
+                    int opc = 2;
+                    switch (txtCaja.getText()) {
+                        case "VIP":
+                            opc = 3;
+                            break;
+                    }
+                    int cod = getIdProductoConNombre(tblProductos.getValueAt(fila, 0).toString(), opc);
+                    String prod = tblProductos.getValueAt(fila, 0).toString();
+                    String presentacion = tblProductos.getValueAt(fila, 1).toString();
+                    Double prec = Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
+                    System.out.println("precio: " + prec);
+                    Double cant = 3.0;
+                    System.out.println("cantidad: " + cant);
+                    double subtotal = prec * 2;
+                    System.out.println("subtotal: " + subtotal);
+                    if (cant == 0) {
+                        JOptionPane.showMessageDialog(getRootPane(), "EL VALOR 0 NO DISPONE DE OPERACIONES");
+                    } else if (Double.parseDouble(tblProductos.getValueAt(fila, 2).toString()) < cant) {
+                        JOptionPane.showMessageDialog(getRootPane(), "NO SE CUENTA CON LAS UNIDADES SOLICITADAS");
+                    } else {
+                        if (complemento > 0) {
+                            PanelComplementos.setVisible(true);
+                            PanelComplementos.setBounds(300, 100, 924, 824);
+                            //905, 814
+                        }
+                        Object datos[] = {cod, prod, presentacion, prec, cant, subtotal};
+                        table1.addRow(datos);
+                        tblPedidos.setModel(table1);
+                        lblPago.setText("" + new VentasControl().calcularMonto(tblPedidos));
+                        tblProductos.clearSelection();
+//                listaCategorias.clearSelection();
+
+                        tblPedidos.getColumnModel().getColumn(0).setPreferredWidth(20);
+                        tblPedidos.getColumnModel().getColumn(1).setPreferredWidth(300);
+                        tblPedidos.getColumnModel().getColumn(2).setPreferredWidth(200);
+                        tblPedidos.getColumnModel().getColumn(3).setPreferredWidth(50);
+                        tblPedidos.getColumnModel().getColumn(4).setPreferredWidth(50);
+                        tblPedidos.getColumnModel().getColumn(5).setPreferredWidth(50);
+
+                        bloquearBotones();
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(getRootPane(), "ERROR: EL PRODUCTO NO TIENE SALIDA 3X2");
+            }
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "SELECCIONE PRODUCTO");
+        }
+
+
+    }//GEN-LAST:event_btn3x2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3038,10 +3123,12 @@ public class Ventas extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog PanelComplementos;
+    private javax.swing.JDialog PanelPromocion;
     public javax.swing.JButton btn0;
     public javax.swing.JButton btn1;
     public javax.swing.JButton btn2;
     public javax.swing.JButton btn3;
+    private javax.swing.JButton btn3x2;
     public javax.swing.JButton btn4;
     public javax.swing.JButton btn5;
     public javax.swing.JButton btn6;
@@ -3355,8 +3442,8 @@ public class Ventas extends javax.swing.JFrame {
                 lista[4] = rs.getString(5);
                 modeloMasVendidos.addRow(lista);
             }
-            tblProductos.getColumnModel().getColumn(0).setPreferredWidth(200);
-            tblProductos.getColumnModel().getColumn(1).setPreferredWidth(50);
+            tblProductos.getColumnModel().getColumn(0).setPreferredWidth(300);
+            tblProductos.getColumnModel().getColumn(1).setPreferredWidth(200);
             tblProductos.getColumnModel().getColumn(2).setPreferredWidth(50);
             tblProductos.getColumnModel().getColumn(3).setPreferredWidth(50);
             tblProductos.getColumnModel().getColumn(4).setPreferredWidth(50);
@@ -3442,7 +3529,7 @@ public class Ventas extends javax.swing.JFrame {
         }
         return -1;
     }
-    
+
     private void LimpiarTabla(JTable tabla, DefaultTableModel modelo) {
         for (int i = 0; i < tabla.getRowCount(); i++) {
             modelo.removeRow(i);

@@ -17,7 +17,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             pst.setInt(1, vp.getIdProducto());
             pst.setInt(2, vp.getIdVenta());
             pst.setDouble(3, vp.getPrecio());
-            pst.setInt(4, vp.getCantidad());
+            pst.setDouble(4, vp.getCantidad());
             pst.setDouble(5, vp.getSubtotal());
             int res = pst.executeUpdate();
             if (res > 0) {
@@ -40,7 +40,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             pst.setInt(1, vp.getIdProducto());
             pst.setInt(2, vp.getIdVenta());
             pst.setDouble(3, vp.getPrecio());
-            pst.setInt(4, vp.getCantidad());
+            pst.setDouble(4, vp.getCantidad());
             pst.setDouble(5, vp.getSubtotal());
             int res = pst.executeUpdate();
             if (res > 0) {
@@ -63,7 +63,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             pst.setInt(1, vp.getIdProducto());
             pst.setInt(2, vp.getIdVenta());
             pst.setDouble(3, vp.getPrecio());
-            pst.setInt(4, vp.getCantidad());
+            pst.setDouble(4, vp.getCantidad());
             pst.setDouble(5, vp.getSubtotal());
             int res = pst.executeUpdate();
             if (res > 0) {
@@ -87,7 +87,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             pst.setInt(1, vp.getIdProducto());
             pst.setInt(2, vp.getIdVenta());
             pst.setDouble(3, vp.getPrecio());
-            pst.setInt(4, vp.getCantidad());
+            pst.setDouble(4, vp.getCantidad());
             pst.setDouble(5, vp.getSubtotal());
             int res = pst.executeUpdate();
             if (res > 0) {

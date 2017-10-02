@@ -84,7 +84,7 @@ public class NpBarrasControl {
         double subtotal = 0.0;
         int numFilas = tabla.getRowCount();
         for (int i = 0; i < numFilas; i++) {
-            subtotal += (Double.parseDouble(tabla.getValueAt(i, 3).toString())) * (Integer.parseInt(tabla.getValueAt(i, 4).toString()));
+            subtotal += (Double.parseDouble(tabla.getValueAt(i, 5).toString()));
         }
         return subtotal;
     }
@@ -203,24 +203,31 @@ public class NpBarrasControl {
         }
         return id;
     }
+
     //metodo para registrar detalles de NOTA DE PEDIDO sin parametros
     public int registrarDetalleDeNpBarra(JTable tabla, int numVenta, int caja) throws Exception {
         try {
 
             int flag = 0;
             int numFilas = tabla.getRowCount();
+            ProductoPresentacion pp = null;
 
             switch (caja) {
                 case 1:
                     for (int i = 0; i < numFilas; i++) {
-                        NpBarra_Prod vp = new NpBarra_Prod();
+                        NpBarra_Prod vp = new NpBarra_Prod();                        
                         vp.setIdProductoPresentacion(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
                         vp.setIdNpBarra(numVenta);
                         vp.setPrecioU(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
-                        vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
-                        vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                        vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
+                        vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));                        
+                        pp = new ProductoPresentacionDAO().Obtener(vp.getIdProductoPresentacion());                        
                         NpBarra_ProdDAO vpdao = new NpBarra_ProdDAO();
                         if (vpdao.registrar(vp)) {
+                            for (int j = 0; j < vp.getCantidad(); j++) {
+                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(pp.getIdProducto(), 2);
+                                sbp.updateStockNotaPedido();
+                            }
                             flag++;
                         }
                     }
@@ -231,10 +238,15 @@ public class NpBarrasControl {
                         vp.setIdProductoPresentacion(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
                         vp.setIdNpBarra(numVenta);
                         vp.setPrecioU(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
-                        vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
+                        vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
                         vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                        pp = new ProductoPresentacionDAO().Obtener(vp.getIdProductoPresentacion());
                         NpBarra_ProdDAO2 vpdao = new NpBarra_ProdDAO2();
                         if (vpdao.registrar(vp)) {
+                            for (int j = 0; j < vp.getCantidad(); j++) {
+                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(pp.getIdProducto(), 2);
+                                sbp.updateStockNotaPedido();
+                            }
                             flag++;
                         }
                     }
@@ -245,10 +257,15 @@ public class NpBarrasControl {
                         vp.setIdProductoPresentacion(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
                         vp.setIdNpBarra(numVenta);
                         vp.setPrecioU(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
-                        vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
+                        vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
                         vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                        pp = new ProductoPresentacionDAO().Obtener(vp.getIdProductoPresentacion());
                         NpBarra_ProdDAO3 vpdao = new NpBarra_ProdDAO3();
                         if (vpdao.registrar(vp)) {
+                            for (int j = 0; j < vp.getCantidad(); j++) {
+                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(pp.getIdProducto(), 3);
+                                sbp.updateStockNotaPedido();
+                            }
                             flag++;
                         }
                     }
@@ -262,41 +279,41 @@ public class NpBarrasControl {
     }
 
     /* MRTODO PARA REGISTRAR DETALLE DE VENTA REAL DE CAJA 2 O 3 CON PARAMETRO numCaja */
-    public int registrarDetalleDeVenta(JTable tabla, int numVenta, int numCaja) throws Exception {
-        try {
-            int flag = 0;
-            int numFilas = tabla.getRowCount();
-            for (int i = 0; i < numFilas; i++) {
-                VentaProducto vp = new VentaProducto();
-                vp.setIdProducto(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
-                vp.setIdVenta(numVenta);
-                vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
-                vp.setCantidad(Integer.parseInt(tabla.getValueAt(i, 4).toString()));
-                vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
-                VentaProductoDAO vpdao = new VentaProductoDAO();
-                switch (numCaja) {
-                    case 2:
-                        if (vpdao.registrar2(vp)) {
-                            flag++;
-                        }
-                        break;
-                    case 3:
-                        if (vpdao.registrar3(vp)) {
-                            flag++;
-                        }
-                        break;
-                    default:
-                        if (vpdao.registrar(vp)) {
-                            flag++;
-                        }
-                        break;
-                }
-            }
-            return flag;
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+//    public int registrarDetalleDeVenta(JTable tabla, int numVenta, int numCaja) throws Exception {
+//        try {
+//            int flag = 0;
+//            int numFilas = tabla.getRowCount();
+//            for (int i = 0; i < numFilas; i++) {
+//                VentaProducto vp = new VentaProducto();
+//                vp.setIdProducto(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
+//                vp.setIdVenta(numVenta);
+//                vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
+//                vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
+//                vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+//                VentaProductoDAO vpdao = new VentaProductoDAO();
+//                switch (numCaja) {
+//                    case 2:
+//                        if (vpdao.registrar2(vp)) {
+//                            flag++;
+//                        }
+//                        break;
+//                    case 3:
+//                        if (vpdao.registrar3(vp)) {
+//                            flag++;
+//                        }
+//                        break;
+//                    default:
+//                        if (vpdao.registrar(vp)) {
+//                            flag++;
+//                        }
+//                        break;
+//                }
+//            }
+//            return flag;
+//        } catch (Exception e) {
+//            throw e;
+//        }
+//    }
 
     /*METODO PARA OBTENER EL NOMBRE DE CAJA CON SU ID*/
     public String getCajaConId(int idCaja) throws Exception {
@@ -361,14 +378,14 @@ public class NpBarrasControl {
             for (int i = 0; i < numFilas; i++) {
                 int id = Integer.parseInt(tabla.getValueAt(i, 0).toString());//252
                 System.out.println("id: " + id);
-                int cantidad = Integer.parseInt(tabla.getValueAt(i, 4).toString());
+                double cantidad = Double.parseDouble(tabla.getValueAt(i, 4).toString());
                 System.out.println("cantidad: " + cantidad);
                 ProductoPresentacionDAO pdao = new ProductoPresentacionDAO();
-                int stock = getStockProductoPresentacion(id)- cantidad;
-                System.out.println("stock: "+stock);
-                
+                double stock = getStockProductoPresentacion(id) - cantidad;
+                System.out.println("stock: " + stock);
+
                 pdao.modificar(id, stock, 2);
-                
+
             }
         } catch (Exception e) {
             throw e;
@@ -433,7 +450,7 @@ public class NpBarrasControl {
         String sql = "SELECT productopresentacion.stock2 FROM\n"
                 + "producto\n"
                 + "INNER JOIN productopresentacion on producto.idproducto = productopresentacion.idproducto\n"
-                + "WHERE productopresentacion.idproductopresentacion ="+idProducto;
+                + "WHERE productopresentacion.idproductopresentacion =" + idProducto;
         try {
             con.conectar();
             PreparedStatement pst = con.getConexion().prepareStatement(sql);

@@ -1,7 +1,6 @@
 
 package Interfaces;
 
-import Modelo.NpBarra_Prod;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ public interface NpBarraProdCRUD<Param> {
 
     public boolean modificar(Param pp) throws Exception;
 
-    public boolean anular(Param pp) throws Exception;
+    public boolean anular(int id) throws Exception;
 
     public List<Param> listar() throws Exception;
 }

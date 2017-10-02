@@ -257,6 +257,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
         btnvisa = new javax.swing.JButton();
         btnMastercard = new javax.swing.JButton();
         btnOpCombinada = new javax.swing.JButton();
+        btn3x2 = new javax.swing.JButton();
 
         panelVuelto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         panelVuelto.setTitle("MONTOS");
@@ -1553,6 +1554,14 @@ public class VentasNotaPedido extends javax.swing.JFrame {
         });
         getContentPane().add(btnOpCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 770, 140, 220));
 
+        btn3x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3x2.png"))); // NOI18N
+        btn3x2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn3x2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn3x2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 80, 90, 90));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1646,11 +1655,11 @@ public class VentasNotaPedido extends javax.swing.JFrame {
             String prod = tblProductos.getValueAt(fila, 0).toString();
             String presentacion = tblProductos.getValueAt(fila, 1).toString();
             double prec = Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
-            int cant = Integer.parseInt(txtCantidad.getText());
+            double cant = Double.parseDouble(txtCantidad.getText());
             double subtotal = prec * cant;
             if (cant == 0) {
                 JOptionPane.showMessageDialog(getRootPane(), "EL VALOR 0 NO DISPONE DE OPERACIONES");
-            } else if (Integer.parseInt(tblProductos.getValueAt(fila, 2).toString()) < cant) {
+            } else if (Double.parseDouble(tblProductos.getValueAt(fila, 2).toString()) < cant) {
                 JOptionPane.showMessageDialog(getRootPane(), "NO SE CUENTA CON LAS UNIDADES SOLICITADAS");
             } else {
                 if (complemento > 0) {
@@ -3017,6 +3026,80 @@ public class VentasNotaPedido extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAguaMineralActionPerformed
 
+    private void btn3x2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3x2ActionPerformed
+        //analizar si el producto seleccionado esta en promocion
+        int fila = tblProductos.getSelectedRow();
+        if (fila >= 0) {
+            String nomProd[] = {"CUBA LIBRE CABO BLANCO"};
+
+            String prodSelec = tblProductos.getValueAt(fila, 0).toString();
+
+            int c = 0;
+
+            for (String prod : nomProd) {
+                if (prod.equals(prodSelec)) {
+                    c++;
+                }
+            }
+
+            if (c > 0) {
+                //JOptionPane.showMessageDialog(getRootPane(), "EL PRODUCTO SI TIENE 3X2");
+
+                try {
+                    int opc = 2;
+                    switch (txtCaja.getText()) {
+                        case "VIP":
+                        opc = 3;
+                        break;
+                    }
+                    int cod = getIdProductoConNombre(tblProductos.getValueAt(fila, 0).toString(), opc);
+                    String prod = tblProductos.getValueAt(fila, 0).toString();
+                    String presentacion = tblProductos.getValueAt(fila, 1).toString();
+                    Double prec = Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
+                    System.out.println("precio: " + prec);
+                    Double cant = 3.0;
+                    System.out.println("cantidad: " + cant);
+                    double subtotal = prec * 2;
+                    System.out.println("subtotal: " + subtotal);
+                    if (cant == 0) {
+                        JOptionPane.showMessageDialog(getRootPane(), "EL VALOR 0 NO DISPONE DE OPERACIONES");
+                    } else if (Double.parseDouble(tblProductos.getValueAt(fila, 2).toString()) < cant) {
+                        JOptionPane.showMessageDialog(getRootPane(), "NO SE CUENTA CON LAS UNIDADES SOLICITADAS");
+                    } else {
+                        if (complemento > 0) {
+                            PanelComplementos.setVisible(true);
+                            PanelComplementos.setBounds(300, 100, 924, 824);
+                            //905, 814
+                        }
+                        Object datos[] = {cod, prod, presentacion, prec, cant, subtotal};
+                        table1.addRow(datos);
+                        tblPedidos.setModel(table1);
+                        lblPago.setText("" + new NpBarrasControl().calcularMonto(tblPedidos));
+                        tblProductos.clearSelection();
+                        //                listaCategorias.clearSelection();
+
+                        tblPedidos.getColumnModel().getColumn(0).setPreferredWidth(20);
+                        tblPedidos.getColumnModel().getColumn(1).setPreferredWidth(300);
+                        tblPedidos.getColumnModel().getColumn(2).setPreferredWidth(200);
+                        tblPedidos.getColumnModel().getColumn(3).setPreferredWidth(50);
+                        tblPedidos.getColumnModel().getColumn(4).setPreferredWidth(50);
+                        tblPedidos.getColumnModel().getColumn(5).setPreferredWidth(50);
+
+                        bloquearBotones();
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(getRootPane(), "ERROR: EL PRODUCTO NO TIENE SALIDA 3X2");
+            }
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "SELECCIONE PRODUCTO");
+        }
+
+    }//GEN-LAST:event_btn3x2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3064,6 +3147,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
     public javax.swing.JButton btn1;
     public javax.swing.JButton btn2;
     public javax.swing.JButton btn3;
+    private javax.swing.JButton btn3x2;
     public javax.swing.JButton btn4;
     public javax.swing.JButton btn5;
     public javax.swing.JButton btn6;
