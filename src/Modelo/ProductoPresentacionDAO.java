@@ -171,12 +171,13 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
                 pp.setIdProducto(rs.getInt(2));
                 pp.setIdPresentacion(rs.getInt(3));
                 pp.setIdalmacen(rs.getInt(4));
-                pp.setStock(rs.getInt(5));
-                pp.setStock2(rs.getInt(6));
-                pp.setStock3(rs.getInt(7));
+                pp.setStock(rs.getDouble(5));
+                pp.setStock2(rs.getDouble(6));
+                pp.setStock3(rs.getDouble(7));
                 pp.setPrecio(rs.getDouble(8));
                 pp.setPrecio2(rs.getDouble(9));
-                pp.setIdcategoria(rs.getInt(10));
+                pp.setPrecio3(rs.getDouble(10));
+                pp.setIdcategoria(rs.getInt(11));
                 lista.add(pp);
             }
             rs.close();

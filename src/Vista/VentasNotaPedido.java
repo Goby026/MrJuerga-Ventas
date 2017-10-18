@@ -1091,7 +1091,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
         tblPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tblPedidos);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 1210, 220));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 1390, 220));
 
         btn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cinco.png"))); // NOI18N
         btn5.setBorder(null);
@@ -1102,7 +1102,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn5ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1650, 290, 90, 90));
+        getContentPane().add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 290, 90, 90));
 
         btn7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/siete.png"))); // NOI18N
         btn7.setBorder(null);
@@ -1113,7 +1113,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn7ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 190, 90, 90));
+        getContentPane().add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 190, 90, 90));
 
         btn9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nueve.png"))); // NOI18N
         btn9.setBorder(null);
@@ -1124,7 +1124,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn9ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1760, 190, 90, 90));
+        getContentPane().add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1690, 190, 90, 90));
 
         btn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/seis.png"))); // NOI18N
         btn6.setBorder(null);
@@ -1135,7 +1135,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn6ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1760, 290, 90, 90));
+        getContentPane().add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1690, 290, 90, 90));
 
         btn8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ocho.png"))); // NOI18N
         btn8.setBorder(null);
@@ -1146,7 +1146,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn8ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1650, 190, 90, 90));
+        getContentPane().add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 190, 90, 90));
 
         btn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cuatro.png"))); // NOI18N
         btn4.setBorder(null);
@@ -1157,7 +1157,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn4ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 290, 90, 90));
+        getContentPane().add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 290, 90, 90));
 
         btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/uno.png"))); // NOI18N
         btn1.setBorder(null);
@@ -1168,7 +1168,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 390, 90, 90));
+        getContentPane().add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 390, 90, 90));
 
         btn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tres.png"))); // NOI18N
         btn3.setBorder(null);
@@ -1179,7 +1179,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn3ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1760, 390, 90, 90));
+        getContentPane().add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1690, 390, 90, 90));
 
         btn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dos.png"))); // NOI18N
         btn2.setBorder(null);
@@ -1190,7 +1190,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1650, 390, 90, 90));
+        getContentPane().add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 390, 90, 90));
 
         btn0.setBackground(new java.awt.Color(0, 204, 102));
         btn0.setFont(new java.awt.Font("Arial Black", 0, 70)); // NOI18N
@@ -1202,7 +1202,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn0ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn0, new org.netbeans.lib.awtextra.AbsoluteConstraints(1650, 490, 90, 90));
+        getContentPane().add(btn0, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 490, 90, 90));
 
         btnDel.setBackground(new java.awt.Color(255, 0, 0));
         btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escobilla-de-suelo.png"))); // NOI18N
@@ -1211,7 +1211,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btnDelActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1760, 490, 90, 90));
+        getContentPane().add(btnDel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1690, 490, 90, 90));
 
         jLabel8.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel8.setText("LISTA DE PEDIDOS");
@@ -1220,12 +1220,12 @@ public class VentasNotaPedido extends javax.swing.JFrame {
         txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 55)); // NOI18N
         txtCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCantidad.setBorder(null);
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 110, 320, 70));
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 110, 320, 70));
 
         jLabel9.setFont(new java.awt.Font("Consolas", 0, 28)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("CANTIDAD");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1480, 80, 410, 30));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 80, 410, 30));
 
         btnAgregar.setBackground(new java.awt.Color(0, 102, 255));
         btnAgregar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -1238,7 +1238,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 490, 90, 90));
+        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 490, 90, 90));
 
         tblProductos = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -1286,7 +1286,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btnQuitarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 950, 130, 50));
+        getContentPane().add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 950, 130, 50));
 
         btnEfectivo.setBackground(new java.awt.Color(0, 204, 0));
         btnEfectivo.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
@@ -1301,7 +1301,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btnEfectivoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 770, 140, 220));
+        getContentPane().add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1750, 750, 140, 220));
 
         jLabel11.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         jLabel11.setText("S/.");
@@ -1415,7 +1415,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jLabel15.setText("PAGO");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 620, -1, -1));
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1540, 180, 310, 10));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1470, 180, 310, 10));
 
         cboxMasVendidos.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         cboxMasVendidos.setForeground(new java.awt.Color(0, 102, 255));
@@ -1530,7 +1530,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btnvisaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnvisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1390, 770, 150, 110));
+        getContentPane().add(btnvisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 750, 150, 110));
 
         btnMastercard.setBackground(new java.awt.Color(255, 204, 153));
         btnMastercard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/masterCard.png"))); // NOI18N
@@ -1539,7 +1539,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btnMastercardActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMastercard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1390, 880, 150, 110));
+        getContentPane().add(btnMastercard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 860, 150, 110));
 
         btnOpCombinada.setBackground(new java.awt.Color(204, 255, 204));
         btnOpCombinada.setFont(new java.awt.Font("Consolas", 0, 20)); // NOI18N
@@ -1552,7 +1552,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btnOpCombinadaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnOpCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 770, 140, 220));
+        getContentPane().add(btnOpCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 750, 140, 220));
 
         btn3x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3x2.png"))); // NOI18N
         btn3x2.addActionListener(new java.awt.event.ActionListener() {
@@ -1560,7 +1560,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 btn3x2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn3x2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 80, 90, 90));
+        getContentPane().add(btn3x2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1800, 490, 90, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

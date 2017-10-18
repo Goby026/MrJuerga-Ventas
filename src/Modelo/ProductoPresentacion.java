@@ -15,6 +15,7 @@ public class ProductoPresentacion {
     private double stock3;
     private double precio;
     private double precio2;
+    private double precio3;//
     private int idcategoria;
     
     
@@ -22,7 +23,7 @@ public class ProductoPresentacion {
     public ProductoPresentacion() {
     }
 
-    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, double stock, double stock2, double stock3, double precio, double precio2, int idcategoria) {
+    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, double stock, double stock2, double stock3, double precio, double precio2, double precio3, int idcategoria) {
         this.idProductoPresentacion = idProductoPresentacion;
         this.idProducto = idProducto;
         this.idPresentacion = idPresentacion;
@@ -32,6 +33,7 @@ public class ProductoPresentacion {
         this.stock3 = stock3;
         this.precio = precio;
         this.precio2 = precio2;
+        this.precio3 = precio3;
         this.idcategoria = idcategoria;
     }
 
@@ -90,7 +92,7 @@ public class ProductoPresentacion {
     public void setStock3(double stock3) {
         this.stock3 = stock3;
     }
-    
+
     public double getPrecio() {
         return precio;
     }
@@ -107,6 +109,14 @@ public class ProductoPresentacion {
         this.precio2 = precio2;
     }
 
+    public double getPrecio3() {
+        return precio3;
+    }
+
+    public void setPrecio3(double precio3) {
+        this.precio3 = precio3;
+    }
+
     public int getIdcategoria() {
         return idcategoria;
     }
@@ -114,6 +124,7 @@ public class ProductoPresentacion {
     public void setIdcategoria(int idcategoria) {
         this.idcategoria = idcategoria;
     }
+
     
 
 }

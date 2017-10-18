@@ -37,38 +37,50 @@ public class NpBarrasControl {
     DefaultTableModel modelo;
 
     public void LlenarTablaProductosConId(int idCategoria, JTable tabla, int idAlmacen, int small, int large, int xl) throws Exception {
-        modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
-        ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+        try {
+            modelo = new DefaultTableModel();
+            tabla.setModel(modelo);
+            ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
 
-        modelo.addColumn("PRODUCTO");
-        modelo.addColumn("PRESENTACIÓN");
-        modelo.addColumn("STOCK");
-        modelo.addColumn("PRECIO");
+            modelo.addColumn("PRODUCTO");
+            modelo.addColumn("PRESENTACIÓN");
+            modelo.addColumn("STOCK");
+            modelo.addColumn("PRECIO");
 
-        Object[] columna = new Object[4];
+            Object[] columna = new Object[4];
 
-        //int numeroRegistros = ved.listar().size();
-        //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
-        for (ProductoPresentacion pp : ppdao.Listar(idAlmacen)) {
-            if (pp.getIdcategoria() == idCategoria) {
-                columna[0] = getProductoConId(pp.getIdProducto());
-                columna[1] = getPresentacionConId(pp.getIdPresentacion());
-                columna[2] = pp.getStock2();
-                columna[3] = pp.getPrecio();
-                modelo.addRow(columna);
+            //int numeroRegistros = ved.listar().size();
+            //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
+            for (ProductoPresentacion pp : ppdao.Listar(idAlmacen)) {
+                if (pp.getIdcategoria() == idCategoria) {
+                    columna[0] = getProductoConId(pp.getIdProducto());
+                    System.out.println(getProductoConId(pp.getIdProducto()));
+                    columna[1] = getPresentacionConId(pp.getIdPresentacion());
+                    System.out.println(getPresentacionConId(pp.getIdPresentacion()));
+                    columna[2] = pp.getStock2();
+                    columna[3] = pp.getPrecio();
+                    modelo.addRow(columna);
+                }
             }
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(xl);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(large);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(small);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(xl);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(large);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(small);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(small);
 
     }
 
     public void llenarTablaProductos(String nomCate, JTable tabla, int numCaja) throws Exception {
-        int id = new CategoriaDAO().getIdCategoria(nomCate);
-        new NpBarrasControl().LlenarTablaProductosConId(id, tabla, numCaja, 50, 100, 200);
+        try {
+            int id = new CategoriaDAO().getIdCategoria(nomCate);
+            System.out.println("Id de categoria " + id);
+            new NpBarrasControl().LlenarTablaProductosConId(id, tabla, numCaja, 50, 100, 200);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     //metodo para cargar la lista de categorias
@@ -215,13 +227,13 @@ public class NpBarrasControl {
             switch (caja) {
                 case 1:
                     for (int i = 0; i < numFilas; i++) {
-                        NpBarra_Prod vp = new NpBarra_Prod();                        
+                        NpBarra_Prod vp = new NpBarra_Prod();
                         vp.setIdProductoPresentacion(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
                         vp.setIdNpBarra(numVenta);
                         vp.setPrecioU(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                         vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
-                        vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));                        
-                        pp = new ProductoPresentacionDAO().Obtener(vp.getIdProductoPresentacion());                        
+                        vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                        pp = new ProductoPresentacionDAO().Obtener(vp.getIdProductoPresentacion());
                         NpBarra_ProdDAO vpdao = new NpBarra_ProdDAO();
                         if (vpdao.registrar(vp)) {
                             for (int j = 0; j < vp.getCantidad(); j++) {

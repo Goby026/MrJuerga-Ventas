@@ -262,7 +262,6 @@ public class VentasVIP extends javax.swing.JFrame {
         btnvisa = new javax.swing.JButton();
         btnMastercard = new javax.swing.JButton();
         btnOpCombinada = new javax.swing.JButton();
-        btn3x2 = new javax.swing.JButton();
 
         panelVuelto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         panelVuelto.setTitle("MONTOS");
@@ -1080,7 +1079,7 @@ public class VentasVIP extends javax.swing.JFrame {
         tblPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tblPedidos);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 1200, 220));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 1390, 220));
 
         btn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-five.png"))); // NOI18N
         btn5.setBorderPainted(false);
@@ -1279,7 +1278,7 @@ public class VentasVIP extends javax.swing.JFrame {
                 btnEfectivoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 740, 140, 220));
+        getContentPane().add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1730, 740, 140, 220));
 
         jLabel11.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         jLabel11.setText("S/.");
@@ -1548,7 +1547,7 @@ public class VentasVIP extends javax.swing.JFrame {
                 btnvisaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnvisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 740, 150, 110));
+        getContentPane().add(btnvisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 740, 150, 110));
 
         btnMastercard.setBackground(new java.awt.Color(255, 204, 153));
         btnMastercard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/masterCard.png"))); // NOI18N
@@ -1557,7 +1556,7 @@ public class VentasVIP extends javax.swing.JFrame {
                 btnMastercardActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMastercard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 850, 150, 110));
+        getContentPane().add(btnMastercard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1580, 850, 150, 110));
 
         btnOpCombinada.setBackground(new java.awt.Color(204, 255, 204));
         btnOpCombinada.setFont(new java.awt.Font("Consolas", 0, 20)); // NOI18N
@@ -1570,15 +1569,7 @@ public class VentasVIP extends javax.swing.JFrame {
                 btnOpCombinadaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnOpCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 740, 140, 220));
-
-        btn3x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3x2.png"))); // NOI18N
-        btn3x2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn3x2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btn3x2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 80, 90, 90));
+        getContentPane().add(btnOpCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 740, 140, 220));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2938,80 +2929,6 @@ public class VentasVIP extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btbAguaMineralActionPerformed
 
-    private void btn3x2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3x2ActionPerformed
-        //analizar si el producto seleccionado esta en promocion
-        int fila = tblProductos.getSelectedRow();
-        if (fila >= 0) {
-            String nomProd[] = {"CUBA LIBRE CABO BLANCO"};
-
-            String prodSelec = tblProductos.getValueAt(fila, 0).toString();
-
-            int c = 0;
-
-            for (String prod : nomProd) {
-                if (prod.equals(prodSelec)) {
-                    c++;
-                }
-            }
-
-            if (c > 0) {
-                //JOptionPane.showMessageDialog(getRootPane(), "EL PRODUCTO SI TIENE 3X2");
-
-                try {
-                    int opc = 2;
-                    switch (txtCaja.getText()) {
-                        case "VIP":
-                        opc = 3;
-                        break;
-                    }
-                    int cod = getIdProductoConNombre(tblProductos.getValueAt(fila, 0).toString(), opc);
-                    String prod = tblProductos.getValueAt(fila, 0).toString();
-                    String presentacion = tblProductos.getValueAt(fila, 1).toString();
-                    Double prec = Double.parseDouble(tblProductos.getValueAt(fila, 3).toString());
-                    System.out.println("precio: " + prec);
-                    Double cant = 3.0;
-                    System.out.println("cantidad: " + cant);
-                    double subtotal = prec * 2;
-                    System.out.println("subtotal: " + subtotal);
-                    if (cant == 0) {
-                        JOptionPane.showMessageDialog(getRootPane(), "EL VALOR 0 NO DISPONE DE OPERACIONES");
-                    } else if (Double.parseDouble(tblProductos.getValueAt(fila, 2).toString()) < cant) {
-                        JOptionPane.showMessageDialog(getRootPane(), "NO SE CUENTA CON LAS UNIDADES SOLICITADAS");
-                    } else {
-                        if (complemento > 0) {
-                            PanelComplementos.setVisible(true);
-                            PanelComplementos.setBounds(300, 100, 924, 824);
-                            //905, 814
-                        }
-                        Object datos[] = {cod, prod, presentacion, prec, cant, subtotal};
-                        table1.addRow(datos);
-                        tblPedidos.setModel(table1);
-                        lblPago.setText("" + new VentasControl().calcularMonto(tblPedidos));
-                        tblProductos.clearSelection();
-                        //                listaCategorias.clearSelection();
-
-                        tblPedidos.getColumnModel().getColumn(0).setPreferredWidth(20);
-                        tblPedidos.getColumnModel().getColumn(1).setPreferredWidth(300);
-                        tblPedidos.getColumnModel().getColumn(2).setPreferredWidth(200);
-                        tblPedidos.getColumnModel().getColumn(3).setPreferredWidth(50);
-                        tblPedidos.getColumnModel().getColumn(4).setPreferredWidth(50);
-                        tblPedidos.getColumnModel().getColumn(5).setPreferredWidth(50);
-
-                        bloquearBotones();
-                    }
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(getRootPane(), "ERROR: EL PRODUCTO NO TIENE SALIDA 3X2");
-            }
-        } else {
-            JOptionPane.showMessageDialog(getRootPane(), "SELECCIONE PRODUCTO");
-        }
-
-    }//GEN-LAST:event_btn3x2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -3060,7 +2977,6 @@ public class VentasVIP extends javax.swing.JFrame {
     public javax.swing.JButton btn1;
     public javax.swing.JButton btn2;
     public javax.swing.JButton btn3;
-    private javax.swing.JButton btn3x2;
     public javax.swing.JButton btn4;
     public javax.swing.JButton btn5;
     public javax.swing.JButton btn6;

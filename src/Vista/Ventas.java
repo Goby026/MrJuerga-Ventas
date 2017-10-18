@@ -1098,7 +1098,7 @@ public class Ventas extends javax.swing.JFrame {
         tblPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tblPedidos);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 1200, 220));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 720, 1390, 220));
 
         btn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/number-five.png"))); // NOI18N
         btn5.setBorderPainted(false);
@@ -1281,7 +1281,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnQuitarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 950, 130, 50));
+        getContentPane().add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 950, 130, 50));
 
         btnEfectivo.setBackground(new java.awt.Color(0, 204, 0));
         btnEfectivo.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
@@ -1296,7 +1296,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnEfectivoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1550, 740, 140, 220));
+        getContentPane().add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1750, 740, 140, 220));
 
         jLabel11.setFont(new java.awt.Font("Consolas", 0, 48)); // NOI18N
         jLabel11.setText("S/.");
@@ -1565,7 +1565,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnvisaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnvisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 740, 150, 110));
+        getContentPane().add(btnvisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 740, 150, 110));
 
         btnMastercard.setBackground(new java.awt.Color(255, 204, 153));
         btnMastercard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/masterCard.png"))); // NOI18N
@@ -1574,7 +1574,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnMastercardActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMastercard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 850, 150, 110));
+        getContentPane().add(btnMastercard, new org.netbeans.lib.awtextra.AbsoluteConstraints(1600, 850, 150, 110));
 
         btnOpCombinada.setBackground(new java.awt.Color(204, 255, 204));
         btnOpCombinada.setFont(new java.awt.Font("Consolas", 0, 20)); // NOI18N
@@ -1587,7 +1587,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnOpCombinadaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnOpCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 740, 140, 220));
+        getContentPane().add(btnOpCombinada, new org.netbeans.lib.awtextra.AbsoluteConstraints(1460, 740, 140, 220));
 
         btn3x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3x2.png"))); // NOI18N
         btn3x2.addActionListener(new java.awt.event.ActionListener() {
@@ -1595,7 +1595,7 @@ public class Ventas extends javax.swing.JFrame {
                 btn3x2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btn3x2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 80, 90, 90));
+        getContentPane().add(btn3x2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1800, 490, 90, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
