@@ -45,7 +45,7 @@ public class Ventas extends javax.swing.JFrame {
     JTextField te = new JTextField();
     int tipoPago = 1;
     Integer num = null;
-    Integer complemento = 0;
+    int complemento = 0;
     String nroSerie = "003";
     int idWarehouse = 2;
 
@@ -1686,6 +1686,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        System.out.println("COMPLEMENTO OK:"+complemento);
         try {
             int opc = 2;
             switch (txtCaja.getText()) {
@@ -1743,11 +1744,15 @@ public class Ventas extends javax.swing.JFrame {
                 int idProd = getIdProductoConNombre(nomProd, 2);
                 ProductoPresentacion pp = new ProductoPresentacionDAO().Obtener(idProd);
 
+                System.out.println("Categoria ="+pp.getIdcategoria());
+                
                 if (pp.getIdcategoria() == 3) {
                     complemento = 1;
                 } else {
                     complemento = 0;
                 }
+                
+                System.out.println("CLICK :"+complemento);
 
                 desbloquearBotones();
                 txtCantidad.setText("");
@@ -2373,6 +2378,7 @@ public class Ventas extends javax.swing.JFrame {
     private void btnBebidasPorBotellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBebidasPorBotellaActionPerformed
         try {
             complemento = 1;
+            System.out.println("COMPLEMENTO:"+complemento);
             String categoria = btnBebidasPorBotella.getText();
             VentasControl vc = new VentasControl();
             vc.llenarTablaProductos(categoria, tblProductos, 2);
