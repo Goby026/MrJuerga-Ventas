@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-06-09T05:41:31 -->
+<!-- 2017-10-26T17:43:38 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="518" leftMargin="57" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b225fa72-f7de-457f-90cd-c2a1b1eb7795">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MrJuerga-Server"/>
 	<parameter name="idflujo" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[new Integer(1)]]></defaultValueExpression>
 	</parameter>
@@ -124,7 +124,7 @@ group by producto.nombre]]>
 				<text><![CDATA[´PRECIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="390" y="0" width="130" height="20" uuid="453b2839-ca49-4136-ac60-20186e209768"/>
+				<reportElement x="389" y="0" width="131" height="20" uuid="453b2839-ca49-4136-ac60-20186e209768"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
@@ -139,7 +139,7 @@ group by producto.nombre]]>
 		<band height="20" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<textField>
-				<reportElement x="0" y="0" width="131" height="20" uuid="96fcc56e-a5bb-4f16-b809-6d98e430e1a7"/>
+				<reportElement x="0" y="0" width="130" height="20" uuid="96fcc56e-a5bb-4f16-b809-6d98e430e1a7"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
@@ -147,7 +147,7 @@ group by producto.nombre]]>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="131" y="0" width="129" height="20" uuid="955a43d8-f4ef-46f5-9577-5785b6fdaa9b"/>
+				<reportElement x="130" y="0" width="129" height="20" uuid="955a43d8-f4ef-46f5-9577-5785b6fdaa9b"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
@@ -155,7 +155,7 @@ group by producto.nombre]]>
 				<textFieldExpression><![CDATA[$F{sum(ventaproducto.cantidad)}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="0" width="129" height="20" uuid="8b3f3b77-58c3-4fd8-8cfd-597e7dd7df4c"/>
+				<reportElement x="259" y="0" width="130" height="20" uuid="8b3f3b77-58c3-4fd8-8cfd-597e7dd7df4c"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>

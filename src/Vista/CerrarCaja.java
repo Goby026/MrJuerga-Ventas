@@ -779,7 +779,7 @@ public class CerrarCaja extends javax.swing.JFrame {
 
     private void btnListaDeVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaDeVentasActionPerformed
         try {
-            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new CerrarCajaControl().getIdUsuario(lblUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText()));
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new CerrarCajaControl().getIdUsuario(lblUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText()));            
             parametros.put("flujo", idFlujoCaja);
             parametros.put("usuario", lblUsuario.getText());
             parametros.put("caja", lblCaja.getText());
