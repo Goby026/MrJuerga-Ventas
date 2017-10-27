@@ -34,29 +34,76 @@ public class VentasControl {
     DefaultTableModel modelo;
 
     //metodo para llenar tabla segun categoria
-    public void LlenarTablaProductosConId(int idCategoria, int idAlmacen, JTable tabla, int small, int large, int xl) throws Exception {
-        modelo = new DefaultTableModel();
+//    public void LlenarTablaProductosConId(int idCategoria, int idAlmacen, JTable tabla, int small, int large, int xl) throws Exception {
+//        modelo = new DefaultTableModel();
+//        tabla.setModel(modelo);
+//        ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+//
+//        modelo.addColumn("PRODUCTO");
+//        modelo.addColumn("PRESENTACIÓN");
+//        modelo.addColumn("STOCK");
+//        modelo.addColumn("PRECIO");
+//
+//        Object[] columna = new Object[4];
+//
+//        //int numeroRegistros = ved.listar().size();
+//        //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
+//        for (ProductoPresentacion pp : ppdao.Listar(idAlmacen)) {
+//            if (pp.getIdcategoria() == idCategoria) {
+//                columna[0] = getProductoConId(pp.getIdProducto());
+//                columna[1] = getPresentacionConId(pp.getIdPresentacion());
+//                columna[2] = pp.getStock();
+//                columna[3] = pp.getPrecio();
+//                modelo.addRow(columna);
+//            }
+//        }
+//        tabla.getColumnModel().getColumn(0).setPreferredWidth(300);
+//        tabla.getColumnModel().getColumn(1).setPreferredWidth(200);
+//        tabla.getColumnModel().getColumn(2).setPreferredWidth(50);
+//        tabla.getColumnModel().getColumn(3).setPreferredWidth(50);
+//
+//    }
+    public void titulos(JTable tabla) {
+        String titulos[] = {"PRODUCTO", "PRESENTACIÓN", "STOCK", "PRECIO"};
+        modelo = new DefaultTableModel(null, titulos);
         tabla.setModel(modelo);
-        ProductoPresentacionDAO ppdao = new ProductoPresentacionDAO();
+    }
 
-        modelo.addColumn("PRODUCTO");
-        modelo.addColumn("PRESENTACIÓN");
-        modelo.addColumn("STOCK");
-        modelo.addColumn("PRECIO");
+    public void LlenarTablaProductosConId(int idCategoria, int idAlmacen, JTable tabla, int small, int large, int xl) throws Exception {
+        titulos(tabla);
+        Conexion con = new Conexion();
+        try {
+            con.conectar();
+            String sql = "select p.nombre, pre.descripcion, pp.stock, pp.precio\n"
+                    + "from producto p\n"
+                    + "inner join productopresentacion pp on p.idproducto = pp.idproducto\n"
+                    + "inner join presentacion pre on pp.idpresentacion = pre.idpresentacion\n"
+                    + "where pp.idcategoria = ? and pp.idalmacen= ?";
+            PreparedStatement pst = con.getConexion().prepareStatement(sql);
+            pst.setInt(1, idCategoria);
+            pst.setInt(2, idAlmacen);
+            ResultSet res = pst.executeQuery();
+            Object[] datos = new Object[4];
 
-        Object[] columna = new Object[4];
-
-        //int numeroRegistros = ved.listar().size();
-        //CICLO PARA LLENAR LA TABLA PRODUCTOS SEGUN LA CATEGORIA SELECCIONADA
-        for (ProductoPresentacion pp : ppdao.Listar(idAlmacen)) {
-            if (pp.getIdcategoria() == idCategoria) {
-                columna[0] = getProductoConId(pp.getIdProducto());
-                columna[1] = getPresentacionConId(pp.getIdPresentacion());
-                columna[2] = pp.getStock();
-                columna[3] = pp.getPrecio();
-                modelo.addRow(columna);
+            while (res.next()) {
+                datos[0] = res.getString(1);
+                datos[1] = res.getString(2);
+                datos[2] = res.getDouble(3);
+                datos[3] = res.getDouble(4);
+                modelo.addRow(datos);
             }
+            
+            tabla.setModel(modelo);
+            
+            pst.close();
+            res.close();            
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            con.cerrar();
         }
+
         tabla.getColumnModel().getColumn(0).setPreferredWidth(300);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(200);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(50);

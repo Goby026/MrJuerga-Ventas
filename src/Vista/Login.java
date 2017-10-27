@@ -222,45 +222,47 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         //173, 431
-        try {
-            String usuario = txtUsuario.getText().toUpperCase();
-            String pass = String.valueOf(txtPass.getPassword()).toUpperCase();
-            String fechaInicio = new FlujoCajaDAO().getFechaDeMaxIdFlujoDeUsuario(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()));            
-            System.out.println(fechaInicio);
-            //int idFlujoCaja = new FlujoCajaDAO().getEstadoConFecha(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()), fechaInicio);
-            int idFlujoCaja = new FlujoCajaDAO().getEstadoConFecha(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()));
-            System.out.println(idFlujoCaja);
-            int flag = 0;
-            if (idFlujoCaja > 0) {
-                flag++;
-            }
-            System.out.println(flag);
-            System.out.println(idFlujoCaja);
-            if (flag > 0) {
-                //si ya se aperturo la caja entonces logearse normal
-                if (new LoginControl().validar(usuario, pass)) {
-                    //validar que ya haya seleccionado una caja despues de haber aperturado
-                    //si ya selecciono una caja, este panel no debe aparecer                
-                    Menu m = new Menu(usuario);
-                    m.setVisible(true);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(getRootPane(), "ERROR DE DATOS, VERIFICA TU USUARIO O CONTRASEÑA");
+        if (!txtUsuario.getText().trim().isEmpty()) {
+            if (!String.valueOf(txtPass.getPassword()).trim().isEmpty()) {
+                try {
+                    String usuario = txtUsuario.getText().toUpperCase();
+                    String pass = String.valueOf(txtPass.getPassword()).toUpperCase();
+                    String fechaInicio = new FlujoCajaDAO().getFechaDeMaxIdFlujoDeUsuario(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()));
+                    System.out.println(fechaInicio);
+                    //int idFlujoCaja = new FlujoCajaDAO().getEstadoConFecha(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()), fechaInicio);
+                    int idFlujoCaja = new FlujoCajaDAO().getEstadoConFecha(new LoginControl().getIdUsuarioConNombre(txtUsuario.getText().toUpperCase()));
+                    System.out.println(idFlujoCaja);
+                    int flag = 0;
+                    if (idFlujoCaja > 0) {
+                        flag++;
+                    }
+                    System.out.println(flag);
+                    System.out.println(idFlujoCaja);
+                    if (flag > 0) {
+                        //si ya se aperturo la caja entonces logearse normal
+                        if (new LoginControl().validar(usuario, pass)) {
+                            //validar que ya haya seleccionado una caja despues de haber aperturado
+                            //si ya selecciono una caja, este panel no debe aparecer                
+                            Menu m = new Menu(usuario);
+                            m.setVisible(true);
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(getRootPane(), "ERROR DE DATOS, VERIFICA TU USUARIO O CONTRASEÑA");
+                        }
+                    } else {
+                        //actualizar segun la caja que se seleccionó
+                        panelSeleccionarCaja.setVisible(true);
+                        panelSeleccionarCaja.setBounds(800, 300, 220, 490);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             } else {
-                //actualizar segun la caja que se seleccionó
-                panelSeleccionarCaja.setVisible(true);
-                panelSeleccionarCaja.setBounds(800, 300, 220, 490);
+                JOptionPane.showMessageDialog(getRootPane(), "INGRESE CONTRASEÑA");
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } else {
+            JOptionPane.showMessageDialog(getRootPane(), "INGRESE USUARIO");
         }
-        try {
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
