@@ -78,7 +78,7 @@ public class VentasControl {
                     + "from producto p\n"
                     + "inner join productopresentacion pp on p.idproducto = pp.idproducto\n"
                     + "inner join presentacion pre on pp.idpresentacion = pre.idpresentacion\n"
-                    + "where pp.idcategoria = ? and pp.idalmacen= ?";
+                    + "where pp.idcategoria = ? and pp.idalmacen= ? and pp.estado = 1";
             PreparedStatement pst = con.getConexion().prepareStatement(sql);
             pst.setInt(1, idCategoria);
             pst.setInt(2, idAlmacen);
