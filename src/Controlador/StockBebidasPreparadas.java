@@ -115,20 +115,20 @@ public class StockBebidasPreparadas {
                     //System.out.println("VALOR DE PRESENTACION:::::::"+pre.getValorMl());
                     
                     double valor = p.getCantidad() / pre.getValorMl();//cantidad de receta entre el valor de la presentacion
-                    System.out.println("VALOR ---> CANTIDAD ML:::::::"+p.getCantidad());
-                    System.out.println("VALOR ---> PRESENTACION ML:::::::"+pre.getValorMl());
-                    System.out.println("VALOR CALCULADO ---> CANTIDAD ML / VALOR DE PRESENTACION:::::::"+valor);
+                    //System.out.println("VALOR ---> CANTIDAD ML:::::::"+p.getCantidad());
+                    //System.out.println("VALOR ---> PRESENTACION ML:::::::"+pre.getValorMl());
+                    //System.out.println("VALOR CALCULADO ---> CANTIDAD ML / VALOR DE PRESENTACION:::::::"+valor);
 
                     //en este caso el idproductopresentacion siempre sera de almacen 1 por que la receta se configuro con ese id
                     //por eso se pasa el idWarehouse para que cuando busque en la tabla productopresentacion
                     //el idproductopresentacion lo tome como si fuera un idProducto y pueda ubicar el correcto stock
                     ProductoPresentacion pp = ppdao.Obtener(p.getIdProductoPresentacion(), idAlmacen);//las cantidades en ML estan registradas en la tabla preparacion que siempre apunta a almacen 1
 
-                    System.out.println("STOCK DE PRODUCTO COMPONENTE ANTES:::::::::::"+pp.getStock());
+                    //System.out.println("STOCK DE PRODUCTO COMPONENTE ANTES:::::::::::"+pp.getStock());
                     
                     double stock = pp.getStock() - valor;
                     
-                    System.out.println("STOCK DE PRODUCTO COMPONENTE DESPUES:::::::::::"+stock);
+                    //System.out.println("STOCK DE PRODUCTO COMPONENTE DESPUES:::::::::::"+stock);
                     if (ppdao.updateStock(stock, p.getIdProductoPresentacion(), idAlmacen)) {
                         c++;
                     }

@@ -269,7 +269,7 @@ public class VentasControl {
             for (int i = 0; i < numFilas; i++) {
                 VentaProducto vp = new VentaProducto();
                 pp = new ProductoPresentacionDAO().Obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
-                vp.setIdProducto(pp.getIdProducto());
+                vp.setIdProducto(pp.getIdProductoPresentacion());
                 vp.setIdVenta(numVenta);
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                 vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
@@ -281,7 +281,7 @@ public class VentasControl {
                         if (vpdao.registrar(vp)) {
                             //System.out.println("ID DE PRODUCTO::::: "+vp.getIdProducto());
                             for (int j = 0; j < vp.getCantidad(); j++) {
-                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(vp.getIdProducto(), 2);
+                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(pp.getIdProducto(), 2);
                                 sbp.updateStockVenta();
                             }
                             flag++;
@@ -290,7 +290,7 @@ public class VentasControl {
                     case 2:
                         if (vpdao.registrar2(vp)) {
                             for (int j = 0; j < vp.getCantidad(); j++) {
-                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(vp.getIdProducto(), 2);
+                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(pp.getIdProducto(), 2);
                                 sbp.updateStockVenta();
                             }
                             flag++;
@@ -299,7 +299,7 @@ public class VentasControl {
                     case 3:
                         if (vpdao.registrar3(vp)) {
                             for (int j = 0; j < vp.getCantidad(); j++) {
-                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(vp.getIdProducto(), 3);
+                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(pp.getIdProducto(), 3);
                                 sbp.updateStockVenta();
                             }
                             flag++;
@@ -322,7 +322,7 @@ public class VentasControl {
             for (int i = 0; i < numFilas; i++) {
                 VentaProducto vp = new VentaProducto();
                 pp = new ProductoPresentacionDAO().Obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
-                vp.setIdProducto(pp.getIdProducto());
+                vp.setIdProducto(pp.getIdProductoPresentacion());
                 vp.setIdVenta(numVenta);
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                 vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
@@ -332,7 +332,7 @@ public class VentasControl {
                     case 1:
                         if (vpdao.registrar(vp)) {
                             for (int j = 0; j < vp.getCantidad(); j++) {
-                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(vp.getIdProducto(), 2);
+                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(pp.getIdProducto(), 2);
                                 sbp.updateStockVenta();
                             }
                             flag++;
@@ -341,7 +341,7 @@ public class VentasControl {
                     case 2:
                         if (vpdao.registrar2(vp)) {
                             for (int j = 0; j < vp.getCantidad(); j++) {
-                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(vp.getIdProducto(), 2);
+                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(pp.getIdProducto(), 2);
                                 sbp.updateStockVenta();
                             }
                             flag++;
@@ -350,7 +350,7 @@ public class VentasControl {
                     case 3:
                         if (vpdao.registrar3(vp)) {
                             for (int j = 0; j < vp.getCantidad(); j++) {
-                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(vp.getIdProducto(), 3);
+                                StockBebidasPreparadas sbp = new StockBebidasPreparadas(pp.getIdProducto(), 3);
                                 sbp.updateStockVenta();
                             }
                             flag++;
