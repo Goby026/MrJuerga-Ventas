@@ -269,7 +269,7 @@ public class VentasControl {
             for (int i = 0; i < numFilas; i++) {
                 VentaProducto vp = new VentaProducto();
                 pp = new ProductoPresentacionDAO().Obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
-                vp.setIdProducto(pp.getIdProductoPresentacion());
+                vp.setIdProducto(pp.getIdProducto());
                 vp.setIdVenta(numVenta);
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                 vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
@@ -322,7 +322,7 @@ public class VentasControl {
             for (int i = 0; i < numFilas; i++) {
                 VentaProducto vp = new VentaProducto();
                 pp = new ProductoPresentacionDAO().Obtener(Integer.parseInt(tabla.getValueAt(i, 0).toString()));
-                vp.setIdProducto(pp.getIdProductoPresentacion());
+                vp.setIdProducto(pp.getIdProducto());
                 vp.setIdVenta(numVenta);
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                 vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
