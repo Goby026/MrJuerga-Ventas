@@ -14,10 +14,7 @@ import Modelo.UsuarioCajaDAO;
 import Modelo.UsuarioDAO;
 import Modelo.Venta;
 import Modelo.VentaDAO;
-import Modelo.VentaProducto;
 import Modelo.VentaProductoDAO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,13 +24,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AnulacionesControl {
 
-    DefaultTableModel modeloDetalle;
-
-    public void cargarTitulosTabla(JTable tabla) {
-        String titulos[] = {"COD","PRODUCTO", "PRESENTACION", "PRECIO", "CANTIDAD", "SUBTOTAL"};
-        modeloDetalle = new DefaultTableModel(null, titulos);
-        tabla.setModel(modeloDetalle);
-    }
+    
 
     public String[] CargarDatos(int numboleta, Integer num) throws Exception {
         try {
@@ -238,32 +229,6 @@ public class AnulacionesControl {
         }
     }
 
-    public void cargarTabla(int numVenta, JTable tabla, Integer num, Integer idAlmacen) throws Exception {
-        try {
-            cargarTitulosTabla(tabla);
-
-            Object[] columna = new Object[6];
-
-            for (int i = 0; i < new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).size(); i++) {
-                columna[0] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getIdProductoPresentacion();
-                columna[1] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getProducto();
-                columna[2] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getPresentacion();
-                columna[3] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getPrecio();
-                columna[4] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getCantidad();
-                columna[5] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getSubtotal();
-                modeloDetalle.addRow(columna);
-            }
-        } catch (Exception ex) {
-            throw ex;
-        }
-    }
-
-    public void limpiarTabla(JTable tabla) {
-        for (int i = 0; i < tabla.getRowCount(); i++) {
-            modeloDetalle.removeRow(i);
-            i -= 1;
-        }
-        cargarTitulosTabla(tabla);
-    }
+    
 
 }

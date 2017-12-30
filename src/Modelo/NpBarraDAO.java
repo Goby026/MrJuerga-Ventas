@@ -1,7 +1,7 @@
 
 package Modelo;
 
-import Interfaces.NpBarraCRUD;
+import Interfaces.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import java.util.List;
  *
  * @author Grover
  */
-public class NpBarraDAO extends Conexion implements NpBarraCRUD<NpBarra>{
+public class NpBarraDAO extends Conexion implements DAO<NpBarra>{
 
     @Override
-    public boolean registrar(NpBarra np) throws Exception {
+    public boolean Registrar(NpBarra np) throws Exception {
         try {
             String sql = "insert into npbarra (fecha, hora, idusuario, idcliente, idtipocomprobante, estado, tipopago,noperacion ,idcaja, idflujocaja) values (?,?,?,?,?,?,?,?,?,?)";
             this.conectar();
@@ -43,7 +43,7 @@ public class NpBarraDAO extends Conexion implements NpBarraCRUD<NpBarra>{
     }
 
     @Override
-    public boolean modificar(NpBarra np) throws Exception {
+    public boolean Modificar(NpBarra np) throws Exception {
         try {
             String sql = "UPDATE npbarra SET fecha=?, hora=?, idusuario=?, idcliente=?, idtipocomprobante=?, estado=?, tipopago = ?,noperacion = ? ,idcaja = ? ,idflujocaja = ? WHERE idnpbarra = ?";
             this.conectar();
@@ -73,7 +73,7 @@ public class NpBarraDAO extends Conexion implements NpBarraCRUD<NpBarra>{
     }
 
     @Override
-    public boolean anular(int id) throws Exception {
+    public boolean Anular(int id) throws Exception {
         try {
             //estado 0=anulado - 1=activo
             String sql = "UPDATE npbarra SET estado = 0 WHERE idnpbarra = " + id + "";
@@ -91,9 +91,38 @@ public class NpBarraDAO extends Conexion implements NpBarraCRUD<NpBarra>{
         }
         return false;
     }
+    public boolean AnularNP(int id, int idCaja) throws Exception {
+        try {
+            //estado 0=anulado - 1=activo
+            String sql = "";
+            switch(idCaja){
+                case 1:
+                    sql = "UPDATE npbarra SET estado = 0 WHERE idnpbarra = " + id + "";
+                    break;
+                case 2:
+                    sql = "UPDATE npbarra2 SET estado = 0 WHERE idnpbarra2 = " + id + "";
+                    break;
+                case 3:
+                    sql = "UPDATE npbarra3 SET estado = 0 WHERE idnpbarra3 = " + id + "";
+                    break;
+            }
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            int res = pst.executeUpdate();
+            if (res > 0) {
+                return true;
+            }
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return false;
+    }
 
     @Override
-    public List<NpBarra> listar() throws Exception {
+    public List<NpBarra> Listar() throws Exception {
         List<NpBarra> lista = null;
         try {
             this.conectar();
@@ -142,5 +171,43 @@ public class NpBarraDAO extends Conexion implements NpBarraCRUD<NpBarra>{
             this.cerrar();
         }
         return -1;
+    }
+
+    @Override
+    public boolean Eliminar(int id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    //obtener una nota de pedido a partir del numero de nota de pedido
+    @Override
+    public NpBarra Obtener(int idNp) throws Exception {
+        NpBarra v = null;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("select * from npbarra where idnpbarra = ?");
+            pst.setInt(1, idNp);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                v = new NpBarra();
+                v.setIdNpBarra(rs.getInt("idnpbarra"));
+                v.setFecha(rs.getString("fecha"));
+                v.setHora(rs.getString("hora"));
+                v.setIdUsuario(rs.getInt("idusuario"));
+                v.setIdCliente(rs.getInt("idcliente"));
+                v.setIdTipoComprobante(rs.getInt("idtipocomprobante"));
+                v.setEstado(rs.getInt("estado"));
+                v.setTipoPago(rs.getInt("tipopago"));
+                v.setnOperacion(rs.getString("noperacion"));
+                v.setIdCaja(rs.getInt("idcaja"));
+                v.setIdFlujoCaja(rs.getInt("idflujocaja"));
+            }
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return v;
     }
 }

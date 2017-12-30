@@ -5,7 +5,7 @@
  */
 package Modelo;
 
-import Interfaces.CajaCRUD;
+import Interfaces.DAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Marce
  */
-public class CajaDAO extends Conexion implements CajaCRUD {
+public class CajaDAO extends Conexion implements DAO<Caja> {
 
     @Override
     public boolean Registrar(Caja c) throws Exception {
@@ -57,12 +57,12 @@ public class CajaDAO extends Conexion implements CajaCRUD {
     }
 
     @Override
-    public boolean Eliminar(Caja c) throws Exception {
+    public boolean Eliminar(int id) throws Exception {
         try {            
             String sql = ("delete from caja where idcaja=?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
-            pst.setInt(1, c.getIdCaja());
+            pst.setInt(1, id);
 
             int res = pst.executeUpdate();
             if (res > 0) {
@@ -98,6 +98,34 @@ public class CajaDAO extends Conexion implements CajaCRUD {
             this.cerrar();
         }
         return lista;
+    }
+
+    @Override
+    public boolean Anular(int id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Caja Obtener(int id) throws Exception {
+        Caja c = null;
+        try {
+            this.conectar();
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT * FROM caja WHERE idcaja = ?");
+            pst.setInt(1, id);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                c = new Caja();
+                c.setIdCaja(res.getInt("idcaja"));
+                c.setNomCaja(res.getString("nomcaja"));
+            }
+            pst.close();
+            res.close();
+        } catch (Exception error) {
+            throw error;
+        } finally {
+            this.cerrar();
+        }
+        return c;
     }
 
 }

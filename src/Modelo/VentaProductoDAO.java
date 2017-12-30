@@ -209,7 +209,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
                         lista.add(da);
                         //model_diario.addRow(datos);
                     }
-                    //tbl_diario.setModel(model_diario);    
+                    //tbl_diario.setModel(model_diario);
                     break;
                 case 2:
                     pst = this.conexion.prepareStatement("SELECT productopresentacion.idproductopresentacion, producto.nombre, presentacion.descripcion,productopresentacion.precio, ventaproducto2.cantidad, ventaproducto2.subtotal\n"

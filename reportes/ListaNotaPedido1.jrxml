@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-12-29T00:26:45 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="76f99987-39c2-43ae-b979-821768a4eca8">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MrJuerga-Local"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="flujo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="usuario" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="caja" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select n.idnpbarra, p.nombre, pre.descripcion ,pp.precio,n.fecha, n.hora ,np.cantidad, np.subtotal 
+from npbarra n
+inner join npbarra_prod np on n.idnpbarra = np.idnpbarra
+inner join productopresentacion pp on np.idProductopresentacion = pp.idproductopresentacion
+inner join producto p on pp.idproducto = p.idproducto
+inner join presentacion pre on pp.idpresentacion = pre.idpresentacion
+where n.idflujocaja = $P{flujo} and pp.idalmacen = 2]]>
+	</queryString>
+	<field name="idnpbarra" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="subtotal" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="552" height="40" uuid="3921bc73-acfc-4325-832c-d6a370c4f9aa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[DETALLE DE NOTA DE PEDIDO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="69" height="13" uuid="242e11eb-443e-49ea-9e1d-3a9c762f938f"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[USUARIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="69" height="13" uuid="d3788ca2-3f53-4c80-a720-0d7718e6a024"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[CAJA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="0" width="100" height="13" uuid="900cdcd0-c796-4c1d-8767-fcdc7ade6480"/>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="15" width="100" height="13" uuid="0c0321ad-71d1-498f-a838-60a00dcd8de4"/>
+				<textFieldExpression><![CDATA[$P{caja}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="13" uuid="6ac4e817-b8df-4219-8eb0-cd92ae58b7e0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="152" height="13" uuid="05d7524a-d1bf-46fc-bc4d-e28a4fd3a137">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="0" width="60" height="13" uuid="0dd81745-f97b-4d5c-8e22-c8698d366c1c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRESENT.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="0" width="46" height="13" uuid="20007a61-e33b-4588-9896-9c306a600e91"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRECIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="0" width="44" height="13" uuid="dd810de5-8eda-409a-867d-93630a9217a1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="0" width="69" height="13" uuid="b534c389-6a67-4fbc-8014-ff1b123a3aae"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="0" width="69" height="13" uuid="ab69568b-f4b4-464f-91c3-5aa273109e25"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="0" width="69" height="13" uuid="9e826166-8a3c-4a8a-802c-31bf40ef99e6"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUBTOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="40" height="20" uuid="285e062f-1f32-49fa-a30c-ac50bf84919f"/>
+				<textFieldExpression><![CDATA[$F{idnpbarra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="0" width="152" height="20" uuid="2c9cdb83-45a3-42f4-8ca8-3e0a09cc65a3"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="193" y="0" width="60" height="20" uuid="868cf46a-78ae-4077-89b7-dae8ccd0a838"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="0" width="46" height="20" uuid="bb5cf8a5-4f51-402f-8943-cfba39aa1323"/>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="0" width="44" height="20" uuid="1f73aa3a-cb74-46c5-943c-76af82c7ff09"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="69" height="20" uuid="dc4b8205-c464-4dea-8d1d-157274446f8f"/>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="0" width="69" height="20" uuid="e99977e0-185f-4fbb-bcb8-658c18e94912"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="0" width="69" height="20" uuid="c3e83228-d935-4128-8444-613a8dc3f35d"/>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<textField pattern="MMMM d, yyyy">
+				<reportElement x="0" y="0" width="552" height="14" uuid="f37299eb-7dad-4485-9af9-a96fb5a4ef1d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

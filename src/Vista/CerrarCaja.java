@@ -181,6 +181,7 @@ public class CerrarCaja extends javax.swing.JFrame {
         txtJarras = new javax.swing.JTextField();
         btnMontoJarras = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
+        btnListaDeVentas1 = new javax.swing.JButton();
 
         NumericJarras.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -394,7 +395,7 @@ public class CerrarCaja extends javax.swing.JFrame {
                 btnCerrarCajaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCerrarCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 870, 280, 70));
+        getContentPane().add(btnCerrarCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 870, 260, 70));
 
         jLabel32.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -427,14 +428,14 @@ public class CerrarCaja extends javax.swing.JFrame {
         getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 880, 230, 60));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 620, 180, 20));
 
-        btnResumen.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnResumen.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         btnResumen.setText("RESUMEN");
         btnResumen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResumenActionPerformed(evt);
             }
         });
-        getContentPane().add(btnResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 820, 280, 40));
+        getContentPane().add(btnResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 820, 260, 40));
 
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -445,14 +446,14 @@ public class CerrarCaja extends javax.swing.JFrame {
         lblCaja.setText("____________");
         getContentPane().add(lblCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 990, 200, -1));
 
-        btnListaDeVentas.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnListaDeVentas.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         btnListaDeVentas.setText("DETALLE DE VENTAS");
         btnListaDeVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnListaDeVentasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnListaDeVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 670, 280, 40));
+        getContentPane().add(btnListaDeVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 720, 260, 40));
 
         jButton3.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
         jButton3.setText("7");
@@ -596,14 +597,14 @@ public class CerrarCaja extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 110));
 
-        btnVentasProductos.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnVentasProductos.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         btnVentasProductos.setText("VENTAS POR PRODUCTO");
         btnVentasProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVentasProductosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVentasProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 720, 280, 40));
+        getContentPane().add(btnVentasProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 770, 260, 40));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GASTOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 0, 11))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -621,14 +622,14 @@ public class CerrarCaja extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 390, 70));
 
-        btnNotasPedidoProducto.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        btnNotasPedidoProducto.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         btnNotasPedidoProducto.setText("NOTAS DE PEDIDO PRODUCTO");
         btnNotasPedidoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNotasPedidoProductoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNotasPedidoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 770, 280, 40));
+        getContentPane().add(btnNotasPedidoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 770, 260, 40));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NOTAS DE PEDIDO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Consolas", 0, 11))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -692,6 +693,15 @@ public class CerrarCaja extends javax.swing.JFrame {
         });
         getContentPane().add(btnMontoJarras, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 480, 110, 30));
         getContentPane().add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 980, 850, -1));
+
+        btnListaDeVentas1.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
+        btnListaDeVentas1.setText("DETALLE NOTA DE PEDIDO");
+        btnListaDeVentas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaDeVentas1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnListaDeVentas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 720, 260, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1003,6 +1013,19 @@ public class CerrarCaja extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnNotasPedidoProductoActionPerformed
 
+    private void btnListaDeVentas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaDeVentas1ActionPerformed
+        try {
+            int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new CerrarCajaControl().getIdUsuario(lblUsuario.getText()), new CerrarCajaControl().getIdCaja(lblCaja.getText()));            
+            parametros.put("flujo", idFlujoCaja);
+            parametros.put("usuario", lblUsuario.getText());
+            parametros.put("caja", lblCaja.getText());
+            mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\ListaNotaPedido" + numCaja + ".jrxml", parametros);
+            mrv.exportarAPdf();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnListaDeVentas1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1043,6 +1066,7 @@ public class CerrarCaja extends javax.swing.JFrame {
     private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCerrarCaja;
     private javax.swing.JButton btnListaDeVentas;
+    private javax.swing.JButton btnListaDeVentas1;
     private javax.swing.JButton btnMontoJarras;
     private javax.swing.JButton btnNotasPedidoProducto;
     private javax.swing.JButton btnResumen;

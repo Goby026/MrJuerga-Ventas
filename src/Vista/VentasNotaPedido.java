@@ -1921,7 +1921,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                     switch (txtCaja.getText()) {
                         case "GENERAL 1":
                             NpBarraDAO vdao = new NpBarraDAO();
-                            if (vdao.registrar(v)) {
+                            if (vdao.Registrar(v)) {
                                 idventa = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(1);
                                 flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 1);
                                 numTicket = 1;
@@ -2156,7 +2156,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 switch (caja) {
                     case "GENERAL 1":
                         NpBarraDAO vdao = new NpBarraDAO();
-                        if (vdao.registrar(v)) {
+                        if (vdao.Registrar(v)) {
                             idventa = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(1);
                             flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 1);
                             numTicket = 1;
@@ -2592,7 +2592,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                 switch (caja) {
                     case "GENERAL 1":
                         NpBarraDAO nprod = new NpBarraDAO();
-                        if (nprod.registrar(v)) {//REGISTRA LA NOTA DE PEDIDO
+                        if (nprod.Registrar(v)) {//REGISTRA LA NOTA DE PEDIDO
 
                             int idUltimaNotaPedido = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(1);
                             flag = vc.registrarDetalleDeNpBarra(tblPedidos, idUltimaNotaPedido, 1);//REGISTRA EL DETALLE DE NOTA DE PEDIDO

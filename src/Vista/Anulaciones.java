@@ -2,9 +2,20 @@ package Vista;
 
 import Controlador.AnulacionesControl;
 import Controlador.Cronometro;
+import Controlador.JTableControl;
 import Controlador.ManejadorFechas;
 import Controlador.MyiReportVisor;
+import Modelo.Caja;
+import Modelo.CajaDAO;
+import Modelo.DatosAnulacion;
 import Modelo.FlujoCajaDAO;
+import Modelo.NpBarra;
+import Modelo.NpBarraDAO;
+import Modelo.NpBarra_Prod;
+import Modelo.NpBarra_ProdDAO;
+import Modelo.TipoPago;
+import Modelo.TipoPagoDAO;
+import Modelo.UsuarioDAO;
 import Modelo.VentaDAO;
 import Modelo.VentaProductoDAO;
 import java.awt.Color;
@@ -12,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,6 +37,12 @@ public class Anulaciones extends javax.swing.JFrame {
     MyiReportVisor mrv;
     HashMap parametros = new HashMap();
     Integer num = 1;
+    Connection Connection;
+    PreparedStatement PreparedStatement;
+    ResultSet ResultSet;
+
+    JTableControl jc = null;
+    int tipoSalida = 0;
 
     public Anulaciones(String Usuario) {
         initComponents();
@@ -41,7 +59,7 @@ public class Anulaciones extends javax.swing.JFrame {
             lblFecha.setText(new ManejadorFechas().getFechaActual());
             lblCaja.setText(new AnulacionesControl().getCajaDeUsuario(Usuario));
             new Cronometro().iniciarCronometro(txtHoraCronometro);
-            new AnulacionesControl().cargarTitulosTabla(tblDetalle);
+            cargarTitulosTabla();
             //int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new GastosControl().getIdUsuario(lblUsuario.getText()), new GastosControl().getIdCaja(lblCaja.getText()));
             switch (lblCaja.getText()) {
                 case "GENERAL 1":
@@ -59,9 +77,13 @@ public class Anulaciones extends javax.swing.JFrame {
         }
     }
 
-    Connection Connection;
-    PreparedStatement PreparedStatement;
-    ResultSet ResultSet;
+    public void cargarTitulosTabla() {
+        String titulos[] = {"COD", "PRODUCTO", "PRESENTACION", "PRECIO", "CANTIDAD", "SUBTOTAL"};
+
+        jc = new JTableControl(titulos, tblDetalle);
+
+        jc.llenarTitulos();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,8 +129,8 @@ public class Anulaciones extends javax.swing.JFrame {
         btnDel = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txt_num_venta = new javax.swing.JTextField();
-        btnListaAnulaciones = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        btnBuscarNotaPedido = new javax.swing.JButton();
         txtUsuario = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -128,7 +150,7 @@ public class Anulaciones extends javax.swing.JFrame {
         panelEstado = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         txtTipoVenta = new javax.swing.JTextField();
-        btnBuscarNotaPedido = new javax.swing.JButton();
+        btnListaAnulaciones = new javax.swing.JButton();
 
         panelConceptoAnulacion.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -142,7 +164,7 @@ public class Anulaciones extends javax.swing.JFrame {
         txaConceptoAnulacion.setRows(5);
         jScrollPane2.setViewportView(txaConceptoAnulacion);
 
-        panelConceptoAnulacion.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 420, 260));
+        panelConceptoAnulacion.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 420, 240));
 
         btnConceptoAnulacion.setBackground(new java.awt.Color(0, 102, 0));
         btnConceptoAnulacion.setFont(new java.awt.Font("Consolas", 1, 18)); // NOI18N
@@ -212,7 +234,7 @@ public class Anulaciones extends javax.swing.JFrame {
                 btnAnularActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 720, 280, 70));
+        getContentPane().add(btnAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 690, 280, 70));
 
         jLabel17.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         jLabel17.setText("S/.");
@@ -424,15 +446,6 @@ public class Anulaciones extends javax.swing.JFrame {
         txt_num_venta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel2.add(txt_num_venta, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 350, 50));
 
-        btnListaAnulaciones.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnListaAnulaciones.setText("LISTA DE ANULACIONES");
-        btnListaAnulaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListaAnulacionesActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnListaAnulaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, 350, 70));
-
         btnBuscar.setBackground(new java.awt.Color(0, 204, 51));
         btnBuscar.setFont(new java.awt.Font("Consolas", 0, 20)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -444,6 +457,18 @@ public class Anulaciones extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 110, 100));
+
+        btnBuscarNotaPedido.setBackground(new java.awt.Color(204, 102, 0));
+        btnBuscarNotaPedido.setFont(new java.awt.Font("Consolas", 0, 20)); // NOI18N
+        btnBuscarNotaPedido.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscarNotaPedido.setText("BUSCAR NOTA PEDIDO");
+        btnBuscarNotaPedido.setBorderPainted(false);
+        btnBuscarNotaPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarNotaPedidoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBuscarNotaPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 350, 60));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 430, 650));
 
@@ -548,17 +573,14 @@ public class Anulaciones extends javax.swing.JFrame {
         txtTipoVenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
         getContentPane().add(txtTipoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 610, 220, -1));
 
-        btnBuscarNotaPedido.setBackground(new java.awt.Color(204, 102, 0));
-        btnBuscarNotaPedido.setFont(new java.awt.Font("Consolas", 0, 20)); // NOI18N
-        btnBuscarNotaPedido.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscarNotaPedido.setText("BUSCAR Nota Pedido");
-        btnBuscarNotaPedido.setBorderPainted(false);
-        btnBuscarNotaPedido.addActionListener(new java.awt.event.ActionListener() {
+        btnListaAnulaciones.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnListaAnulaciones.setText("REPORTE DE ANULACIONES");
+        btnListaAnulaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarNotaPedidoActionPerformed(evt);
+                btnListaAnulacionesActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBuscarNotaPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 720, 310, 60));
+        getContentPane().add(btnListaAnulaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 690, 350, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -568,7 +590,7 @@ public class Anulaciones extends javax.swing.JFrame {
             if (!txt_num_venta.getText().trim().isEmpty()) {
                 if (lblCaja.getText().equals(txtCaja.getText())) {
                     panelConceptoAnulacion.setVisible(true);
-                    panelConceptoAnulacion.setBounds(700, 250, 435, 431);
+                    panelConceptoAnulacion.setBounds(700, 250, 435, 441);
                 } else {
                     JOptionPane.showMessageDialog(getRootPane(), "EL NUMERO DE BOLETA CORRESPONDE A OTRA CAJA");
                 }
@@ -646,6 +668,7 @@ public class Anulaciones extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
+            tipoSalida = 1;
             int numBoleta = Integer.parseInt(txt_num_venta.getText());
             if (new AnulacionesControl().getEstadoDeVenta(numBoleta, num)) {
                 lblEstado.setText("ACTIVO");
@@ -676,7 +699,7 @@ public class Anulaciones extends javax.swing.JFrame {
                     break;
             }
 
-            new AnulacionesControl().cargarTabla(numBoleta, tblDetalle, num, idAlmacen);
+            cargarTabla(numBoleta, num, idAlmacen);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -698,22 +721,45 @@ public class Anulaciones extends javax.swing.JFrame {
 
     private void btnConceptoAnulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConceptoAnulacionActionPerformed
         try {
-            int numVenta = Integer.parseInt(txt_num_venta.getText());
-            if (new VentaDAO().anular(numVenta, num)) {
-                new AnulacionesControl().sumarStock(tblDetalle,1);//1= anular venta real
-                new VentaProductoDAO().updateVentaProducto(numVenta, num);
-                if (txtTipoVenta.getText().equals("4")) {
-                    new VentaProductoDAO().updateVentaProductoOP(numVenta, num);
-                }
-                JOptionPane.showMessageDialog(getRootPane(), "LA VENTA: " + numVenta + " FUE ANULADA EXITOSAMENTE");
-                panelConceptoAnulacion.dispose();
-                //limpiarCampos();
+            switch (tipoSalida) {//1=venta real, 2=nota de pedido
+                case 1://venta real
+                    int numVenta = Integer.parseInt(txt_num_venta.getText());
+                    if (new VentaDAO().anular(numVenta, num)) {
+                        //new AnulacionesControl().sumarStock(tblDetalle, 1);//1= anular venta real
+                        new VentaProductoDAO().updateVentaProducto(numVenta, num);
+                        if (txtTipoVenta.getText().equals("4")) {
+                            new VentaProductoDAO().updateVentaProductoOP(numVenta, num);
+                        }
+                        JOptionPane.showMessageDialog(getRootPane(), "LA VENTA: " + numVenta + " FUE ANULADA EXITOSAMENTE");
+                        panelConceptoAnulacion.dispose();
+                        //limpiarCampos();
 //                JPanel temp=(JPanel) this.getContentPane(); 
 //                SwingUtilities.updateComponentTreeUI(temp);
 //                this.validateTree();
-            } else {
-                System.out.println("error");
+                    } else {
+                        System.out.println("error");
+                    }
+                    break;
+                case 2:
+                    int numNota = Integer.parseInt(txt_num_venta.getText());
+                    if (new NpBarraDAO().AnularNP(numNota, num)) {//anula la nota de pedido de una determinada caja
+                        //new AnulacionesControl().sumarStock(tblDetalle, 1);//
+                        new NpBarra_ProdDAO().AnularNP(numNota, num);
+                        if (txtTipoVenta.getText().equals("4")) {
+                            new NpBarra_ProdDAO().updateNpProductoOP(numNota, num);
+                        }
+                        JOptionPane.showMessageDialog(getRootPane(), "LA NOTA DE PEDIDO: " + numNota + " FUE ANULADA EXITOSAMENTE");
+                        panelConceptoAnulacion.dispose();
+                        //limpiarCampos();
+//                JPanel temp=(JPanel) this.getContentPane();
+//                SwingUtilities.updateComponentTreeUI(temp);
+//                this.validateTree();
+                    } else {
+                        System.out.println("error");
+                    }
+                    break;
             }
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
@@ -725,7 +771,56 @@ public class Anulaciones extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnBuscarNotaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNotaPedidoActionPerformed
-        // TODO add your handling code here:
+        try {
+            tipoSalida = 2;
+            int numNotaPedido = Integer.parseInt(txt_num_venta.getText());
+            NpBarraDAO npdao = new NpBarraDAO();
+            NpBarra np = npdao.Obtener(numNotaPedido);
+            if (np.getEstado() == 1) {
+                lblEstado.setText("ACTIVO");
+                //lblEstado.setBackground(Color.GREEN);
+                panelEstado.setBackground(Color.GREEN);
+            } else {
+                lblEstado.setText("ANULADO");
+                //lblEstado.setBackground(Color.RED);
+                panelEstado.setBackground(Color.RED);
+            }
+
+            txtnumVenta.setText("" + numNotaPedido);
+            txtConcepto.setText("NOTA DE PEDIDO");
+            Caja c = new CajaDAO().Obtener(np.getIdCaja());
+            txtCaja.setText(c.getNomCaja());
+            //txtUsuario.setText(array[3]);
+            txtUsuario.setText("" + new UsuarioDAO().Obtener(np.getIdUsuario()));
+            txtHora.setText(np.getHora());
+            txtFecha.setText(np.getFecha());
+            TipoPago tp = new TipoPagoDAO().Obtener(np.getTipoPago());
+            txtTipoVenta.setText(tp.getDescripcion());
+            double monto = 0.0;
+            NpBarra_ProdDAO npbDAO = new NpBarra_ProdDAO();
+            for (NpBarra_Prod npb : npbDAO.listar(numNotaPedido)) {
+                monto += npb.getSubtotal();
+            }
+            txtMonto.setText("" + monto);
+            //cargar la tabla con nota de pedido
+            jc.LimpiarTabla();
+            List<DatosAnulacion> lista = new NpBarra_ProdDAO().ListarNP(numNotaPedido, num);
+            Object datos[] = new Object[6];
+            for (DatosAnulacion da : lista) {
+                datos[0] = da.getIdProductoPresentacion();
+                datos[1] = da.getProducto();
+                datos[2] = da.getPresentacion();
+                datos[3] = da.getPrecio();
+                datos[4] = da.getCantidad();
+                datos[5] = da.getSubtotal();
+
+                jc.getModelo().addRow(datos);
+            }
+
+            tblDetalle.setModel(jc.getModelo());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btnBuscarNotaPedidoActionPerformed
 
     /**
@@ -826,7 +921,7 @@ public class Anulaciones extends javax.swing.JFrame {
     public void limpiarCampos() {
         txt_num_venta.setText("");
         lblEstado.setText("");
-        new AnulacionesControl().limpiarTabla(tblDetalle);
+        jc.LimpiarTabla();
         panelEstado.setBackground(new Color(240, 240, 240));
         txtnumVenta.setText("");
         txtConcepto.setText("");
@@ -835,5 +930,24 @@ public class Anulaciones extends javax.swing.JFrame {
         txtHora.setText("");
         txtFecha.setText("");
         txtMonto.setText("");
+    }
+
+    public void cargarTabla(int numVenta, Integer num, Integer idAlmacen) throws Exception {
+        try {
+            jc.LimpiarTabla();
+            Object[] columna = new Object[6];
+
+            for (int i = 0; i < new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).size(); i++) {
+                columna[0] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getIdProductoPresentacion();
+                columna[1] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getProducto();
+                columna[2] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getPresentacion();
+                columna[3] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getPrecio();
+                columna[4] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getCantidad();
+                columna[5] = new VentaProductoDAO().getDatosTabla(numVenta, num, idAlmacen).get(i).getSubtotal();
+                jc.getModelo().addRow(columna);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 }
