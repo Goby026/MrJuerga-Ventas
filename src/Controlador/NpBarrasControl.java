@@ -264,7 +264,7 @@ public class NpBarrasControl {
     }
 
     //metodo para registrar detalles de NOTA DE PEDIDO sin parametros
-    public int registrarDetalleDeNpBarra(JTable tabla, int numVenta, int caja) throws Exception {
+    public int registrarDetalleDeNpBarra(JTable tabla, int numVenta, int caja, int complemento) throws Exception {
         try {
 
             int flag = 0;
@@ -280,6 +280,7 @@ public class NpBarrasControl {
                         vp.setPrecioU(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                         vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
                         vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                        vp.setComplemento(complemento);
                         pp = new ProductoPresentacionDAO().Obtener(vp.getIdProductoPresentacion());
                         NpBarra_ProdDAO vpdao = new NpBarra_ProdDAO();
                         if (vpdao.registrar(vp)) {
@@ -299,6 +300,7 @@ public class NpBarrasControl {
                         vp.setPrecioU(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                         vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
                         vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                        vp.setComplemento(complemento);
                         pp = new ProductoPresentacionDAO().Obtener(vp.getIdProductoPresentacion());
                         NpBarra_ProdDAO2 vpdao = new NpBarra_ProdDAO2();
                         if (vpdao.registrar(vp)) {
@@ -318,6 +320,7 @@ public class NpBarrasControl {
                         vp.setPrecioU(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                         vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
                         vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                        vp.setComplemento(complemento);
                         pp = new ProductoPresentacionDAO().Obtener(vp.getIdProductoPresentacion());
                         NpBarra_ProdDAO3 vpdao = new NpBarra_ProdDAO3();
                         if (vpdao.registrar(vp)) {

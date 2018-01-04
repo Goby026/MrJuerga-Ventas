@@ -17,13 +17,14 @@ public class ProductoPresentacion {
     private double precio2;
     private double precio3;//
     private int idcategoria;
-    
+    private int estado;
+    private String codFamilia;
     
 
     public ProductoPresentacion() {
     }
 
-    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, double stock, double stock2, double stock3, double precio, double precio2, double precio3, int idcategoria) {
+    public ProductoPresentacion(int idProductoPresentacion, int idProducto, int idPresentacion, int idalmacen, double stock, double stock2, double stock3, double precio, double precio2, double precio3, int idcategoria, int estado, String codFamilia) {
         this.idProductoPresentacion = idProductoPresentacion;
         this.idProducto = idProducto;
         this.idPresentacion = idPresentacion;
@@ -35,6 +36,8 @@ public class ProductoPresentacion {
         this.precio2 = precio2;
         this.precio3 = precio3;
         this.idcategoria = idcategoria;
+        this.estado = estado;
+        this.codFamilia = codFamilia;
     }
 
     public int getIdProductoPresentacion() {
@@ -125,6 +128,20 @@ public class ProductoPresentacion {
         this.idcategoria = idcategoria;
     }
 
-    
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public String getCodFamilia() {
+        return codFamilia;
+    }
+
+    public void setCodFamilia(String codFamilia) {
+        this.codFamilia = codFamilia;
+    }
 
 }

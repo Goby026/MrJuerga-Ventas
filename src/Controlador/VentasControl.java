@@ -261,7 +261,7 @@ public class VentasControl {
     }
 
     //metodo para registrar detalles de venta normal en barra general y barra VIP
-    public int registrarDetalleDeVenta(JTable tabla, int numVenta, int numCaja) throws Exception {
+    public int registrarDetalleDeVenta(JTable tabla, int numVenta, int numCaja, int complemento) throws Exception {
         try {
             int flag = 0;
             int numFilas = tabla.getRowCount();
@@ -274,6 +274,7 @@ public class VentasControl {
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                 vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
                 vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                vp.setComplemento(complemento);
                 VentaProductoDAO vpdao = new VentaProductoDAO();
 
                 switch (numCaja) {
@@ -314,7 +315,7 @@ public class VentasControl {
     }
 
     /* METODO PARA REGISTRAR DETALLE DE VENTA DE OPERACIONES COMBINADAS Y POR CAJA*/
-    public int registrarDetalleDeVenta(JTable tabla, int numVenta, double monto, int numCaja) throws Exception {
+    public int registrarDetalleDeVenta(JTable tabla, int numVenta, double monto, int numCaja, int complemento) throws Exception {
         try {
             int flag = 0;
             int numFilas = tabla.getRowCount();
@@ -327,6 +328,7 @@ public class VentasControl {
                 vp.setPrecio(Double.parseDouble(tabla.getValueAt(i, 3).toString()));
                 vp.setCantidad(Double.parseDouble(tabla.getValueAt(i, 4).toString()));
                 vp.setSubtotal(Double.parseDouble(tabla.getValueAt(i, 5).toString()));
+                vp.setComplemento(complemento);
                 VentaProductoDAO vpdao = new VentaProductoDAO();
                 switch (numCaja) {
                     case 1:

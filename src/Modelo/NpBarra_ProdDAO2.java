@@ -20,7 +20,7 @@ public class NpBarra_ProdDAO2 extends Conexion implements NpBarraProdCRUD<NpBarr
     @Override
     public boolean registrar(NpBarra_Prod2 pp) throws Exception {
         try {
-            String sql = "insert into npbarra_prod2 (idproductopresentacion, idnpbarra2, preciou, cantidad, subtotal) values (?,?,?,?,?)";
+            String sql = "insert into npbarra_prod2 (idproductopresentacion, idnpbarra2, preciou, cantidad, subtotal, complemento) values (?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, pp.getIdProductoPresentacion());
@@ -28,6 +28,7 @@ public class NpBarra_ProdDAO2 extends Conexion implements NpBarraProdCRUD<NpBarr
             pst.setDouble(3, pp.getPrecioU());
             pst.setDouble(4, pp.getCantidad());
             pst.setDouble(5, pp.getSubtotal());
+            pst.setInt(6, pp.getComplemento());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -50,7 +51,7 @@ public class NpBarra_ProdDAO2 extends Conexion implements NpBarraProdCRUD<NpBarr
     public boolean anular(int id) throws Exception {
         try {
             //estado 0=anulado - 1=activo
-            String sql = "UPDATE npbarra_prod2 SET cantidad = 0, subtotal = 0 WHERE idnpbarra_prod2 = ?";
+            String sql = "UPDATE npbarra_prod2 SET cantidad = 0, subtotal = 0, complemento = 0 WHERE idnpbarra_prod2 = ?";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1,id);
@@ -83,6 +84,7 @@ public class NpBarra_ProdDAO2 extends Conexion implements NpBarraProdCRUD<NpBarr
                 vp.setPrecioU(rs.getDouble("preciou"));
                 vp.setCantidad(rs.getInt("cantidad"));
                 vp.setSubtotal(rs.getDouble("subtotal"));
+                vp.setComplemento(rs.getInt("complemento"));
                 lista.add(vp);
             }
             rs.close();

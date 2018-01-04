@@ -6,8 +6,6 @@
 package Modelo;
 
 import Interfaces.DAO;
-//import ModelosTablas.InventarioValorizado;
-//import ModelosTablas.tablaBuscarProducto;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +22,7 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
     @Override
     public boolean Registrar(ProductoPresentacion pp) throws Exception {
         try {
-            String sql = "insert into productopresentacion (idproducto, idpresentacion, idalmacen, stock, stock2, stock3, precio, precio2, idcategoria)VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into productopresentacion (idproducto, idpresentacion, idalmacen, stock, stock2, stock3, precio, precio2, idcategoria, estado, codfamilia)VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, pp.getIdProducto());
@@ -36,6 +34,8 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
             pst.setDouble(7, pp.getPrecio());
             pst.setDouble(8, pp.getPrecio2());
             pst.setDouble(9, pp.getIdcategoria());
+            pst.setInt(9, pp.getEstado());
+            pst.setString(9, pp.getCodFamilia());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -52,7 +52,7 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
     @Override
     public boolean Modificar(ProductoPresentacion pp) throws Exception {
         try {
-            String sql = ("UPDATE productopresentacion SET idproducto=?, idpresentacion=?, idalmacen=?, stock=?, stock2=?, stock3=?,precio=?, precio2=?, idcategoria=? WHERE idproductopresentacion=?");
+            String sql = ("UPDATE productopresentacion SET idproducto=?, idpresentacion=?, idalmacen=?, stock=?, stock2=?, stock3=?,precio=?, precio2=?, idcategoria=?, estado = ?,codfamilia = ? WHERE idproductopresentacion=?");
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, pp.getIdProducto());
@@ -65,6 +65,8 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
             pst.setDouble(8, pp.getPrecio2());
             pst.setDouble(9, pp.getIdcategoria());
             pst.setInt(10, pp.getIdProductoPresentacion());
+            pst.setInt(11, pp.getEstado());
+            pst.setString(12, pp.getCodFamilia());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -144,7 +146,10 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
                 pp.setStock3(rs.getDouble(7));
                 pp.setPrecio(rs.getDouble(8));
                 pp.setPrecio2(rs.getDouble(9));
-                pp.setIdcategoria(rs.getInt(10));
+                pp.setPrecio3(rs.getDouble(10));
+                pp.setIdcategoria(rs.getInt(11));
+                pp.setEstado(rs.getInt(12));
+                pp.setCodFamilia(rs.getString(13));
                 lista.add(pp);
             }
             rs.close();
@@ -178,6 +183,8 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
                 pp.setPrecio2(rs.getDouble(9));
                 pp.setPrecio3(rs.getDouble(10));
                 pp.setIdcategoria(rs.getInt(11));
+                pp.setEstado(rs.getInt(12));
+                pp.setCodFamilia(rs.getString(13));
                 lista.add(pp);
             }
             rs.close();
@@ -195,7 +202,7 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
         try {
             ProductoPresentacion pp = new ProductoPresentacion();
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT idproductopresentacion, idproducto, idpresentacion, idalmacen, stock, stock2, stock3, precio, precio2, idcategoria FROM productopresentacion "
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT idproductopresentacion, idproducto, idpresentacion, idalmacen, stock, stock2, stock3, precio, precio2,precio3, idcategoria, estado, codfamilia FROM productopresentacion "
                     + "WHERE idproducto = " + idProducto + " AND idalmacen = " + idAlmacen);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -208,7 +215,10 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
                 pp.setStock3(rs.getDouble(7));
                 pp.setPrecio(rs.getDouble(8));
                 pp.setPrecio2(rs.getDouble(9));
-                pp.setIdcategoria(rs.getInt(10));
+                pp.setPrecio3(rs.getDouble(10));
+                pp.setIdcategoria(rs.getInt(11));
+                pp.setEstado(rs.getInt(12));
+                pp.setCodFamilia(rs.getString(13));
             }
             rs.close();
             pst.close();
@@ -225,7 +235,7 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
         try {
             ProductoPresentacion pp = new ProductoPresentacion();
             this.conectar();
-            PreparedStatement pst = this.conexion.prepareStatement("SELECT pp.idproductopresentacion, pp.idproducto, pp.idpresentacion, pp.idalmacen, pp.stock, pp.stock2, pp.stock3, pp.precio, pp.precio2, pp.idcategoria  \n"
+            PreparedStatement pst = this.conexion.prepareStatement("SELECT pp.idproductopresentacion, pp.idproducto, pp.idpresentacion, pp.idalmacen, pp.stock, pp.stock2, pp.stock3, pp.precio, pp.precio2, pp.precio3,pp.idcategoria, pp.estado, pp.codfamilia  \n"
                     + "FROM  productopresentacion pp\n"
                     + "INNER JOIN producto p ON p.idproducto = pp.idproducto\n"
                     + "WHERE p.nombre = '"+nomProd+"' AND pp.idalmacen = "+idAlmacen);
@@ -240,7 +250,10 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
                 pp.setStock3(rs.getDouble(7));
                 pp.setPrecio(rs.getDouble(8));
                 pp.setPrecio2(rs.getDouble(9));
-                pp.setIdcategoria(rs.getInt(10));
+                pp.setPrecio3(rs.getDouble(10));
+                pp.setIdcategoria(rs.getInt(11));
+                pp.setEstado(rs.getInt(12));
+                pp.setCodFamilia(rs.getString(13));
             }
             rs.close();
             pst.close();
@@ -589,6 +602,8 @@ public class ProductoPresentacionDAO extends Conexion implements DAO<ProductoPre
                 pp.setPrecio2(rs.getDouble(9));
                 pp.setPrecio3(rs.getDouble(10));
                 pp.setIdcategoria(rs.getInt(11));
+                pp.setEstado(rs.getInt(12));
+                pp.setCodFamilia(rs.getString(13));
             }
             rs.close();
             pst.close();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-12-29T18:02:37 -->
+<!-- 2017-12-31T12:19:27 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01290089-76cd-4858-86f1-b1dcfee53afb">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
@@ -91,7 +91,7 @@ where venta.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idfl
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[BOLETA]]></text>
+				<text><![CDATA[COD]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="60" y="0" width="166" height="20" uuid="233c9005-3da3-42aa-aa09-d09c702439bc"/>
@@ -131,7 +131,7 @@ where venta.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idfl
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="32" splitType="Stretch">
+		<band height="77" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="60" height="20" uuid="87567454-c62d-4bca-98a0-fdeb9e8fab11"/>
 				<textFieldExpression><![CDATA[$F{idventa}]]></textFieldExpression>
@@ -157,9 +157,12 @@ where venta.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idfl
 				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
 			</textField>
 		</band>
-		<band height="239">
+		<band height="70">
 			<subreport>
-				<reportElement x="34" y="39" width="200" height="200" uuid="6d634c6b-1e63-4900-bd1f-8edc47f5378f"/>
+				<reportElement x="0" y="0" width="552" height="70" uuid="6d634c6b-1e63-4900-bd1f-8edc47f5378f"/>
+				<subreportParameter name="idFlujo">
+					<subreportParameterExpression><![CDATA[$P{idFlujo}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["Anulaciones_sub1.jasper"]]></subreportExpression>
 			</subreport>

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-09-07T11:56:07 -->
+<!-- 2017-12-31T13:21:55 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01290089-76cd-4858-86f1-b1dcfee53afb">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idFlujo" class="java.lang.Integer"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="caja" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select venta2.idventa2, producto.nombre, presentacion.descripcion, ventaproducto2.preciou, venta2.fecha, venta2.hora from venta2
 inner join ventaproducto2 on venta2.idventa2 = ventaproducto2.idventa
@@ -45,15 +47,37 @@ where venta2.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idf
 				</textElement>
 				<text><![CDATA[LISTA DE ANULACIONES]]></text>
 			</staticText>
-			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="0" y="20" width="552" height="20" uuid="fd454ace-568c-4c17-bf0b-bb17507df766"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="17" splitType="Stretch"/>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="80" height="16" uuid="b6887191-70e4-4a1a-b038-9ff9408a101e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUARIO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="80" height="16" uuid="e62eb9ff-e62f-4e11-8bbc-6cd82d5d3bf2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAJA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="0" width="130" height="16" uuid="631b63bf-074f-4a0e-9dd7-46e6183c06b2"/>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="17" width="130" height="16" uuid="389bdc99-2045-4ae3-9630-4d135e746108"/>
+				<textFieldExpression><![CDATA[$P{caja}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
@@ -102,7 +126,7 @@ where venta2.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idf
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch">
+		<band height="43" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="60" height="20" uuid="87567454-c62d-4bca-98a0-fdeb9e8fab11"/>
 				<textFieldExpression><![CDATA[$F{idventa2}]]></textFieldExpression>
@@ -133,7 +157,13 @@ where venta2.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idf
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="20" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="0" width="552" height="20" uuid="fd454ace-568c-4c17-bf0b-bb17507df766"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

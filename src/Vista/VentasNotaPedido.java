@@ -1923,7 +1923,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                             NpBarraDAO vdao = new NpBarraDAO();
                             if (vdao.Registrar(v)) {
                                 idventa = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(1);
-                                flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 1);
+                                flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 1, complemento);
                                 numTicket = 1;
                                 nroSerie = "003 -";
                                 System.out.println("venta registrada");
@@ -1967,7 +1967,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                             NpBarra2DAO vdao2 = new NpBarra2DAO();
                             if (vdao2.registrar(v)) {
                                 idventa = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(2);//2 = caja 02
-                                flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 2);
+                                flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 2, complemento);
                                 numTicket = 1;
                                 nroSerie = "004 -";
                                 System.out.println("venta registrada");
@@ -2014,7 +2014,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                             NpBarra3DAO vdao3 = new NpBarra3DAO();
                             if (vdao3.registrar(v)) {
                                 idventa = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(3);
-                                flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 3);
+                                flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 3, complemento);
                                 numTicket = 1;
                                 nroSerie = "005 -";
                                 System.out.println("venta registrada");
@@ -2158,7 +2158,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                         NpBarraDAO vdao = new NpBarraDAO();
                         if (vdao.Registrar(v)) {
                             idventa = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(1);
-                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 1);
+                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 1, complemento);
                             numTicket = 1;
                             nroSerie = "003 -";
                             System.out.println("nota de pedido registrada");
@@ -2171,7 +2171,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                         NpBarra2DAO vdao2 = new NpBarra2DAO();
                         if (vdao2.registrar(v)) {
                             idventa = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(2);
-                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 2);
+                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 2, complemento);
                             numTicket = 2;
                             nroSerie = "004 -";
                             System.out.println("nota de pedido registrada");
@@ -2183,7 +2183,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                         NpBarra3DAO vdao3 = new NpBarra3DAO();
                         if (vdao3.registrar(v)) {
                             idventa = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(3);
-                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 3);
+                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idventa, 3, complemento);
                             numTicket = 3;
                             nroSerie = "005 -";
                             System.out.println("nota de pedido registrada");
@@ -2595,7 +2595,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                         if (nprod.Registrar(v)) {//REGISTRA LA NOTA DE PEDIDO
 
                             int idUltimaNotaPedido = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(1);
-                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idUltimaNotaPedido, 1);//REGISTRA EL DETALLE DE NOTA DE PEDIDO
+                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idUltimaNotaPedido, 1, complemento);//REGISTRA EL DETALLE DE NOTA DE PEDIDO
 
                             nroSerie = "003 -";
                             System.out.println("nota pedido registrada");
@@ -2653,7 +2653,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                         if (nprod2.registrar(v)) {//REGISTRA LA NOTA DE PEDIDO
 
                             int idUltimaNotaPedido = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(2);
-                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idUltimaNotaPedido, 2);//REGISTRA EL DETALLE DE NOTA DE PEDIDO
+                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idUltimaNotaPedido, 2, complemento);//REGISTRA EL DETALLE DE NOTA DE PEDIDO
 
                             nroSerie = "004 -";
                             System.out.println("nota pedido registrada");
@@ -2711,7 +2711,7 @@ public class VentasNotaPedido extends javax.swing.JFrame {
                         if (nprod3.registrar(v)) {//REGISTRA LA NOTA DE PEDIDO
 
                             int idUltimaNotaPedido = new NpBarrasControl().getIdDeUltimaNpBarraRegistrada(3);
-                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idUltimaNotaPedido, 3);//REGISTRA EL DETALLE DE NOTA DE PEDIDO
+                            flag = vc.registrarDetalleDeNpBarra(tblPedidos, idUltimaNotaPedido, 3, complemento);//REGISTRA EL DETALLE DE NOTA DE PEDIDO
 
                             nroSerie = "005 -";
                             System.out.println("nota pedido registrada");

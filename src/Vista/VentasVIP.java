@@ -225,7 +225,6 @@ public class VentasVIP extends javax.swing.JFrame {
         btnEfectivo = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         lblPago = new javax.swing.JLabel();
-        btnPendientes = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -1288,16 +1287,6 @@ public class VentasVIP extends javax.swing.JFrame {
         lblPago.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(1520, 630, 350, 90));
 
-        btnPendientes.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
-        btnPendientes.setText("LISTA DE PEDIDOS");
-        btnPendientes.setEnabled(false);
-        btnPendientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendientesActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnPendientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 970, 340, 30));
-
         jPanel8.setBackground(new java.awt.Color(102, 102, 102));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1729,10 +1718,6 @@ public class VentasVIP extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tblProductosMouseClicked
 
-    private void btnPendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendientesActionPerformed
-        new VentasPendientes().setVisible(true);
-    }//GEN-LAST:event_btnPendientesActionPerformed
-
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         txtCantidad.setText("");
     }//GEN-LAST:event_btnDelActionPerformed
@@ -1934,7 +1919,7 @@ public class VentasVIP extends javax.swing.JFrame {
                     Integer flag = null;
                     if (vdao.registrar3(v)) {
                         idventa = new VentasControl().getIdDeUltimaVentaRegistrada3();
-                        flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                        flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num, complemento);
                         numTicket = 3;
                         nroSerie = "005 -";
                         System.out.println("ventaCaja3 registrada");
@@ -2109,7 +2094,7 @@ public class VentasVIP extends javax.swing.JFrame {
                     case "GENERAL 1":
                         if (vdao.registrar(v)) {
                             idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
-                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num, complemento);
                             numTicket = 1;
                             nroSerie = "003 -";
                             System.out.println("venta registrada");
@@ -2120,7 +2105,7 @@ public class VentasVIP extends javax.swing.JFrame {
                     case "GENERAL 2":
                         if (vdao.registrar2(v)) {
                             idventa = new VentasControl().getIdDeUltimaVentaRegistrada2();
-                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num, complemento);
                             numTicket = 2;
                             nroSerie = "004 -";
                             System.out.println("ventaCaja2 registrada");
@@ -2131,7 +2116,7 @@ public class VentasVIP extends javax.swing.JFrame {
                     case "VIP":
                         if (vdao.registrar3(v)) {
                             idventa = new VentasControl().getIdDeUltimaVentaRegistrada3();
-                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num, complemento);
                             numTicket = 3;
                             nroSerie = "005 -";
                             System.out.println("ventaCaja3 registrada");
@@ -2512,7 +2497,7 @@ public class VentasVIP extends javax.swing.JFrame {
                     case "GENERAL 1":
                         if (vdao.registrar(v)) {
                             idventa = new VentasControl().getIdDeUltimaVentaRegistrada();
-                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num, complemento);
                             numTicket = 1;
                             nroSerie = "003 -";
                             System.out.println("venta registrada");
@@ -2545,7 +2530,7 @@ public class VentasVIP extends javax.swing.JFrame {
                     case "GENERAL 2":
                         if (vdao.registrar2(v)) {
                             idventa = new VentasControl().getIdDeUltimaVentaRegistrada2();
-                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, Double.parseDouble(txtefectivoCombinada.getText()), num);
+                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, Double.parseDouble(txtefectivoCombinada.getText()), num, complemento);
                             numTicket = 2;
                             nroSerie = "004 -";
                             System.out.println("ventaCaja2 registrada");
@@ -2577,7 +2562,7 @@ public class VentasVIP extends javax.swing.JFrame {
                     case "VIP":
                         if (vdao.registrar3(v)) {
                             idventa = new VentasControl().getIdDeUltimaVentaRegistrada3();
-                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num);
+                            flag = vc.registrarDetalleDeVenta(tblPedidos, idventa, num, complemento);
                             numTicket = 3;
                             nroSerie = "005 -";
                             System.out.println("ventaCaja3 registrada");
@@ -3026,7 +3011,6 @@ public class VentasVIP extends javax.swing.JFrame {
     private javax.swing.JButton btnOchoTarjeta;
     private javax.swing.JButton btnOpCombinada;
     private javax.swing.JToggleButton btnOtros;
-    private javax.swing.JButton btnPendientes;
     private javax.swing.JButton btnPunto;
     private javax.swing.JButton btnQuitar;
     private javax.swing.JButton btnQuitarOP;

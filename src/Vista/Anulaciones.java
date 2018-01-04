@@ -709,8 +709,8 @@ public class Anulaciones extends javax.swing.JFrame {
         try {
             int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AnulacionesControl().getIdUsuario(lblUsuario.getText()), new AnulacionesControl().getIdCaja(lblCaja.getText()));
             System.out.println(idFlujoCaja);
-//            parametros.put("Usuario", txtUsuario.getText());
-//            parametros.put("Caja", txtCaja.getText());
+            parametros.put("usuario", lblUsuario.getText());
+            parametros.put("caja", lblCaja.getText());
             parametros.put("idFlujo", idFlujoCaja);
             mrv = new MyiReportVisor(System.getProperty("user.dir") + "\\reportes\\Anulaciones" + num + ".jrxml", parametros);
             mrv.exportarAPdf();

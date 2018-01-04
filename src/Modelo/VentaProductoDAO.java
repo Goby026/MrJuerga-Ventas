@@ -11,7 +11,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
     @Override
     public boolean registrar(VentaProducto vp) throws Exception {
         try {
-            String sql = "insert into ventaproducto (idproducto, idventa, preciou, cantidad, subtotal) values (?,?,?,?,?)";
+            String sql = "insert into ventaproducto (idproducto, idventa, preciou, cantidad, subtotal, complemento) values (?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, vp.getIdProducto());
@@ -19,6 +19,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             pst.setDouble(3, vp.getPrecio());
             pst.setDouble(4, vp.getCantidad());
             pst.setDouble(5, vp.getSubtotal());
+            pst.setInt(6, vp.getComplemento());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -34,7 +35,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
 
     public boolean registrar2(VentaProducto vp) throws Exception {
         try {
-            String sql = "insert into ventaproducto2 (idproducto, idventa, preciou, cantidad, subtotal) values (?,?,?,?,?)";
+            String sql = "insert into ventaproducto2 (idproducto, idventa, preciou, cantidad, subtotal, complemento) values (?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, vp.getIdProducto());
@@ -42,6 +43,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             pst.setDouble(3, vp.getPrecio());
             pst.setDouble(4, vp.getCantidad());
             pst.setDouble(5, vp.getSubtotal());
+            pst.setInt(6, vp.getComplemento());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -57,7 +59,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
 
     public boolean registrar3(VentaProducto vp) throws Exception {
         try {
-            String sql = "insert into ventaproducto3 (idproducto, idventa, preciou, cantidad, subtotal) values (?,?,?,?,?)";
+            String sql = "insert into ventaproducto3 (idproducto, idventa, preciou, cantidad, subtotal, complemento) values (?,?,?,?,?,?)";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, vp.getIdProducto());
@@ -65,6 +67,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             pst.setDouble(3, vp.getPrecio());
             pst.setDouble(4, vp.getCantidad());
             pst.setDouble(5, vp.getSubtotal());
+            pst.setInt(6, vp.getComplemento());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -81,7 +84,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
     @Override
     public boolean modificar(VentaProducto vp) throws Exception {
         try {
-            String sql = "update ventaproducto set idproducto=?, idventa=?, preciou=?, cantidad=?, subtotal=? where idventa = ?";
+            String sql = "update ventaproducto set idproducto=?, idventa=?, preciou=?, cantidad=?, subtotal=?, complemento=? where idventa = ?";
             this.conectar();
             PreparedStatement pst = this.conexion.prepareStatement(sql);
             pst.setInt(1, vp.getIdProducto());
@@ -89,6 +92,8 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
             pst.setDouble(3, vp.getPrecio());
             pst.setDouble(4, vp.getCantidad());
             pst.setDouble(5, vp.getSubtotal());
+            pst.setInt(6, vp.getComplemento());
+            pst.setInt(7, vp.getIdVenta());
             int res = pst.executeUpdate();
             if (res > 0) {
                 return true;
@@ -139,6 +144,7 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
                 vp.setPrecio(rs.getDouble("preciou"));
                 vp.setCantidad(rs.getInt("cantidad"));
                 vp.setSubtotal(rs.getDouble("subtotal"));
+                vp.setComplemento(rs.getInt("complemento"));
                 lista.add(vp);
             }
             rs.close();
@@ -299,13 +305,13 @@ public class VentaProductoDAO extends Conexion implements VentaProductoCRUD {
         String sql = null;
         switch (num) {
             case 1:
-                sql = "UPDATE `ventaproducto` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`=" + idVenta + "";
+                sql = "UPDATE `ventaproducto` SET `cantidad`='0', `subtotal`='0', complemento = '0' WHERE `idventa`=" + idVenta + "";
                 break;
             case 2:
-                sql = "UPDATE `ventaproducto2` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`=" + idVenta + "";
+                sql = "UPDATE `ventaproducto2` SET `cantidad`='0', `subtotal`='0', complemento = '0' WHERE `idventa`=" + idVenta + "";
                 break;
             case 3:
-                sql = "UPDATE `ventaproducto3` SET `cantidad`='0', `subtotal`='0' WHERE `idventa`=" + idVenta + "";
+                sql = "UPDATE `ventaproducto3` SET `cantidad`='0', `subtotal`='0', complemento = '0' WHERE `idventa`=" + idVenta + "";
                 break;
             default:
                 break;

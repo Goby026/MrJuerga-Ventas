@@ -6,23 +6,25 @@ package Modelo;
  * @author Grover
  */
 public class NpBarra_Prod3 {
-    int idNpBarraProd3;
-    int idProductoPresentacion;
-    int idNpBarra;
-    double precioU;
-    double cantidad;
-    double subtotal;
-
+    private int idNpBarraProd3;
+    private int idProductoPresentacion;
+    private int idNpBarra;
+    private double precioU;
+    private double cantidad;
+    private double subtotal;
+    private int complemento;
+    
     public NpBarra_Prod3() {
     }
 
-    public NpBarra_Prod3(int idNpBarraProd3, int idProductoPresentacion, int idNpBarra, double precioU, double cantidad, double subtotal) {
+    public NpBarra_Prod3(int idNpBarraProd3, int idProductoPresentacion, int idNpBarra, double precioU, double cantidad, double subtotal, int complemento) {
         this.idNpBarraProd3 = idNpBarraProd3;
         this.idProductoPresentacion = idProductoPresentacion;
         this.idNpBarra = idNpBarra;
         this.precioU = precioU;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
+        this.complemento = complemento;
     }
 
     public int getIdNpBarraProd3() {
@@ -73,6 +75,12 @@ public class NpBarra_Prod3 {
         this.subtotal = subtotal;
     }
 
-    
+    public int getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(int complemento) {
+        this.complemento = complemento;
+    }
     
 }

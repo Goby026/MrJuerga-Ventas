@@ -1,23 +1,25 @@
 package Modelo;
 
 public class VentaProducto {
-    int id;
-    int idProducto;
-    int idVenta;
-    double precio;
-    double cantidad;
-    double subtotal;
+    private int id;
+    private int idProducto;
+    private int idVenta;
+    private double precio;
+    private double cantidad;
+    private double subtotal;
+    private int complemento;
 
     public VentaProducto() {
     }
 
-    public VentaProducto(int id, int idProducto, int idVenta, double precio, double cantidad, double subtotal) {
+    public VentaProducto(int id, int idProducto, int idVenta, double precio, double cantidad, double subtotal, int complemento) {
         this.id = id;
         this.idProducto = idProducto;
         this.idVenta = idVenta;
         this.precio = precio;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
+        this.complemento = complemento;
     }
 
     public int getId() {
@@ -67,6 +69,12 @@ public class VentaProducto {
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
-    
-    
+
+    public int getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(int complemento) {
+        this.complemento = complemento;
+    }
 }
