@@ -210,4 +210,50 @@ public class NpBarraDAO extends Conexion implements DAO<NpBarra>{
         }
         return v;
     }
+    
+    public NpBarra ObtenerNP(int idNp, int idCaja) throws Exception {
+        NpBarra v = null;
+        try {
+            this.conectar();
+            String sql ="";
+            switch (idCaja) {
+                case 1:
+                    sql = "select * from npbarra where idnpbarra = ?";
+                    break;
+                case 2:
+                    sql = "select * from npbarra2 where idnpbarra2 = ?";
+                    break;
+                case 3:
+                    sql = "select * from npbarra3 where idnpbarra3 = ?";
+                    break;
+            }
+            
+            
+            PreparedStatement pst = this.conexion.prepareStatement(sql);
+            pst.setInt(1, idNp);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                v = new NpBarra();
+                v.setIdNpBarra(rs.getInt(1));
+                v.setFecha(rs.getString(2));
+                v.setHora(rs.getString(3));
+                v.setIdUsuario(rs.getInt(4));
+                v.setIdCliente(rs.getInt(5));
+                v.setIdTipoComprobante(rs.getInt(6));
+                v.setEstado(rs.getInt(7));
+                v.setTipoPago(rs.getInt(8));
+                v.setnOperacion(rs.getString(9));
+                v.setIdCaja(rs.getInt(10));
+                v.setIdFlujoCaja(rs.getInt(11));
+            }
+            rs.close();
+            pst.close();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            this.cerrar();
+        }
+        return v;
+    }
+    
 }

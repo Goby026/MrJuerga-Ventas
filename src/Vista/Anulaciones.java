@@ -708,7 +708,7 @@ public class Anulaciones extends javax.swing.JFrame {
     private void btnListaAnulacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaAnulacionesActionPerformed
         try {
             int idFlujoCaja = new FlujoCajaDAO().getIdFlujo(new AnulacionesControl().getIdUsuario(lblUsuario.getText()), new AnulacionesControl().getIdCaja(lblCaja.getText()));
-            System.out.println(idFlujoCaja);
+            System.out.println("flujo de caja: "+idFlujoCaja);
             parametros.put("usuario", lblUsuario.getText());
             parametros.put("caja", lblCaja.getText());
             parametros.put("idFlujo", idFlujoCaja);
@@ -775,7 +775,7 @@ public class Anulaciones extends javax.swing.JFrame {
             tipoSalida = 2;
             int numNotaPedido = Integer.parseInt(txt_num_venta.getText());
             NpBarraDAO npdao = new NpBarraDAO();
-            NpBarra np = npdao.Obtener(numNotaPedido);
+            NpBarra np = npdao.ObtenerNP(numNotaPedido,num);
             if (np.getEstado() == 1) {
                 lblEstado.setText("ACTIVO");
                 //lblEstado.setBackground(Color.GREEN);

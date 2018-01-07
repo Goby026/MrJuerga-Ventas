@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2018-01-06T21:46:58 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Anulaciones_sub1" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="16e563d4-8e77-459b-a247-a9577429210d">
+<!-- 2018-01-06T22:52:14 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Anulaciones_sub2" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="2bb7fc5b-f2e8-45a1-8600-c76e25433e20">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MrJuerga-Server"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -15,15 +15,15 @@
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<parameter name="idFlujo" class="java.lang.Integer"/>
 	<queryString language="SQL">
-		<![CDATA[select n.idnpbarra, p.nombre, pre.descripcion, np.preciou, n.fecha, n.hora
-from npbarra n
-inner join npbarra_prod np on n.idnpbarra = np.idnpbarra
+		<![CDATA[select n.idnpbarra2, p.nombre, pre.descripcion, np.preciou, n.fecha, n.hora
+from npbarra2 n
+inner join npbarra_prod2 np on n.idnpbarra2 = np.idnpbarra2
 inner join productopresentacion pp on np.idProductopresentacion = pp.idproductopresentacion
 inner join producto p on pp.idproducto = p.idproducto
 inner join presentacion pre on pp.idpresentacion = pre.idpresentacion
 where n.estado = 0 and n.idflujocaja =  $P{idFlujo}]]>
 	</queryString>
-	<field name="idnpbarra" class="java.lang.Integer"/>
+	<field name="idnpbarra2" class="java.lang.Integer"/>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="descripcion" class="java.lang.String"/>
 	<field name="preciou" class="java.lang.Double"/>
@@ -32,21 +32,21 @@ where n.estado = 0 and n.idflujocaja =  $P{idFlujo}]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
+	<pageHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="78c91fe9-929d-49b6-8eb8-fb2ba4467429"/>
+				<reportElement x="0" y="0" width="100" height="20" uuid="f68c4c30-3f55-4357-93fe-c3b7965a18d8"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[NOTAS DE PEDIDO]]></text>
 			</staticText>
 		</band>
-	</title>
+	</pageHeader>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="16" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="7" width="95" height="16" uuid="e4c7af9b-07a7-4fab-a9aa-d97ee0dab8a8">
+				<reportElement x="0" y="0" width="95" height="16" uuid="f86c3009-be75-4960-8ebd-34efced8c879">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement>
@@ -55,35 +55,35 @@ where n.estado = 0 and n.idflujocaja =  $P{idFlujo}]]>
 				<text><![CDATA[COD]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="95" y="7" width="92" height="16" uuid="7b2771bf-296b-4dce-ae13-e309941ebf4a"/>
+				<reportElement x="95" y="0" width="92" height="16" uuid="9de196ba-c284-4fdc-9b6c-6516c082adcd"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[NOMBRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="187" y="7" width="92" height="16" uuid="4d639d4f-8141-413c-ab6b-4c606ca325af"/>
+				<reportElement x="187" y="0" width="92" height="16" uuid="341fa46e-1c93-48bf-b0e2-0332800795e2"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[PRESENTACION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="279" y="7" width="92" height="16" uuid="1e6601b3-3234-4b1e-bbba-ff95c7660c3a"/>
+				<reportElement x="279" y="0" width="92" height="16" uuid="0540b10c-2f4d-4bd1-9656-6e9f3c047a3a"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[PRECIO U.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="371" y="7" width="92" height="16" uuid="d2d8a2de-0418-4c13-884b-58a6c4fe9e41"/>
+				<reportElement x="371" y="0" width="92" height="16" uuid="1049c46e-f360-4803-81bd-c125ca14a6d8"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[FECHA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="463" y="7" width="92" height="16" uuid="430ae85c-91d6-4d6b-a31c-2005e0077c1e"/>
+				<reportElement x="463" y="0" width="92" height="16" uuid="35d3d95f-2090-4163-9930-406da1d44f41"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -92,31 +92,31 @@ where n.estado = 0 and n.idflujocaja =  $P{idFlujo}]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="13" splitType="Stretch">
+		<band height="14" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="95" height="13" uuid="1f93dc45-98b9-4573-93f9-15ad95d014d8">
+				<reportElement x="0" y="0" width="95" height="14" uuid="7816d484-b5ba-439d-bb15-3cfa4c79f82b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{idnpbarra}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{idnpbarra2}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="95" y="0" width="92" height="13" uuid="90310f9d-90e2-476f-a49e-178c4457e2dd"/>
+				<reportElement x="95" y="0" width="92" height="14" uuid="43800f21-9c7f-4091-a402-5836c687159b"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="187" y="0" width="92" height="13" uuid="6b4211fc-6787-4339-a7f6-07e885437d7a"/>
+				<reportElement x="187" y="0" width="92" height="14" uuid="9234f425-6cfc-4d12-9a79-52591c06a4a5"/>
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="279" y="0" width="92" height="13" uuid="74024db0-0068-42ed-a244-b0f34e83f79d"/>
+				<reportElement x="279" y="0" width="92" height="14" uuid="af87acb6-328e-419c-8bad-d0245fdd2c38"/>
 				<textFieldExpression><![CDATA[$F{preciou}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="371" y="0" width="92" height="13" uuid="90309203-58f8-4d2b-acee-989ad4edefb2"/>
+				<reportElement x="371" y="0" width="92" height="14" uuid="cbbcae8e-c0ba-4cd9-aa2e-35be88112971"/>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="463" y="0" width="92" height="13" uuid="38e3d88b-1f2d-42ac-a005-c5fa6e8bc10c"/>
+				<reportElement x="463" y="0" width="92" height="14" uuid="ae3adf0c-6f81-4b69-a129-063547cbb165"/>
 				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
 			</textField>
 		</band>

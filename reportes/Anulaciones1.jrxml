@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-12-31T12:19:27 -->
+<!-- 2018-01-07T00:56:20 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01290089-76cd-4858-86f1-b1dcfee53afb">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MrJuerga-Local"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MrJuerga-Server"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="idFlujo" class="java.lang.Integer"/>
 	<parameter name="usuario" class="java.lang.String"/>
@@ -41,11 +41,12 @@ where venta.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idfl
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="81" splitType="Stretch">
+		<band height="280" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<staticText>
 				<reportElement x="0" y="0" width="552" height="33" uuid="d95e88cb-e010-4c12-862e-d040f2c8f3cf"/>
 				<textElement textAlignment="Center">
-					<font size="16" isBold="true"/>
+					<font size="22" isBold="true"/>
 				</textElement>
 				<text><![CDATA[LISTA DE ANULACIONES]]></text>
 			</staticText>
@@ -79,59 +80,82 @@ where venta.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idfl
 				</reportElement>
 				<textFieldExpression><![CDATA[$P{caja}]]></textFieldExpression>
 			</textField>
+			<subreport>
+				<reportElement x="0" y="80" width="552" height="20" uuid="6d634c6b-1e63-4900-bd1f-8edc47f5378f"/>
+				<subreportParameter name="idFlujo">
+					<subreportParameterExpression><![CDATA[$P{idFlujo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["Anulaciones_sub1.jasper"]]></subreportExpression>
+			</subreport>
+			<rectangle>
+				<reportElement x="0" y="70" width="551" height="1" uuid="eb265e32-9294-4959-8e21-8c6fdf8b6ea9"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
 		</band>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="20" splitType="Stretch">
+		<band height="45" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="60" height="20" uuid="a4a5af92-fd9b-43f8-b459-88f98fed1a67"/>
+				<reportElement x="0" y="22" width="60" height="20" uuid="a4a5af92-fd9b-43f8-b459-88f98fed1a67"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[COD]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="60" y="0" width="166" height="20" uuid="233c9005-3da3-42aa-aa09-d09c702439bc"/>
+				<reportElement x="60" y="22" width="166" height="20" uuid="233c9005-3da3-42aa-aa09-d09c702439bc"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PRODUCTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="226" y="0" width="106" height="20" uuid="c4656ca8-38d8-49e0-9832-3be28a6b2e28"/>
+				<reportElement x="226" y="22" width="106" height="20" uuid="c4656ca8-38d8-49e0-9832-3be28a6b2e28"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PRESENTACION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="332" y="0" width="78" height="20" uuid="65b005ad-b34c-4207-9474-c6f72b87e8c1"/>
+				<reportElement x="332" y="22" width="78" height="20" uuid="65b005ad-b34c-4207-9474-c6f72b87e8c1"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PRECIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="0" width="70" height="20" uuid="c1205b5d-373d-41e9-ab19-f2bc6268e7fa"/>
+				<reportElement x="410" y="22" width="70" height="20" uuid="c1205b5d-373d-41e9-ab19-f2bc6268e7fa"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FECHA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="0" width="72" height="20" uuid="10954958-5810-4405-a5fa-1c3ceb2ca00b"/>
+				<reportElement x="480" y="22" width="72" height="20" uuid="10954958-5810-4405-a5fa-1c3ceb2ca00b"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[HORA]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="100" height="13" uuid="60d36039-85b4-4ff9-aee7-ce89566037e1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TICKETS]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="77" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="60" height="20" uuid="87567454-c62d-4bca-98a0-fdeb9e8fab11"/>
 				<textFieldExpression><![CDATA[$F{idventa}]]></textFieldExpression>
@@ -156,16 +180,6 @@ where venta.estado = 0 and productopresentacion.idalmacen = 2 and flujocaja.idfl
 				<reportElement x="480" y="0" width="72" height="20" uuid="8a2792f4-c2ac-4cd3-80d6-f75f83f5b021"/>
 				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
 			</textField>
-		</band>
-		<band height="70">
-			<subreport>
-				<reportElement x="0" y="0" width="552" height="70" uuid="6d634c6b-1e63-4900-bd1f-8edc47f5378f"/>
-				<subreportParameter name="idFlujo">
-					<subreportParameterExpression><![CDATA[$P{idFlujo}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA["Anulaciones_sub1.jasper"]]></subreportExpression>
-			</subreport>
 		</band>
 	</detail>
 	<columnFooter>
